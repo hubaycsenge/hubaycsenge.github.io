@@ -1,0 +1,31 @@
+# ---------------------------------------------------------------------------
+# Raw research materials must NEVER be committed.
+#
+# The wiki source vault (~/Documents/PhD_research) is a separate, unpublished
+# repository. This site only ever reads its `wiki/*.md` prose and renders it to
+# HTML; `raw/` — the paper PDFs, scanned notes and cloned repos — is never read
+# and never copied here. The patterns below are a second line of defence in case
+# anything is dragged into this tree by hand.
+# ---------------------------------------------------------------------------
+raw/
+**/raw/
+*.pdf
+*.epub
+*.djvu
+*.docx
+*.pptx
+
+# Build tooling
+.venv/
+__pycache__/
+*.pyc
+
+# Any stray copy of the source vault
+PhD_research/
+vault/
+*.base
+.obsidian/
+
+# OS
+.DS_Store
+Thumbs.db
