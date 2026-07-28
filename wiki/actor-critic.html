@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Actor–critic — Research wiki</title>
+<meta name="description" content="The RL architecture that maps most cleanly onto both the mammalian brain and the structure this thesis already has. From sutton-barto-2018-rl §13.5…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Methods</p>
+  <h1>Actor–critic</h1>
+<dl class="meta"><div><dt>type</dt><dd>method</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">reinforcement-learning</span> <span class="tag">architecture</span> <span class="tag">neuroscience</span> <span class="tag">decision-making</span></dd></div></dl>
+<p>The RL architecture that maps most cleanly onto both the mammalian brain and the
+structure this thesis already has. From <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §13.5, §15.7–15.8
+and §15.10.</p>
+<h2>The structure</h2>
+<p>Two components learning simultaneously from the same signal:</p>
+<ul>
+<li>The <strong>critic</strong> learns a state-value function for whatever policy the actor is
+  currently following, using a TD method (<a class="wikilink" href="td-learning.html">td-learning</a>).</li>
+<li>The <strong>actor</strong> holds the policy and updates it from the critic's TD error. "A
+  positive δ means that the action was 'good' because it led to a state with a
+  better-than-expected value; a negative δ means that the action was 'bad'."</li>
+</ul>
+<p>The critic has no direct access to the action; the actor has no direct access to
+the reward. The same δ reinforces both, but with opposite objectives: <strong>the actor
+works to keep δ as positive as possible; the critic works to drive |δ| toward
+zero</strong> (§15.8).</p>
+<div class="callout callout-important">
+<p class="callout-title">The only structural difference between actor and critic is the</p>
+<p>eligibility trace
+The critic's traces are <strong>non-contingent</strong> (presynaptic activity only) — making
+its learning rule "essentially the TD model of classical conditioning". The
+actor's are <strong>contingent</strong> (they also depend on the unit's own output) — making
+its rule "like instrumental conditioning using a Law-of-Effect-type learning
+rule". "The difference between the critic and actor learning rules is relatively
+simple, but this difference has a profound effect on learning and is essential to
+how the actor–critic algorithm works." (§15.8)</p>
+<p>This is the same prediction/control split as <a class="wikilink" href="conditioning.html">conditioning</a>, realised as one
+line of algebra.</p>
+</div>
+<p>The critic solves the delayed-reward problem for the actor: "the TD error produced
+by the critic acts as a conditioned reinforcement signal for the actor, providing
+an immediate evaluation of performance even when the primary reward signal itself
+is considerably delayed" (§14.4).</p>
+<h2>The neural hypothesis</h2>
+<p>Following Takahashi, Schoenbaum &amp; Niv (2008), §15.7 places the actor in the
+<strong>dorsal striatum</strong> and the critic's value-learning in the <strong>ventral striatum</strong>,
+with dopamine neurons in the VTA and SNpc broadcasting δ to the corticostriatal
+synapses of both.</p>
+<p>Three facts of neuroanatomy make this fit: dopamine axons target both striatal
+subdivisions; dopamine appears critical to synaptic plasticity in both; and the
+effect of a neuromodulator depends on the target structure, so one broadcast
+signal can drive two different learning rules. Dopamine neurons are unusually well
+suited to broadcasting a scalar: each axon makes roughly 500,000 synaptic contacts,
+100–1,000 times more than a typical neuron.</p>
+<p>Two cautions the authors give:</p>
+<ul>
+<li>Modern evidence points to "the more complicated picture that different
+  subpopulations of dopamine neurons respond to input differently", i.e. the
+  signal may be <strong>vector-valued</strong> rather than scalar (§15.4).</li>
+<li>Lesion work shows the actor placement is "too simple": the dorso<strong>lateral</strong>
+  striatum is more involved in model-free/habitual processes, the dorso<strong>medial</strong>
+  in model-based/goal-directed ones (§15.11). See <a class="wikilink" href="habitual-vs-goal-directed.html">habitual-vs-goal-directed</a>.</li>
+</ul>
+<h2>Teams, and what it says about arbitration</h2>
+<p>§15.10 treats the actor as a <strong>population</strong> of independent learning units all
+receiving the same broadcast δ — a <em>team problem</em> in the game-theoretic sense: no
+conflict of interest, one common signal that evaluates the collective action.</p>
+<p>The result: if each unit's algorithm can learn despite a reward signal heavily
+corrupted by the noise of the other units' contributions, and despite only
+partially observing the state, <strong>the population as a whole improves — without the
+units communicating with one another</strong>. Williams (1992) showed that a team of
+Bernoulli-logistic REINFORCE units performs policy gradient ascent on the team's
+common reward, even when interconnected into a multilayer network. The authors
+note this is "a neurally plausible alternative to the widely-used
+error-backpropagation method", if a slower one.</p>
+<p>Two requirements for it to work:</p>
+<ol>
+<li><strong>Contingent eligibility traces</strong> — non-contingent traces "do not work at all in
+   the team setting" because they give no way to correlate an individual action
+   with the change in the shared signal.</li>
+<li><strong>Persistent variability</strong> in each unit's output, so the team explores the
+   collective action space.</li>
+</ol>
+<div class="callout callout-important">
+<p class="callout-title">A third option for <a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a></p>
+<p>That page currently frames the choice as <strong>winner-take-all</strong> (Kismet) versus
+<strong>hierarchical rule tree</strong> (<a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>). §15.10 supplies a
+third: a set of behaviour units under one broadcast evaluative signal, with the
+expressed behaviour emerging from their collective output rather than from an
+explicit selection rule.</p>
+<p>It also reframes winner-take-all, which the book treats not as a naïve default
+but as a deliberate simplification of <em>structural credit assignment</em>: "An extreme
+case is a winner-take-all arrangement (for example, the result of lateral
+inhibition in the brain) that restricts collective actions to those to which
+only one, or a few, team members contribute. In this case the winners get the
+credit or blame."</p>
+<p>Under a learning regime that matters concretely: a rule tree gives no way to
+attribute outcome to component behaviours, whereas winner-take-all does. The
+arbitration question and the credit-assignment question turn out to be the same
+question. <em>(Inference from §15.10 applied to this wiki, not stated in the book.)</em></p>
+</div>
+<h2>Why this architecture and not another</h2>
+<p>For the behaviour-learning task in <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>, actor–critic has
+three properties that matter here, all from the sections above:</p>
+<ul>
+<li>It <strong>separates prediction from control</strong>, which lets the emotional state model
+  (prediction of what events mean) stay distinct from the behaviour policy
+  (what to do) — the split <a class="wikilink" href="emotion-engine.html">emotion-engine</a> already has.</li>
+<li>It handles <strong>delayed and sparse reinforcement</strong> through the critic, which is the
+  regime of any real social interaction.</li>
+<li>It is <strong>the architecture the brain plausibly uses</strong>, which for a thesis in the
+  <a class="wikilink" href="ethorobotics.html">ethorobotics</a> tradition is an argument of the same kind as the dog model
+  itself — biological plausibility as design justification.</li>
+</ul>
+<p>Against it: the book's own §17.5 caveats about online incremental learning apply,
+and actor–critic inherits them.</p>
+<h2>Related</h2>
+<p><a class="wikilink" href="td-learning.html">td-learning</a> · <a class="wikilink" href="conditioning.html">conditioning</a> · <a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a> ·
+<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> · <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a></p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="conditioning.html">Conditioning</a></li>
+<li><a href="emotion-arbitration.html">Emotion arbitration</a></li>
+<li><a href="habitual-vs-goal-directed.html">Habitual vs goal-directed behaviour</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="reward-design.html">Reward design</a></li>
+<li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>
+<li><a href="td-learning.html">Temporal-difference learning</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

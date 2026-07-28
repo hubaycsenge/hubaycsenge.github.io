@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thesis — evolving argument — Research wiki</title>
+<meta name="description" content="The central claim as it now stands after ingesting 18 sources. Steps 1–4 are well supported ; step 5 is partly settled by prior work; the contribution has…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Synthesis</p>
+  <h1>Thesis — evolving argument</h1>
+<dl class="meta"><div><dt>type</dt><dd>synthesis</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>12</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">thesis</span> <span class="tag">hub</span></dd></div></dl>
+<p>The central claim as it now stands after ingesting 18 sources. Steps 1–4 are
+<strong>well supported</strong>; step 5 is partly settled by prior work; the contribution has
+moved to steps 6–8.</p>
+<h2>The argument in steps</h2>
+<ol>
+<li><strong>Robots in social roles need to handle affect.</strong> Recognising a partner's
+   emotional state and returning appropriate feedback improves cooperation and
+   acceptance <a class="wikilink" href="research-proposal.html">research-proposal</a> — <em>qualified</em>: it helps when the expressed
+   emotion is correctly read, and can backfire when it is not
+   (<a class="wikilink" href="emotion-attribution.html">emotion-attribution</a>).</li>
+<li><strong>People attribute emotions to artificial agents, spontaneously and
+   accurately, and act on the attribution.</strong> Strongly evidenced
+   (<a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a>, <a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a>).</li>
+<li><strong>But robots should not imitate humans.</strong> <a class="wikilink" href="function-orientedness.html">function-orientedness</a> and
+   <a class="wikilink" href="interspecific-hri.html">interspecific-hri</a>, motivated by the ethological reinterpretation of the
+   <a class="wikilink" href="uncanny-valley.html">uncanny-valley</a> (<a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a>).</li>
+<li><strong>Dogs are the right model species</strong> — and the transfer claim is now properly
+   stated: not imitation but <strong>functional analogy</strong>, dog behaviour as a source of
+   legible primitives re-expressed in whatever embodiment is available
+   (<a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>). Demonstrated across five robots spanning a
+   bare holonomic base to an 11-DOF expressive head
+   (<a class="wikilink" href="lakatos-2014-embodiments-demo.html">lakatos-2014-embodiments-demo</a>).</li>
+<li><strong>The engine needs an evolutionarily grounded base model.</strong> Prior work settled
+   on a <strong>hybrid</strong>: Panksepp for architecture, dog ethology for the state set
+   (<a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>). See <a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a>.</li>
+<li><strong>The engine must fuse human affect with the robot's own internal state.</strong>
+   <strong>No prior model does this.</strong> <a class="wikilink" href="emotion-engine.html">emotion-engine</a></li>
+<li><strong>Behaviour is learnt, not hand-authored</strong> — reinforcement learning over an
+   ethologically-derived action set, with <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a> (<code>py_trees_ros</code>)
+   executing the primitives. A double departure from the lineage, which used fuzzy
+   automata and state-space models and authored every rule by hand. Justified by
+   <a class="wikilink" href="social-competence.html">social-competence</a>'s own requirement of "responsiveness to learning and
+   training". See <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>.</li>
+<li><strong>The contribution is real-time, autonomous operation in real environments</strong>,
+   validated on human subjects (<a class="wikilink" href="validation-study.html">validation-study</a>).</li>
+</ol>
+<h2>Where the contribution actually is, after ingest</h2>
+<div class="callout callout-important">
+<p class="callout-title">Sharpened claim</p>
+<p>"Real-time event detection in real environments" is defensible but vague. The
+corpus supports something more precise and harder to dispute:</p>
+<p><strong>1. Nobody has closed the perception-to-emotion loop — and this is now known to
+be field-wide, not lineage-specific.</strong> Every emotional engine in this lineage
+runs on hand-labelled events from a GUI (<a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>); every
+human study of dog-derived emotional behaviour was <strong>wizard-of-oz</strong>
+(<a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a>, <a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a>).</p>
+<p><a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a> closes the argument. It is an entirely
+independent tradition — game AI, Barbados and Kingston, OCC and PAD rather than
+Panksepp and dog ethology — and <strong>it stops in exactly the same place</strong>: every
+emotion is fired by a scripted dialogue choice with a hard-wired trigger. Two
+traditions, no contact between them, same architecture, same missing link.</p>
+<p>This thesis builds the thing that was faked.</p>
+<p><strong>2. Nobody models the robot's own state.</strong> Fusing battery, motor and sensor
+health with social perception is unattempted across the entire corpus, and is
+what makes the robot's emotion <em>its own</em> rather than a mirror of the human's.</p>
+<p><strong>3. Nobody has done light-and-motion-only emotional expression.</strong> Every
+measured robot has a face or articulated appendages
+(<a class="wikilink" href="emotion-recognition-benchmarks.html">emotion-recognition-benchmarks</a>). <a class="wikilink" href="robot-platform.html">robot-platform</a> has neither. There is
+no baseline; establishing one is a contribution.</p>
+<p><strong>4. Nobody's robot in this tradition learns.</strong> Every model in the corpus is
+fixed at design time, while <a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a> lists "responsiveness
+to learning and training" as a requirement of <a class="wikilink" href="social-competence.html">social-competence</a>. The gap
+between the framework's stated requirement and every implementation of it is a
+contribution in itself. See <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>.</p>
+</div>
+<h2>Where the argument is still weakest</h2>
+<ul>
+<li><strong>Step 6 is unspecified.</strong> Internal state and perceived human affect are in
+  incompatible units, and no source offers a fusion scheme. This is the
+  contribution <em>and</em> the least developed part. Q2.</li>
+<li><strong>Step 8 has no operational definition.</strong> No latency budget, no criterion, no
+  named environment. Q3. The one number that would partly settle it — end-to-end
+  lidar → detection → tick → response latency — is cheaply measurable on the
+  existing stack.</li>
+<li><strong>The perception stream may not exist.</strong> No camera or microphone is documented
+  on <a class="wikilink" href="robot-platform.html">robot-platform</a>. If confirmed, <a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a> must be
+  rebuilt around proxemic and kinematic cues — plausible, arguably better-aligned,
+  but a different chapter. <strong>Confirm before designing.</strong></li>
+<li><strong>Step 7 is now supported, and partly pre-empted.</strong>
+  <a class="wikilink" href="colledanchise-ogren-behavior-trees.html">colledanchise-ogren-behavior-trees</a> supplies the behaviour-tree theory, the
+  RL-BT integration and a safety mechanism.
+  <a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a> supplies the emotion half — and <strong>it gets
+  there first</strong>: BT nodes that make affective state first-class in action selection
+  are prior art as of 2019. The thesis cannot claim that idea.
+  What it can claim is everything EMoBeT lacks — a robot, sensing, learning,
+  internal state, a real environment, and <strong>any evaluation at all</strong> (their §V is
+  worked traces; the authors defer viability testing to future work). The reward
+  signal remains undefined — Q14.</li>
+<li><strong><a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> undercuts step 8 rather than supporting it.</strong> Its
+  §17.5 states that current methods "struggle to learn rapidly in the incremental,
+  online settings" and names safe embedding of RL agents in physical environments
+  as an open problem. That makes real-time real-environment learning a defensible
+  <em>target</em> but not a solved engineering step.</li>
+<li><strong>The evidence base is one research network.</strong> Every empirical result supporting
+  the dog model comes from people who proposed it, including the papers that look
+  Japanese (<a class="wikilink" href="hungarian-ethorobotics-network.html">hungarian-ethorobotics-network</a>). Independent or critical
+  literature is the most valuable thing missing.</li>
+<li><strong>Nothing tests <a class="wikilink" href="social-competence.html">social-competence</a> as the framework defines it</strong> — it emerges
+  over time, and every study in the corpus is single-session.</li>
+</ul>
+<h2>Related</h2>
+<p><a class="wikilink" href="open-questions.html">open-questions</a> · <a class="wikilink" href="citation-backlog.html">citation-backlog</a> · <a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a> ·
+<a class="wikilink" href="emotion-recognition-benchmarks.html">emotion-recognition-benchmarks</a> · <a class="wikilink" href="catalog.html">Wiki index</a></p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="albuquerque-2016-emotion-recognition.html">Albuquerque et al. (2016) — Dogs recognize dog and human emotions</a></li>
+<li><a href="behaviour-trees.html">Behaviour trees</a></li>
+<li><a href="belle-2019-programming-with-affect.html">Belle, Gittens &amp; Graham (2019) — Programming with Affect</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="colledanchise-ogren-behavior-trees.html">Colledanchise &amp; Ögren — Behavior Trees in Robotics and AI: An Introduction</a></li>
+<li><a href="dog-human-interaction-model.html">Dog–human interaction as behaviour model</a></li>
+<li><a href="emotion-attribution.html">Emotion attribution to artificial agents</a></li>
+<li><a href="emotion-model-comparison.html">Emotion model comparison</a></li>
+<li><a href="habitual-vs-goal-directed.html">Habitual vs goal-directed behaviour</a></li>
+<li><a href="interspecific-hri.html">HRI as interspecific interaction</a></li>
+<li><a href="lakatos-2014-embodiments-demo.html">Lakatos et al. — Dog-Inspired Social Behaviour in Robots with Different Embodiments</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="miklosi-2017-ethorobotics.html">Miklósi et al. (2017) — Ethorobotics: A New Approach to Human-Robot Relationship</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="research-proposal.html">PhD research proposal</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

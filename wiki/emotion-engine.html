@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emotional engine — Research wiki</title>
+<meta name="description" content="The system this thesis builds: recognise events in context and simulate an emotional state for the robot which drives feedback research-proposal.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Methods</p>
+  <h1>Emotional engine</h1>
+<dl class="meta"><div><dt>type</dt><dd>method</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>6</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">architecture</span> <span class="tag">core-contribution</span> <span class="tag">hub</span></dd></div></dl>
+<p>The system this thesis builds: recognise <strong>events in context</strong> and simulate an
+emotional state for the robot which drives feedback <a class="wikilink" href="research-proposal.html">research-proposal</a>.</p>
+<p>After ingesting the corpus, the picture has changed substantially: <strong>most of this
+architecture already exists</strong>, and the contribution has to be located precisely.</p>
+<h2>The canonical structure</h2>
+<p>Every emotion-handling robot in the corpus shares one structure
+(<a class="wikilink" href="szabo-2010-emotional-engine.html">szabo-2010-emotional-engine</a>):</p>
+<pre><code>input devices → event identification → EMOTIONAL ENGINE → output peripheries
+ (visual, audio,   (events carrying      (interprets, computes    (expression)
+  mechanical)       emotional info)       impact in the model)
+</code></pre>
+<p>Szabó et al. add <strong>input middleware</strong> and <strong>output middleware</strong> either side of the
+abstract model, so the same engine can drive different hardware. Worth adopting
+directly for <a class="wikilink" href="robot-platform.html">robot-platform</a> — the LED service and <code>cmd_vel</code> become output
+middleware; lidar and leg detection become input middleware.</p>
+<h2>Prior art, and what is left</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>State of the art in the corpus</th>
+<th>Open?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base emotion model</td>
+<td>Panksepp-grounded, 5 dog-derived states (<a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>)</td>
+<td>mostly settled</td>
+</tr>
+<tr>
+<td>Temporal dynamics</td>
+<td>short/medium (+long in 2010) layers, peak width, decline rates</td>
+<td>settled</td>
+</tr>
+<tr>
+<td>Probabilistic variation</td>
+<td>B matrix resampled per stimulus, <code>N(B_M, B_σ)</code></td>
+<td>settled</td>
+</tr>
+<tr>
+<td>Arbitration</td>
+<td>hierarchical rule tree (<a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a>)</td>
+<td>partly — medium-term not integrated</td>
+</tr>
+<tr>
+<td>Behaviour coordination</td>
+<td>FRI fuzzy automaton (<a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a>)</td>
+<td>settled, but <strong>separate</strong> from the engine</td>
+</tr>
+<tr>
+<td><strong>Learning / adaptation</strong></td>
+<td><strong>absent — every model in the corpus is hand-authored</strong></td>
+<td><strong>OPEN — and now a design commitment</strong>, see <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a></td>
+</tr>
+<tr>
+<td>Expressive behaviours</td>
+<td>dog-derived, validated on 5 robots (<a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>)</td>
+<td>settled for faces/appendages, <strong>open for light+motion</strong></td>
+</tr>
+<tr>
+<td><strong>Sensor-derived input</strong></td>
+<td><strong>absent in the literature</strong> — but the platform now delivers fused people + 17-keypoint pose (<a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a>)</td>
+<td><strong>OPEN — literature, not hardware</strong></td>
+</tr>
+<tr>
+<td><strong>Robot internal state</strong></td>
+<td><strong>absent in the literature</strong>; telemetry now confirmed present on the platform</td>
+<td><strong>OPEN — modelling only</strong></td>
+</tr>
+<tr>
+<td><strong>Real-time, real environment</strong></td>
+<td><strong>absent — all simulation or wizard-of-oz</strong></td>
+<td><strong>OPEN</strong></td>
+</tr>
+<tr>
+<td><strong>Autonomous operation</strong></td>
+<td><strong>absent — the empirical studies were teleoperated</strong></td>
+<td><strong>OPEN</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>An independent architecture that converges</h2>
+<p><a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a> builds <strong>EMoBeT</strong> from OCC emotions, a PAD
+mood space and Five Factor personality — no contact with this lineage — and arrives
+at the <strong>same three-layer temporal structure</strong>: emotion (short) → mood (mid) →
+personality (long), against Szabó's short / medium / long-term layers. Two
+independent derivations of the same design is the strongest support the layered
+structure has.</p>
+<p>Two things EMoBeT has that this lineage lacks:</p>
+<ul>
+<li><strong>Episodic memory of specific individuals</strong>, decaying on an Ebbinghaus curve. On
+  re-meeting a person the agent recalls its strongest memory of them and
+  re-triggers those emotions. Nothing in the Hungarian corpus does this, and it is
+  what a longitudinal study of <a class="wikilink" href="social-competence.html">social-competence</a> would need (Q16).</li>
+<li><strong>A retained long-term layer.</strong> Szabó's long-term layer appears in the 2010 paper
+  and is dropped by 2012; EMoBeT keeps personality as a first-class subsystem.</li>
+</ul>
+<p>What it does <strong>not</strong> have: any sensing, any learning, any internal state of the
+agent, and any evaluation.</p>
+<h2>Where the contribution actually is</h2>
+<div class="callout callout-important">
+<p class="callout-title">Reframing after ingest</p>
+<p><a class="wikilink" href="research-proposal.html">research-proposal</a> claims novelty in "real-time event detection in real
+environments". The corpus supports something sharper and more defensible:</p>
+<p><strong>Every emotional engine in this lineage has been driven by hand-labelled
+events, and every human study of it has been wizard-of-oz.</strong> The models are
+mature; the <em>perception-to-emotion link</em> has never been closed. This thesis
+closes it.</p>
+<p>Second, and possibly stronger: <strong>no prior model takes the robot's own state as
+input.</strong> Fusing proprioceptive-style signals with social perception is
+unattempted here, and it is what makes the robot's emotion <em>its own</em> rather than
+a mirror of the human's.</p>
+</div>
+<h2>Inputs — two streams</h2>
+<p><strong>1. Perceived state of surrounding people.</strong> See
+<a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a>. The platform provides <strong>17-keypoint body pose
+from a camera, fused with lidar detections into people in map space</strong>
+(<a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a>) — so the input is bodily: posture, orientation,
+gesture, gait, spatial arrangement. Richer than the <a class="wikilink" href="attachment-sst.html">attachment-sst</a>-derived
+states the fuzzy automaton uses, and still not facial expression, which keeps Q5
+answered. What is missing is any mapping from pose to affect — that gap is
+literature, not hardware.</p>
+<p><strong>2. The robot's own internal state</strong> — battery charge, sensor and motor states
+<a class="wikilink" href="research-proposal.html">research-proposal</a>. <strong>The telemetry exists</strong> (confirmed 2026-07-28,
+<a class="wikilink" href="mecanumbot-repos.html">mecanumbot-repos</a>): <code>OpenCRState.msg</code> publishes goal and measured wheel
+velocities, positions, currents and accelerations, <strong>per-wheel error states</strong>, DMS
+distance, battery voltage and 9-axis IMU; <code>orin_battery_state</code> adds INA219 power
+data. Per-wheel fault state is a real "how am I doing" signal rather than a bare
+charge level. Q2 is now a modelling question only.</p>
+<div class="callout callout-note">
+<p class="callout-title">Q2 now has a formalism, if not an answer</p>
+<p><a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §14.3 makes what is rewarding <strong>state-dependent</strong>, and
+the state explicitly includes "what is internal to this machine": "an animal will
+be more rewarded by eating when it is hungry than when it has just finished a
+satisfying meal". §17.4/§17.5 go further — reward may depend on motivational
+states, memories, or on the progress of learning itself (intrinsic motivation).</p>
+<p>That gives a third option beside <em>modulator</em>, <em>separate channel</em> and <em>mapped
+into the same space</em>: internal state as a <strong>modulator of the reward function</strong>
+rather than of the affect space. It does not solve the commensurability problem,
+but it moves it somewhere with a literature. See <a class="wikilink" href="reward-design.html">reward-design</a>.</p>
+</div>
+<h2>Output</h2>
+<p>Emotional state → <a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a> → expressive behaviour, executed via
+<a class="wikilink" href="behaviour-trees.html">behaviour-trees</a> (<code>py_trees_ros</code>), shaped by <a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>,
+constrained by <a class="wikilink" href="function-orientedness.html">function-orientedness</a>, expressed through <strong>omnidirectional
+motion and four RGB LEDs</strong>.</p>
+<h2>Where the engine sits once behaviour is learnt</h2>
+<p>Following the decision recorded in <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>, the engine is
+<strong>not</strong> the learner. It stays hand-authored and sits on the <em>environment</em> side of
+the RL agent boundary, computing the reward that trains the behaviour policy —
+which is where <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §3.1 says a reward computation belongs,
+"beyond [the agent's] ability to change arbitrarily". The boundary is drawn inside
+the robot, not at its shell: motors, sensors and the engine are all environment.</p>
+<p>Whether the emotional state is the reward or a state feature is <strong>not settled</strong> —
+Q15 in <a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+<h2>Design questions still live</h2>
+<ul>
+<li>Does internal state modulate the affect space, occupy its own channel, or map
+  into it? (Q2)</li>
+<li>Should <a class="wikilink" href="ostensive-signalling.html">ostensive-signalling</a> gate responses, so the robot reacts to events
+  addressed to it rather than to all detected affect?</li>
+<li><strong>Fuzzy automaton or behaviour tree, or both?</strong> (Q9)</li>
+<li>What latency budget makes "real-time" true? (Q3)</li>
+<li>Does the medium-term layer feed arbitration, which Szabó left undone?</li>
+<li><strong>Recover the long-term layer</strong> from <a class="wikilink" href="szabo-2010-emotional-engine.html">szabo-2010-emotional-engine</a> as
+  temperament — it converges with the "behavioural factors" of
+  <a class="wikilink" href="ichikawa-numakunai-2012-roman.html">ichikawa-numakunai-2012-roman</a>.</li>
+<li><strong>What collapses the five-dimensional state to a scalar reward?</strong> (Q14, see
+  <a class="wikilink" href="reward-design.html">reward-design</a> — the sharpest question this architecture creates.)</li>
+</ul>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="actor-critic.html">Actor–critic</a></li>
+<li><a href="behaviour-trees.html">Behaviour trees</a></li>
+<li><a href="belle-2019-programming-with-affect.html">Belle, Gittens &amp; Graham (2019) — Programming with Affect</a></li>
+<li><a href="conditioning.html">Conditioning</a></li>
+<li><a href="emotion-arbitration.html">Emotion arbitration</a></li>
+<li><a href="emotion-model-comparison.html">Emotion model comparison</a></li>
+<li><a href="emotion-recognition-benchmarks.html">Emotion recognition rates across robots</a></li>
+<li><a href="gacsi-2016-emotion-attribution.html">Gácsi et al. (2016) — Humans attribute emotions to a robot showing dog-derived behavioural patterns</a></li>
+<li><a href="lakatos-2014-emotion-attribution.html">Lakatos et al. (2014) — Emotion attribution to a non-humanoid robot in different social situations</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="mecanumbot-repos.html">Mecanumbot repositories</a></li>
+<li><a href="robot-platform.html">Mecanumbot — the experimental robot platform</a></li>
+<li><a href="mecanumbot-behaviours.html">mecanumbot_behaviours — the behaviour layer</a></li>
+<li><a href="mecanumbot-perception.html">mecanumbot_sensorprocess_smart — the perception stack</a></li>
+<li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="ostensive-signalling.html">Ostensive signalling</a></li>
+<li><a href="panksepp-2005-affective-consciousness.html">Panksepp (2005) — Affective consciousness: core emotional feelings in animals and humans</a></li>
+<li><a href="panksepp-affective-systems.html">Panksepp&#x27;s affective systems</a></li>
+<li><a href="prior-robot-platforms.html">Prior robot platforms</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="reward-design.html">Reward design</a></li>
+<li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>
+<li><a href="szabo-2010-emotional-engine.html">Szabó et al. (2010) — An Emotional Engine Model Inspired by Human-Dog Interaction</a></li>
+<li><a href="szabo-2011-emotional-engine.html">Szabó et al. (2012) — Building a Human-Dog Interaction Inspired Emotional Engine Model</a></li>
+<li><a href="td-learning.html">Temporal-difference learning</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

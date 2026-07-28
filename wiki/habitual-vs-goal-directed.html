@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Habitual vs goal-directed behaviour — Research wiki</title>
+<meta name="description" content="Psychology&#x27;s distinction between two modes of behavioural control, and its correspondence with RL&#x27;s model-free/model-based distinction. From…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Concepts</p>
+  <h1>Habitual vs goal-directed behaviour</h1>
+<dl class="meta"><div><dt>type</dt><dd>concept</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">animal-learning</span> <span class="tag">psychology</span> <span class="tag">reinforcement-learning</span> <span class="tag">longitudinal</span></dd></div></dl>
+<p>Psychology's distinction between two modes of behavioural control, and its
+correspondence with RL's model-free/model-based distinction. From
+<a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §14.5–14.6 and §15.11.</p>
+<table>
+<thead>
+<tr>
+<th>Psychology</th>
+<th>Reinforcement learning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Habitual</strong> — triggered by antecedent stimuli, performed more or less automatically</td>
+<td><strong>Model-free</strong> — decisions read out of a cached policy or action-value function</td>
+</tr>
+<tr>
+<td><strong>Goal-directed</strong> — controlled by knowledge of the value of goals and of the relationship between actions and consequences</td>
+<td><strong>Model-based</strong> — decisions made by planning with an environment model</td>
+</tr>
+</tbody>
+</table>
+<p>An environment model has two parts: a <strong>state-transition</strong> part and a <strong>reward</strong>
+part. What psychologists call a <strong>cognitive map</strong> (Tolman 1948) is the same thing —
+and, crucially, it "can be learned by supervised learning methods without relying
+on reward signals", then used later when motivation appears. That is the account of
+<em>latent learning</em>: rats that explored an unrewarded maze caught up almost
+immediately once food was introduced.</p>
+<h2>The trade-off</h2>
+<p>Goal-directed control adapts fast to a changed environment, because changing the
+model changes the policy through planning, without new experience of the affected
+states. Model-free control cannot: "for a model-free agent to change the action its
+policy specifies for a state... it has to move to that state, act from it, possibly
+many times, and experience the consequences of its actions" (§14.6).</p>
+<p>Habitual control is faster to execute and more robust once the environment is
+stable. "The development of goal-directed behavioral control was likely a major
+advance in the evolution of animal intelligence."</p>
+<h2>Overtraining converts goal-directed into habitual</h2>
+<p>The experimental evidence is <strong>outcome devaluation</strong>. Adams &amp; Dickinson (1981)
+trained rats to lever-press for sucrose pellets, then devalued the pellets by
+pairing free access to them with a nausea-inducing injection. In subsequent
+extinction trials the injected rats lever-pressed less <strong>from the very first
+trial</strong> — without ever having experienced lever-pressing followed by sickness.
+They had combined knowledge of the outcome with the outcome's changed value: model-
+based control.</p>
+<p>Adams (1982) then compared rats trained to 100 rewarded presses against an
+overtrained group at 500. Devaluation strongly suppressed pressing in the first
+group and had "little effect" in the overtrained group — "if anything, it made it
+more vigorous". Extended training had converted goal-directed behaviour into a
+habit.</p>
+<p>Daw, Niv &amp; Dayan (2005) explain the shift by <strong>confidence-weighted arbitration</strong>:
+both processes run, each proposes an action, and the more trustworthy one wins.
+Early on the model-based process is more trustworthy because chaining short-term
+predictions needs less experience; later the model-free process wins because
+planning accumulates model error and shortcuts like tree-pruning.</p>
+<p>The authors note that not every psychologist accepts the cognitive reading of
+devaluation experiments, "but the model-based planning explanation is widely
+accepted".</p>
+<h2>In the brain</h2>
+<p>Lesion and imaging work (§15.11) places model-free processes more in the
+dorsolateral striatum and model-based in the dorsomedial, with the orbitofrontal
+cortex implicated in the <strong>reward part</strong> of the model and the <strong>hippocampus</strong> in
+the state-transition part — when a rat pauses at a choice point, hippocampal
+activity "sweeps forward (and not backwards) along the possible paths", and the
+trajectories correspond to what the rat then does.</p>
+<p>But the separation is not clean. Doll, Simon &amp; Daw (2012), quoted in §15.11:
+"model-based influences appear ubiquitous more or less wherever the brain
+processes reward information" — including in the dopamine signals themselves. This
+qualifies the tidy actor–critic story in <a class="wikilink" href="actor-critic.html">actor-critic</a>.</p>
+<h2>Why this page exists</h2>
+<div class="callout callout-important">
+<p class="callout-title">The corpus' central untested construct now has a mechanism</p>
+<p><a class="wikilink" href="social-competence.html">social-competence</a> is defined by <a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a> as something
+that <strong>emerges over time</strong> through interaction, and <a class="wikilink" href="thesis.html">thesis</a> records that no
+study in the corpus tests it, because every study is single-session.</p>
+<p>This chapter supplies a documented, quantified process by which repeated
+interaction changes the <em>mode</em> of behavioural control — and an experimental
+instrument for detecting it, outcome devaluation, which measures whether
+behaviour is still sensitive to the value of its consequences.</p>
+<p>A robot that shifted from deliberate to habitual responding as a relationship
+developed would be a concrete, measurable claim about partnership formation
+rather than a restatement of the framework. Whether that is a good idea for
+<a class="wikilink" href="validation-study.html">validation-study</a> is open — it would require a longitudinal design the corpus
+has no precedent for. Q16 in <a class="wikilink" href="open-questions.html">open-questions</a>. <em>(Connection drawn here; not
+made by any source.)</em> #needs-source</p>
+</div>
+<p>The book also warns against reading RL as tabula rasa: "Nothing about
+reinforcement learning implies a tabula rasa view of learning and behavior.
+Indeed, experience with engineering applications has highlighted the importance of
+building into reinforcement learning systems knowledge that is analogous to what
+evolution provides to animals" (§14.7). That is the same argument as
+<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> makes from <code>A(s)</code>.</p>
+<h2>Related</h2>
+<p><a class="wikilink" href="conditioning.html">conditioning</a> · <a class="wikilink" href="actor-critic.html">actor-critic</a> · <a class="wikilink" href="social-competence.html">social-competence</a> ·
+<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> · <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a></p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="actor-critic.html">Actor–critic</a></li>
+<li><a href="conditioning.html">Conditioning</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="social-competence.html">Social competence</a></li>
+<li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

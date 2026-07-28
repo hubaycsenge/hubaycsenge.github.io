@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Szabó et al. (2010) — An Emotional Engine Model Inspired by Human-Dog Interaction — Research wiki</title>
+<meta name="description" content="The first version of the engine that szabo-2011-emotional-engine extends. Read the 2011 paper for the mature model; this one is valuable for two things…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Sources</p>
+  <h1>Szabó et al. (2010) — An Emotional Engine Model Inspired by Human-Dog Interaction</h1>
+<dl class="meta"><div><dt>type</dt><dd>source</dd></div><div><dt>status</dt><dd><span class="badge badge-solid" title="well supported and cross-referenced">solid</span></dd></div><div><dt>citekey</dt><dd>szabo2010emotional</dd></div><div><dt>authors</dt><dd>Csanád Szabó, András Róka, Márta Gácsi, Ádám Miklósi, Péter Baranyi, Péter Korondi</dd></div><div><dt>year</dt><dd>2010</dd></div><div><dt>venue</dt><dd>IEEE ROBIO 2010, Tianjin, pp. 567–572</dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">emotional-engine</span> <span class="tag">architecture</span> <span class="tag">prior-work</span></dd></div></dl>
+<p>The first version of the engine that <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a> extends. Read
+the 2011 paper for the mature model; this one is valuable for two things the
+successor drops.</p>
+<h2>What is unique to this version</h2>
+<p><strong>1. A survey of emotional models in six social robots</strong>, scored on criteria the
+authors chose — short-/medium-/long-term response, probabilistic nature,
+ethological background:</p>
+<table>
+<thead>
+<tr>
+<th>Robot</th>
+<th>short</th>
+<th>medium</th>
+<th>long</th>
+<th>probabilistic</th>
+<th>ethological</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ifbot</td>
+<td></td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Probo</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td>?</td>
+</tr>
+<tr>
+<td>iCat</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td>EmotiRob</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Aibo</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Kismet</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td>✓</td>
+</tr>
+<tr>
+<td><strong>This proposal</strong></td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<p>Only this model claims all five. Detail in <a class="wikilink" href="prior-robot-platforms.html">prior-robot-platforms</a>.</p>
+<p><strong>2. A long-term emotional layer</strong>, dropped in the 2011 paper. Long-term emotions
+are the <em>basic emotional settings</em> each emotion converges to when unstimulated —
+either predefined static values or dynamically generated from long-term event
+statistics. Formally, <code>y[k] = C(E·xA[k] + d)</code> with <code>d</code> the long-term offset.
+This is a <strong>temperament / personality</strong> mechanism, and it is worth recovering.</p>
+<p><strong>3. Explicit probabilistic behaviour.</strong> The B matrix is resampled per stimulus,
+<code>B'A = N(B_M, B_σ)</code>, from mean and variance matrices, because dogs vary their
+response to the same context. A <em>variance</em> attribute (high/medium/low)
+accompanies arousal and valence in the impact table. The 2011 paper drops the
+variance column.</p>
+<h2>Differences from the 2011 version</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>2010 (ROBIO)</th>
+<th>2011 (IECON)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Basic emotions</td>
+<td>4 (happiness, despair, fear, anger)</td>
+<td>5 (+ surprise)</td>
+</tr>
+<tr>
+<td>Impact attributes</td>
+<td>arousal, valence, <strong>variance</strong></td>
+<td>arousal, valence</td>
+</tr>
+<tr>
+<td>Time layers</td>
+<td>short, medium, <strong>long</strong></td>
+<td>short, medium</td>
+</tr>
+<tr>
+<td>Grounding</td>
+<td>dog-interaction analogy, no named theory</td>
+<td><strong>Panksepp</strong> named</td>
+</tr>
+<tr>
+<td>Arbitration</td>
+<td>none</td>
+<td>hierarchical rule tree</td>
+</tr>
+<tr>
+<td>Core</td>
+<td>linear, later saturated</td>
+<td>non-linear, dynamic B and C</td>
+</tr>
+</tbody>
+</table>
+<h2>Design requirements stated</h2>
+<p>Explicitly targets integration beyond robots — "mobile phone, car, wash machine,
+intelligent home". Hence: simple arithmetic, time and amplitude scalability,
+stability via eigenvalue selection, event-triggered background operation, low
+resource load. It introduces <strong>input and output middleware</strong> to map physical
+device I/O onto the abstract model — a clean separation worth adopting for
+<a class="wikilink" href="emotion-engine.html">emotion-engine</a> on <a class="wikilink" href="robot-platform.html">robot-platform</a>.</p>
+<h2>Limitations</h2>
+<p>Same as the successor: simulation only, hand-labelled events, expert-elicited
+tables, no sensors, no human subjects, no robot internal state. The authors
+concede there were no experimental data on dogs to set the time constants, and
+propose setting them from <em>human</em> usage patterns instead.</p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="emotion-model-comparison.html">Emotion model comparison</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="ichikawa-numakunai-2012-roman.html">Ichikawa (2012) and Numakunai (2012) — dog-based robot behaviour in Intelligent Space</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="prior-robot-platforms.html">Prior robot platforms</a></li>
+<li><a href="szabo-2011-emotional-engine.html">Szabó et al. (2012) — Building a Human-Dog Interaction Inspired Emotional Engine Model</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

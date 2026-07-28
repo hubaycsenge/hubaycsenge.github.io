@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emotion model comparison — Research wiki</title>
+<meta name="description" content="The decision page for Q1 in open-questions. The corpus has changed this question substantially — it is no longer a straight two-way choice.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Synthesis</p>
+  <h1>Emotion model comparison</h1>
+<dl class="meta"><div><dt>type</dt><dd>synthesis</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>4</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">comparison</span> <span class="tag">emotion-model</span> <span class="tag">decision</span></dd></div></dl>
+<p>The decision page for <strong>Q1</strong> in <a class="wikilink" href="open-questions.html">open-questions</a>. The corpus has changed this
+question substantially — it is no longer a straight two-way choice.</p>
+<div class="callout callout-important">
+<p class="callout-title">Recommendation after reading both primaries — awaiting sign-off</p>
+<p>Written 2026-07-28 after ingesting <a class="wikilink" href="panksepp-2005-affective-consciousness.html">panksepp-2005-affective-consciousness</a>,
+<a class="wikilink" href="panksepp-2011-emotional-circuits.html">panksepp-2011-emotional-circuits</a> and <a class="wikilink" href="plutchik-1982-psychoevolutionary.html">plutchik-1982-psychoevolutionary</a>.
+<strong>Filed as a recommendation, not as a decision</strong> — Q1 remains open until Csenge
+confirms.</p>
+<p><strong>Keep the hybrid, but relabel which model supplies what:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Source</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Architecture</strong></td>
+<td><strong>Panksepp</strong></td>
+<td>Parallel independent circuits; the three-level primary/secondary/tertiary split; the six-attribute system specification, including <em>emotions outlast their stimuli</em> — the temporal layer Szabó hand-built; and the <strong>homeostatic vs emotional affect</strong> distinction, which is the best answer Q2 has</td>
+</tr>
+<tr>
+<td><strong>State set + behaviour mapping</strong></td>
+<td><strong>Plutchik</strong></td>
+<td>The <strong>functional language</strong> (fear→Protection, anger→Destruction, …) is <a class="wikilink" href="function-orientedness.html">function-orientedness</a> arriving from emotion theory; the behavioural column maps onto motion primitives a faceless robot has; intensity is native; and it contains <strong>surprise</strong>, which Szabó implemented and Panksepp has no circuit for</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why this and not one or the other.</strong> The two models are not rival descriptions
+of one thing — Panksepp derives seven states from neural circuits identified by
+brain stimulation, Plutchik derives eight from functional behaviour prototypes
+across phylogeny. Different evidence, different lists, and neither refutes the
+other. Panksepp is strong exactly where Plutchik is empty (mechanism, neural
+grounding, dynamics, internal state) and empty exactly where Plutchik is strong
+(behavioural expression, function, intensity, and a state set implementable on a
+robot without a face).</p>
+<p><strong>This is also what the field already did, unacknowledged.</strong> Szabó's set is
+<em>happiness, despair, fear, anger, surprise</em> — surprise is Plutchik's, not
+Panksepp's. The corpus' "Panksepp-grounded" engine is already partly
+Plutchik-shaped. Making that explicit converts an anomaly into a design.</p>
+<p><strong>The cost</strong>, stated plainly: two models with incompatible ontologies are being
+stapled together, and neither author would endorse it. Panksepp insists on not
+mixing levels of analysis; Plutchik has no neural commitments to mix. The thesis
+must argue the hybrid, not assume it.</p>
+<p><strong>What would change the recommendation</strong>: if the engine's states must be
+defensible to an ethologist circuit-by-circuit, go pure Panksepp and accept
+dropping surprise. If the priority is legible expression on a faceless robot,
+go further toward Plutchik and treat the neural grounding as motivation rather
+than as structure.</p>
+</div>
+<h2>The finding that reframes the question</h2>
+<p><a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a> did not pick between an emotion theory and dog
+ethology. It used <strong>Panksepp as architectural justification</strong> for a state set
+derived from <strong>dog behaviour</strong>:</p>
+<ul>
+<li>From Panksepp: several parallel, equally-ranked, independently-varying basic
+  states, grounded in distinct neural circuits.</li>
+<li>From dog ethology: <em>which</em> states — happiness, despair, fear, anger, surprise —
+  and how environmental events move them.</li>
+</ul>
+<p>Only FEAR and RAGE map onto Panksepp's circuits; SEEKING, LUST, CARE and PLAY have
+no counterpart in the implementation, and surprise has no Panksepp circuit at all.</p>
+<p><strong>So option 3 exists and is what the field actually did.</strong> The real question is
+narrower: what supplies the <em>dynamics</em> — intensity, blending, decay — that neither
+the circuit inventory nor the ethological table provides?</p>
+<h2>Comparison</h2>
+<table>
+<thead>
+<tr>
+<th>Axis</th>
+<th><a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a></th>
+<th><a class="wikilink" href="plutchik-model.html">plutchik-model</a></th>
+<th>Szabó's hybrid (implemented)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Representation</td>
+<td>discrete circuits</td>
+<td>continuous states</td>
+<td>5 discrete states, continuous levels in [−1,1]</td>
+</tr>
+<tr>
+<td>Grounding</td>
+<td>neural / mechanistic</td>
+<td>evolutionary / adaptive</td>
+<td>Panksepp for architecture, dog ethology for content</td>
+</tr>
+<tr>
+<td>Intensity</td>
+<td>not native</td>
+<td><strong>native</strong></td>
+<td>hand-built: saturation, peak width, decline rates</td>
+</tr>
+<tr>
+<td>Blending</td>
+<td>inhibition between circuits</td>
+<td><strong>native (dyads)</strong></td>
+<td>ambivalent cross-modal expression, explicitly <em>not</em> Plutchik dyads</td>
+</tr>
+<tr>
+<td>Mapping to <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a></td>
+<td>clean (discrete)</td>
+<td>needs discretisation</td>
+<td>clean</td>
+</tr>
+<tr>
+<td>Handles robot internal state (Q2)</td>
+<td>no</td>
+<td>no</td>
+<td><strong>no</strong> — the gap is universal</td>
+</tr>
+<tr>
+<td>Prior robot implementations</td>
+<td><a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a></td>
+<td>none in corpus</td>
+<td>this is it</td>
+</tr>
+<tr>
+<td>Computability from sensor input</td>
+<td>untested</td>
+<td>untested</td>
+<td><strong>untested — inputs were hand-labelled</strong></td>
+</tr>
+<tr>
+<td>Fit with supervisors / lineage</td>
+<td>strong</td>
+<td>none</td>
+<td>strongest</td>
+</tr>
+</tbody>
+</table>
+<h2>Recommendation, held loosely</h2>
+<p><strong>Adopt the Szabó structure and extend it</strong>, rather than re-litigating the model
+choice. Reasons:</p>
+<ol>
+<li>It is the lineage's model, with an implementation, tables and arbitration rules
+   to inherit (<a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a>).</li>
+<li>The genuinely open problems — sensor-derived input, robot internal state,
+   real-time autonomous operation — are <strong>orthogonal to the model choice</strong>. Time
+   spent choosing between Panksepp and Plutchik is time not spent on the actual
+   contribution (<a class="wikilink" href="emotion-engine.html">emotion-engine</a>).</li>
+<li>Its known weaknesses are addressable within it: recover the <strong>long-term layer</strong>
+   from <a class="wikilink" href="szabo-2010-emotional-engine.html">szabo-2010-emotional-engine</a> for temperament, and <strong>integrate the
+   medium-term layer into arbitration</strong>, which Szabó explicitly left undone.</li>
+</ol>
+<p><strong>The argument on the other side</strong>, which should be recorded rather than dismissed:
+LED colour on <a class="wikilink" href="robot-platform.html">robot-platform</a> is a <strong>continuous</strong> expressive channel, and a
+continuous emotion space maps to it more naturally than five discrete states do.
+If expression is going to be primarily light-based, Plutchik's intensity and
+blending stop being a nicety.</p>
+<h2>Decision record</h2>
+<p><em>Undecided as of 2026-07-27.</em> Before deciding, obtain the Panksepp (2005) and
+Plutchik (2001) primaries — currently the model pages rest on second-hand
+characterisations (<a class="wikilink" href="citation-backlog.html">citation-backlog</a>). When decided, record the choice, the
+reasons, the sources and what was given up, then update step 5 of <a class="wikilink" href="thesis.html">thesis</a>.</p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="belle-2019-programming-with-affect.html">Belle, Gittens &amp; Graham (2019) — Programming with Affect</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="panksepp-2005-affective-consciousness.html">Panksepp (2005) — Affective consciousness: core emotional feelings in animals and humans</a></li>
+<li><a href="panksepp-affective-systems.html">Panksepp&#x27;s affective systems</a></li>
+<li><a href="plutchik-1982-psychoevolutionary.html">Plutchik (1982) — A psychoevolutionary theory of emotions</a></li>
+<li><a href="plutchik-model.html">Plutchik&#x27;s model</a></li>
+<li><a href="prior-robot-platforms.html">Prior robot platforms</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

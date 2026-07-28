@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vincze et al. (2021) — Towards automatic observation and coding of simple behaviours in ethological experiments — Research wiki</title>
+<meta name="description" content="Behavioural coding — categorising observed behaviour into predefined elements — is done by trained human observers, in real time or from video. It is…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Sources</p>
+  <h1>Vincze et al. (2021) — Towards automatic observation and coding of simple behaviours in ethological experiments</h1>
+<dl class="meta"><div><dt>type</dt><dd>source</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>citekey</dt><dd>vincze2021towards</dd></div><div><dt>authors</dt><dd>Dávid Vincze, Márta Gácsi, Szilveszter Kovács, Mihoko Niitsuma, Péter Korondi, Ádám Miklósi</dd></div><div><dt>year</dt><dd>2021</dd></div><div><dt>venue</dt><dd>IEEE/SICE SII 2021 (short paper)</dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">methodology</span> <span class="tag">automatic-coding</span> <span class="tag">evaluation</span> <span class="tag">most-recent</span></dd></div></dl>
+<p><strong>The most recent paper in the corpus (2021)</strong> and the one that shows where this
+research programme had got to most lately. Directly relevant to
+<a class="wikilink" href="validation-study.html">validation-study</a>: it attacks the measurement problem, not the model.</p>
+<h2>The problem</h2>
+<p>Behavioural <strong>coding</strong> — categorising observed behaviour into predefined elements
+— is done by trained human observers, in real time or from video. It is
+resource-hungry, observers disagree with each other, and even skilled observers
+make mistakes. Existing computer tools (e.g. BORIS) help with timestamps and data
+handling but <strong>still require the human to decide what behaviour is being shown</strong>.</p>
+<h2>The proposal</h2>
+<p>Automatically code behaviour elements in a simulated dog–human interaction,
+<strong>using only the spatial position data of the participants</strong> — no access to the
+simulation's internal states. Connected to the existing simulation system
+(<a class="wikilink" href="vincze-2012-interfaces-and-virca.html">vincze-2012-interfaces-and-virca</a>), evaluated on scenarios where a simulated
+dog agent performs pre-programmed behaviours.</p>
+<p>Preliminary result: the method recognised the expected behaviour elements
+correctly. The authors are explicit that <strong>further evaluation is necessary</strong>.</p>
+<h2>Why the position-only constraint matters</h2>
+<p>Deliberately blind to inner state, the coder is a genuinely independent observer —
+it measures what an ethologist would see, not what the model intends. That makes
+it usable as an <strong>evaluation instrument for the thesis' own engine</strong>: if the
+engine drives behaviour and an independent coder recovers the intended behaviour
+element, that is evidence the expression works, separately from asking humans.</p>
+<p>The authors note the obvious extension: applied to real experiments once reliable
+localisation of live participants is available. <strong><a class="wikilink" href="robot-platform.html">robot-platform</a> has exactly
+that</strong> — a lidar plus the DR-SPAAM leg detector produce spatial position data for
+people in the room. This connection is not made in any source; it is a hypothesis
+worth testing. Q10 in <a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+<h2>Limitations</h2>
+<ul>
+<li>Two-page short paper. <strong>Preliminary</strong>, artificially constructed data, no
+  accuracy figures reported in the text.</li>
+<li>Simulated agents only; the real-world application is stated as future work.</li>
+<li>Handles <em>simple</em> behaviour elements; nothing about emotional state.</li>
+</ul>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="validation-study.html">Human validation study (planned)</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="hungarian-ethorobotics-network.html">The ethorobotics research network</a></li>
+<li><a href="vincze-2012-interfaces-and-virca.html">Vincze et al. (2012) — HRI interfaces and the VirCA environment</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

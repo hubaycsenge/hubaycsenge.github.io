@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emotion recognition rates across robots — Research wiki</title>
+<meta name="description" content="Every figure in the corpus for how well humans identify a robot&#x27;s expressed emotion . This is the bar validation-study has to clear, and the table that…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Synthesis</p>
+  <h1>Emotion recognition rates across robots</h1>
+<dl class="meta"><div><dt>type</dt><dd>synthesis</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>2</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">comparison</span> <span class="tag">evaluation</span> <span class="tag">benchmarks</span></dd></div></dl>
+<p>Every figure in the corpus for <em>how well humans identify a robot's expressed
+emotion</em>. This is the bar <a class="wikilink" href="validation-study.html">validation-study</a> has to clear, and the table that
+justifies the dog-derived approach.</p>
+<h2>Forced-choice recognition rates</h2>
+<table>
+<thead>
+<tr>
+<th>Robot</th>
+<th>Modality</th>
+<th>Joy / happiness</th>
+<th>Fear</th>
+<th>Overall</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MogiRobi</strong></td>
+<td>dog-derived body movement (antenna, appendices, approach/avoid)</td>
+<td><strong>83.3%</strong></td>
+<td><strong>47.9%</strong></td>
+<td>—</td>
+<td><a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a></td>
+</tr>
+<tr>
+<td><strong>PeopleBot</strong></td>
+<td>dog-derived movement + Morton-rule sounds</td>
+<td>—</td>
+<td>—</td>
+<td><strong>75%</strong> (5 states)</td>
+<td><a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a></td>
+</tr>
+<tr>
+<td>Kismet</td>
+<td>human-like face</td>
+<td>82.4%</td>
+<td>47.1%</td>
+<td>73%</td>
+<td>via both</td>
+</tr>
+<tr>
+<td>Probo</td>
+<td>animal-like face</td>
+<td>100%</td>
+<td>65%</td>
+<td>73%</td>
+<td>via both</td>
+</tr>
+<tr>
+<td>Eddie</td>
+<td>robot head, animal-like features</td>
+<td>—</td>
+<td>—</td>
+<td>57%</td>
+<td>via <a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a></td>
+</tr>
+<tr>
+<td>Feelix</td>
+<td>LEGO humanoid face</td>
+<td>—</td>
+<td>—</td>
+<td>45%</td>
+<td>via <a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a></td>
+</tr>
+<tr>
+<td><em>Dog (live comparison)</em></td>
+<td>actual dog behaviour</td>
+<td>—</td>
+<td>—</td>
+<td><strong>78%</strong> (5 states)</td>
+<td><a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-note">
+<p class="callout-title">Read these across studies with care</p>
+<p>Different emotion sets, different numbers of options (chance = 0.2 in Gácsi's
+five-way choice, 0.125 in Lakatos' eight-way), different presentation (video vs
+live interaction). The Kismet/Probo/Eddie/Feelix figures are <strong>reported
+second-hand</strong> by the Hungarian papers, not measured by them. Do not build a
+statistical comparison on this table; use it to establish orders of magnitude.</p>
+</div>
+<h2>What the numbers actually support</h2>
+<p><strong>1. Dog-derived body movement matches a human-like face.</strong> MogiRobi's 83.3% joy
+vs Kismet's 82.4%; PeopleBot's 75% overall vs Kismet's and Probo's 73%. Achieved
+without a face, without speech, and without adding non-functional hardware. This
+is the empirical core of the <a class="wikilink" href="function-orientedness.html">function-orientedness</a> argument — legibility
+without imitation.</p>
+<p><strong>2. Robot ≈ dog.</strong> PeopleBot 75% vs the live dog's 78%, with no significant
+difference overall in the model (p = 0.16). The ceiling is not far above where
+these robots already are.</p>
+<p><strong>3. Fear is the universal failure.</strong> ~47–48% for both MogiRobi and Kismet;
+65% for Probo. Consistent across face-based and body-based expression, and dog
+owners are bad at recognising fear in <em>real dogs</em> from visual signals alone.
+Robot fear is typically misread as <strong>indifference, passivity or reluctance</strong> —
+and in <a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a> participants responded to it with
+anger and embarrassment.</p>
+<div class="callout callout-warning">
+<p class="callout-title">Design consequence</p>
+<p>If <a class="wikilink" href="emotion-engine.html">emotion-engine</a> adopts Szabó's arbitration rule that <strong>fear above medium
+intensity overrides everything</strong> (<a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a>), it will
+preferentially express the one state humans reliably fail to read — and misread
+in a way that produces negative user reactions. The priority rule is
+biologically motivated but may be pragmatically wrong for HRI. Q12 in
+<a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+</div>
+<p><strong>4. Nobody has measured this on a light-and-motion-only robot.</strong> Every figure
+above comes from a robot with either a face or articulated appendages.
+<a class="wikilink" href="robot-platform.html">robot-platform</a> has neither. There is no baseline for what is achievable with
+omnidirectional motion plus four RGB LEDs — which makes it a genuine contribution
+to establish one.</p>
+<h2>To add</h2>
+<p>Recognition rates for anger, sadness, surprise and neutral from
+<a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a> Fig. 3 and the Table 2 confusion matrix — those
+are <strong>figures/tables not recovered by text extraction</strong>. Read the PDF pages
+directly to fill these in. #needs-source</p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="albuquerque-2016-emotion-recognition.html">Albuquerque et al. (2016) — Dogs recognize dog and human emotions</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="emotion-arbitration.html">Emotion arbitration</a></li>
+<li><a href="emotion-attribution.html">Emotion attribution to artificial agents</a></li>
+<li><a href="ethorobotics.html">Ethorobotics</a></li>
+<li><a href="function-orientedness.html">Function-orientedness</a></li>
+<li><a href="gacsi-2016-emotion-attribution.html">Gácsi et al. (2016) — Humans attribute emotions to a robot showing dog-derived behavioural patterns</a></li>
+<li><a href="validation-study.html">Human validation study (planned)</a></li>
+<li><a href="lakatos-2014-emotion-attribution.html">Lakatos et al. (2014) — Emotion attribution to a non-humanoid robot in different social situations</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="prior-robot-platforms.html">Prior robot platforms</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mecanumbot repositories — Research wiki</title>
+<meta name="description" content="Clipped README material for the robot platform. See robot-platform for the synthesised platform page, mecanumbot-perception and mecanumbot-behaviours for…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Sources</p>
+  <h1>Mecanumbot repositories</h1>
+<dl class="meta"><div><dt>type</dt><dd>source</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>citekey</dt><dd>fortuz-mecanumbot</dd></div><div><dt>authors</dt><dd>Fortuz, fegyobeno, hubaycsenge</dd></div><div><dt>year</dt><dd>2026</dd></div><div><dt>venue</dt><dd>GitHub repositories (clips re-taken 2026-07-28)</dd></div><div><dt>sources</dt><dd>5</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">repo</span> <span class="tag">robot-platform</span> <span class="tag">ros2</span> <span class="tag">first-party</span></dd></div></dl>
+<p>Clipped README material for the robot platform. See <a class="wikilink" href="robot-platform.html">robot-platform</a> for the
+synthesised platform page, <a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a> and
+<a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a> for Csenge's two own packages.</p>
+<p><strong>Re-clipped 2026-07-28</strong>, replacing the 2026-07-27 snapshot. The platform has
+changed substantially since then — see <em>What changed</em> below.</p>
+<h2>Repositories in the project</h2>
+<table>
+<thead>
+<tr>
+<th>Repo</th>
+<th>Purpose</th>
+<th>Clipped?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/Fortuz/mecanumbot"><code>Fortuz/mecanumbot</code></a></td>
+<td>ROS 2 packages running on the onboard computer</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Fortuz/mecanumbot_msgs"><code>Fortuz/mecanumbot_msgs</code></a></td>
+<td>Message/service definitions. <strong>Apache-2.0</strong></td>
+<td>✓</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Fortuz/mecanumbot_remote"><code>Fortuz/mecanumbot_remote</code></a></td>
+<td>Teleop + LED GUI for an external PC. <strong>Apache-2.0</strong></td>
+<td>✓</td>
+</tr>
+<tr>
+<td><a href="https://github.com/hubaycsenge/mecanumbot_sensorprocess_smart"><strong><code>hubaycsenge/mecanumbot_sensorprocess_smart</code></strong></a></td>
+<td><strong>Csenge's</strong> perception stack → <a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a></td>
+<td>✓ <strong>new</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/hubaycsenge/mecanumbot_behaviours"><strong><code>hubaycsenge/mecanumbot_behaviours</code></strong></a></td>
+<td><strong>Csenge's</strong> behaviour trees → <a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a></td>
+<td>✓</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Fortuz/mecanumbot_microcontrollers"><code>Fortuz/mecanumbot_microcontrollers</code></a></td>
+<td>Microcontroller code</td>
+<td>✗ — no longer clipped</td>
+</tr>
+<tr>
+<td><a href="https://github.com/fegyobeno/mecanumbot_python"><code>fegyobeno/mecanumbot_python</code></a></td>
+<td>Native Python motor scripts, on-robot in <code>~/Sandbox</code></td>
+<td>✗ — referenced only</td>
+</tr>
+</tbody>
+</table>
+<p>Derived from the Turtlebot3 <code>humble</code> packages, modified for four independently
+driven mecanum wheels instead of differential drive.</p>
+<h2>What changed since 2026-07-27</h2>
+<div class="callout callout-important">
+<p class="callout-title">Four wiki claims are now wrong</p>
+<p>This update overturns load-bearing statements on <a class="wikilink" href="robot-platform.html">robot-platform</a>,
+<a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a> and <a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>The wiki said</th>
+<th>The repos now say</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Onboard compute is a <strong>Raspberry Pi</strong></td>
+<td><strong>NVIDIA Jetson Orin Nano</strong>, JetPack 6, Ubuntu 22.04, ROS 2 Humble, <code>aarch64</code></td>
+</tr>
+<tr>
+<td><strong>No camera</strong> documented — Q13, and the reason to rescope perception</td>
+<td><strong>CSI camera</strong> via <code>nvarguscamerasrc</code>, hardware NVENC H.264, plus V4L2 webcam support. <code>mecanumbot_camera_stream</code> package</td>
+</tr>
+<tr>
+<td><strong>No microphone</strong> documented</td>
+<td><code>mecanumbot_audio</code> exists, with <code>AudioInfo.msg</code> and <code>AudioData.msg</code> (channels, sample rate, subtype, float32 sample blocks)</td>
+</tr>
+<tr>
+<td><strong>No internal-state telemetry</strong> — the Q2 blocker</td>
+<td><code>OpenCRState.msg</code> <strong>and</strong> <code>orin_battery_state</code> — see below</td>
+</tr>
+<tr>
+<td><strong>No face, no head, no neck, no arms</strong></td>
+<td><code>AccessMotorCmd.msg</code> carries <strong>neck</strong> (<code>n_pos</code>) and <strong>left/right grabber</strong> (<code>gl_pos</code>, <code>gr_pos</code>) goal positions, commanded on <code>/cmd_accessory_pos</code></td>
+</tr>
+</tbody>
+</table>
+<h2>What the clips establish</h2>
+<p><strong>Compute and middleware.</strong> Ubuntu 22.04, ROS 2 Humble, CycloneDDS,
+<code>ROS_DOMAIN_ID=19</code>, <code>colcon</code>. Jetson Orin Nano at <code>192.168.1.240</code> on a dedicated
+<code>MecanumNet</code>; chrony time sync to the remote PC; systemd <code>ros2.service</code> autostart.
+Nodes detect the board at runtime by reading <code>/proc/device-tree/model</code>, so
+Jetson-only publishers are skipped on other machines.</p>
+<p><strong>Hardware.</strong> OpenCR microcontroller, LD08/LDS-02 lidar, an Arduino Nano driving
+the LEDs — all USB serial, addressed through udev rules
+(<code>/dev/opencr</code>, <code>/dev/ld08_lidar</code>, <code>/dev/arduino_nano</code>). INA219 current/voltage
+sensor on I²C. Wheel geometry: Ø65 mm, radius 32.5 mm, thickness 30 mm,
+separation x 129 mm, y 300 mm.</p>
+<p><strong>Internal-state telemetry — the Q2 blocker is gone.</strong> <code>OpenCRState.msg</code> is a full
+frame: goal and measured wheel velocities, positions, currents and accelerations,
+<strong>per-wheel error states</strong>, neck and grabber goal positions, DMS distance measure,
+<strong>battery voltage</strong>, and 9-axis IMU (angular velocity, linear acceleration,
+magnetometer, orientation quaternion). Separately,
+<code>mecanumbot_sensorproc_node</code> reads the INA219 and publishes <code>orin_battery_state</code>
+(Jetson only). Between them this is a richer internal-state stream than
+<a class="wikilink" href="emotion-engine.html">emotion-engine</a> assumed.</p>
+<p><strong>Expressive output.</strong> Four addressable RGB LED panels (<code>fl</code>, <code>fr</code>, <code>br</code>, <code>bl</code>),
+each with <code>mode</code> + <code>color</code>, via the <code>SetLedStatus</code> / <code>GetLedStatus</code> services
+served by <code>mecanumbot_led</code> over serial to the Arduino Nano. Plus neck and grabber
+servos, plus holonomic motion.</p>
+<p><strong>Controller/teleop infrastructure</strong>, larger than expected: <code>ButtonEvent</code>,
+<code>JoystickEvent</code>, <code>ControllerStatus</code>, and a per-user database of named actions
+(<code>ActionDescriptor</code> / <code>ActionTuple</code>), controller mappings and recording schemes,
+all exposed as services. A recording scheme is a named list of topics to record
+per user — directly useful for <a class="wikilink" href="validation-study.html">validation-study</a> data capture.</p>
+<p><strong>A simulation and evaluation harness.</strong> <code>SimActor</code> / <code>SimActorArray</code> describe
+simulated actors (id, name, kind, whether tracked subject, lidar visibility, pose,
+twist). <code>SimBehaviorEvaluation</code> and <code>SimDetectionEvaluation</code> are <strong>per-scenario
+automatic verdicts</strong> — unsafe-motion, proximity, wall-proximity, wrong-target and
+stale-detection flags; subject/actor/wall distances; false-wall and wrong-human
+lock flags; <code>status</code> and <code>reason</code> strings. Nothing in the corpus does automated
+behaviour scoring like this, and it bears directly on Q10.</p>
+<h2>Gaps in these sources</h2>
+<div class="callout callout-warning">
+<p class="callout-title">Still no commit SHAs</p>
+<p>The clips remain undated snapshots of rendered README pages. <strong>No commit SHA is
+recorded for any repository</strong>, so nothing here can be pinned to a version. Two
+of the five clips (<code>mecanumbot_msgs</code>, <code>mecanumbot_remote</code>) record a licence —
+<strong>Apache-2.0</strong>; the other three record none.</p>
+<p>For a thesis that will claim a working system, the SHAs matter. Ask Csenge to
+record <code>git rev-parse HEAD</code> for each repo, or clone them properly into <code>raw/</code>.</p>
+</div>
+<p>Also unrecorded:</p>
+<ul>
+<li><strong>LED <code>mode</code> and <code>color</code> enumerations</strong> — still used by value in examples
+  (<code>mode: 1</code>, <code>color: 3/4</code>) and never defined here. <code>mecanumbot_msgs</code> says the
+  tables are in the <code>mecanumbot_led</code> package README, which is not clipped.</li>
+<li><strong>Camera details</strong> — no resolution, frame rate, mounting position, or field of
+  view for the CSI camera itself. The detector configs assume 640×480 or 1280×720
+  and a 60° horizontal FOV, but those are node parameters, not camera facts.</li>
+<li><strong>The audio stack</strong> — <code>mecanumbot_audio</code> is named in <code>mecanumbot_msgs</code> as a
+  consumer of the audio types, but the package is not clipped and no microphone
+  hardware is described. Whether audio is <strong>capture, playback, or both</strong> is
+  undetermined, and it matters: capture enables vocal affect input, playback
+  enables Morton's-rules vocalisation (<a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>).</li>
+<li><strong><code>mecanumbot_microcontrollers</code></strong> is no longer clipped at all. The previous clip
+  was empty; now there is nothing. Low priority unless the LED or accessory
+  firmware behaviour becomes relevant.</li>
+<li><strong>The README title still says "Raspberry PI"</strong> while its body documents the
+  Jetson — an internal inconsistency in the upstream repo, not in this wiki.</li>
+</ul>
+<h2>To confirm with Csenge</h2>
+<p>Marked as questions because <code>CLAUDE.md</code> says not to assume a repo has
+been run:</p>
+<ul>
+<li><strong>Has the full stack been run end to end on the robot?</strong> Which of the five
+  perception nodes and four behaviour trees have actually executed on hardware, as
+  opposed to building?</li>
+<li>Is <code>mecanumbot_audio</code> <strong>capture, playback, or both</strong>? Is there a microphone?</li>
+<li>Commit SHAs and licences for the three repos that record neither.</li>
+<li>Measured latency, scan/frame → detection → tick → response. Q3.</li>
+</ul>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="robot-platform.html">Mecanumbot — the experimental robot platform</a></li>
+<li><a href="mecanumbot-behaviours.html">mecanumbot_behaviours — the behaviour layer</a></li>
+<li><a href="mecanumbot-perception.html">mecanumbot_sensorprocess_smart — the perception stack</a></li>
+<li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,387 @@
+[
+ {
+  "slug": "actor-critic",
+  "title": "Actor–critic",
+  "category": "methods",
+  "status": "draft",
+  "url": "wiki/actor-critic.html"
+ },
+ {
+  "slug": "albuquerque-2016-emotion-recognition",
+  "title": "Albuquerque et al. (2016) — Dogs recognize dog and human emotions",
+  "category": "sources",
+  "status": "draft",
+  "url": "wiki/albuquerque-2016-emotion-recognition.html"
+ },
+ {
+  "slug": "attachment-sst",
+  "title": "Attachment and the Strange Situation Test",
+  "category": "concepts",
+  "status": "draft",
+  "url": "wiki/attachment-sst.html"
+ },
+ {
+  "slug": "behaviour-trees",
+  "title": "Behaviour trees",
+  "category": "methods",
+  "status": "draft",
+  "url": "wiki/behaviour-trees.html"
+ },
+ {
+  "slug": "belle-2019-programming-with-affect",
+  "title": "Belle, Gittens & Graham (2019) — Programming with Affect",
+  "category": "sources",
+  "status": "draft",
+  "url": "wiki/belle-2019-programming-with-affect.html"
+ },
+ {
+  "slug": "citation-backlog",
+  "title": "Citation backlog",
+  "category": "synthesis",
+  "status": "draft",
+  "url": "wiki/citation-backlog.html"
+ },
+ {
+  "slug": "colledanchise-ogren-behavior-trees",
+  "title": "Colledanchise & Ögren — Behavior Trees in Robotics and AI: An Introduction",
+  "category": "sources",
+  "status": "draft",
+  "url": "wiki/colledanchise-ogren-behavior-trees.html"
+ },
+ {
+  "slug": "conditioning",
+  "title": "Conditioning",
+  "category": "concepts",
+  "status": "draft",
+  "url": "wiki/conditioning.html"
+ },
+ {
+  "slug": "dog-human-interaction-model",
+  "title": "Dog–human interaction as behaviour model",
+  "category": "models",
+  "status": "draft",
+  "url": "wiki/dog-human-interaction-model.html"
+ },
+ {
+  "slug": "emotion-arbitration",
+  "title": "Emotion arbitration",
+  "category": "methods",
+  "status": "draft",
+  "url": "wiki/emotion-arbitration.html"
+ },
+ {
+  "slug": "emotion-attribution",
+  "title": "Emotion attribution to artificial agents",
+  "category": "concepts",
+  "status": "solid",
+  "url": "wiki/emotion-attribution.html"
+ },
+ {
+  "slug": "emotion-model-comparison",
+  "title": "Emotion model comparison",
+  "category": "synthesis",
+  "status": "draft",
+  "url": "wiki/emotion-model-comparison.html"
+ },
+ {
+  "slug": "emotion-recognition-benchmarks",
+  "title": "Emotion recognition rates across robots",
+  "category": "synthesis",
+  "status": "draft",
+  "url": "wiki/emotion-recognition-benchmarks.html"
+ },
+ {
+  "slug": "emotion-engine",
+  "title": "Emotional engine",
+  "category": "methods",
+  "status": "draft",
+  "url": "wiki/emotion-engine.html"
+ },
+ {
+  "slug": "ethorobotics",
+  "title": "Ethorobotics",
+  "category": "concepts",
+  "status": "solid",
+  "url": "wiki/ethorobotics.html"
+ },
+ {
+  "slug": "fuzzy-automaton-fri",
+  "title": "FRI fuzzy automaton",
+  "category": "methods",
+  "status": "draft",
+  "url": "wiki/fuzzy-automaton-fri.html"
+ },
+ {
+  "slug": "function-orientedness",
+  "title": "Function-orientedness",
+  "category": "concepts",
+  "status": "draft",
+  "url": "wiki/function-orientedness.html"
+ },
+ {
+  "slug": "gacsi-2016-emotion-attribution",
+  "title": "Gácsi et al. (2016) — Humans attribute emotions to a robot showing dog-derived behavioural patterns",
+  "category": "sources",
+  "status": "solid",
+  "url": "wiki/gacsi-2016-emotion-attribution.html"
+ },
+ {
+  "slug": "habitual-vs-goal-directed",
+  "title": "Habitual vs goal-directed behaviour",
+  "category": "concepts",
+  "status": "draft",
+  "url": "wiki/habitual-vs-goal-directed.html"
+ },
+ {
+  "slug": "interspecific-hri",
+  "title": "HRI as interspecific interaction",
+  "category": "concepts",
+  "status": "draft",
+  "url": "wiki/interspecific-hri.html"
+ },
+ {
+  "slug": "validation-study",
+  "title": "Human validation study (planned)",
+  "category": "experiments",
+  "status": "draft",
+  "url": "wiki/validation-study.html"
+ },
+ {
+  "slug": "ichikawa-numakunai-2012-roman",
+  "title": "Ichikawa (2012) and Numakunai (2012) — dog-based robot behaviour in Intelligent Space",
+  "category": "sources",
+  "status": "draft",
+  "url": "wiki/ichikawa-numakunai-2012-roman.html"
+ },
+ {
+  "slug": "kovacs-fri-automaton-series",
+  "title": "Kovács, Vincze et al. (2009–2011) — the FRI fuzzy automaton series",
+  "category": "sources",
+  "status": "solid",
+  "url": "wiki/kovacs-fri-automaton-series.html"
+ },
+ {
+  "slug": "lakatos-2014-emotion-attribution",
+  "title": "Lakatos et al. (2014) — Emotion attribution to a non-humanoid robot in different social situations",
+  "category": "sources",
+  "status": "solid",
+  "url": "wiki/lakatos-2014-emotion-attribution.html"
+ },
+ {
+  "slug": "lakatos-2014-embodiments-demo",
+  "title": "Lakatos et al. — Dog-Inspired Social Behaviour in Robots with Different Embodiments",
+  "category": "sources",
+  "status": "draft",
+  "url": "wiki/lakatos-2014-embodiments-demo.html"
+ },
+ {
+  "slug": "log",
+  "title": "Log",
+  "category": "vault",
+  "status": "",
+  "url": "wiki/log.html"
+ },
+ {
+  "slug": "mecanumbot-repos",
+  "title": "Mecanumbot repositories",
+  "category": "sources",
+  "status": "draft",
+  "url": "wiki/mecanumbot-repos.html"
+ },
+ {
+  "slug": "robot-platform",
+  "title": "Mecanumbot — the experimental robot platform",
+  "category": "systems",
+  "status": "draft",
+  "url": "wiki/robot-platform.html"
+ },
+ {
+  "slug": "mecanumbot-behaviours",
+  "title": "mecanumbot_behaviours — the behaviour layer",
+  "category": "systems",
+  "status": "draft",
+  "url": "wiki/mecanumbot-behaviours.html"
+ },
+ {
+  "slug": "mecanumbot-perception",
+  "title": "mecanumbot_sensorprocess_smart — the perception stack",
+  "category": "systems",
+  "status": "draft",
+  "url": "wiki/mecanumbot-perception.html"
+ },
+ {
+  "slug": "miklosi-2017-ethorobotics",
+  "title": "Miklósi et al. (2017) — Ethorobotics: A New Approach to Human-Robot Relationship",
+  "category": "sources",
+  "status": "solid",
+  "url": "wiki/miklosi-2017-ethorobotics.html"
+ },
+ {
+  "slug": "multimodal-emotion-recognition",
+  "title": "Multimodal emotion recognition",
+  "category": "methods",
+  "status": "draft",
+  "url": "wiki/multimodal-emotion-recognition.html"
+ },
+ {
+  "slug": "open-questions",
+  "title": "Open questions",
+  "category": "synthesis",
+  "status": "draft",
+  "url": "wiki/open-questions.html"
+ },
+ {
+  "slug": "ostensive-signalling",
+  "title": "Ostensive signalling",
+  "category": "concepts",
+  "status": "draft",
+  "url": "wiki/ostensive-signalling.html"
+ },
+ {
+  "slug": "panksepp-2005-affective-consciousness",
+  "title": "Panksepp (2005) — Affective consciousness: core emotional feelings in animals and humans",
+  "category": "sources",
+  "status": "draft",
+  "url": "wiki/panksepp-2005-affective-consciousness.html"
+ },
+ {
+  "slug": "panksepp-2011-emotional-circuits",
+  "title": "Panksepp (2011) — The basic emotional circuits of mammalian brains",
+  "category": "sources",
+  "status": "draft",
+  "url": "wiki/panksepp-2011-emotional-circuits.html"
+ },
+ {
+  "slug": "panksepp-affective-systems",
+  "title": "Panksepp's affective systems",
+  "category": "models",
+  "status": "draft",
+  "url": "wiki/panksepp-affective-systems.html"
+ },
+ {
+  "slug": "research-proposal",
+  "title": "PhD research proposal",
+  "category": "sources",
+  "status": "solid",
+  "url": "wiki/research-proposal.html"
+ },
+ {
+  "slug": "plutchik-1982-psychoevolutionary",
+  "title": "Plutchik (1982) — A psychoevolutionary theory of emotions",
+  "category": "sources",
+  "status": "draft",
+  "url": "wiki/plutchik-1982-psychoevolutionary.html"
+ },
+ {
+  "slug": "plutchik-model",
+  "title": "Plutchik's model",
+  "category": "models",
+  "status": "draft",
+  "url": "wiki/plutchik-model.html"
+ },
+ {
+  "slug": "prior-robot-platforms",
+  "title": "Prior robot platforms",
+  "category": "systems",
+  "status": "draft",
+  "url": "wiki/prior-robot-platforms.html"
+ },
+ {
+  "slug": "rl-for-behaviour-learning",
+  "title": "Reinforcement learning for behaviour learning",
+  "category": "synthesis",
+  "status": "draft",
+  "url": "wiki/rl-for-behaviour-learning.html"
+ },
+ {
+  "slug": "reward-design",
+  "title": "Reward design",
+  "category": "methods",
+  "status": "draft",
+  "url": "wiki/reward-design.html"
+ },
+ {
+  "slug": "social-competence",
+  "title": "Social competence",
+  "category": "concepts",
+  "status": "draft",
+  "url": "wiki/social-competence.html"
+ },
+ {
+  "slug": "sutton-barto-2018-rl",
+  "title": "Sutton & Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)",
+  "category": "sources",
+  "status": "draft",
+  "url": "wiki/sutton-barto-2018-rl.html"
+ },
+ {
+  "slug": "szabo-2010-emotional-engine",
+  "title": "Szabó et al. (2010) — An Emotional Engine Model Inspired by Human-Dog Interaction",
+  "category": "sources",
+  "status": "solid",
+  "url": "wiki/szabo-2010-emotional-engine.html"
+ },
+ {
+  "slug": "szabo-2011-emotional-engine",
+  "title": "Szabó et al. (2012) — Building a Human-Dog Interaction Inspired Emotional Engine Model",
+  "category": "sources",
+  "status": "solid",
+  "url": "wiki/szabo-2011-emotional-engine.html"
+ },
+ {
+  "slug": "td-learning",
+  "title": "Temporal-difference learning",
+  "category": "methods",
+  "status": "draft",
+  "url": "wiki/td-learning.html"
+ },
+ {
+  "slug": "hungarian-ethorobotics-network",
+  "title": "The ethorobotics research network",
+  "category": "people",
+  "status": "draft",
+  "url": "wiki/hungarian-ethorobotics-network.html"
+ },
+ {
+  "slug": "uncanny-valley",
+  "title": "The uncanny valley (and its ethological reinterpretation)",
+  "category": "concepts",
+  "status": "draft",
+  "url": "wiki/uncanny-valley.html"
+ },
+ {
+  "slug": "thesis",
+  "title": "Thesis — evolving argument",
+  "category": "synthesis",
+  "status": "draft",
+  "url": "wiki/thesis.html"
+ },
+ {
+  "slug": "topal-2014-ostensive",
+  "title": "Topál, Kis & Oláh (2014) — Dogs' sensitivity to human ostensive cues",
+  "category": "sources",
+  "status": "draft",
+  "url": "wiki/topal-2014-ostensive.html"
+ },
+ {
+  "slug": "vincze-2012-interfaces-and-virca",
+  "title": "Vincze et al. (2012) — HRI interfaces and the VirCA environment",
+  "category": "sources",
+  "status": "draft",
+  "url": "wiki/vincze-2012-interfaces-and-virca.html"
+ },
+ {
+  "slug": "vincze-2021-automatic-coding",
+  "title": "Vincze et al. (2021) — Towards automatic observation and coding of simple behaviours in ethological experiments",
+  "category": "sources",
+  "status": "draft",
+  "url": "wiki/vincze-2021-automatic-coding.html"
+ },
+ {
+  "slug": "catalog",
+  "title": "Wiki index",
+  "category": "vault",
+  "status": "",
+  "url": "wiki/catalog.html"
+ }
+]

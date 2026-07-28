@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ichikawa (2012) and Numakunai (2012) — dog-based robot behaviour in Intelligent Space — Research wiki</title>
+<meta name="description" content="Two RO-MAN 2012 papers from Chuo University (Niitsuma, Hashimoto) with Korondi and Gácsi as Hungarian co-authors. Not an independent corroboration — this…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Sources</p>
+  <h1>Ichikawa (2012) and Numakunai (2012) — dog-based robot behaviour in Intelligent Space</h1>
+<dl class="meta"><div><dt>type</dt><dd>source</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>citekey</dt><dd>ichikawa2012impression</dd></div><div><dt>authors</dt><dd>Takuya Ichikawa, Mina Yuki, Mihoko Niitsuma, Hideki Hashimoto, Péter Korondi, Márta Gácsi, Ryuichi Numakunai</dd></div><div><dt>year</dt><dd>2012</dd></div><div><dt>venue</dt><dd>IEEE RO-MAN 2012</dd></div><div><dt>sources</dt><dd>2</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">japan</span> <span class="tag">ispace</span> <span class="tag">home-care</span> <span class="tag">dog-model</span> <span class="tag">application</span></dd></div></dl>
+<p>Two RO-MAN 2012 papers from Chuo University (Niitsuma, Hashimoto) with Korondi and
+Gácsi as Hungarian co-authors. <strong>Not an independent corroboration</strong> — this is the
+same collaboration network extended to Japan (<a class="wikilink" href="hungarian-ethorobotics-network.html">hungarian-ethorobotics-network</a>)
+— but it is the only <em>application-domain</em> work in the corpus.</p>
+<h2>Shared setting</h2>
+<p><strong>Intelligent Space (iSpace)</strong>: an environment instrumented with distributed
+intelligent network devices (DINDs = sensors + processors + network devices),
+able to track multiple people simultaneously in different locations. A mobile
+robot serves as the physical agent that delivers information wherever the
+caregiver happens to be.</p>
+<p><strong>Application</strong>: elderly monitoring / home-care support. The robot must inform a
+caregiver of events without disrupting their primary activity. This is a concrete
+answer to <em>what a socially competent robot is actually for</em> — the functional niche
+that <a class="wikilink" href="function-orientedness.html">function-orientedness</a> demands but <a class="wikilink" href="research-proposal.html">research-proposal</a> never specifies.</p>
+<h2>Ichikawa et al. — behavioural factors</h2>
+<p>Extends the existing dog-based robot behaviour model by adding <strong>behavioural
+factors</strong> that give the same behaviour different characteristics (a personality/
+temperament layer). Subjects evaluated their impressions of the robot under
+different factor settings, in a <strong>simulator</strong>.</p>
+<p>Result: subjects formed the impressions the authors expected from the factors
+chosen, <strong>without any prior knowledge about the robot</strong>. Conclusion drawn: factors
+can be tuned to a caregiver's preference.</p>
+<h2>Numakunai et al. — exploratory behaviour</h2>
+<p>Adds an <strong>exploratory behaviour</strong> model, taking dogs' exploration in the Strange
+Situation Test (<a class="wikilink" href="attachment-sst.html">attachment-sst</a>) as the base. Contribution: a map-building
+method that records not just the positions of people and the robot but also the
+robot's <strong>movement history and willingness to explore</strong>, so a target and path can
+be selected according to behavioural characteristics.</p>
+<p>Result: subjects perceived different impressions from the different exploratory
+behaviours.</p>
+<h2>Relevance</h2>
+<ul>
+<li><strong>Behavioural factors are a temperament layer</strong> — the same role played by
+  Szabó's dropped long-term layer (<a class="wikilink" href="szabo-2010-emotional-engine.html">szabo-2010-emotional-engine</a>) and, in
+  animals, by individual variation. Two independent routes to the same need.</li>
+<li><strong>Exploration is already modelled as a state</strong> in
+  <a class="wikilink" href="kovacs-fri-automaton-series.html">kovacs-fri-automaton-series</a> (<code>ExplorationLevel</code>). Numakunai turns it into
+  actual navigation. For a mecanum-drive robot with no expressive face, <em>how it
+  moves</em> is a primary expressive channel — see <a class="wikilink" href="robot-platform.html">robot-platform</a>.</li>
+<li>Home care gives a defensible answer to "what real environment?" (Q3).</li>
+</ul>
+<h2>Limitations</h2>
+<ul>
+<li><strong>Both evaluated in simulation</strong>, not with a live robot. Ichikawa explicitly
+  notes the subjects' viewpoint differed from a live experiment and defers that to
+  future work.</li>
+<li>Impression evaluation only — no task performance, no acceptance measure, no
+  emotion recognition.</li>
+<li>Neither paper models emotion; they model behaviour characteristics.</li>
+<li>Extraction of these two PDFs was partial; the experimental details (N, measures,
+  statistics) were not fully recovered and should be checked in the originals
+  before citing numbers. #needs-source</li>
+</ul>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="attachment-sst.html">Attachment and the Strange Situation Test</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="validation-study.html">Human validation study (planned)</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="hungarian-ethorobotics-network.html">The ethorobotics research network</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

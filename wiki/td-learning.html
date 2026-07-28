@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Temporal-difference learning — Research wiki</title>
+<meta name="description" content="The central algorithmic idea of sutton-barto-2018-rl — the authors call Ch. 6 &quot;the most important for the subject and for the rest of the book&quot; — and the…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Methods</p>
+  <h1>Temporal-difference learning</h1>
+<dl class="meta"><div><dt>type</dt><dd>method</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">reinforcement-learning</span> <span class="tag">neuroscience</span> <span class="tag">prediction</span></dd></div></dl>
+<p>The central algorithmic idea of <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> — the authors call Ch. 6
+"the most important for the subject and for the rest of the book" — and the point
+where the book makes contact with animal behaviour and with the brain.</p>
+<h2>The TD error</h2>
+<p>For state values, the TD error is</p>
+<pre><code>δ_t = R_{t+1} + γ·V(S_{t+1}) − V(S_t)
+</code></pre>
+<p>the discrepancy between an earlier and a later estimate of expected future reward.
+Learning updates parameters in proportion to δ and to an eligibility trace.</p>
+<p>Two distinctions the book insists on, both relevant to this wiki:</p>
+<ul>
+<li><strong>Reward signal vs reinforcement signal.</strong> The reward signal <code>R</code> defines the
+  problem; the <em>reinforcement</em> signal is "the major factor directing changes a
+  learning algorithm makes in an agent's policy, value estimates, or environment
+  models" — for TD methods that is δ, not <code>R</code> (§15.2, §14 terminology). Inside δ,
+  <code>R_{t+1}</code> is the primary reinforcement contribution and <code>γV(S_{t+1}) − V(S_t)</code>
+  is the <strong>conditioned reinforcement</strong> contribution — the formal counterpart of
+  the secondary reinforcer in <a class="wikilink" href="conditioning.html">conditioning</a>.</li>
+<li><strong>Reward vs value.</strong> Reward is immediate desirability, value is long-run
+  desirability. "Rewards are in a sense primary, whereas values, as predictions of
+  rewards, are secondary... it is much harder to determine values than it is to
+  determine rewards" (§1.3).</li>
+</ul>
+<h2>The TD model of classical conditioning</h2>
+<p>The TD algorithm doubles as a model of animal learning (§14.2.3). It generalises
+the Rescorla–Wagner model by moving from trial level to real time, <code>t</code> now
+indexing time steps of the order of 10 ms rather than whole trials. Two things
+follow that Rescorla–Wagner cannot produce:</p>
+<ul>
+<li><strong>Higher-order conditioning</strong> falls out of bootstrapping — since
+  <code>V(S_{t+1}) − V(S_t)</code> appears in δ alongside <code>R_{t+1}</code>, "as far as learning is
+  concerned there is no difference between a temporal difference and the
+  occurrence of a US" (§14.2.3).</li>
+<li><strong>Timing effects within a trial</strong> — dependence of learning on the
+  interstimulus interval, anticipatory conditioned responses, and the prediction
+  that <em>temporal primacy overrides blocking</em>: a newly added CS whose onset
+  precedes the pretrained CS is not blocked, and the pretrained CS loses
+  associative strength. This was a prediction of the model before it was observed;
+  Kehoe, Schreurs &amp; Graham (1987) later confirmed it in the rabbit nictitating
+  membrane preparation, and noted that non-TD models have difficulty explaining
+  the data (§14.2.4).</li>
+</ul>
+<p><strong>Stimulus representation matters more than the algorithm.</strong> Three representations
+are compared (§14.2.4): <em>presence</em> (one feature per CS while it is present),
+<em>complete serial compound</em> (CSC — a tapped delay line, a precise internal clock),
+and <em>microstimulus</em> (overlapping internal signals that broaden and weaken with
+elapsed time). The authors call the CSC "a useful fiction", unrealistic as a
+hypothesis about the brain, and say the common view that it is an essential part
+of the TD model "is mistaken". Which one is used determines whether the model
+reproduces the shape and timing of the conditioned response at all.</p>
+<div class="callout callout-note">
+<p class="callout-title">Why this matters for <a class="wikilink" href="emotion-engine.html">emotion-engine</a></p>
+<p><a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a> hand-specifies peak widths, decline rates and
+saturation levels per emotion — that is a hand-authored temporal profile. The TD
+model's lesson is that such profiles are largely determined by the <strong>stimulus
+representation</strong> rather than by the learning rule. If any part of the engine's
+dynamics is to be learnt rather than tuned, the representation is where the
+design effort goes. <em>(Reading applied to this wiki, not a claim of the book.)</em></p>
+</div>
+<h2>The reward prediction error hypothesis</h2>
+<p>The best-known link between RL and neuroscience (§15.3–15.6). First stated by
+Montague, Dayan &amp; Sejnowski (1996) on the basis of experiments from Wolfram
+Schultz's laboratory in the late 1980s and 1990s.</p>
+<p>The hypothesis: the <strong>phasic</strong> activity of dopamine-producing neurons signals a
+reward prediction error — specifically a TD error — rather than reward itself.
+Four observed features of dopamine neuron activity that δ reproduces:</p>
+<ol>
+<li>Phasic response occurs only when a rewarding event is <strong>unpredicted</strong>.</li>
+<li>Early in learning, neutral cues preceding reward produce no response; with
+   learning they acquire one.</li>
+<li>When an earlier cue reliably precedes an already-predictive cue, the response
+   <strong>shifts to the earlier cue</strong> and ceases for the later one.</li>
+<li>If a predicted reward is <strong>omitted</strong>, activity drops below baseline shortly
+   after the expected time — without any external cue marking that time.</li>
+</ol>
+<p>The authors are candid about the fit. It is not perfect: when reward arrives
+<em>earlier</em> than expected, dopamine neurons do not show the negative excursion at
+the original expected time that the TD model with a CSC representation predicts
+(Hollerman &amp; Schultz 1998). Several repairs have been proposed — modified CSC,
+microstimulus representations, longer eligibility traces — and "many fine details
+of TD-error behavior depend on subtle interactions between eligibility traces,
+discounting, and stimulus representations" (§15.6).</p>
+<p>They also stress that the correspondence was <strong>unplanned</strong>: TD learning and its
+connection to dynamic programming were developed years before the dopamine
+experiments, "in total absence of any knowledge about the relevant properties of
+dopamine neurons".</p>
+<div class="callout callout-warning">
+<p class="callout-title">Contradiction — Panksepp rejects the reduction</p>
+<p>The RPE hypothesis is about <strong>dopamine and reward prediction</strong>. This book never
+mentions Panksepp, and makes no claim about any named affective system.</p>
+<p>The Panksepp primaries, now held, reject the bridge explicitly. §7 of
+<a class="wikilink" href="panksepp-2005-affective-consciousness.html">panksepp-2005-affective-consciousness</a> is titled <em>"The
+SEEKING/expectancy/wanting system of the brain: It's not just 'reward prediction
+error'"</em>; <a class="wikilink" href="panksepp-2011-emotional-circuits.html">panksepp-2011-emotional-circuits</a> calls the restriction "a
+fundamental error... mixing levels of analysis".</p>
+<p><strong>Not a symmetrical dispute.</strong> Panksepp accepts that SEEKING is dopaminergic and
+does not contest Schultz's data; he contests that RPE <em>exhausts</em> the system.
+Sutton &amp; Barto describe a learning signal and never discuss affect. Better
+supported for "what does phasic dopamine compute": the RPE hypothesis. Better
+supported for "what is SEEKING for": Panksepp, unopposed.</p>
+<p>Full record on <a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a>.</p>
+</div>
+<p>Two further caveats the authors give (§15.4, §15.7): dopamine's role in
+<strong>punishment</strong> "remains controversial", it "can function differently in
+non-mammals", and the dopamine signal is explicitly <em>not</em> the master reward signal
+<code>R</code> — "one should not necessarily be able to probe the brain and record any signal
+like <code>Rt</code> in the activity of any single neuron".</p>
+<h2>Eligibility traces</h2>
+<p>Decaying traces marking which parameters are eligible for modification when a
+reinforcement signal arrives (§14.4, §15.8). Two kinds, and the distinction is the
+whole difference between the actor and the critic in <a class="wikilink" href="actor-critic.html">actor-critic</a>:</p>
+<ul>
+<li><strong>Non-contingent</strong> — depend only on presynaptic (input) activity. Adequate for
+  learning to <em>predict</em>.</li>
+<li><strong>Contingent</strong> — depend additionally on the unit's own output. Necessary for
+  learning to <em>control</em>, because they record which action was taken in which
+  state.</li>
+</ul>
+<p>Klopf's (1972, 1982) "hedonistic neuron" hypothesis is the origin of the idea:
+individual neurons adjust their synapses on the basis of the rewarding or punishing
+consequences of <em>their own</em> action potentials, with synaptically-local traces
+marking eligibility. The book's exponentially decaying traces are described as
+"placeholders" for Klopf's richer original conception, in which the shape of a
+trace is "like a histogram of the durations of the feedback loops in which the
+neuron is embedded" (§15.9).</p>
+<p>The neuroscience counterpart is <strong>reward-modulated spike-timing-dependent
+plasticity</strong> — regular STDP changes occur only if a neuromodulatory pulse arrives
+within a time window afterwards. Note the unresolved discrepancy in the book about
+how long that window is, recorded on <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a>.</p>
+<h2>Related</h2>
+<p><a class="wikilink" href="conditioning.html">conditioning</a> · <a class="wikilink" href="actor-critic.html">actor-critic</a> · <a class="wikilink" href="reward-design.html">reward-design</a> ·
+<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> · <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a></p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="actor-critic.html">Actor–critic</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="conditioning.html">Conditioning</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="panksepp-2005-affective-consciousness.html">Panksepp (2005) — Affective consciousness: core emotional feelings in animals and humans</a></li>
+<li><a href="panksepp-2011-emotional-circuits.html">Panksepp (2011) — The basic emotional circuits of mammalian brains</a></li>
+<li><a href="panksepp-affective-systems.html">Panksepp&#x27;s affective systems</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="reward-design.html">Reward design</a></li>
+<li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open questions — Research wiki</title>
+<meta name="description" content="Live uncertainties, each to be closed by a source, an experiment, or a recorded decision. Q1 and Q7 are largely answered, Q6 has a template. Q11 is…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Synthesis</p>
+  <h1>Open questions</h1>
+<dl class="meta"><div><dt>type</dt><dd>synthesis</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>12</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">hub</span> <span class="tag">questions</span></dd></div></dl>
+<p>Live uncertainties, each to be closed by a source, an experiment, or a recorded
+decision. Q1 and Q7 are largely answered, Q6 has a template. <strong>Q11 is answered by
+Csenge's decision to use RL for the behaviour layer</strong> and Q9 is partly dissolved
+by it; Q14–Q16 open in their place.</p>
+<h2>Q1 — Which emotion model grounds the engine? <em>(recommendation filed, awaiting sign-off)</em></h2>
+<p>Prior work in the lineage settled on a <strong>hybrid</strong>: Panksepp for architecture, dog
+ethology for the state set (<a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>).</p>
+<p><em>Update 2026-07-28</em>: both primaries are now held —
+<a class="wikilink" href="panksepp-2005-affective-consciousness.html">panksepp-2005-affective-consciousness</a>, <a class="wikilink" href="panksepp-2011-emotional-circuits.html">panksepp-2011-emotional-circuits</a>
+and <a class="wikilink" href="plutchik-1982-psychoevolutionary.html">plutchik-1982-psychoevolutionary</a> — and a <strong>recommendation is on
+<a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a></strong>: Panksepp for architecture, <strong>Plutchik for the
+state set and behaviour mapping</strong>, on the grounds that Plutchik's <em>functional
+language</em> is <a class="wikilink" href="function-orientedness.html">function-orientedness</a> in emotion-theory form and that his
+behavioural column is implementable on a faceless robot. It also explains
+<em>surprise</em>, which Szabó implemented and Panksepp has no circuit for.</p>
+<p><strong>Not filed as a decision.</strong> Q1 stays open until confirmed.</p>
+<p>Two sub-questions are now answered: intensity and blending come natively from
+Plutchik's cone and dyads; <strong>dynamics</strong> ("emotions outlast the stimuli that
+activated them") are a sourced Panksepp attribute rather than an engineering
+convenience.</p>
+<h2>Q2 — How is the robot's internal state commensurable with perceived human affect? <em>(open — but the data blocker is gone)</em></h2>
+<p>Battery, motor and sensor health versus human emotion estimates, in incompatible
+units. <strong>No source in the corpus attempts this</strong> — the gap is universal.
+Modulator, separate channel, or mapped into the same space? Unresolved.
+<em>This is now the strongest candidate for the thesis' original contribution.
+See <a class="wikilink" href="emotion-engine.html">emotion-engine</a>.</em> #needs-source</p>
+<p><em>Update 2026-07-28, theory</em>: <strong>two independently derived models agree that
+internal state is a different category of affect from emotion.</strong> Panksepp splits
+<strong>homeostatic</strong> affects (interoceptive — hunger, thirst) from <strong>emotional</strong> ones
+(<a class="wikilink" href="panksepp-2005-affective-consciousness.html">panksepp-2005-affective-consciousness</a>); Plutchik distinguishes <strong>motivation</strong>
+(changing internal states, absence of homeostatically significant stimuli,
+rhythmic) from <strong>emotion</strong> (external stimuli, presence of a survival-relevant
+event) (<a class="wikilink" href="plutchik-1982-psychoevolutionary.html">plutchik-1982-psychoevolutionary</a>).</p>
+<p>That converges with <a class="wikilink" href="reward-design.html">reward-design</a>'s route from <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §14.3:
+internal state as a <strong>modulator of what is rewarding</strong>, not as another dimension
+of the affect vector. Three sources, three traditions, one architecture — the
+strongest support Q2 has had.</p>
+<p><em>Update 2026-07-28, platform</em>: the <strong>telemetry exists and is richer than
+assumed</strong>.
+<code>OpenCRState.msg</code> carries wheel velocities, positions, currents, accelerations,
+<strong>per-wheel error states</strong>, DMS distance, battery voltage and 9-axis IMU;
+<code>orin_battery_state</code> adds INA219 power data (<a class="wikilink" href="mecanumbot-repos.html">mecanumbot-repos</a>). Per-wheel
+fault state is a genuine "how am I doing" signal, not just a charge level. What
+remains is purely the modelling question — <a class="wikilink" href="reward-design.html">reward-design</a> offers internal state
+as a <strong>modulator of what is rewarding</strong> as the best-sourced route.</p>
+<h2>Q3 — What makes "real-time in a real environment" defensible?</h2>
+<p>Still needs an operational definition: end-to-end latency budget, what counts as a
+real environment, what failure looks like. <strong>Cheapest partial answer available</strong>:
+measure lidar scan → DR-SPAAM detection → <code>py_trees</code> tick → LED/motion response on
+<a class="wikilink" href="robot-platform.html">robot-platform</a>. The home-care setting of <a class="wikilink" href="ichikawa-numakunai-2012-roman.html">ichikawa-numakunai-2012-roman</a> is
+the corpus' answer to "which environment".</p>
+<p><em>Update 2026-07-28</em>: <a class="wikilink" href="colledanchise-ogren-behavior-trees.html">colledanchise-ogren-behavior-trees</a> Ch. 9 supplies an
+<strong>analytic</strong> complement to the measured one. Stochastic BTs convert to Discrete
+Time Markov Chains, yielding <strong>Mean Time To Succeed</strong>, <strong>Mean Time To Fail</strong> and
+success probability over time, composable across subtrees. That gives a defensible
+answer to "will this complete in time, and how often will it fail" <strong>without
+running the robot</strong> — and it is stated in terms of the actual tree, not a
+generic claim. Pair it with the measured end-to-end latency. Note the platform is
+now heavier than when Q3 was written: two neural detectors plus fusion, and
+"checking all the conditions can be expensive" is a listed BT disadvantage.</p>
+<h2>Q4 — Does the dog model survive contact with implementation? <em>(partly answered, and less severe)</em></h2>
+<p><a class="wikilink" href="lakatos-2014-embodiments-demo.html">lakatos-2014-embodiments-demo</a> shows the same design working across four
+embodiments including one (Sunflower) whose expressive channels were an LED panel
+and motion — close to <a class="wikilink" href="robot-platform.html">robot-platform</a>. But <strong>no one has measured recognition
+rates on a light-and-motion-only robot</strong>.</p>
+<p><em>Update 2026-07-28</em>: the robot has a <strong>neck and two grabbers</strong>, so it is not
+light-and-motion-only. Available re-expressions now include <em>head up and down
+dynamically</em> (Gácsi's anger signal) alongside approach, back, turn away, orient
+and motionless. Tail and ear analogues are still missing.
+<a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a> already implements neck/gripper gesture as a distinct
+experimental condition, so this is partly measurable rather than merely arguable.</p>
+<h2>Q5 — Does the affective computing literature smuggle in anthropomorphism? <em>(a clear datapoint)</em></h2>
+<p><em>Update 2026-07-28</em>: <a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a> is the answer in
+miniature. The nearest prior art to this thesis' decision layer is built from
+<strong>OCC</strong> appraisal, a <strong>PAD</strong> mood space, the <strong>Five Factor Model</strong> of personality
+and scripted human dialogue — every component drawn from human psychology, applied
+to human-shaped characters having human conversations. Nothing in it would survive
+translation to a wheeled robot with no face.</p>
+<p>That is not a criticism of the paper, which is about game NPCs. It is a
+demonstration that the BT-plus-emotion tradition the thesis inherits its
+<em>architecture</em> from carries anthropomorphic commitments in its <em>content</em>, and that
+<a class="wikilink" href="function-orientedness.html">function-orientedness</a> has to be applied deliberately rather than assumed. Also
+worth noting their explicit design stance — simulate human-like emotion "regardless
+of whether it is an optimal outcome" — which is the opposite of what
+<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> proposes.</p>
+<p>Still live, and now sharper: if <a class="wikilink" href="robot-platform.html">robot-platform</a> has no camera, the
+facial-expression route is closed anyway, and the proxemic alternative is <em>more</em>
+ethologically consistent. The risk inverts — the temptation will be to add a
+camera to do things the human way.</p>
+<h2>Q6 — What is the evaluation instrument for the human study? <em>(template found)</em></h2>
+<p><a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a> and <a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a>
+provide a full protocol — NARS, open-ended-then-forced-choice, 4-point attribution
+scoring with κ = 0.84, Solomon Coder, non-parametric statistics, wizard-of-oz
+baseline. Collected in <a class="wikilink" href="validation-study.html">validation-study</a>. <strong>Still missing</strong>: a cooperation or
+task-performance measure. #needs-source</p>
+<h2>Q7 — Which platform, and what does it constrain? <em>(answered, and corrected)</em></h2>
+<p>Mecanumbot: ROS 2 Humble on an <strong>NVIDIA Jetson Orin Nano</strong>, OpenCR, LD08 lidar,
+<strong>CSI camera</strong>, DR-SPAAM + YOLO-pose person detection, <code>py_trees_ros</code>, four RGB
+LED panels, <strong>neck and two grabbers</strong>, mecanum drive. See <a class="wikilink" href="robot-platform.html">robot-platform</a>.</p>
+<p><em>Corrected 2026-07-28.</em> The two urgent follow-ups are <strong>both resolved</strong>: there is
+a camera, and internal-state telemetry is exposed. The earlier answer said
+Raspberry Pi, no camera and no telemetry — all wrong. One sensing question
+survives: <strong>is <code>mecanumbot_audio</code> capture, playback, or both?</strong> It decides whether
+vocal affect input and Morton's-rules vocalisation are on the table.</p>
+<hr>
+<h2>New questions from this ingest</h2>
+<h2>Q8 — When does emotion expression help, and when does it backfire?</h2>
+<p><a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a> cites Petisca et al. (2014) that robot emotion
+expression sometimes <strong>worsens</strong> human perception.
+<a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a> observed the mechanism: misread "fear" read
+as indifference, met with anger and embarrassment. Step 1 of <a class="wikilink" href="thesis.html">thesis</a> needs
+qualifying. Obtain Petisca et al. #needs-source</p>
+<h2>Q9 — Fuzzy automaton, behaviour tree, or both? <em>(partly dissolved)</em></h2>
+<p>The lineage has <strong>two parallel architectures that were never integrated</strong>:
+<a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a> for behaviour state, <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a> for
+emotional state. Neither cites the other as a component. Meanwhile
+<a class="wikilink" href="robot-platform.html">robot-platform</a> ships <code>py_trees</code>, a third option. Integrating them is an
+opportunity; picking one is a decision that has to be made and justified. See
+<a class="wikilink" href="behaviour-trees.html">behaviour-trees</a>.</p>
+<p><em>Update after the RL decision</em>: the contest partly dissolves if
+<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> is adopted — the behaviour tree becomes the
+<strong>executor</strong> of primitives and the learnt policy the <strong>selector</strong>, so they are not
+competing for the same job. What the fuzzy automaton uniquely supplied, a
+hand-authored model of behavioural <em>sequencing</em>, is what learning displaces. That
+loss is the residue of Q9 and is real.</p>
+<p><em>Update 2026-07-28, largely resolved</em>: <a class="wikilink" href="colledanchise-ogren-behavior-trees.html">colledanchise-ogren-behavior-trees</a>
+settles the architectural half. BTs <strong>generalise</strong> FSMs, hierarchical FSMs,
+Subsumption, Teleo-Reactive programs and Decision Trees, so nothing expressible in
+the automaton is lost by structure; and the BT does more than execute — §8.4 says
+it <strong>decomposes the RL problem into local state spaces</strong>. Measured against that,
+the FSM-based learner's node count grew <strong>exponentially</strong> while the BT's growth
+rate declined (§8.2.4.1).</p>
+<p><strong>Decision: behaviour tree, with learning nodes.</strong> One residue survives and should
+be stated in the thesis rather than buried: the automaton does <strong>behaviour
+fusion</strong> (continuous blending by necessity level — "somewhat anxious while still
+exploring") and a BT <strong>selects</strong>. Blending would need explicit parallel or
+decorator machinery. See <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a>.</p>
+<h2>Q10 — Can automatic behaviour coding replace human coders here?</h2>
+<p><a class="wikilink" href="vincze-2021-automatic-coding.html">vincze-2021-automatic-coding</a> codes behaviour elements from <strong>spatial position
+data alone</strong>, and <a class="wikilink" href="robot-platform.html">robot-platform</a> produces exactly that via lidar + leg
+detection. The authors name real-participant localisation as the blocker; this
+platform may remove it. Would cut the most expensive part of
+<a class="wikilink" href="validation-study.html">validation-study</a> and give an independent measure.</p>
+<h2>Q11 — What is reinforcement learning actually for? <em>(answered)</em></h2>
+<p><strong>Answered by decision, 2026-07-28</strong>: RL is to teach <a class="wikilink" href="robot-platform.html">robot-platform</a> behaviour
+patterns. <em>Which component</em>: the behaviour policy, not the emotional engine.
+<em>Which chapters</em>: Ch. 14–15 and §17.4 of <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a>.</p>
+<p>The trade-off with hand-authored rules is answered — not dismissed — by keeping
+the ethologically-derived primitives as the admissible action set <code>A(s)</code> (§14.3)
+and learning only the selection over them. The full argument, the layering, a
+first MDP formulation and its risks are in <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>. <em>Which
+reward signal</em> remains open: Q14.</p>
+<h2>Q12 — Should fear really override everything?</h2>
+<p><a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a> gives fear absolute priority above medium intensity, on a
+triune-brain justification the authors themselves call obsolete. Fear is also the
+<strong>least reliably recognised emotion on every robot measured</strong> (~48%), and is
+misread in a way that provokes hostile user reactions. The rule maximises exposure
+to the known failure mode. See <a class="wikilink" href="emotion-recognition-benchmarks.html">emotion-recognition-benchmarks</a>.</p>
+<h2>Q13 — Should the input set be proxemic rather than affective? <em>(reframed — the premise was false)</em></h2>
+<p>Asked on the assumption that <a class="wikilink" href="robot-platform.html">robot-platform</a> had no camera. <strong>It has one</strong>, and
+<a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a> already publishes <strong>17-keypoint body pose</strong> fused with
+lidar into people in map space.</p>
+<p>The question survives in better form: the input set is neither bare proxemics nor
+facial expression but <strong>bodily</strong> — posture, orientation, gesture, gait, spatial
+arrangement. That is closer to what a dog reads, keeps Q5 answered, and is
+strictly richer than the <a class="wikilink" href="attachment-sst.html">attachment-sst</a> rule base needs. It is still <strong>affect
+inference from behaviour</strong> rather than emotion recognition, and the thesis still
+has to say so. See <a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a>.</p>
+<hr>
+<h2>New questions from the Sutton &amp; Barto ingest</h2>
+<h2>Q14 — What collapses the emotional state into a scalar reward?</h2>
+<p>The reward hypothesis requires a single number (<a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §3.2);
+the emotional state is a <strong>five-dimensional vector</strong>
+(<a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>). Sutton &amp; Barto concede that scalar reward is
+"at odds with" the qualitatively different appetitive and aversive systems of real
+animals, and explicitly pass over the problem (§14 terminology).</p>
+<p>Weighted sum, valence projection, a separate reward per behaviour unit, or a
+vector-valued signal as §15.4 hints dopamine may actually be? <strong>This is the
+central unsolved design decision created by the RL commitment.</strong> See
+<a class="wikilink" href="reward-design.html">reward-design</a> and <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>. #needs-source</p>
+<h2>Q15 — Is the emotional engine the reward function, or a state feature?</h2>
+<p>Two readable architectures, predicting different behaviour. Either the engine
+computes <code>R</code> and the policy never sees the emotion vector — emotion is
+motivationally efficacious — or the emotion vector is part of the state and reward
+comes from elsewhere (task success, human response) — emotion is merely
+informative. Nothing in the corpus forces the choice. See <a class="wikilink" href="emotion-engine.html">emotion-engine</a>.</p>
+<h2>Q16 — Should habit formation be a measured outcome of the validation study?</h2>
+<p><a class="wikilink" href="habitual-vs-goal-directed.html">habitual-vs-goal-directed</a> supplies a documented process by which repeated
+experience shifts behavioural control from goal-directed to habitual, and an
+instrument for detecting it (outcome devaluation, Adams &amp; Dickinson 1981; Adams
+1982). <a class="wikilink" href="social-competence.html">social-competence</a> is defined as emerging over time and <strong>no study in
+the corpus tests it</strong>. This would turn "partnership forms" into a measurable
+claim — at the cost of a longitudinal design with no precedent in the corpus. See
+<a class="wikilink" href="validation-study.html">validation-study</a>.</p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="attachment-sst.html">Attachment and the Strange Situation Test</a></li>
+<li><a href="belle-2019-programming-with-affect.html">Belle, Gittens &amp; Graham (2019) — Programming with Affect</a></li>
+<li><a href="colledanchise-ogren-behavior-trees.html">Colledanchise &amp; Ögren — Behavior Trees in Robotics and AI: An Introduction</a></li>
+<li><a href="dog-human-interaction-model.html">Dog–human interaction as behaviour model</a></li>
+<li><a href="emotion-arbitration.html">Emotion arbitration</a></li>
+<li><a href="emotion-attribution.html">Emotion attribution to artificial agents</a></li>
+<li><a href="emotion-model-comparison.html">Emotion model comparison</a></li>
+<li><a href="emotion-recognition-benchmarks.html">Emotion recognition rates across robots</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="ethorobotics.html">Ethorobotics</a></li>
+<li><a href="fuzzy-automaton-fri.html">FRI fuzzy automaton</a></li>
+<li><a href="function-orientedness.html">Function-orientedness</a></li>
+<li><a href="gacsi-2016-emotion-attribution.html">Gácsi et al. (2016) — Humans attribute emotions to a robot showing dog-derived behavioural patterns</a></li>
+<li><a href="habitual-vs-goal-directed.html">Habitual vs goal-directed behaviour</a></li>
+<li><a href="validation-study.html">Human validation study (planned)</a></li>
+<li><a href="kovacs-fri-automaton-series.html">Kovács, Vincze et al. (2009–2011) — the FRI fuzzy automaton series</a></li>
+<li><a href="lakatos-2014-embodiments-demo.html">Lakatos et al. — Dog-Inspired Social Behaviour in Robots with Different Embodiments</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="mecanumbot-repos.html">Mecanumbot repositories</a></li>
+<li><a href="robot-platform.html">Mecanumbot — the experimental robot platform</a></li>
+<li><a href="panksepp-2005-affective-consciousness.html">Panksepp (2005) — Affective consciousness: core emotional feelings in animals and humans</a></li>
+<li><a href="panksepp-2011-emotional-circuits.html">Panksepp (2011) — The basic emotional circuits of mammalian brains</a></li>
+<li><a href="panksepp-affective-systems.html">Panksepp&#x27;s affective systems</a></li>
+<li><a href="research-proposal.html">PhD research proposal</a></li>
+<li><a href="plutchik-model.html">Plutchik&#x27;s model</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="reward-design.html">Reward design</a></li>
+<li><a href="social-competence.html">Social competence</a></li>
+<li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>
+<li><a href="szabo-2011-emotional-engine.html">Szabó et al. (2012) — Building a Human-Dog Interaction Inspired Emotional Engine Model</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="vincze-2021-automatic-coding.html">Vincze et al. (2021) — Towards automatic observation and coding of simple behaviours in ethological experiments</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

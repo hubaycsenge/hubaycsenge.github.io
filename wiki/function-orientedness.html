@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Function-orientedness — Research wiki</title>
+<meta name="description" content="An ethorobotics principle: start from function and environment, then design the best-suited agent , independent of similarity to humans…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Concepts</p>
+  <h1>Function-orientedness</h1>
+<dl class="meta"><div><dt>type</dt><dd>concept</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>4</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">ethology</span> <span class="tag">design-principle</span> <span class="tag">framing</span></dd></div></dl>
+<p>An <a class="wikilink" href="ethorobotics.html">ethorobotics</a> principle: <strong>start from function and environment, then design
+the best-suited agent</strong>, independent of similarity to humans
+<a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a>.</p>
+<p>The ethological root is Tinbergen's focus on the function of behaviour in relation
+to the environment in which the species evolved. Applied to robotics: the robot
+should have a function, and its embodiment, behaviour and cognitive abilities
+should fit its specific environment.</p>
+<p>Two arguments for it beyond the <a class="wikilink" href="uncanny-valley.html">uncanny-valley</a> escape:</p>
+<ul>
+<li><strong>Robot engineering is not constrained by evolutionary continuity</strong> — it can
+  jump between radically different designs, so there is no reason to inherit human
+  form.</li>
+<li><strong>Humans may not be well designed for many tasks</strong>, so uncritical copying is
+  wasted effort.</li>
+</ul>
+<h2>The operational test</h2>
+<p>Applied on every ingest: <em>does this method require the robot to look or act human
+in order to work, or only to be </em><em>legible</em><em>?</em> Legibility is compatible with
+function-orientedness; imitation is not.</p>
+<p>The corpus makes the distinction concrete. <a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a>
+rejects adding arms to a robot purely for emotional display —</p>
+<blockquote>
+<p>"it does not seem practical to add extra non-functional features, such as arms
+and hands... just for displaying some emotional expressions, because this would
+make the robot unnecessarily expensive."</p>
+</blockquote>
+<p>— and notes that most social robots "do not need verbal abilities or a human-like
+face to fit their original function". <a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a> makes
+the same point: robots should be "functional with regard to their roles in the
+human community, and their social behaviour should mirror this function as well,
+taking into account the embodiment and the technological constraints".</p>
+<h2>Now supported empirically, not just argued</h2>
+<p><a class="wikilink" href="emotion-recognition-benchmarks.html">emotion-recognition-benchmarks</a> is the evidence: dog-derived body movement on a
+faceless PeopleBot reached 75%, against Kismet's 73% with a purpose-built
+expressive face. MogiRobi's 83.3% joy against Kismet's 82.4%. The functional route
+is not a compromise — it performs equivalently, at lower hardware cost.</p>
+<p>And <a class="wikilink" href="lakatos-2014-embodiments-demo.html">lakatos-2014-embodiments-demo</a> shows the same behavioural design working
+across four embodiments from a bare holonomic base to an 11-DOF expressive head.</p>
+<h2>Consequence for this thesis</h2>
+<p><a class="wikilink" href="robot-platform.html">robot-platform</a> has no non-functional expressive hardware at all — its LEDs and
+mecanum drive both serve primary functions. That is <em>maximally</em>
+function-oriented, and makes the platform an unusually clean test of the
+principle. It also means every expressive behaviour must be built from
+<strong>motion quality and light</strong>, with no fallback. See Q4 in <a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+<p>Tracked as Q5 for the risk in the other direction: affective computing methods
+imported wholesale carry anthropomorphic assumptions.</p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="dog-human-interaction-model.html">Dog–human interaction as behaviour model</a></li>
+<li><a href="emotion-model-comparison.html">Emotion model comparison</a></li>
+<li><a href="emotion-recognition-benchmarks.html">Emotion recognition rates across robots</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="ethorobotics.html">Ethorobotics</a></li>
+<li><a href="interspecific-hri.html">HRI as interspecific interaction</a></li>
+<li><a href="ichikawa-numakunai-2012-roman.html">Ichikawa (2012) and Numakunai (2012) — dog-based robot behaviour in Intelligent Space</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="mecanumbot-perception.html">mecanumbot_sensorprocess_smart — the perception stack</a></li>
+<li><a href="miklosi-2017-ethorobotics.html">Miklósi et al. (2017) — Ethorobotics: A New Approach to Human-Robot Relationship</a></li>
+<li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="research-proposal.html">PhD research proposal</a></li>
+<li><a href="plutchik-1982-psychoevolutionary.html">Plutchik (1982) — A psychoevolutionary theory of emotions</a></li>
+<li><a href="plutchik-model.html">Plutchik&#x27;s model</a></li>
+<li><a href="social-competence.html">Social competence</a></li>
+<li><a href="uncanny-valley.html">The uncanny valley (and its ethological reinterpretation)</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

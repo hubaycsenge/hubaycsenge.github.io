@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reward design — Research wiki</title>
+<meta name="description" content="&quot;The use of a reward signal to formalize the idea of a goal is one of the most distinctive features of reinforcement learning.&quot; It is stated as a…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Methods</p>
+  <h1>Reward design</h1>
+<dl class="meta"><div><dt>type</dt><dd>method</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">reinforcement-learning</span> <span class="tag">design-problem</span> <span class="tag">core-contribution</span></dd></div></dl>
+<p><strong>The hard part.</strong> If the behaviour layer is to be learnt
+(<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>), the reward signal is the design decision the whole
+thing rests on, and <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> offers warnings rather than recipes.
+From §3.1–3.2, §14.3, §17.4 and §17.5.</p>
+<h2>The reward hypothesis</h2>
+<blockquote>
+<p>That all of what we mean by goals and purposes can be well thought of as the
+maximization of the expected value of the cumulative sum of a received scalar
+signal (called reward).
+— §3.2</p>
+</blockquote>
+<p>"The use of a reward signal to formalize the idea of a goal is one of the most
+distinctive features of reinforcement learning." It is stated as a hypothesis, not
+a result, and it is where a multi-dimensional emotional state and RL come into
+tension — see <em>Scalar reward</em> below.</p>
+<h2>Where reward lives</h2>
+<p>Two framing claims that change how <a class="wikilink" href="emotion-engine.html">emotion-engine</a> should be drawn:</p>
+<p><strong>Reward is internal to the agent.</strong> <code>Rt</code> is "more like a reward signal in
+neuroscience, which is a signal internal to the brain... This signal might be
+triggered when the animal perceives an attractive (or an aversive) object, but it
+can also be triggered by things that do not physically exist in the animal's
+external environment, such as memories, ideas, or hallucinations" (§14
+terminology).</p>
+<p><strong>The agent is not the robot.</strong> The agent–environment boundary "is typically not
+the same as the physical boundary of a robot's or animal's body. Usually, the
+boundary is drawn closer to the agent than that... the motors and mechanical
+linkages of a robot and its sensing hardware should usually be considered parts of
+the environment" — and so is the reward computation, because "it defines the task
+facing the agent and thus must be beyond its ability to change arbitrarily. The
+agent–environment boundary represents the limit of the agent's absolute control,
+not of its knowledge" (§3.1).</p>
+<p>Consequences for this thesis, in order of usefulness:</p>
+<ol>
+<li>The <strong>emotional engine sits on the environment side of the boundary</strong> and
+   computes the reward for the behaviour policy. That is a clean way to state the
+   architecture: emotional state → reward → learnt behaviour, and it explains why
+   the engine must not be learnt by the same loop that consumes it.</li>
+<li><strong>Battery, motor and sensor health are legitimately part of the state</strong>, and
+   what is rewarding may depend on them — the direct analogue of hunger modulating
+   food reward (§14.3). This is the first formal handle the wiki has on Q2 in
+   <a class="wikilink" href="open-questions.html">open-questions</a>.</li>
+<li>The book also permits reward to depend on the learning process itself
+   (see <em>Intrinsic motivation</em>).</li>
+</ol>
+<h2>The failure modes</h2>
+<p><strong>Do not reward subgoals.</strong> §3.2: "the reward signal is not the place to impart to
+the agent prior knowledge about how to achieve what we want it to do... a
+chess-playing agent should be rewarded only for actually winning, not for
+achieving subgoals such as taking its opponent's pieces... it might find a way to
+take the opponent's pieces even at the cost of losing the game." §17.4 repeats it:
+"augmenting the reward signal with well-intentioned supplemental rewards may lead
+the agent to behave very differently from what is intended; the agent may end up
+not achieving the overall goal at all."</p>
+<p><strong>The reward signal says what, not how.</strong> "The reward signal is your way of
+communicating to the robot what you want it to achieve, not how you want it
+achieved" (§3.2).</p>
+<p><strong>Agents find unintended solutions.</strong> "Reinforcement learning agents can discover
+unexpected ways to make their environments deliver reward, some of which might be
+undesirable, or even dangerous" (§17.4).</p>
+<p><strong>Sparse reward.</strong> Rewarding events may be too rare for the agent ever to
+encounter them; the agent "may wander aimlessly for long periods of time" (Minsky's
+"plateau problem"). Acute in HRI, where a single interaction may yield one
+evaluative event.</p>
+<p><strong>In practice it is trial and error.</strong> "Designing a reward signal is often left to
+an informal trial-and-error search for a signal that produces acceptable results."
+That is worth quoting to a supervisor who expects a principled derivation.</p>
+<h2>The remedies the book offers</h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Remedy</th>
+<th>Section</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sparse reward</td>
+<td><strong>Shaping</strong> — start with a reward signal that is dense given the agent's <em>current</em> behaviour, then modify it gradually toward the target signal</td>
+<td>§17.4, §14.3</td>
+</tr>
+<tr>
+<td>Wanting to guide learning without corrupting the goal</td>
+<td><strong>Initialise the value function</strong>, not the reward: <code>v̂(s,w) = wᵀx(s) + v₀(s)</code>, updating <code>w</code> as usual</td>
+<td>§17.4</td>
+</tr>
+<tr>
+<td>No idea what the reward should be, but an expert exists</td>
+<td><strong>Imitation / learning from demonstration</strong>, or <strong>inverse RL</strong> to recover a plausible reward from observed behaviour</td>
+<td>§17.4</td>
+</tr>
+<tr>
+<td>Intuition failing</td>
+<td><strong>Optimise the reward signal itself</strong> in an outer loop scored by a high-level objective — "one level analogous to evolution, and the other due to reinforcement learning by individual agents"</td>
+<td>§17.4</td>
+</tr>
+</tbody>
+</table>
+<p>Shaping is the one to reach for first here, because it is <em>also</em> the
+ethologically-native training method and is already named as a requirement:
+<a class="wikilink" href="social-competence.html">social-competence</a> lists "responsiveness to learning and training" among the
+dog-derived properties a robot needs (<a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a>).</p>
+<div class="callout callout-important">
+<p class="callout-title">The agent's goal need not be the designer's goal</p>
+<p>"These experiments also demonstrated that an agent's goal should not always be
+the same as the goal of the agent's designer" (§17.4, on Singh, Lewis &amp; Barto).
+Because agents learn under constraints — limited computation, limited
+information, limited time — "learning to achieve a goal that is different from
+the designer's goal can sometimes end up getting closer to the designer's goal
+than if that goal were pursued directly."</p>
+<p>The example given is evolutionary and lands close to this thesis: because we
+cannot assess nutritional value directly, "evolution—the designer of our reward
+signal—gave us a reward signal that makes us seek certain tastes... Similarly,
+because an animal cannot observe its own evolutionary fitness, that objective
+function does not work as a reward signal for learning."</p>
+<p>Read across to the robot: the designer's goal is <em>successful social
+interaction</em>, which the robot cannot observe. The reward signal must instead be
+built from observable proxies. <strong>That is exactly what an emotional state is</strong> —
+a fast, observable, evolutionarily-shaped proxy for interaction quality. This is
+the strongest argument the book supplies for the emotional engine as a
+component of a learning system rather than as an output device. <em>(Reading, not
+a claim of the book — the book never discusses emotion.)</em></p>
+</div>
+<h2>Intrinsic motivation</h2>
+<p>§17.5 lists internal-factor rewards as an open frontier: an agent may use "some
+measure of learning progress as an internal or 'intrinsic' reward, implementing a
+computational form of curiosity", or reward "the receipt of unexpected, novel, or
+otherwise interesting input", or "assess the agent's ability to cause changes in
+its environment". The result is "a computational analog of something like play".</p>
+<p>§17.4: "reward signals may be influenced by things inside the larger behaving
+agent, such as motivational states, memories, ideas... Reward signals may also
+depend on properties of the learning process itself."</p>
+<p>This is the closest the book comes to the robot's own internal state driving
+affect, and it is a gesture, not a method — it cites Singh, Barto &amp; Chentanez
+(2005), Oudeyer &amp; Kaplan (2007) and Baldassarre &amp; Mirolli (2013), none of which is
+in the corpus. Logged in <a class="wikilink" href="citation-backlog.html">citation-backlog</a>. Note also that PLAY is a Panksepp
+circuit (<a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a>) that <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>
+dropped; the convergence is suggestive but <strong>unsourced</strong> and should not be leaned
+on. #needs-source</p>
+<h2>Scalar reward, and the mismatch with an emotional state</h2>
+<p>The reward hypothesis requires a single number. An emotional state in this lineage
+is a <strong>vector</strong> of five simultaneously active dimensions
+(<a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>). The book acknowledges the problem in its own
+terms:</p>
+<blockquote>
+<p>It has often been pointed out that using a single number as a reward or a
+penalty signal, depending only on its sign, is at odds with the fact that
+animals' appetitive and aversive systems have qualitatively different properties
+and involve different brain mechanisms. This points to a direction in which the
+reinforcement learning framework might be developed in the future... but for now
+we are passing over these possibilities.
+— §14 terminology</p>
+</blockquote>
+<p>So the collapse from emotional state to scalar reward is a <strong>design decision this
+thesis has to make and defend</strong>, and the book explicitly declines to help. It is
+the sharpest open question created by this ingest — Q14 in <a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+<h2>Related</h2>
+<p><a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> · <a class="wikilink" href="td-learning.html">td-learning</a> · <a class="wikilink" href="actor-critic.html">actor-critic</a> ·
+<a class="wikilink" href="emotion-engine.html">emotion-engine</a> · <a class="wikilink" href="conditioning.html">conditioning</a> · <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a></p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="conditioning.html">Conditioning</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="ostensive-signalling.html">Ostensive signalling</a></li>
+<li><a href="panksepp-2005-affective-consciousness.html">Panksepp (2005) — Affective consciousness: core emotional feelings in animals and humans</a></li>
+<li><a href="panksepp-2011-emotional-circuits.html">Panksepp (2011) — The basic emotional circuits of mammalian brains</a></li>
+<li><a href="panksepp-affective-systems.html">Panksepp&#x27;s affective systems</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="social-competence.html">Social competence</a></li>
+<li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>
+<li><a href="td-learning.html">Temporal-difference learning</a></li>
+<li><a href="topal-2014-ostensive.html">Topál, Kis &amp; Oláh (2014) — Dogs&#x27; sensitivity to human ostensive cues</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.) — Research wiki</title>
+<meta name="description" content="Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction , second edition. MIT Press, 2018. The standard textbook of the field.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Sources</p>
+  <h1>Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</h1>
+<dl class="meta"><div><dt>type</dt><dd>source</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>citekey</dt><dd>sutton2018reinforcement</dd></div><div><dt>authors</dt><dd>Richard S. Sutton, Andrew G. Barto</dd></div><div><dt>year</dt><dd>2018</dd></div><div><dt>venue</dt><dd>MIT Press, 2nd edition</dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">textbook</span> <span class="tag">reinforcement-learning</span> <span class="tag">animal-learning</span> <span class="tag">neuroscience</span></dd></div></dl>
+<p>Richard S. Sutton and Andrew G. Barto, <em>Reinforcement Learning: An Introduction</em>,
+second edition. MIT Press, 2018. The standard textbook of the field.</p>
+<div class="callout callout-note">
+<p class="callout-title">Scope of this ingest, and provenance</p>
+<p>Read closely: <strong>Ch. 14 (Psychology)</strong>, <strong>Ch. 15 (Neuroscience)</strong>, <strong>§17.4
+(Designing Reward Signals)</strong>, <strong>§17.5</strong>, plus <strong>§1.3–1.4</strong>, <strong>§3.1–3.2</strong> and the
+<em>Comments on Terminology</em> at the end of Ch. 14. Parts I and II (the algorithms
+themselves, Ch. 2–13) are recorded structurally and read only where Ch. 14/15
+depend on them. Cite this page by <strong>section number, not page number</strong> — the PDF
+in <code>raw/</code> was printed from a browser (<code>cairo</code>, 2026-07-27), so it is one of the
+freely circulated electronic versions and its pagination may not match the
+printed MIT Press edition.</p>
+</div>
+<h2>What this book is for this wiki</h2>
+<p>It is <strong>not a source on emotion</strong>. Verified against the full text: <em>Panksepp</em> does
+not appear; <em>emotion</em> appears three times, all incidental; <em>affective</em> appears
+twice in the body, both times meaning "the ventral striatum assigns affective
+value to sensations". §14.7 says explicitly that the book omits links "to
+ecological and evolutionary aspects of behavior studied by ethologists and
+behavioral ecologists".</p>
+<p>What it <strong>is</strong>: the formal apparatus for the animal-learning phenomena that the
+rest of this corpus models by hand. Ch. 14 covers conditioning, the Law of Effect,
+shaping, motivation, cognitive maps and habit formation; Ch. 15 covers the neural
+substrate. That is the same subject matter as <a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a> and
+<a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a>, approached from computation instead of ethology.</p>
+<p>Given the decision to use RL to teach <a class="wikilink" href="robot-platform.html">robot-platform</a> behaviour patterns, the
+design argument built on this source is in <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>.</p>
+<h2>Takeaways</h2>
+<ul>
+<li><strong>Prediction ↔ classical conditioning; control ↔ instrumental conditioning.</strong>
+  The book's two algorithm families map onto psychology's two conditioning
+  paradigms, a correspondence the authors call "a convenient first approximation"
+  rather than an identity (§14.1). See <a class="wikilink" href="conditioning.html">conditioning</a>.</li>
+<li><strong>An animal's instinctive repertoire is the admissible action set.</strong> Thorndike's
+  cats selected from their "instinctual impulses"; Sutton &amp; Barto map this onto
+  <code>A(s)</code> and note that "specifying these sets is an important aspect of
+  reinforcement learning because it can radically simplify learning" (§14.3).
+  This is the single most consequential sentence in the book for this thesis —
+  see <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>.</li>
+<li><strong>Reward is internal to the agent, and the agent is not the robot.</strong> <code>Rt</code> is
+  "more like a reward signal in neuroscience, which is a signal internal to the
+  brain" (§14 terminology). The agent–environment boundary "is typically not the
+  same as the physical boundary of a robot's or animal's body" — motors, sensors
+  and the reward computation itself sit on the environment side (§3.1).</li>
+<li><strong>Reward ≠ reinforcement.</strong> The reward signal defines the problem; the
+  <em>reinforcement</em> signal drives parameter updates and is usually the TD error
+  δ = R + γV(S′) − V(S), not R (§15.2, §14 terminology). See <a class="wikilink" href="td-learning.html">td-learning</a>.</li>
+<li><strong>Phasic dopamine activity behaves like a TD error</strong>, not like reward — the
+  reward prediction error hypothesis (§15.3–15.6). See <a class="wikilink" href="td-learning.html">td-learning</a>.</li>
+<li><strong>Actor–critic plausibly maps onto the striatum</strong>: critic in ventral, actor in
+  dorsal, dopamine broadcasting the same scalar δ to both (§15.7). See
+  <a class="wikilink" href="actor-critic.html">actor-critic</a>.</li>
+<li><strong>Model-free ↔ habitual, model-based ↔ goal-directed</strong>, with a documented shift
+  from goal-directed to habitual under overtraining (§14.6). See
+  <a class="wikilink" href="habitual-vs-goal-directed.html">habitual-vs-goal-directed</a>.</li>
+<li><strong>Reward design is the hard part, and the book offers warnings rather than
+  recipes</strong> (§17.4). See <a class="wikilink" href="reward-design.html">reward-design</a>.</li>
+<li><strong>Online, incremental learning on real systems is named as unsolved</strong> (§17.5).
+  This <em>supports</em> rather than undermines the thesis' framing of real-time
+  real-environment operation as hard.</li>
+</ul>
+<h2>Method</h2>
+<p>A textbook, not a study — it reports no new experiments. Its evidential structure
+is worth stating because it affects how it can be cited:</p>
+<ul>
+<li><strong>Ch. 1–13</strong> are mathematics and algorithms, with simulation results.</li>
+<li><strong>Ch. 14–15</strong> are literature reviews of animal-learning and neuroscience
+  experiments performed by others (Pavlov, Thorndike, Rescorla &amp; Wagner, Kamin,
+  Adams &amp; Dickinson, Tolman, Schultz's group, Yagishita et al.), read through the
+  RL formalism. Claims here are <strong>second-hand</strong>; the primary sources are listed in
+  <a class="wikilink" href="citation-backlog.html">citation-backlog</a>.</li>
+<li><strong>Ch. 16</strong> is applications and case studies; <strong>Ch. 17</strong> is the authors'
+  assessment of open problems.</li>
+</ul>
+<p>Peer review: MIT Press monograph, not a peer-reviewed article. Ch. 14 and 15 were
+read in draft by named domain experts (Moore, Botvinick, Daw, Dayan, Niv), which
+the authors state in the preface — a reasonable but weaker guarantee than review.</p>
+<h2>Limitations, for this thesis specifically</h2>
+<ul>
+<li><strong>No emotion content and no ethology content.</strong> Nothing here licenses a claim
+  about affect. In particular it cannot be used to support the
+  Panksepp–dopamine bridge; see the warning on <a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a>.</li>
+<li><strong>Trial-structured laboratory paradigms.</strong> The animal experiments reviewed are
+  rats, pigeons, rabbits and monkeys in controlled apparatus. Transfer to a mobile
+  robot in a corridor with an untrained human is not addressed.</li>
+<li><strong>The authors' own assessment of online learning is pessimistic</strong> (§17.5):
+  current deep methods "struggle to learn rapidly in the incremental, online
+  settings that are most natural for the reinforcement learning algorithms
+  emphasized in this book"; catastrophic interference is unsolved; "an honest
+  assessment has to be that current deep learning methods are not well suited to
+  online learning". They also name safe embedding of RL agents in physical
+  environments as "one of the most pressing areas for future research".</li>
+<li><strong>Scalar reward.</strong> The authors themselves flag this as at odds with the fact
+  that "animals' appetitive and aversive systems have qualitatively different
+  properties and involve different brain mechanisms", and say a separate
+  appetitive/aversive treatment is a direction they pass over (§14 terminology).
+  For a multi-dimensional emotional state this is a real mismatch — see
+  <a class="wikilink" href="reward-design.html">reward-design</a>.</li>
+<li><strong>Single-agent.</strong> Multi-agent RL is out of scope except for the team argument in
+  §15.10, so the book says nothing about the interaction as a two-party process,
+  which is what <a class="wikilink" href="interspecific-hri.html">interspecific-hri</a> insists on.</li>
+</ul>
+<div class="callout callout-warning">
+<p class="callout-title">Inconsistency inside this source</p>
+<p>The eligibility window for reward-modulated STDP is given as lasting "up to 10
+seconds" in §15.8 and again in the §15.13 summary, both citing Yagishita et al.
+(2014). The Bibliographical and Historical Remarks for §15.8 report the <strong>same
+paper</strong> as finding a window "of from 0.3 to 2 seconds after STDP stimulation".
+Two orders of magnitude apart, unresolvable from this book. If the number
+matters, read Yagishita et al. (2014) directly — logged in
+<a class="wikilink" href="citation-backlog.html">citation-backlog</a>. Nothing in this wiki currently depends on it.</p>
+</div>
+<h2>What this changes in the wiki</h2>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a></td>
+<td>The SEEKING/dopamine bridge is <strong>not</strong> supported by this book. Warning rewritten and downgraded.</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="emotion-engine.html">emotion-engine</a></td>
+<td>Internal state gains a formalism: §17.5 intrinsic motivation and the §3.1 agent boundary. Learning added as a component row.</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a></td>
+<td>§15.10 gives a third option beside winner-take-all and rule tree: a <em>team</em> of units under one broadcast signal, with winner-take-all as a credit-assignment simplification.</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a></td>
+<td>The "human-readable rules" argument against RL is weakened, not defeated — §14.3 <code>A(s)</code> lets both hold at once.</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="social-competence.html">social-competence</a></td>
+<td>"Responsiveness to learning and training" is a listed dog-derived requirement; this book is what makes it implementable.</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a></td>
+<td>The behaviour tables are re-readable as <code>A(s)</code> plus a reward specification.</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="open-questions.html">open-questions</a></td>
+<td>Q11 answered by Csenge's decision; Q14–Q16 opened.</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="thesis.html">thesis</a></td>
+<td>Steps 5 and 7 acquire a learning component.</td>
+</tr>
+<tr>
+<td>New pages</td>
+<td><a class="wikilink" href="conditioning.html">conditioning</a>, <a class="wikilink" href="td-learning.html">td-learning</a>, <a class="wikilink" href="actor-critic.html">actor-critic</a>, <a class="wikilink" href="reward-design.html">reward-design</a>, <a class="wikilink" href="habitual-vs-goal-directed.html">habitual-vs-goal-directed</a>, <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>.</td>
+</tr>
+</tbody>
+</table>
+<h2>Structure, for navigation</h2>
+<ul>
+<li><strong>Part I — Tabular</strong> (Ch. 2–8): bandits, finite MDPs, dynamic programming, Monte
+  Carlo, temporal-difference learning, n-step bootstrapping, planning (Dyna,
+  prioritised sweeping, RTDP, MCTS).</li>
+<li><strong>Part II — Approximate</strong> (Ch. 9–13): on- and off-policy prediction and control
+  with function approximation, eligibility traces, policy gradient (REINFORCE,
+  actor–critic).</li>
+<li><strong>Part III — Looking Deeper</strong> (Ch. 14–17): Psychology, Neuroscience,
+  applications and case studies, frontiers.</li>
+</ul>
+<p>The authors' own reading advice (preface): Ch. 1, Ch. 2 through §2.4, Ch. 3, then
+select; "Chapter 6 is the most important for the subject and for the rest of the
+book"; a planning-focused course should cover Ch. 8.</p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="actor-critic.html">Actor–critic</a></li>
+<li><a href="behaviour-trees.html">Behaviour trees</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="colledanchise-ogren-behavior-trees.html">Colledanchise &amp; Ögren — Behavior Trees in Robotics and AI: An Introduction</a></li>
+<li><a href="conditioning.html">Conditioning</a></li>
+<li><a href="dog-human-interaction-model.html">Dog–human interaction as behaviour model</a></li>
+<li><a href="emotion-arbitration.html">Emotion arbitration</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="fuzzy-automaton-fri.html">FRI fuzzy automaton</a></li>
+<li><a href="habitual-vs-goal-directed.html">Habitual vs goal-directed behaviour</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="panksepp-2005-affective-consciousness.html">Panksepp (2005) — Affective consciousness: core emotional feelings in animals and humans</a></li>
+<li><a href="panksepp-affective-systems.html">Panksepp&#x27;s affective systems</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="reward-design.html">Reward design</a></li>
+<li><a href="social-competence.html">Social competence</a></li>
+<li><a href="td-learning.html">Temporal-difference learning</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

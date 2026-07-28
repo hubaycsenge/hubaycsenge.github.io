@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Social competence — Research wiki</title>
+<meta name="description" content="The target property for an ethorobot. Defined in miklosi-2017-ethorobotics as">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Concepts</p>
+  <h1>Social competence</h1>
+<dl class="meta"><div><dt>type</dt><dd>concept</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>2</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">ethology</span> <span class="tag">hri</span> <span class="tag">definition</span></dd></div></dl>
+<p>The target property for an ethorobot. Defined in <a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a> as</p>
+<blockquote>
+<p>an individual's ability to generate social skills that conform to the
+expectations of others and the social rules of the group.</p>
+</blockquote>
+<p>It emerges only when three conditions hold: the individual <strong>wants</strong> to
+participate, <strong>has the means</strong> to participate, and <strong>is regarded by others</strong> as
+able to participate.</p>
+<p>That third condition is the interesting one for robotics — social competence is
+partly conferred by the partner, not wholly built into the agent. Which is why:</p>
+<h2>Partnership is a process, not a state</h2>
+<blockquote>
+<p>"A social robot does not automatically become a social partner but achieves this
+state of affairs if it engages in the appropriate kind of social interactions
+with its partner. Any type of partnership is not an <em>a priori</em> attribute of the
+robot but actually an outcome of relevant social interactions."
+— <a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a></p>
+</blockquote>
+<p>Both the robot's social skills <em>and the time devoted to interaction by both
+parties</em> determine whether partnership emerges.</p>
+<p><strong>Consequence for <a class="wikilink" href="validation-study.html">validation-study</a></strong>: a single 20-minute session cannot
+measure social competence in this sense; it can only measure legibility of
+expression. Every empirical study in the corpus
+(<a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a>, <a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a>) is a
+short single-session study, so <strong>none of them actually tests the framework's
+central construct.</strong> That is a real gap, and a possible contribution.</p>
+<p><a class="wikilink" href="habitual-vs-goal-directed.html">habitual-vs-goal-directed</a> now offers a candidate mechanism and instrument for
+that gap — a documented shift from goal-directed to habitual control with repeated
+experience, detectable by outcome devaluation. Q16 in <a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+<h2>Why the human model is rejected</h2>
+<p>Approaches like Fong et al. (2003) enumerate the human social skills a robot
+should have. <a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a> rejects this on two grounds: there is
+no robust technical solution for most of them, and the biological foundations of
+human social interaction are obscured by our social and cultural complexity. The
+dog's competence is <em>simpler and legible</em> — which is the whole argument for
+<a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>.</p>
+<h2>Dog-derived components proposed for robots</h2>
+<p>From <a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a>:</p>
+<ul>
+<li>attachment to humans (<a class="wikilink" href="attachment-sst.html">attachment-sst</a>)</li>
+<li>simple ways of communicative interaction</li>
+<li><strong>responsiveness to learning and training</strong> — see below</li>
+<li><strong>being useful in some specific way</strong></li>
+</ul>
+<div class="callout callout-important">
+<p class="callout-title">"Responsiveness to learning and training" is the in-corpus mandate for RL</p>
+<p>This item sat unremarked until the <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> ingest. It is a
+requirement stated by the framing source of the whole thesis, and <strong>no system in
+the corpus satisfies it</strong> — every model is hand-authored and fixed at design
+time (<a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a>, <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>).</p>
+<p>It is therefore the strongest justification available for the decision recorded
+in <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>: a trainable robot is not an imported
+machine-learning ambition but an unmet ethorobotic requirement. It also picks
+the <em>method</em> — Skinner's <strong>shaping</strong> (<a class="wikilink" href="conditioning.html">conditioning</a>) is simultaneously the
+ethologically native form of training and the book's principal remedy for sparse
+reward (<a class="wikilink" href="reward-design.html">reward-design</a>).</p>
+<p>Two further sources now converge on this. <a class="wikilink" href="panksepp-2011-emotional-circuits.html">panksepp-2011-emotional-circuits</a>
+gives the <strong>PLAY</strong> circuit exactly this function — "to help young animals to
+acquire the social knowledge and refinement of subtle social interactions that
+they will need to thrive" — and <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §17.5 independently
+describes intrinsic motivation as producing "a computational analog of something
+like play". And <a class="wikilink" href="topal-2014-ostensive.html">topal-2014-ostensive</a> reduces the target from knowledge
+transfer to <strong>behavioural synchronisation</strong>, with a five-item attention
+specification that is directly buildable. See <a class="wikilink" href="ostensive-signalling.html">ostensive-signalling</a>.</p>
+</div>
+<p>The last is easy to overlook and is a hard constraint: in this framework social
+competence without function is not viable, because the robot's niche <em>is</em> its
+function. See <a class="wikilink" href="function-orientedness.html">function-orientedness</a>.</p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="belle-2019-programming-with-affect.html">Belle, Gittens &amp; Graham (2019) — Programming with Affect</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="conditioning.html">Conditioning</a></li>
+<li><a href="dog-human-interaction-model.html">Dog–human interaction as behaviour model</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="ethorobotics.html">Ethorobotics</a></li>
+<li><a href="habitual-vs-goal-directed.html">Habitual vs goal-directed behaviour</a></li>
+<li><a href="interspecific-hri.html">HRI as interspecific interaction</a></li>
+<li><a href="validation-study.html">Human validation study (planned)</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="mecanumbot-behaviours.html">mecanumbot_behaviours — the behaviour layer</a></li>
+<li><a href="mecanumbot-perception.html">mecanumbot_sensorprocess_smart — the perception stack</a></li>
+<li><a href="miklosi-2017-ethorobotics.html">Miklósi et al. (2017) — Ethorobotics: A New Approach to Human-Robot Relationship</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="ostensive-signalling.html">Ostensive signalling</a></li>
+<li><a href="panksepp-2011-emotional-circuits.html">Panksepp (2011) — The basic emotional circuits of mammalian brains</a></li>
+<li><a href="panksepp-affective-systems.html">Panksepp&#x27;s affective systems</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="reward-design.html">Reward design</a></li>
+<li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="topal-2014-ostensive.html">Topál, Kis &amp; Oláh (2014) — Dogs&#x27; sensitivity to human ostensive cues</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

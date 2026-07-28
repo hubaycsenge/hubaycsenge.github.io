@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Human validation study (planned) — Research wiki</title>
+<meta name="description" content="Integrate the emotion analysis into the robot&#x27;s behavioural structure and validate its responses by testing on humans research-proposal.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Experiments</p>
+  <h1>Human validation study (planned)</h1>
+<dl class="meta"><div><dt>type</dt><dd>experiment</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>4</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">human-subjects</span> <span class="tag">planned</span> <span class="tag">evaluation</span></dd></div></dl>
+<p>Integrate the emotion analysis into the robot's behavioural structure and validate
+its responses by testing on humans <a class="wikilink" href="research-proposal.html">research-proposal</a>.</p>
+<p>Was one unsourced sentence. The corpus now supplies a <strong>complete methodological
+template</strong> — <a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a> and
+<a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a> are, between them, a protocol this study can
+adapt rather than invent.</p>
+<h2>Inherited protocol</h2>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Precedent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Family Dog Project lab, ELTE; 4.6 × 3.8 m room, 4 wall cameras</td>
+</tr>
+<tr>
+<td>Baseline condition</td>
+<td><strong>wizard-of-oz</strong> teleoperation — the natural control against an autonomous engine</td>
+</tr>
+<tr>
+<td>Emotion measures</td>
+<td>open-ended questionnaire <strong>first</strong>, forced choice <strong>second</strong> (avoids priming)</td>
+</tr>
+<tr>
+<td>Open-ended scoring</td>
+<td>4-point scale: formal behaviour description → contextual behaviour → implicit inner state → explicit emotion naming. Cohen's κ = 0.84 with a second coder</td>
+</tr>
+<tr>
+<td>Certainty</td>
+<td>0–4 self-rated certainty per choice</td>
+</tr>
+<tr>
+<td>Attitude</td>
+<td><strong>NARS</strong> (Negative Attitudes towards Robots Scale), pre and post</td>
+</tr>
+<tr>
+<td>Behaviour coding</td>
+<td>Solomon Coder from video</td>
+</tr>
+<tr>
+<td>Statistics</td>
+<td>Shapiro–Wilk → non-parametric (Mann–Whitney, Wilcoxon, binomial); GLMM with binomial/logit for multi-factor; Benjamini–Hochberg correction</td>
+</tr>
+<tr>
+<td>Design</td>
+<td>within-subject, counterbalanced order and stimulus assignment</td>
+</tr>
+<tr>
+<td>Ethics</td>
+<td>ELTE Institute of Biology IRB written approval</td>
+</tr>
+<tr>
+<td>Sample</td>
+<td>48–81 participants; expect ~30% exclusion for technical faults</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Also inherited: an automatic behaviour coder.</strong> <a class="wikilink" href="vincze-2021-automatic-coding.html">vincze-2021-automatic-coding</a>
+codes behaviour elements from spatial position data alone. Combined with the
+lidar-based person tracking already on <a class="wikilink" href="robot-platform.html">robot-platform</a>, this could <strong>replace
+or cross-check human coding</strong> — reducing the most expensive part of the protocol
+and producing an independent measure. Q10 in <a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+<h2>Three conditions already exist in code</h2>
+<div class="callout callout-important">
+<p class="callout-title"><a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a> implements a signalling-modality experiment</p>
+<p>Discovered in the 2026-07-28 repository re-clip. Csenge's own behaviour package
+ships three leading-behaviour trees on one navigation substrate:</p>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Signalling channel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Control</code></td>
+<td>none — navigation only</td>
+</tr>
+<tr>
+<td><code>Doglike</code></td>
+<td>neck / gripper gestures on <code>/cmd_accessory_pos</code></td>
+</tr>
+<tr>
+<td><code>LED</code></td>
+<td>LED patterns via <code>set_led_status</code></td>
+</tr>
+</tbody>
+</table>
+<p>This maps onto the leading behaviour of <a class="wikilink" href="lakatos-2014-embodiments-demo.html">lakatos-2014-embodiments-demo</a> and
+isolates <strong>which expressive channel carries the leading signal</strong> — the open
+question raised by the platform having no face. Condition is a launch argument;
+the parameter YAML is selected from the Wi-Fi SSID, and there are <strong>two named
+environment settings files</strong>, which is relevant to the "real environment" part
+of Q3.</p>
+<p><strong>But this is not the study below.</strong> These are three fixed signalling
+conditions with no affect model, no arbitration and no learning. They answer
+"is the dog-like channel more legible than LEDs or nothing", which is valuable
+and probably a paper — but it is not "does the emotional engine work".
+Treating one as the other would be the easiest mistake available here.</p>
+</div>
+<p>Also newly available for data capture: <code>mecanumbot_msgs</code> exposes <strong>recording
+scheme</strong> services — named per-user lists of topics to record — plus
+<code>SimBehaviorEvaluation</code> / <code>SimDetectionEvaluation</code>, per-scenario automatic
+verdicts carrying unsafe-motion, proximity, wrong-target and stale-detection
+flags. That is scoring infrastructure the protocol below assumed it would have to
+build. See Q10.</p>
+<h2>The condition that matters</h2>
+<p>The prior studies were all wizard-of-oz — the emotional behaviour was
+<em>performed by a human operator</em>. This thesis builds the thing that was faked.
+So the decisive comparison is:</p>
+<p><strong>autonomous engine vs wizard-of-oz vs no-emotion control</strong></p>
+<p>Anything less cannot separate "the engine works" from "dog-derived behaviour is
+legible", which is already established.</p>
+<h2>Targets to beat</h2>
+<p>From <a class="wikilink" href="emotion-recognition-benchmarks.html">emotion-recognition-benchmarks</a>: ~83% recognition for a positive state,
+~75% overall across five states. Fear will be the failure mode — expect ~48%, and
+expect it to be misread as indifference and to provoke negative user reactions.</p>
+<h2>Still to specify</h2>
+<ul>
+<li><strong>Hypotheses.</strong> Presumably that appropriate feedback improves cooperation and
+  acceptance — but see Q8 in <a class="wikilink" href="open-questions.html">open-questions</a>: the corpus contains a citation
+  that robot emotion expression sometimes <em>worsens</em> perception.</li>
+<li><strong>Cooperation and acceptance measures.</strong> NARS covers attitude; a task-performance
+  or cooperation measure is still missing. #needs-source</li>
+<li><strong>Real environment.</strong> The novelty claim (Q3) is undercut by a lab study. The
+  home-care setting of <a class="wikilink" href="ichikawa-numakunai-2012-roman.html">ichikawa-numakunai-2012-roman</a> is the corpus' answer to
+  "which real environment" and is worth considering.</li>
+<li><strong>Long-term interaction.</strong> <a class="wikilink" href="social-competence.html">social-competence</a> as defined by
+  <a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a> emerges over time and cannot be measured in one
+  session. Every study in the corpus is single-session — so none tests the
+  framework's central construct. A longitudinal design would be a real
+  contribution, and is expensive.</li>
+<li>Ethics approval route and timeline — start early.</li>
+</ul>
+<h2>Log</h2>
+<p>Nothing run yet. Record pilots, protocol revisions and results here.</p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="emotion-attribution.html">Emotion attribution to artificial agents</a></li>
+<li><a href="emotion-recognition-benchmarks.html">Emotion recognition rates across robots</a></li>
+<li><a href="gacsi-2016-emotion-attribution.html">Gácsi et al. (2016) — Humans attribute emotions to a robot showing dog-derived behavioural patterns</a></li>
+<li><a href="habitual-vs-goal-directed.html">Habitual vs goal-directed behaviour</a></li>
+<li><a href="interspecific-hri.html">HRI as interspecific interaction</a></li>
+<li><a href="lakatos-2014-emotion-attribution.html">Lakatos et al. (2014) — Emotion attribution to a non-humanoid robot in different social situations</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="mecanumbot-repos.html">Mecanumbot repositories</a></li>
+<li><a href="robot-platform.html">Mecanumbot — the experimental robot platform</a></li>
+<li><a href="mecanumbot-behaviours.html">mecanumbot_behaviours — the behaviour layer</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="research-proposal.html">PhD research proposal</a></li>
+<li><a href="plutchik-1982-psychoevolutionary.html">Plutchik (1982) — A psychoevolutionary theory of emotions</a></li>
+<li><a href="social-competence.html">Social competence</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="vincze-2012-interfaces-and-virca.html">Vincze et al. (2012) — HRI interfaces and the VirCA environment</a></li>
+<li><a href="vincze-2021-automatic-coding.html">Vincze et al. (2021) — Towards automatic observation and coding of simple behaviours in ethological experiments</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

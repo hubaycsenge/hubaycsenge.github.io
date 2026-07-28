@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emotion attribution to artificial agents — Research wiki</title>
+<meta name="description" content="People attribute emotions to artificial agents, and this facilitates interaction research-proposal. Now the best-evidenced claim in the wiki — two studies…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Concepts</p>
+  <h1>Emotion attribution to artificial agents</h1>
+<dl class="meta"><div><dt>type</dt><dd>concept</dd></div><div><dt>status</dt><dd><span class="badge badge-solid" title="well supported and cross-referenced">solid</span></dd></div><div><dt>sources</dt><dd>4</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">hri</span> <span class="tag">affective-computing</span> <span class="tag">psychology</span></dd></div></dl>
+<p>People attribute emotions to artificial agents, and this facilitates interaction
+<a class="wikilink" href="research-proposal.html">research-proposal</a>. <strong>Now the best-evidenced claim in the wiki</strong> — two studies
+in the corpus test it directly.</p>
+<h2>The evidence</h2>
+<p><strong>Spontaneous, unprompted attribution.</strong> In <a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a>,
+participants were given no hint that the study was about emotion and were asked
+only "write down briefly what is happening on each video". They spontaneously
+credited the robot with emotional states in 12–57% of cases depending on the
+emotion (dog: 31–68%), and gave reliably higher scores to emotionally loaded than
+to neutral clips.</p>
+<p><strong>Accurate attribution.</strong> All robot clips identified above chance; 75% mean
+success against the live dog's 78%, with no significant overall difference.
+Kismet-comparable rates without a face. See <a class="wikilink" href="emotion-recognition-benchmarks.html">emotion-recognition-benchmarks</a>.</p>
+<p><strong>Behavioural consequences, not just reports.</strong> In
+<a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a>, participants <strong>played more (or exclusively)
+with the ball the robot had expressed "happiness" toward</strong>, and explained their
+choice by reference to the robot's inner states. Attribution changed what people
+did.</p>
+<p><strong>Attitudes improved.</strong> NARS scores dropped after interaction, for dog owners
+(2.00 → 1.83) and non-owners alike (2.83 → 2.08).</p>
+<p><strong>Independent of expertise.</strong> No effect of dog ownership on emotion recognition in
+either study. The model does not require a dog-literate user.</p>
+<p><strong>Secondary emotions too.</strong> Participants could detect from greeting behaviour that
+the robot had transgressed a rule — guilt attribution, not merely primary affect.</p>
+<h2>The counter-evidence</h2>
+<div class="callout callout-warning">
+<p class="callout-title">Attribution is not automatically beneficial</p>
+<p><a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a> cites Petisca, Dias &amp; Paiva (2014): in some
+cases a robot's emotion expression <strong>leads to poorer perception by humans</strong>.
+The paper is not in the corpus — obtain it (<a class="wikilink" href="citation-backlog.html">citation-backlog</a>).</p>
+<p><a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a> observed the mechanism directly:
+participants often read the robot's "fear" as indifference or reluctance and
+responded with <strong>anger and embarrassment</strong> — discouraging the robot, making
+negative comments, hands on hips. A misread negative emotion produced a hostile
+user reaction rather than a sympathetic one.</p>
+<p>So the premise in step 2 of <a class="wikilink" href="thesis.html">thesis</a> should be qualified: attribution helps
+<strong>when the expressed emotion is correctly read</strong>. Since fear is reliably
+misread across every robot measured, this is not a marginal caveat. Q8 in
+<a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+</div>
+<h2>Design implication</h2>
+<p><a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a> takes an unusual and useful stance: participant
+impressions "by definition cannot be false" — attributing <em>no</em> emotion or the
+<em>wrong</em> emotion means the robot's actions were badly set, not that the user erred.
+That reframes evaluation as a design signal and should shape
+<a class="wikilink" href="validation-study.html">validation-study</a>.</p>
+<h2>Open</h2>
+<ul>
+<li>Under what conditions attribution helps versus misleads — the central unresolved
+  question above.</li>
+<li>Whether attribution depends on morphology, behavioural contingency, or both.
+  Indirect evidence favours contingency: the same design worked across four very
+  different embodiments (<a class="wikilink" href="lakatos-2014-embodiments-demo.html">lakatos-2014-embodiments-demo</a>).</li>
+<li>Over-attribution risk: expectations the robot cannot meet. Not studied in the
+  corpus. #needs-source</li>
+</ul>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="albuquerque-2016-emotion-recognition.html">Albuquerque et al. (2016) — Dogs recognize dog and human emotions</a></li>
+<li><a href="gacsi-2016-emotion-attribution.html">Gácsi et al. (2016) — Humans attribute emotions to a robot showing dog-derived behavioural patterns</a></li>
+<li><a href="interspecific-hri.html">HRI as interspecific interaction</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="research-proposal.html">PhD research proposal</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

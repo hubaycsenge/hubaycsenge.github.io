@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mecanumbot — the experimental robot platform — Research wiki</title>
+<meta name="description" content="A Turtlebot3-family robot rebuilt with mecanum-wheel drive , intended to &quot;fit into the Turtlebot3 family&quot;. Derived from the Turtlebot3 humble packages…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Systems</p>
+  <h1>Mecanumbot — the experimental robot platform</h1>
+<dl class="meta"><div><dt>type</dt><dd>system</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>5</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">hardware</span> <span class="tag">ros2</span> <span class="tag">platform</span></dd></div></dl>
+<p>A <strong>Turtlebot3-family robot rebuilt with mecanum-wheel drive</strong>, intended to "fit
+into the Turtlebot3 family". Derived from the Turtlebot3 <code>humble</code> packages,
+substantially modified for four independently driven mecanum wheels.</p>
+<div class="callout callout-important">
+<p class="callout-title">Substantially revised 2026-07-28</p>
+<p>The 2026-07-27 version of this page described a Raspberry Pi robot with no
+camera, no microphone, no telemetry and no articulated parts, and two urgent
+unknowns were built on top of that. <strong>All four were wrong</strong>, and the corrections
+run in the same direction: the platform is considerably more capable than the
+wiki assumed. See <a class="wikilink" href="mecanumbot-repos.html">mecanumbot-repos</a> for the diff.</p>
+</div>
+<h2>Stack</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS / middleware</td>
+<td>Ubuntu 22.04, ROS 2 Humble, CycloneDDS, <code>ROS_DOMAIN_ID=19</code></td>
+</tr>
+<tr>
+<td>Onboard compute</td>
+<td><strong>NVIDIA Jetson Orin Nano</strong>, JetPack 6, <code>aarch64</code> (<code>192.168.1.240</code> on <code>MecanumNet</code>)</td>
+</tr>
+<tr>
+<td>Microcontroller</td>
+<td>OpenCR (<code>/dev/opencr</code>), Arduino Nano for LEDs (<code>/dev/arduino_nano</code>)</td>
+</tr>
+<tr>
+<td>Range sensing</td>
+<td>LD08 / LDS-02 lidar (<code>/dev/ld08_lidar</code>)</td>
+</tr>
+<tr>
+<td>Vision</td>
+<td><strong>CSI camera</strong> (<code>nvarguscamerasrc</code>), hardware NVENC H.264; V4L2 webcam also supported</td>
+</tr>
+<tr>
+<td>Audio</td>
+<td><code>mecanumbot_audio</code> + <code>AudioInfo</code> / <code>AudioData</code> msgs — <strong>capture or playback undetermined</strong></td>
+</tr>
+<tr>
+<td>Power sensing</td>
+<td>INA219 over I²C → <code>orin_battery_state</code></td>
+</tr>
+<tr>
+<td>Person detection</td>
+<td>DR-SPAAM on lidar <strong>+ YOLO pose (17 COCO keypoints)</strong> on camera, fused → <a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a></td>
+</tr>
+<tr>
+<td>Navigation</td>
+<td><code>navigation2</code> / <code>nav2_bringup</code>, AMCL</td>
+</tr>
+<tr>
+<td>Behaviour</td>
+<td><code>py_trees</code> + <code>py_trees_ros</code> → <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a>, <a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a></td>
+</tr>
+<tr>
+<td>Expressive output</td>
+<td>4 RGB LED panels; <strong>neck + two grabbers</strong>; holonomic motion</td>
+</tr>
+<tr>
+<td>Drive</td>
+<td>4× mecanum wheels — Ø65 mm, separation x 129 mm, y 300 mm</td>
+</tr>
+</tbody>
+</table>
+<h2>What the embodiment permits</h2>
+<p><strong>Omnidirectional motion is the primary expressive channel.</strong> Mecanum drive gives
+holonomic movement — the same capability MogiRobi and Ethon had, and the
+literature already uses movement quality expressively: approach, back away, turn
+away, sidle, partly spin, maintain distance (<a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a>,
+<a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a>).</p>
+<p><strong>Colour and light are a second channel.</strong> Four independently controlled RGB LED
+panels with modes. Closest precedent in the corpus is <strong>Sunflower</strong>, whose
+expressive surfaces were an LED panel plus motion, and which carried the same
+dog-derived behaviour design as three very different robots
+(<a class="wikilink" href="lakatos-2014-embodiments-demo.html">lakatos-2014-embodiments-demo</a>).</p>
+<p><strong>A neck and two grabbers are a third channel</strong> — and this is new to the wiki.
+<code>AccessMotorCmd.msg</code> commands <code>n_pos</code>, <code>gl_pos</code>, <code>gr_pos</code> on
+<code>/cmd_accessory_pos</code>, and <a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a> already uses neck and gripper
+gestures as the <code>Doglike</code> experimental condition. A neck affords <strong>orienting,
+head-turning and gaze-like direction of attention</strong>, which is the single most
+important expressive primitive in the dog literature after approach.</p>
+<h2>What the embodiment forbids</h2>
+<p>Still no face, no eyes, no ears, no tail, and no vertical DOF. The re-expression
+table is materially better than it was:</p>
+<table>
+<thead>
+<tr>
+<th>Dog / prior robot signal</th>
+<th>Available here?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Approach / retreat / distance-keeping</td>
+<td>✓ (and better — holonomic)</td>
+</tr>
+<tr>
+<td>Turn away / orient toward</td>
+<td>✓ — now by <strong>body or neck</strong></td>
+</tr>
+<tr>
+<td>Head up/down dynamically (Gácsi's anger)</td>
+<td>✓ via neck — <strong>new</strong></td>
+</tr>
+<tr>
+<td>Tail wagging (MogiRobi antenna)</td>
+<td>✗ — needs a motion or light analogue</td>
+</tr>
+<tr>
+<td>Ear position (MogiRobi appendices)</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>Arm raising, swinging (PeopleBot)</td>
+<td>~ partial — grabbers, but no arm reach or elevation</td>
+</tr>
+<tr>
+<td>Body lowering / crouching</td>
+<td>✗ (no vertical DOF)</td>
+</tr>
+<tr>
+<td>Vocalisation following Morton's rules</td>
+<td><strong>depends on whether audio is playback</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Q4 in <a class="wikilink" href="open-questions.html">open-questions</a> is correspondingly less severe. Of the Gácsi
+re-expressions, <em>approach</em>, <em>back</em>, <em>turn away</em>, <em>orient</em> and <em>motionless</em> were
+already available; <em>head up and down dynamically</em> now is too.</p>
+<h2>The two unknowns are resolved</h2>
+<div class="callout callout-note">
+<p class="callout-title">Both blockers from 2026-07-27 are cleared</p>
+<p><strong>1. There is a camera.</strong> A CSI camera on the Jetson, with a full detection
+pipeline already written (<a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a>). Human sensing is no longer
+lidar-only. What the camera yields is <strong>17-keypoint body pose</strong>, not faces — see
+that page for why this is a better position for the thesis than either of the
+alternatives <a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a> was choosing between.</p>
+<p><strong>2. Internal-state telemetry exists, and is rich.</strong> <code>OpenCRState.msg</code> carries
+goal and measured wheel velocities, positions, currents and accelerations,
+<strong>per-wheel error states</strong>, DMS distance, <strong>battery voltage</strong> and 9-axis IMU;
+<code>orin_battery_state</code> adds INA219 power-rail data. This is more than
+<a class="wikilink" href="emotion-engine.html">emotion-engine</a> asked for — it includes per-wheel fault state, which is a
+genuine "how am I doing" signal rather than just a charge level. Q2 no longer
+has a data blocker; only the modelling question remains.</p>
+</div>
+<p>Still open on sensing: <strong>whether <code>mecanumbot_audio</code> is capture, playback or
+both.</strong> It decides two different things — capture would open vocal affect input,
+playback would enable Morton's-rules vocalisation
+(<a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>), and the corpus uses vocalisation heavily.
+Nothing in the clips settles it. #needs-source</p>
+<h2>Consequences for the thesis</h2>
+<ul>
+<li><strong><a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a></strong> must be rewritten around body pose. The
+  platform gap closed; the literature gap did not.</li>
+<li><strong><a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a></strong>'s draft MDP was built for a lidar-only robot.
+  Both the state and the action set expand — see that page.</li>
+<li><strong><a class="wikilink" href="validation-study.html">validation-study</a></strong> inherits three implemented conditions from
+  <a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a>, and a per-user topic <strong>recording scheme</strong> service
+  from <code>mecanumbot_msgs</code> for data capture.</li>
+<li><strong>Q10 (automatic behaviour coding)</strong> gets an unexpected boost: <code>mecanumbot_msgs</code>
+  defines <code>SimBehaviorEvaluation</code> and <code>SimDetectionEvaluation</code>, per-scenario
+  automatic verdicts with unsafe-motion, proximity, wrong-target and
+  stale-detection flags. Automated scoring infrastructure already exists.</li>
+</ul>
+<h2>To confirm with Csenge</h2>
+<ul>
+<li><strong>Has the full stack been run end to end on the robot</strong>, and which nodes have
+  actually executed on hardware rather than merely built?</li>
+<li>Is <code>mecanumbot_audio</code> capture, playback, or both? Is there a microphone? A
+  speaker?</li>
+<li>Camera specification — resolution, frame rate, FOV, mounting height and pitch.
+  Mounting matters: a low camera sees legs and torsos, not faces.</li>
+<li>Commit SHAs and licences for the three repos recording neither
+  (<a class="wikilink" href="mecanumbot-repos.html">mecanumbot-repos</a>).</li>
+<li>LED <code>mode</code> and <code>color</code> enumerations.</li>
+<li>Measured latency: scan/frame → detection → fusion → tick → LED, neck or motion
+  response. This number <em>is</em> the real-time claim (Q3), and the stack is now
+  heavy enough — two neural detectors plus fusion — that it is no longer obviously
+  cheap.</li>
+</ul>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="albuquerque-2016-emotion-recognition.html">Albuquerque et al. (2016) — Dogs recognize dog and human emotions</a></li>
+<li><a href="attachment-sst.html">Attachment and the Strange Situation Test</a></li>
+<li><a href="behaviour-trees.html">Behaviour trees</a></li>
+<li><a href="belle-2019-programming-with-affect.html">Belle, Gittens &amp; Graham (2019) — Programming with Affect</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="dog-human-interaction-model.html">Dog–human interaction as behaviour model</a></li>
+<li><a href="emotion-arbitration.html">Emotion arbitration</a></li>
+<li><a href="emotion-model-comparison.html">Emotion model comparison</a></li>
+<li><a href="emotion-recognition-benchmarks.html">Emotion recognition rates across robots</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="fuzzy-automaton-fri.html">FRI fuzzy automaton</a></li>
+<li><a href="function-orientedness.html">Function-orientedness</a></li>
+<li><a href="validation-study.html">Human validation study (planned)</a></li>
+<li><a href="ichikawa-numakunai-2012-roman.html">Ichikawa (2012) and Numakunai (2012) — dog-based robot behaviour in Intelligent Space</a></li>
+<li><a href="lakatos-2014-embodiments-demo.html">Lakatos et al. — Dog-Inspired Social Behaviour in Robots with Different Embodiments</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="mecanumbot-repos.html">Mecanumbot repositories</a></li>
+<li><a href="mecanumbot-behaviours.html">mecanumbot_behaviours — the behaviour layer</a></li>
+<li><a href="mecanumbot-perception.html">mecanumbot_sensorprocess_smart — the perception stack</a></li>
+<li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="ostensive-signalling.html">Ostensive signalling</a></li>
+<li><a href="research-proposal.html">PhD research proposal</a></li>
+<li><a href="plutchik-1982-psychoevolutionary.html">Plutchik (1982) — A psychoevolutionary theory of emotions</a></li>
+<li><a href="plutchik-model.html">Plutchik&#x27;s model</a></li>
+<li><a href="prior-robot-platforms.html">Prior robot platforms</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>
+<li><a href="szabo-2010-emotional-engine.html">Szabó et al. (2010) — An Emotional Engine Model Inspired by Human-Dog Interaction</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="vincze-2021-automatic-coding.html">Vincze et al. (2021) — Towards automatic observation and coding of simple behaviours in ethological experiments</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

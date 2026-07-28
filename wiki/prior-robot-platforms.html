@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prior robot platforms — Research wiki</title>
+<meta name="description" content="Every robot named across the corpus, and what it contributes. Compare against robot-platform.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Systems</p>
+  <h1>Prior robot platforms</h1>
+<dl class="meta"><div><dt>type</dt><dd>system</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>5</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">comparison</span> <span class="tag">platforms</span> <span class="tag">hub</span></dd></div></dl>
+<p>Every robot named across the corpus, and what it contributes. Compare against
+<a class="wikilink" href="robot-platform.html">robot-platform</a>.</p>
+<h2>Robots in the ethorobotics lineage</h2>
+<table>
+<thead>
+<tr>
+<th>Robot</th>
+<th>Embodiment</th>
+<th>Expressive channels</th>
+<th>Used in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MogiRobi</strong></td>
+<td>holonomic base, 2 m/s any direction</td>
+<td>3-DOF head, 2-DOF neck, 1-DOF ear-tufts, 2-DOF rear antenna</td>
+<td><a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a>, <a class="wikilink" href="kovacs-fri-automaton-series.html">kovacs-fri-automaton-series</a>, <a class="wikilink" href="lakatos-2014-embodiments-demo.html">lakatos-2014-embodiments-demo</a></td>
+</tr>
+<tr>
+<td><strong>Ethon</strong></td>
+<td>holonomic, 40 kg, 2 m/s</td>
+<td>Kinect as "head" on 2 DOF, 1-DOF arm</td>
+<td><a class="wikilink" href="lakatos-2014-embodiments-demo.html">lakatos-2014-embodiments-demo</a></td>
+</tr>
+<tr>
+<td><strong>PeopleBot</strong></td>
+<td>P3-DX differential drive</td>
+<td>touchscreen "head" (fixed), 5-DOF arm + mock arm, pre-recorded sound</td>
+<td><a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a></td>
+</tr>
+<tr>
+<td><strong>Sunflower</strong></td>
+<td>Pioneer P3-DX base</td>
+<td>neutral non-animated face on 4-DOF neck, <strong>LED light panel</strong>, speaker, touchscreen, tray</td>
+<td><a class="wikilink" href="lakatos-2014-embodiments-demo.html">lakatos-2014-embodiments-demo</a></td>
+</tr>
+<tr>
+<td><strong>FLASH</strong></td>
+<td>balancing</td>
+<td>11-DOF EMYS expressive head, 2× 7-DOF WANDA arms with 4 fingers each</td>
+<td><a class="wikilink" href="lakatos-2014-embodiments-demo.html">lakatos-2014-embodiments-demo</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sunflower is the closest analogue to <a class="wikilink" href="robot-platform.html">robot-platform</a></strong> — wheeled base, LEDs,
+no articulated dog-analogue appendages. That it carried the same dog-derived
+leading behaviour as MogiRobi and FLASH is the best evidence available that the
+design transfers to a Mecanumbot.</p>
+<h2>Robots surveyed as emotional-model prior art</h2>
+<p>From <a class="wikilink" href="szabo-2010-emotional-engine.html">szabo-2010-emotional-engine</a>'s comparison, scored on short/medium/long-term
+response, probabilistic behaviour and ethological grounding:</p>
+<table>
+<thead>
+<tr>
+<th>Robot</th>
+<th>Emotion model</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Kismet</strong></td>
+<td>emotions + drives; drives on a slower timescale form "mood"; <strong>winner-take-all</strong> arbitration</td>
+<td>theories from infant social development, psychology, ethology, evolution. Joy 82.4%, fear 47.1%</td>
+</tr>
+<tr>
+<td><strong>Aibo</strong></td>
+<td>drives + six basic emotions; stochastic state machine for non-repetition</td>
+<td>behavioural system inspired by canine behaviour; reflexive vs deliberate</td>
+</tr>
+<tr>
+<td><strong>iCat</strong></td>
+<td>mode animation (medium-term) + action animation (short-term); probabilistic automaton</td>
+<td>animation principles for believability</td>
+</tr>
+<tr>
+<td><strong>Probo</strong></td>
+<td>arousal–valence space → specific emotion + intensity; 3-level framework (reactive/routine/reflective), first two implemented</td>
+<td>therapeutic, huggable. Joy 100%, fear 65%</td>
+</tr>
+<tr>
+<td><strong>Ifbot</strong></td>
+<td>facial expressions mapped to a 3D emotional space via a 5-layer perceptron</td>
+<td>recognises emotion from voice tone</td>
+</tr>
+<tr>
+<td><strong>EmotiRob</strong></td>
+<td>each action/word associated with a vector of primary emotions</td>
+<td>companion robot, therapeutic</td>
+</tr>
+</tbody>
+</table>
+<p>Recognition rates collected in <a class="wikilink" href="emotion-recognition-benchmarks.html">emotion-recognition-benchmarks</a>.</p>
+<h2>What this table shows</h2>
+<ul>
+<li><strong>Arousal–valence (Probo) vs discrete states (Aibo, Kismet, Szabó)</strong> is the
+  live representational split — the same one in <a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a>.</li>
+<li><strong>Multiple time layers are near-universal</strong>: short-term emotion vs medium-term
+  mood appears in Kismet, iCat, Probo and both Szabó papers. This is settled
+  practice, not an open question, and <a class="wikilink" href="emotion-engine.html">emotion-engine</a> should adopt it.</li>
+<li><strong>Ethological grounding is rare</strong> — only Aibo, Kismet and the Szabó model claim
+  it. This is where the Hungarian programme is genuinely distinctive.</li>
+<li><strong>Every one of these is face- or body-articulation-based.</strong> None expresses
+  emotion primarily through <em>motion quality and light</em>, which is what
+  <a class="wikilink" href="robot-platform.html">robot-platform</a> must do. That gap is an opportunity, and a risk.</li>
+</ul>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="lakatos-2014-emotion-attribution.html">Lakatos et al. (2014) — Emotion attribution to a non-humanoid robot in different social situations</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="szabo-2010-emotional-engine.html">Szabó et al. (2010) — An Emotional Engine Model Inspired by Human-Dog Interaction</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

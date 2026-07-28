@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Szabó et al. (2012) — Building a Human-Dog Interaction Inspired Emotional Engine Model — Research wiki</title>
+<meta name="description" content="Supersedes and extends szabo-2010-emotional-engine.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Sources</p>
+  <h1>Szabó et al. (2012) — Building a Human-Dog Interaction Inspired Emotional Engine Model</h1>
+<dl class="meta"><div><dt>type</dt><dd>source</dd></div><div><dt>status</dt><dd><span class="badge badge-solid" title="well supported and cross-referenced">solid</span></dd></div><div><dt>citekey</dt><dd>szabo2012building</dd></div><div><dt>authors</dt><dd>Csanád Szabó, András Róka, Tamás Faragó, Márta Gácsi, Ádám Miklósi, Péter Korondi</dd></div><div><dt>year</dt><dd>2012</dd></div><div><dt>venue</dt><dd>IECON 2012 — 38th Annual Conference of the IEEE Industrial Electronics Society, pp. 5516–5522</dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">emotional-engine</span> <span class="tag">panksepp</span> <span class="tag">architecture</span> <span class="tag">prior-work</span> <span class="tag">nearest-prior</span></dd></div></dl>
+<div class="callout callout-warning">
+<p class="callout-title">Year corrected 2026-07-28 — this is a <strong>2012</strong> paper</p>
+<p>The wiki dated this 2011 because the raw filename reads
+<code>Szabó 2011 IECON Canada.pdf</code>. Csenge's thesis reference list gives <strong>IECON
+2012, 38th Annual Conference, pp. 5516–5522, doi:10.1109/iecon.2012.6389513</strong>,
+and the PDF's title page matches that entry exactly, author list included.
+IECON 2012 was held in Montréal, Canada — which explains "Canada" in the
+filename; IECON 2011 was in Melbourne.</p>
+<p><strong>The raw filename is wrong and the wiki inherited the error.</strong> Frontmatter and
+citekey (<code>szabo2012building</code>) are corrected. The <strong>page filename is unchanged</strong>
+— 22 pages link to <code>szabo-2011-emotional-engine</code>, and <code>log.md</code> is append-only so
+its links cannot be rewritten. Renaming is a clean mechanical follow-up if
+wanted. Cite as <strong>2012</strong>. See <a class="wikilink" href="citation-backlog.html">citation-backlog</a>.</p>
+</div>
+<div class="callout callout-important">
+<p class="callout-title">This is the nearest prior work to the thesis</p>
+<p>It is <strong>confirmed</strong> reference <code>[7]</code> of <a class="wikilink" href="research-proposal.html">research-proposal</a> ("One such
+solution relies on Panksepp's theory... uses the model of action circuits found
+in the nervous system for simulating the emotional states of the robot"). It
+<strong>already builds a Panksepp-grounded emotional engine for a dog-inspired robot.</strong>
+The novelty claim in <a class="wikilink" href="emotion-engine.html">emotion-engine</a> must be defended specifically against
+this paper. #needs-source (confirm the mapping)</p>
+</div>
+<p>Supersedes and extends <a class="wikilink" href="szabo-2010-emotional-engine.html">szabo-2010-emotional-engine</a>.</p>
+<h2>The model</h2>
+<p><strong>Grounding</strong>: explicitly <strong>Panksepp</strong> (<a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a>). The paper
+names the circuits — SEEKING-expectation, FEAR-self-defence, RAGE-anger,
+LUST-sexuality, CARE-parental attachment, PANIC-grief/sadness/separation,
+PLAY-joy/happiness — and states: <em>"We applied Panksepp's model to build our core
+emotional engine."</em> Hence several parallel, equal basic emotional states
+representing distinct brain circuitry, changing independently in response to
+external events.</p>
+<p><strong>States</strong>: five — happiness, despair, fear, anger, <strong>surprise</strong> (surprise added
+relative to the 2010 version's four).</p>
+<p><strong>Input model</strong>: an expert-elicited table mapping 13 environmental contexts
+(greeting owner, leaving owner, petted, owner initiates interaction, owner
+scolds/punishes, rejected interaction initiation, meeting familiar person,
+ambivalent social situation, facing threatening stranger, play with human,
+threatening stimulus, strange environment, unpleasant inner state) onto each
+emotional state via <strong>arousal (5-step) and valence (±)</strong>.</p>
+<p><strong>Dynamics</strong> — a second table gives per-emotion temporal character: width of
+emotional peak, decline of short-term emotion, impact of short-term on
+medium-term, decline of medium-term. E.g. fear has a <em>very broad</em> peak, <em>slow</em>
+decline, <em>high</em> impact on medium-term; surprise is <em>very short</em> and declines
+<em>fast</em>.</p>
+<p><strong>Mathematics</strong>: discrete state-space, two time layers.</p>
+<pre><code>xR[k+1] = A·xR[k] + B·u[k]      yR[k] = C·xR[k]        (short-term)
+xM[k+1] = N·yR[k] + M·xM[k]     yM[k] = O·xM[k]        (medium-term)
+</code></pre>
+<p>Linear core, extended non-linearly: <strong>B computed dynamically</strong> from the new
+saturation level, desired emotion width, A, and an anti-windup mechanism; <strong>C
+saturates</strong> to keep outputs in [−1,1]. Medium-term layer is the "mood".
+Asymptotic stability enforced by choice of A and M.</p>
+<h2>Emotion arbitration — the part the wiki did not have</h2>
+<p>Against Kismet's <strong>winner-take-all</strong>, Szabó et al. define a hierarchical rule tree
+(<a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a>):</p>
+<ol>
+<li>One positive dimension → express it.</li>
+<li>Multiple positive dimensions:
+   a. fear &gt; 3 (medium) → express fear regardless of everything else;
+   b. one dimension strictly highest → express it;
+   c. ties broken by fixed hierarchy: <strong>fear &gt; surprise &gt; anger &gt; happiness =
+      despair</strong>;
+   d. ties at ≥ 3 → the top two are expressed as <strong>mixed or alternating
+      behaviour</strong>.</li>
+</ol>
+<p>Justified via MacLean's triune-brain hierarchy — which the authors <em>explicitly
+flag as obsolete</em> in light of newer neurobiology, while arguing it remains useful
+for ordering emotions. Mixed emotions here means ambivalent behaviour across
+modalities (e.g. submissive posture + aggressive vocalisation), <strong>not</strong> Plutchik's
+secondary/tertiary dyads — the paper cites <a class="wikilink" href="plutchik-model.html">plutchik-model</a> only to distinguish
+itself from it.</p>
+<p>Validated in MATLAB with a GUI, on a scripted scenario (greet → pet → play →
+rejected interaction → owner leaves). Arbitration output: Happiness → Surprise →
+Despair → Neutral.</p>
+<h2>Limitations</h2>
+<ul>
+<li><strong>Simulation only.</strong> No robot, no sensors, no human subjects. "The robot shown
+  in Figure 5 was chosen... We are currently working on the design of simple
+  behaviours."</li>
+<li>Inputs are <strong>hand-labelled discrete events</strong>, not sensor-derived. The entire
+  perception problem is assumed away — precisely where
+  <a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a> would have to sit.</li>
+<li>Expert-elicited tables from "extensive causal observations", not measured data.
+  The 2010 paper admits "there are no experimental data on dogs which could help
+  choose the particular time constants".</li>
+<li>Medium-term layer is <strong>not</strong> integrated into arbitration ("further investigation
+  is needed").</li>
+<li><strong>No robot internal state.</strong> Battery, motor and sensor health appear nowhere.</li>
+</ul>
+<h2>Where this leaves the thesis</h2>
+<p>Two of the three claimed contributions are already occupied: a Panksepp-based
+engine exists, and dog-derived behaviour is established. What remains genuinely
+open, and is <em>strengthened</em> rather than weakened by this paper:</p>
+<ol>
+<li><strong>Real sensor input</strong> instead of scripted events.</li>
+<li><strong>Robot internal state</strong> as a second input stream (Q2 in <a class="wikilink" href="open-questions.html">open-questions</a>).</li>
+<li><strong>Real-time operation in real environments</strong> with human validation (Q3).</li>
+</ol>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="actor-critic.html">Actor–critic</a></li>
+<li><a href="behaviour-trees.html">Behaviour trees</a></li>
+<li><a href="belle-2019-programming-with-affect.html">Belle, Gittens &amp; Graham (2019) — Programming with Affect</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="dog-human-interaction-model.html">Dog–human interaction as behaviour model</a></li>
+<li><a href="emotion-arbitration.html">Emotion arbitration</a></li>
+<li><a href="emotion-model-comparison.html">Emotion model comparison</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="fuzzy-automaton-fri.html">FRI fuzzy automaton</a></li>
+<li><a href="interspecific-hri.html">HRI as interspecific interaction</a></li>
+<li><a href="kovacs-fri-automaton-series.html">Kovács, Vincze et al. (2009–2011) — the FRI fuzzy automaton series</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="panksepp-2005-affective-consciousness.html">Panksepp (2005) — Affective consciousness: core emotional feelings in animals and humans</a></li>
+<li><a href="panksepp-2011-emotional-circuits.html">Panksepp (2011) — The basic emotional circuits of mammalian brains</a></li>
+<li><a href="panksepp-affective-systems.html">Panksepp&#x27;s affective systems</a></li>
+<li><a href="plutchik-model.html">Plutchik&#x27;s model</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="reward-design.html">Reward design</a></li>
+<li><a href="social-competence.html">Social competence</a></li>
+<li><a href="szabo-2010-emotional-engine.html">Szabó et al. (2010) — An Emotional Engine Model Inspired by Human-Dog Interaction</a></li>
+<li><a href="td-learning.html">Temporal-difference learning</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

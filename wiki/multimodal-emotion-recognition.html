@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multimodal emotion recognition — Research wiki</title>
+<meta name="description" content="The perception front-end of emotion-engine — and, after ingesting the corpus, the largest hole in both the literature and the platform .">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Methods</p>
+  <h1>Multimodal emotion recognition</h1>
+<dl class="meta"><div><dt>type</dt><dd>method</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>4</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">affective-computing</span> <span class="tag">perception</span> <span class="tag">ai</span> <span class="tag">gap</span></dd></div></dl>
+<p>The perception front-end of <a class="wikilink" href="emotion-engine.html">emotion-engine</a> — and, after ingesting the corpus,
+<strong>the largest hole in both the literature and the platform</strong>.</p>
+<h2>The state of things</h2>
+<div class="callout callout-warning">
+<p class="callout-title">No source in the corpus does this</p>
+<p>Every emotion model here takes <strong>hand-labelled discrete events</strong> as input.
+<a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a> and <a class="wikilink" href="szabo-2010-emotional-engine.html">szabo-2010-emotional-engine</a> feed the
+engine from a MATLAB GUI. <a class="wikilink" href="kovacs-fri-automaton-series.html">kovacs-fri-automaton-series</a> feeds the automaton
+geometric inputs (distances, presence flags). The empirical studies
+(<a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a>, <a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a>) were
+<strong>teleoperated</strong>. The perception-to-emotion link has never been closed in this
+lineage.</p>
+<p>References <code>[5]</code> and <code>[6]</code> of <a class="wikilink" href="research-proposal.html">research-proposal</a> — the sensor-based emotion
+analysis citations — are <strong>not in the corpus at all</strong>. This is the biggest
+coverage gap. See <a class="wikilink" href="citation-backlog.html">citation-backlog</a>.</p>
+</div>
+<p>Of the surveyed robots, only two do any affect recognition: <strong>Ifbot</strong> recognises
+emotion from voice tone via a five-layer perceptron; <strong>EmotiRob</strong> takes video and
+audio and associates each action or word with a vector of primary emotions
+(<a class="wikilink" href="prior-robot-platforms.html">prior-robot-platforms</a>). Neither is described in enough detail to reuse.</p>
+<h2>The platform constraint has changed — 2026-07-28</h2>
+<div class="callout callout-important">
+<p class="callout-title">There is a camera, and the input is body pose</p>
+<p>This section previously argued from "<a class="wikilink" href="robot-platform.html">robot-platform</a> documents no camera and
+no microphone". <strong>That was wrong</strong>, and the re-clipped repositories
+(<a class="wikilink" href="mecanumbot-repos.html">mecanumbot-repos</a>) correct it. The platform has a CSI camera and a working
+detection pipeline (<a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a>) publishing the <strong>17 COCO pose
+keypoints</strong> — nose, eyes, ears, shoulders, elbows, wrists, hips, knees, ankles —
+fused with lidar into people in map space.</p>
+<p>The real input set is therefore <strong>neither lidar proxemics nor facial
+expression</strong>, but the thing between them: posture, orientation, gesture, gait,
+and spatial arrangement between people. For a thesis arguing
+<a class="wikilink" href="function-orientedness.html">function-orientedness</a>, that is a better position than either option this
+page was choosing between — it is much closer to what a dog reads off a human,
+and it keeps the Q5 objection answered.</p>
+<p><strong>What has not changed is the literature gap.</strong> No node infers affect; no source
+in the corpus maps body pose to emotional state; references <code>[5]</code> and <code>[6]</code> of
+<a class="wikilink" href="research-proposal.html">research-proposal</a> are still missing. The platform can now see. Nothing tells
+it what it is looking at.</p>
+</div>
+<p>The proxemic and kinematic set below remains valid and is now a <strong>subset</strong> of what
+is available, not the whole of it. It is still what the
+<a class="wikilink" href="attachment-sst.html">attachment-sst</a>-derived rule base uses, and it is still the cheapest route:</p>
+<ul>
+<li><strong>proxemics</strong> — distance, and change in distance</li>
+<li><strong>approach and retreat speed</strong></li>
+<li><strong>orientation and dwell time</strong></li>
+<li><strong>movement history</strong> — as <a class="wikilink" href="ichikawa-numakunai-2012-roman.html">ichikawa-numakunai-2012-roman</a> models for the robot,
+  applied to the human</li>
+<li><strong>presence and number of people</strong>, familiar vs unfamiliar if identity is
+  available</li>
+</ul>
+<div class="callout callout-note">
+<p class="callout-title">This may be a better fit, not a worse one</p>
+<p>These are exactly the inputs the <a class="wikilink" href="attachment-sst.html">attachment-sst</a>-derived rules already use:
+<code>OwnerToDogDistance</code>, <code>StrangerToDogDistance</code>, <code>OwnerInTheRoom</code>,
+<code>ThePlaceIsUnknown</code>. A lidar-only pipeline is <strong>directly compatible with the
+existing ethological rule base</strong>, needs no training data, and is cheap enough to
+support the real-time claim.</p>
+<p>It is also more consistent with <a class="wikilink" href="function-orientedness.html">function-orientedness</a>: facial-expression
+recognition is the part of affective computing most committed to human-likeness
+(Q5). Reading a person's <em>behaviour in space</em> is what a dog does.</p>
+<p>The cost is honesty about scope — this is <strong>affect inference from behaviour</strong>,
+not emotion recognition in the affective-computing sense. The thesis would need
+to say so plainly. That remains true of the keypoint route as well.</p>
+</div>
+<h2>What to hunt for now</h2>
+<p>The search has become much more specific, and much more tractable. The wanted
+literature is <strong>bodily and postural affect recognition from skeletal keypoints</strong> —
+not facial expression, not speech. Terms that will find it: <em>body pose affect
+recognition</em>, <em>bodily expression of emotion</em>, <em>skeleton-based emotion
+recognition</em>, <em>gait and affect</em>, <em>proxemics and interpersonal distance</em>.</p>
+<p>This is a real and reasonably mature subfield, and none of it is in the wiki.
+Getting two or three papers here would close the single largest coverage gap in
+<a class="wikilink" href="citation-backlog.html">citation-backlog</a>. Also worth checking whether any of it uses <strong>COCO 17-keypoint
+input specifically</strong>, since that would be directly reusable on
+<a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a>'s output.</p>
+<p>Still to confirm: whether <code>mecanumbot_audio</code> is capture or playback. If capture,
+vocal prosody becomes available and Ifbot's approach (voice tone → perceptron)
+becomes a comparable precedent. #needs-source</p>
+<div class="callout callout-important">
+<p class="callout-title">The proposal's own references point at face and voice, not body</p>
+<p>Refs <code>[5]</code> and <code>[6]</code> are now identified (<a class="wikilink" href="citation-backlog.html">citation-backlog</a>): <strong>Wani et al.
+(2021)</strong> on <em>speech</em> emotion recognition and <strong>Li &amp; Deng (2022)</strong> on <em>facial
+expression</em> recognition. So the plan was face + voice.</p>
+<p><a class="wikilink" href="robot-platform.html">robot-platform</a> delivers <strong>body pose</strong> and an unconfirmed audio path. The
+literature the thesis actually needs — skeleton-based and bodily affect
+recognition — <strong>is not on the reference list at all</strong>. That gap is the single
+most valuable thing to close, and closing it is also what makes the
+<a class="wikilink" href="function-orientedness.html">function-orientedness</a> argument survive: reading posture is what a dog does;
+reading faces is the part of affective computing most committed to human
+likeness (Q5).</p>
+</div>
+<p><strong>And there is a ceiling.</strong> <a class="wikilink" href="albuquerque-2016-emotion-recognition.html">albuquerque-2016-emotion-recognition</a> shows dogs
+recognise emotion cross-modally in both dogs and humans — but <strong>more than twice as
+strongly for conspecifics</strong> (congruence index 0.26 vs 0.12). A faithfully
+dog-modelled recogniser should be expected to be <em>worse</em> at humans than at its own
+kind. Worth stating before a reviewer does.</p>
+<h2>Assessment axes for anything ingested here</h2>
+<ul>
+<li>Modalities; early or late fusion</li>
+<li><strong>Latency</strong> and compute footprint — decisive for Q3</li>
+<li>Validation setting: lab, staged, or in the wild</li>
+<li>Training data and population — generalisation to real users is a known weakness
+  <code>[unsourced]</code> #needs-source</li>
+<li>Whether it presupposes a human-like agent (Q5)</li>
+<li>Output format — must match whatever <a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a> settles on</li>
+</ul>
+<h2>Gaps</h2>
+<p><code>wiki/datasets/</code> is still empty — no corpus or benchmark is recorded, because no
+ingested source uses one. If the lidar route is taken, the relevant "dataset" may
+be <strong>recorded interaction sessions</strong>, not a public affect corpus.</p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="albuquerque-2016-emotion-recognition.html">Albuquerque et al. (2016) — Dogs recognize dog and human emotions</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="mecanumbot-repos.html">Mecanumbot repositories</a></li>
+<li><a href="robot-platform.html">Mecanumbot — the experimental robot platform</a></li>
+<li><a href="mecanumbot-perception.html">mecanumbot_sensorprocess_smart — the perception stack</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="szabo-2011-emotional-engine.html">Szabó et al. (2012) — Building a Human-Dog Interaction Inspired Emotional Engine Model</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

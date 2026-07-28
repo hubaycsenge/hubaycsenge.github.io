@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vincze et al. (2012) — HRI interfaces and the VirCA environment — Research wiki</title>
+<meta name="description" content="Two papers about tooling around the FRI fuzzy automaton, not about new behaviour models. Their value to this thesis is methodological.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Sources</p>
+  <h1>Vincze et al. (2012) — HRI interfaces and the VirCA environment</h1>
+<dl class="meta"><div><dt>type</dt><dd>source</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>citekey</dt><dd>vincze2012interfaces</dd></div><div><dt>authors</dt><dd>Dávid Vincze, Szilveszter Kovács, Mihoko Niitsuma, Hideki Hashimoto, Péter Korondi, Márta Gácsi, Ádám Miklósi, Péter Baranyi</dd></div><div><dt>year</dt><dd>2012</dd></div><div><dt>venue</dt><dd>Ethologically Inspired HRI Interfaces (2012) · Acta Polytechnica Hungarica 9(1):107 (VirCA)</dd></div><div><dt>sources</dt><dd>2</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">simulation</span> <span class="tag">tooling</span> <span class="tag">prior-work</span></dd></div></dl>
+<p>Two papers about <strong>tooling</strong> around the <a class="wikilink" href="kovacs-fri-automaton-series.html">FRI fuzzy
+automaton</a>, not about new behaviour models. Their value to this thesis is
+methodological.</p>
+<h2>Ethologically Inspired Human-Robot Interaction Interfaces</h2>
+<p>Presents the interfaces built for the ethological model: simulated environments
+and real robot hardware with sensors and cameras. The model itself is the FRI
+fuzzy automaton loaded with rules extracted from an ethological test procedure;
+the paper's contribution is the communication methods and protocols between
+components.</p>
+<h2>A Novel Application of the 3D VirCA Environment (Acta Polytechnica Hungarica)</h2>
+<p>Embeds the MATLAB fuzzy-automaton model into <strong>VirCA</strong>, a 3D collaborative
+augmented-reality arena, via proxy CyberDevices controlled over UDP. Motivation:
+a human observer can interact with a <em>simulated</em> dog agent in the same way an
+ethologist observes a real one, so a formal ethological model can be tested
+against the paradigm that produced it.</p>
+<p>Framed within "Cognitive Infocommunications" and the Future Internet / Internet of
+Things agenda — a 2012 framing that has dated, and is not load-bearing.</p>
+<h2>Why this matters here</h2>
+<p><strong>A simulation-first validation path.</strong> Before the human study
+(<a class="wikilink" href="validation-study.html">validation-study</a>) there is an established route in this group: implement the
+model, drive an agent in a virtual environment, and have humans interact with it.
+That de-risks the engine before hardware and ethics are in play, and it is cheap.</p>
+<p>It also sets up <a class="wikilink" href="vincze-2021-automatic-coding.html">vincze-2021-automatic-coding</a>, which automates the coding of
+exactly these simulated interactions.</p>
+<h2>Limitations</h2>
+<ul>
+<li>Engineering/integration papers. <strong>No behavioural results, no user study, no
+  performance figures.</strong></li>
+<li>VirCA is a specific 2010s Hungarian platform; whether it is still maintained or
+  reachable from ROS 2 is unknown and should be checked before relying on it.
+  #needs-source</li>
+<li>Overlaps substantially with the Kovács series in its model description.</li>
+</ul>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="log.html">Log</a></li>
+<li><a href="uncanny-valley.html">The uncanny valley (and its ethological reinterpretation)</a></li>
+<li><a href="vincze-2021-automatic-coding.html">Vincze et al. (2021) — Towards automatic observation and coding of simple behaviours in ethological experiments</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRI fuzzy automaton — Research wiki</title>
+<meta name="description" content="The behaviour-control architecture of the Hungarian ethorobotics programme, developed by Kovács and Vincze at Miskolc (kovacs-fri-automaton-series).…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Methods</p>
+  <h1>FRI fuzzy automaton</h1>
+<dl class="meta"><div><dt>type</dt><dd>method</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>2</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">architecture</span> <span class="tag">fuzzy-logic</span> <span class="tag">behaviour-control</span></dd></div></dl>
+<p>The behaviour-control architecture of the Hungarian ethorobotics programme,
+developed by Kovács and Vincze at Miskolc (<a class="wikilink" href="kovacs-fri-automaton-series.html">kovacs-fri-automaton-series</a>).
+Distinct from — and never integrated with — the
+<a class="wikilink" href="szabo-2011-emotional-engine.html">Szabó emotional engine</a>.</p>
+<h2>Why a fuzzy automaton</h2>
+<p>Ethological models are descriptive verbal models: sparse action–reaction rules
+observed over event sequences, with states that are continuous (mood, anxiety) and
+only partially observable. That demands, simultaneously:</p>
+<ul>
+<li><strong>rule-based knowledge representation</strong> (rules are what ethologists produce),</li>
+<li><strong>state-machine structure</strong> (behaviour follows observed sequences),</li>
+<li><strong>continuous values and states</strong>.</li>
+</ul>
+<p>A fuzzy automaton satisfies all three: the state is a vector of membership values,
+state transitions are governed by a fuzzy rule base, observations and conclusions
+are continuous.</p>
+<p>Formally, extending the Fuzzy Finite-state Automaton to continuous inputs:</p>
+<pre><code>F̃ = (S, X, P, Y, δ, ω)
+  S  finite set of fuzzy states        X  input vector
+  P  fuzzy start state                 Y  output vector
+  δ: S × X → S   fuzzy state-transition function
+  ω: S × X → Y   output function
+</code></pre>
+<h2>The rule-base explosion, and FRI</h2>
+<p>A classical fuzzy rule base for <code>δ</code> is <strong>exponential</strong>:</p>
+<pre><code>R = n · iⁿ · jᵐ
+</code></pre>
+<p>(<em>n</em> = state-vector length, <em>m</em> = input dimension, <em>i</em>, <em>j</em> = term-set sizes). For
+an ethological model of 10–20 state variables that means thousands of rules —
+while the actual ethological knowledge amounts to a few dozen. Most rules would be
+undefined, which classical fuzzy reasoning cannot handle.</p>
+<p><strong>Fuzzy Rule Interpolation (FRI)</strong> removes the problem: the rule base may be
+<em>sparse</em>, and FRI still produces a reasonable interpolated conclusion when no rule
+fires under the current observation. Only the significant rules need to exist.</p>
+<p><strong>FIVE</strong> (the method used) adopts the <strong>Vague Environment</strong> concept: fuzzy
+partitions are handled by scaling functions, which turns fuzzy interpolation into
+crisp interpolation, then applies <strong>Shepard-operator interpolation</strong> for cheap
+multidimensional evaluation. Available as a MATLAB FRI Toolbox.</p>
+<h2>The two properties that matter for this thesis</h2>
+<p><strong>Low computational demand</strong> — the authors repeatedly claim the structure is
+"quick enough to fit the requirements of real-time embedded applications". Never
+benchmarked in any paper in the corpus, but the claim is architectural, not
+empirical, and plausible.</p>
+<p><strong>Human-readable rules</strong> — "even after numerical optimization of the model, the
+rules are still human readable, and helps the formal validation of the model by
+the ethological experts". This is a genuine advantage over a learned controller
+and is the strongest argument <em>against</em> replacing this layer with
+<a class="wikilink" href="sutton-barto-2018-rl.html">reinforcement learning</a>.</p>
+<div class="callout callout-note">
+<p class="callout-title">The argument is weakened but not defeated</p>
+<p><a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> records the decision to learn the behaviour layer,
+and answers this objection by keeping the ethologically-authored primitives as
+the <strong>admissible action set <code>A(s)</code></strong> (<a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §14.3) rather than
+replacing them. Legibility survives in the action set.</p>
+<p>What does <em>not</em> survive is this page's other contribution: the fuzzy automaton
+encodes <strong>observed behavioural sequences</strong> — <code>δ: S × X → S</code> is a hand-authored
+model of how dogs move between states. A learned policy replaces exactly that.
+So the honest position is that RL costs the sequencing grounding while
+preserving the primitive grounding, and the thesis should say so. Q9 and Q11 in
+<a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+</div>
+<div class="callout callout-warning">
+<p class="callout-title">A state machine is the wrong substrate for a learned layer</p>
+<p><a class="wikilink" href="colledanchise-ogren-behavior-trees.html">colledanchise-ogren-behavior-trees</a> measured GP-BT against an FSM-based
+learner on the Mario AI benchmark: "the FSM approach generates a number of nodes
+that increases <strong>exponentially</strong> over time, while the growth rate in GP-BT tends
+to decrease" (§8.2.4.1). §2.6 gives the analytic reason — "a FSM with a large
+number of transitions can drastically deteriorate the speed of an algorithm that
+has to consider all the possible paths in the FSMs" — and traces it to
+transitions being <strong>one-way control transfers</strong>, Dijkstra's <code>goto</code>.</p>
+<p>A fuzzy automaton is a state machine. Its <strong>transition function is exactly what a
+learned policy would replace</strong>, and it is the part that scales badly under
+learning. So the two objections converge: the automaton loses its distinctive
+contribution to the learner <em>and</em> is a poor substrate for one.</p>
+<p>What the automaton still has and a BT does not is <strong>behaviour fusion</strong> —
+continuous blending by necessity level, which can express "somewhat anxious while
+still exploring". A tick selects; it does not blend. That loss is real and
+unresolved. See <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a> and Q9.</p>
+</div>
+<h2>Behaviour-based control</h2>
+<p>The output function <code>ω: S×X→Y</code> decomposes into <strong>parallel component behaviours</strong>
+plus <strong>behaviour fusion</strong>, giving the standard behaviour-based control structure —
+behaviour coordination (which behaviour, or what necessity level for each) and
+behaviour fusion (how to blend them).</p>
+<div class="callout callout-note">
+<p class="callout-title">Relationship to behaviour trees</p>
+<p>This decomposition does the same job as a <a class="wikilink" href="behaviour-trees.html">behaviour tree</a> but
+with <strong>fuzzy blending</strong> rather than discrete branching. <code>py_trees</code> on
+<a class="wikilink" href="robot-platform.html">robot-platform</a> arbitrates discretely. Whether to reimplement the fuzzy
+automaton inside a behaviour tree, run them in parallel, or drop one is an open
+architectural decision — Q9 in <a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+</div>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="behaviour-trees.html">Behaviour trees</a></li>
+<li><a href="colledanchise-ogren-behavior-trees.html">Colledanchise &amp; Ögren — Behavior Trees in Robotics and AI: An Introduction</a></li>
+<li><a href="dog-human-interaction-model.html">Dog–human interaction as behaviour model</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="kovacs-fri-automaton-series.html">Kovács, Vincze et al. (2009–2011) — the FRI fuzzy automaton series</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="social-competence.html">Social competence</a></li>
+<li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>
+<li><a href="hungarian-ethorobotics-network.html">The ethorobotics research network</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

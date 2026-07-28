@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Colledanchise &amp; Ögren — Behavior Trees in Robotics and AI: An Introduction — Research wiki</title>
+<meta name="description" content="Michele Colledanchise and Petter Ögren, Behavior Trees in Robotics and AI: An Introduction . CRC Press, 2018.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Sources</p>
+  <h1>Colledanchise &amp; Ögren — Behavior Trees in Robotics and AI: An Introduction</h1>
+<dl class="meta"><div><dt>type</dt><dd>source</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>citekey</dt><dd>colledanchise2018behavior</dd></div><div><dt>authors</dt><dd>Michele Colledanchise, Petter Ögren</dd></div><div><dt>year</dt><dd>2018</dd></div><div><dt>venue</dt><dd>CRC Press. Read as arXiv:1709.00084v6, 25 Oct 2022, 198 pp.</dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">behaviour-trees</span> <span class="tag">architecture</span> <span class="tag">reinforcement-learning</span> <span class="tag">textbook</span></dd></div></dl>
+<p>Michele Colledanchise and Petter Ögren, <em>Behavior Trees in Robotics and AI: An
+Introduction</em>. CRC Press, 2018.</p>
+<div class="callout callout-note">
+<p class="callout-title">Provenance — this is the arXiv version</p>
+<p>The PDF in <code>raw/</code> is <strong>arXiv:1709.00084v6, dated 25 October 2022</strong>, printed from
+a browser. It is not the CRC Press print edition, and it is four years newer than
+the published book. Cite by <strong>chapter and section</strong>, not page number. Replaces
+the 45-page preview clipped earlier the same day.</p>
+</div>
+<p><strong>Why it is here</strong>: Csenge's decision, 2026-07-28 — behaviour trees as the
+<strong>executive layer for decisions made by reinforcement learning algorithms</strong>. This
+book is the standard reference for BTs and, in Chapter 8, contains the specific
+literature on combining them with RL.</p>
+<h2>Takeaways</h2>
+<ul>
+<li><strong>A BT is a switching structure, not a state machine.</strong> Internal nodes are
+  <em>control flow</em> nodes (Sequence <code>→</code>, Fallback <code>?</code>, Parallel <code>⇒</code>, Decorator);
+  leaves are <em>execution</em> nodes (Action, Condition). The root emits <strong>ticks</strong> at a
+  frequency; a node executes only if ticked, and returns <strong>Running</strong>, <strong>Success</strong>
+  or <strong>Failure</strong> to its parent.</li>
+<li><strong>The central argument is two-way control transfer.</strong> FSM transitions are
+  one-way control transfers — Dijkstra's <code>goto</code>. Reactivity requires many
+  transitions; many one-way transfers destroy modularity, because removing a
+  component means revising every transition into it. BTs use two-way transfers
+  governed by internal nodes, so <strong>a leaf is written without knowing what runs
+  next</strong>. This is the whole book in one idea.</li>
+<li><strong>BTs generalise</strong> FSMs, hierarchical FSMs, the Subsumption architecture,
+  Teleo-Reactive programs and Decision Trees (Ch. 2, formalised in Ch. 6).</li>
+<li><strong>Chapter 8 is the reason this source matters here</strong> — see below.</li>
+<li><strong>Analysis tooling exists</strong>: Ch. 5 gives a state-space formalism for safety,
+  robustness and efficiency; Ch. 9 converts <em>Stochastic BTs</em> into Discrete Time
+  Markov Chains and computes <strong>Mean Time To Succeed, Mean Time To Fail</strong> and
+  success probability over time, and shows these compose across subtrees.</li>
+<li><strong>Honest about limits</strong>: §2.6.2 lists real disadvantages (below).</li>
+</ul>
+<h2>Chapter 8 — the RL integration, and what it says about this thesis</h2>
+<p>Two learning approaches, and the comparison between them (§8.4) is the load-bearing
+passage.</p>
+<p><strong>RL-BT (§8.3)</strong> — start from a <strong>manually designed BT</strong> and replace a subset of
+nodes with <strong>Learning Nodes</strong>, of two kinds:</p>
+<ul>
+<li><strong>Learning Action node</strong> — encapsulates Q-learning with user-defined state,
+  action set and reward. Their example: an Action "pick an object" learns grasping,
+  where state is object pose, actions are grasp poses, reward is grasp quality.</li>
+<li><strong>Learning Control Flow node</strong> — a Fallback with <strong>flexible child ordering</strong>.
+  Given a state, it learns <em>the order in which to try its own children</em>. Reward can
+  be task-dependent or simply return-value-dependent (positive for Success,
+  negative for Failure).</li>
+</ul>
+<p><strong>GP-BT (§8.2)</strong> — genetic programming <em>builds and extends the BT itself</em>, starting
+from a single <code>Action Learn</code> node, greedily trying single actions first and
+invoking GP only when no single action improves the reward.</p>
+<div class="callout callout-important">
+<p class="callout-title">The architectural justification for the whole plan</p>
+<p>§8.4, comparing the two:</p>
+<blockquote>
+<p>"If RL-BT was started from scratch with a BT consisting of a single action,
+<strong>there would be no difference between RL-BT and standard RL</strong>. Instead, the
+point of combining BTs with RL is to <strong>address the curse of dimensionality, and
+do RL on smaller state spaces, while the BT connects these subproblems in a
+modular way</strong>."</p>
+</blockquote>
+<p>This is a stronger claim than "the tree executes what the policy decides". The
+BT is not downstream plumbing — it <strong>decomposes the learning problem</strong>. Each
+learning node faces a small, local state space; the tree supplies the structure
+that would otherwise have to be learnt.</p>
+<p>That matters for <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>, which argued the layering on
+<a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §14.3 (<code>A(s)</code> as an ethologically-authored action set).
+The two arguments compose: the ethology supplies <em>which</em> primitives exist, and
+the BT supplies <em>how the learning problem is carved up between them</em>. Neither
+source makes the other's point, and together they are a much better justification
+than either alone.</p>
+</div>
+<p><strong>The cost, stated by the authors</strong>: RL-BT "needs user input regarding both the BT
+structure, and the actions, states and local reward functions to be considered in
+the subproblems", whereas GP-BT needs only a single global reward plus the
+available conditions and actions. <strong>More hand-authoring, not less</strong> — which for
+this thesis is an advantage, since hand-authored structure is where the ethology
+lives (<a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a>).</p>
+<p><strong>Their RL-BT experiment</strong> is a search-and-rescue toy: rooms containing victims and
+one of three fire types, three extinguishers each effective against one fire type,
+assignment unknown to the agent. Scenario 1 (one Learning Action node) converges
+to 100% accuracy; Scenario 2 (nested learning action <em>and</em> learning control-flow
+nodes, with time-consuming actions) converges to <strong>97–99%</strong>, the shortfall
+attributed to the control-flow node needing trial and error to learn the ordering.
+30 episodes × 400 iterations. <strong>A simulated toy problem, not a robot</strong> — the
+robotic validation in Ch. 8 is for GP-BT (KUKA Youbot), not RL-BT.</p>
+<h2>Two further results worth carrying</h2>
+<p><strong>The safety subtree.</strong> GP-BT runs <code>Sequence(T_safe, T_learn)</code>, where <code>T_safe</code> is
+hand-authored and <strong>overrides the learned tree whenever needed</strong>; the authors note
+this "is the only part of GP-BT that requires user input", and that unsafe regions
+need a conservative margin so the safety action can act in time (§8.2, §5.3).</p>
+<p>That is a concrete mechanism for the problem <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §17.5 names
+and does not solve — "safe embedding of reinforcement learning agents into physical
+environments". For a robot learning around untrained humans in a real environment,
+this is directly load-bearing. See <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>.</p>
+<p><strong>FSMs scale badly under learning.</strong> Comparing GP-BT against an FSM-based learner
+and pure GP on the Mario AI benchmark, "the FSM approach generates a number of
+nodes that increases <strong>exponentially</strong> over time, while the growth rate in GP-BT
+tends to decrease over time" (§8.2.4.1, Fig. 8.8). §2.6 makes the same point
+analytically: "a FSM with a large number of transitions can drastically deteriorate
+the speed of an algorithm that has to consider all the possible paths".</p>
+<p>This is a quantitative argument bearing on <strong>Q9</strong> — <a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a> is a
+state machine, and the corpus' reason for choosing it was hand-authored
+readability, not learnability. See <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a>.</p>
+<h2>Design principles worth reusing (Ch. 3)</h2>
+<p>Explicit success conditions for readability; <strong>implicit sequences</strong> for reactivity
+(check the <em>goal</em> first, then preconditions, rather than checking outcomes);
+decision-tree structure for case handling; <strong>Sequence nodes to guarantee safety</strong>;
+<strong>backchaining</strong> to build deliberative BTs; memory nodes when un-reactive
+behaviour is wanted; and choosing the right granularity.</p>
+<p>The safety discussion includes a caution the wiki should keep: a naive safety
+sequence "will probably lead to an unwanted <strong>chattering</strong> behaviour" — recharge
+to just over 20%, resume, drop to 20%, repeat.</p>
+<h2>Limitations and disadvantages</h2>
+<p>The authors' own list (§2.6.2), which is unusually candid:</p>
+<ul>
+<li><strong>The BT engine is complex to implement</strong> — ticks should be generated and
+  traversed in parallel with action execution.</li>
+<li><strong>Checking all conditions can be expensive</strong>, sometimes infeasible; closed-loop
+  execution then costs more than it gains.</li>
+<li><strong>Feed-forward execution is sometimes just fine</strong> — in structured, predictable
+  environments BTs have no advantage over simpler architectures.</li>
+<li><strong>BTs require a new mindset</strong>: "the execution of BTs is not focused on states but
+  on conditions and the switching is not event driven but tick driven".</li>
+<li><strong>Tooling is less mature</strong> than for FSMs.</li>
+</ul>
+<p>For this wiki specifically:</p>
+<ul>
+<li><strong>Almost nothing on social robotics or HRI.</strong> §1.6 surveys autonomous driving,
+  industrial robotics, the Amazon Picking Challenge and — in a <strong>single paragraph</strong>
+  — the social robot <strong>JIBO</strong>, noted only as having a BT-based SDK. No interaction
+  design, no human-subject results, no affect. The coverage gap recorded in
+  <a class="wikilink" href="citation-backlog.html">citation-backlog</a> as "behaviour trees in HRI — nothing" is only partly closed:
+  this book supplies the architecture, not its social application.</li>
+<li><strong>No emotion content at all.</strong> The emotion-plus-BT reference the thesis needs is
+  still Belle, Gittens &amp; Graham (2019), which is not held.</li>
+<li><strong>Chapters 5, 6, 7 and 9 were read for scope, not in detail</strong> — their results are
+  recorded here by what they deliver, not derived. If a formal guarantee is to be
+  claimed in the thesis, re-read the relevant chapter properly first.</li>
+</ul>
+<h2>What this changes in the wiki</h2>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="wikilink" href="behaviour-trees.html">behaviour-trees</a></td>
+<td>Rewritten. Node semantics, the two-way-transfer argument, generalisation claims, disadvantages</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a></td>
+<td>The BT-as-executive layering is now <strong>sourced</strong>, and strengthened — the BT decomposes the learning problem. Safety subtree added</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a></td>
+<td>Q9 gains a quantitative argument: FSM node count grows exponentially under learning</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="open-questions.html">open-questions</a></td>
+<td>Q9 largely resolved; Q3 gains a tool (Ch. 9 MTTS/MTTF)</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="thesis.html">thesis</a></td>
+<td>Step 7 is no longer unsupported by the corpus</td>
+</tr>
+</tbody>
+</table>
+<h2>Related</h2>
+<p><a class="wikilink" href="behaviour-trees.html">behaviour-trees</a> · <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> · <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> ·
+<a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a> · <a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a> · <a class="wikilink" href="citation-backlog.html">citation-backlog</a></p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="behaviour-trees.html">Behaviour trees</a></li>
+<li><a href="belle-2019-programming-with-affect.html">Belle, Gittens &amp; Graham (2019) — Programming with Affect</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="fuzzy-automaton-fri.html">FRI fuzzy automaton</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mecanumbot_behaviours — the behaviour layer — Research wiki</title>
+<meta name="description" content="The previous clip established only that this repository existed. It turns out to contain an experiment design, already implemented — which changes what…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Systems</p>
+  <h1>mecanumbot_behaviours — the behaviour layer</h1>
+<dl class="meta"><div><dt>type</dt><dd>system</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">first-party</span> <span class="tag">behaviour-trees</span> <span class="tag">experiment</span> <span class="tag">core-contribution</span></dd></div></dl>
+<p><strong>Csenge's own package</strong> (<a href="https://github.com/hubaycsenge/mecanumbot_behaviours"><code>hubaycsenge/mecanumbot_behaviours</code></a>),
+clipped 2026-07-28. High-level behaviour orchestration on <code>py_trees</code> /
+<code>py_trees_ros</code>.</p>
+<p>The previous clip established only that this repository existed. It turns out to
+contain <strong>an experiment design, already implemented</strong> — which changes what
+<a class="wikilink" href="validation-study.html">validation-study</a> has to build.</p>
+<h2>Structure</h2>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mecanumbot_behaviours</code></td>
+<td>Meta package (<code>ament_cmake</code>), dependency aggregation only</td>
+</tr>
+<tr>
+<td><code>mecanumbot_leading_behaviour</code></td>
+<td>Behaviour trees for the leading / attention-guidance experiments; holds the reusable behaviour library</td>
+</tr>
+<tr>
+<td><code>mecanumbot_demo_behaviours</code></td>
+<td>Demo trees (wander between people, hide and seek) reusing the leading library</td>
+</tr>
+</tbody>
+</table>
+<h2>How it drives the robot</h2>
+<p><strong>The trees do not drive the wheels for navigation.</strong> They publish Nav2 goals on
+<code>/goal_pose</code> and watch <code>/navigate_to_pose/_action/status</code>, using <code>/cmd_vel</code> only
+for in-place spins. Accessory gestures go on <code>/cmd_accessory_pos</code>; LEDs go through
+the <code>set_led_status</code> service.</p>
+<p>That is a clean layering — deliberation in the tree, motion planning in Nav2 — and
+it matches option 3 on <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a> (<em>tree as executor</em>), which is also the
+option <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> selects.</p>
+<h2>The three experimental conditions</h2>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Node</th>
+<th>Signalling channel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Control</code></td>
+<td><code>control_leading_bt_node</code></td>
+<td>None — navigation only</td>
+</tr>
+<tr>
+<td><code>Doglike</code></td>
+<td><code>doglike_leading_bt_node</code></td>
+<td><strong>Neck / gripper gestures</strong> on <code>/cmd_accessory_pos</code></td>
+</tr>
+<tr>
+<td><code>LED</code></td>
+<td><code>LED_leading_bt_node</code></td>
+<td><strong>LED patterns</strong> via <code>set_led_status</code></td>
+</tr>
+</tbody>
+</table>
+<p>Plus <code>bottom_up_tree_node</code>, a simpler baseline combining approach with LED
+indication, run directly with <code>ros2 run</code>.</p>
+<div class="callout callout-important">
+<p class="callout-title">This is a within-subject signalling-modality experiment, already coded</p>
+<p><a class="wikilink" href="validation-study.html">validation-study</a> inherited its protocol from
+<a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a> and <a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a> but
+had no implemented conditions. Here they are: a no-signal control and two
+distinct expressive modalities, on the same navigation substrate.</p>
+<p>This maps directly onto the <strong>leading behaviour</strong> of
+<a class="wikilink" href="lakatos-2014-embodiments-demo.html">lakatos-2014-embodiments-demo</a> — the hearing-dog scenario with its four
+components (interaction initiation, leading, feedback, goal-oriented
+attention-directing). The condition structure isolates <em>which expressive channel
+carries the leading signal</em>, which is precisely the open question raised by
+<a class="wikilink" href="robot-platform.html">robot-platform</a> having no face.</p>
+<p><strong>But note what it is not.</strong> These are three <em>fixed</em> signalling conditions, not
+an emotional engine. There is no affect model here, no arbitration, no learning.
+The comparison it supports is "does the dog-like channel beat LEDs and beat
+nothing at leading a person", which is a legibility question — valuable, and
+already a paper, but not the thesis claim in
+<a class="wikilink" href="emotion-engine.html">emotion-engine</a>. Do not let the wiki blur the two.</p>
+</div>
+<p>Condition selection is by launch argument, defaulting to <code>Doglike</code>. The launcher
+picks a parameter YAML from the <strong>current Wi-Fi SSID</strong> (<code>nmcli</code>, falling back to
+<code>iwgetid</code>): <code>MecanumNet</code> → <code>behaviour_setting_constants.yaml</code>, <code>MecanumetoNet</code> →
+<code>Eto_behaviour_setting_constants.yaml</code>. Two named settings files implies two
+physical environments — worth knowing which, for the "real environment" part of
+Q3.</p>
+<h2>What it consumes</h2>
+<p><code>people_fusion</code> from <a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a>, plus <code>subject_pose</code> from the lidar
+detector for the leading behaviours. Runtime dependencies are <code>py_trees</code>,
+<code>py_trees_ros</code>, <code>rclpy</code>, <code>geometry_msgs</code>, <code>action_msgs</code>, <code>nav2_msgs</code>,
+<code>mecanumbot_msgs</code>; <code>mecanumbot_demo_behaviours</code> imports directly from
+<code>mecanumbot_leading_behaviour</code>, and its <code>utils/map_generate.py</code> also needs
+<code>opencv-python</code> and <code>mecanumbot_description</code>.</p>
+<h2>Known problems in the package</h2>
+<ul>
+<li><strong>Runtime dependencies are not declared</strong> in either <code>package.xml</code> — they list
+  only lint test dependencies. The packages build, but <code>rosdep</code> will not install
+  what they need to run. Same issue as <a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a>.</li>
+<li><code>tree_nodes/hide_and_seek.py</code> is <strong>present and complete but has no entry point</strong>
+  in <code>setup.py</code>, so it is not installed as an executable.</li>
+<li><code>mecanumbot_demo_behaviours</code> ships a copy of the launch file that still points
+  at <code>doglike_demo_bt_node</code> / <code>control_demo_bt_node</code> / <code>LED_demo_bt_node</code>, <strong>none
+  of which are registered</strong> in that package's <code>setup.py</code>. Demo trees must be
+  started with <code>ros2 run</code>.</li>
+</ul>
+<h2>Hide and seek, and wander between people</h2>
+<p>The two demo trees are more interesting than "demo" suggests.</p>
+<p><strong>Wander between people</strong> is an attention/proxemics behaviour over the fused
+people array. <strong>Hide and seek</strong> is a game — and games are, in
+<a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a>' terms, exactly where <a class="wikilink" href="social-competence.html">social-competence</a> is
+built. It is also the only behaviour in the whole corpus that requires modelling
+what the <em>other</em> party can perceive.</p>
+<p>That it is written but not installed is worth asking about — it may be abandoned,
+or it may be the next experiment. <strong>Ask Csenge.</strong> #needs-source</p>
+<h2>Related</h2>
+<p><a class="wikilink" href="robot-platform.html">robot-platform</a> · <a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a> · <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a> ·
+<a class="wikilink" href="validation-study.html">validation-study</a> · <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> ·
+<a class="wikilink" href="lakatos-2014-embodiments-demo.html">lakatos-2014-embodiments-demo</a> · <a class="wikilink" href="mecanumbot-repos.html">mecanumbot-repos</a></p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="behaviour-trees.html">Behaviour trees</a></li>
+<li><a href="colledanchise-ogren-behavior-trees.html">Colledanchise &amp; Ögren — Behavior Trees in Robotics and AI: An Introduction</a></li>
+<li><a href="validation-study.html">Human validation study (planned)</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="mecanumbot-repos.html">Mecanumbot repositories</a></li>
+<li><a href="robot-platform.html">Mecanumbot — the experimental robot platform</a></li>
+<li><a href="mecanumbot-perception.html">mecanumbot_sensorprocess_smart — the perception stack</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="ostensive-signalling.html">Ostensive signalling</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

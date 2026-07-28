@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Belle, Gittens &amp; Graham (2019) — Programming with Affect — Research wiki</title>
+<meta name="description" content="Shakir Belle, Curtis Gittens (University of the West Indies, Barbados) and T.C. Nicholas Graham (Queen&#x27;s University, Kingston), Programming with Affect…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Sources</p>
+  <h1>Belle, Gittens &amp; Graham (2019) — Programming with Affect</h1>
+<dl class="meta"><div><dt>type</dt><dd>source</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>citekey</dt><dd>belle2019programming</dd></div><div><dt>authors</dt><dd>Shakir Belle, Curtis Gittens, T.C. Nicholas Graham</dd></div><div><dt>year</dt><dd>2019</dd></div><div><dt>venue</dt><dd>2019 IEEE Games, Entertainment, Media Conference (GEM), pp. 1–8</dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">behaviour-trees</span> <span class="tag">emotion</span> <span class="tag">game-ai</span> <span class="tag">nearest-prior</span> <span class="tag">ref-10</span></dd></div></dl>
+<p>Shakir Belle, Curtis Gittens (University of the West Indies, Barbados) and
+T.C. Nicholas Graham (Queen's University, Kingston), <em>Programming with Affect: How
+Behaviour Trees and a Lightweight Cognitive Architecture Enable the Development of
+Non-Player Characters with Emotions</em>, <strong>IEEE GEM 2019</strong>, pp. 1–8.</p>
+<p><strong>Reference <code>[9]</code>/<code>[10]</code> of <a class="wikilink" href="research-proposal.html">research-proposal</a>, now held</strong> — the last unheld
+numeric reference, and the one flagged as most important after
+<a class="wikilink" href="colledanchise-ogren-behavior-trees.html">colledanchise-ogren-behavior-trees</a> turned out to contain no emotion content.</p>
+<h2>What it is</h2>
+<p><strong>EMoBeT</strong> (Emotion Modelling Behaviour Tree): a framework that makes mood a
+<strong>first-class property</strong> of a behaviour tree, by adding two node types.</p>
+<table>
+<thead>
+<tr>
+<th>New node</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Emotion Adder</strong></td>
+<td>Triggers an emotion in the character. Single child. The developer supplies the possible emotions (from the OCC set) and the triggers that fire them</td>
+</tr>
+<tr>
+<td><strong>E-Selector</strong></td>
+<td>Selects an action <strong>based on current mood</strong>. Exactly <strong>two</strong> children, labelled positive and negative; picks the one matching the sign of the character's mood octant</td>
+</tr>
+</tbody>
+</table>
+<p>The stated motivation is that existing tools "do not treat mood as a first-class
+property: specifically, they do not provide mechanisms for modifying an NPC's mood,
+or for allowing the NPC's current mood to influence its behaviour."</p>
+<h2>The architecture</h2>
+<p>Built on <strong>ALMA</strong> (Gebhard's <em>A Layered Model of Affect</em>), reimplemented
+light-weight so it runs in real time on ordinary gaming hardware. Four subsystems:</p>
+<ul>
+<li><strong>Personality</strong> — the <strong>Five Factor Model</strong> (openness, conscientiousness,
+  extraversion, agreeableness, neuroticism). Sets the character's default mood and
+  scales emotion intensity: "having a highly neurotic personality will cause the
+  intensities of negative emotions to be higher".</li>
+<li><strong>Emotion</strong> — short-term states from <strong>OCC</strong> (Ortony, Clore &amp; Collins). Each
+  carries type, intensity and trigger.</li>
+<li><strong>Mood</strong> — mid-term, and "the deciding factor for all NPC decisions". Represented
+  in <strong>PAD</strong> space (Pleasure, Arousal, Dominance, each −1…1), giving <strong>eight
+  octants</strong>: Exuberant, Dependent, Relaxed, Docile, Hostile, Anxious, Disdainful,
+  Bored. Intensity is <em>slight</em>, <em>moderate</em> or <em>full</em> by distance from the origin.</li>
+<li><strong>Memory</strong> — long- and short-term, decaying on the <strong>Ebbinghaus forgetting
+  curve</strong>. On re-encountering a player the character recalls its <strong>strongest</strong>
+  memory of them and re-triggers the associated emotions.</li>
+</ul>
+<p>Mood updates via an <strong>emotion centre</strong> — the combined PAD point of all felt
+emotions. If the emotion centre lies between the current mood and the origin, mood
+is pushed <em>further into</em> its current octant; otherwise mood moves <em>toward</em> the
+emotion centre.</p>
+<p>Three design requirements are stated: <strong>influence</strong> (emotion must affect
+decisions), <strong>persistence</strong> (emotions do not vanish after the event), and
+<strong>interface</strong> (use behaviour trees, because developers already know them).</p>
+<h2>Why this matters for the thesis</h2>
+<div class="callout callout-important">
+<p class="callout-title">The nearest prior art to the decision layer — and it stops where the rest of the corpus stops</p>
+<p>This is the only source in the corpus that joins <strong>emotion</strong> to <strong>behaviour
+trees</strong>, and it genuinely pre-empts one thing: <em>behaviour-tree nodes that make
+affective state first-class in action selection</em>. The thesis cannot claim novelty
+for that idea in the abstract.</p>
+<p>But look at what triggers the emotions. Every emotion in every scenario is fired
+by a <strong>scripted player dialogue choice</strong> — the developer enumerates the options
+and hard-wires which emotion each one adds. That is <strong>hand-labelled discrete
+events</strong>, exactly as in <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>'s MATLAB GUI.</p>
+<p><strong>Two entirely independent traditions — Hungarian ethorobotics and Caribbean /
+Canadian game AI — arrive at the same architecture and stop at the same place.</strong>
+Neither closes the perception-to-emotion link. That convergence strengthens the
+claim in <a class="wikilink" href="thesis.html">thesis</a> considerably: the gap is not an oversight of one research
+network, it is where the field as a whole stops. <em>(Synthesis drawn here; neither
+source cites the other.)</em></p>
+</div>
+<p><strong>What EMoBeT does not have</strong>, and the thesis therefore still owns: no robot, no
+sensing of any kind, no learning, no internal state of the agent, no real
+environment — and <strong>no evaluation</strong> (below).</p>
+<h2>The E-Selector answers a live design question — differently from the wiki</h2>
+<p><a class="wikilink" href="behaviour-trees.html">behaviour-trees</a> has an open item: does emotional state <strong>gate</strong> the tree,
+<strong>re-weight</strong> it, or <strong>parameterise leaf actions</strong>?</p>
+<p>Belle et al. choose <strong>gating</strong>, and in its crudest form: the E-Selector takes
+exactly two children and picks by the <em>sign</em> of the mood octant. An eight-octant
+PAD mood is collapsed to one bit at the point of decision.</p>
+<p>That is worth recording as prior art, and worth differing from. The wiki's existing
+argument — that <strong>parameterising leaf actions</strong> best fits
+<a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>, where the same primitive <em>approach</em> appears under
+joy, fear, neutral and anger distinguished by <strong>manner</strong> rather than kind — now has
+a concrete alternative to be defended against. It is also a much better fit for
+<a class="wikilink" href="robot-platform.html">robot-platform</a>, where expression is continuous (LED colour, speed, proximity)
+rather than a choice between two scripted lines.</p>
+<h2>Comparison with the corpus' own engine</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a></th>
+<th>EMoBeT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Temporal layers</td>
+<td>short / medium / long-term</td>
+<td>emotion / mood / personality</td>
+</tr>
+<tr>
+<td>Emotion model</td>
+<td>Panksepp circuits + dog ethology</td>
+<td><strong>OCC</strong></td>
+</tr>
+<tr>
+<td>Mood space</td>
+<td>5 discrete states</td>
+<td><strong>PAD</strong>, 8 octants</td>
+</tr>
+<tr>
+<td>Long-term layer</td>
+<td>temperament (dropped in the 2012 paper)</td>
+<td>Five Factor personality, retained</td>
+</tr>
+<tr>
+<td>Arbitration</td>
+<td>hierarchical rule tree, 5 states</td>
+<td><strong>E-Selector, binary</strong></td>
+</tr>
+<tr>
+<td>Memory of individuals</td>
+<td>none</td>
+<td>yes, with Ebbinghaus decay</td>
+</tr>
+<tr>
+<td>Input</td>
+<td>hand-labelled events (GUI)</td>
+<td>hand-scripted dialogue choices</td>
+</tr>
+<tr>
+<td>Validation</td>
+<td>wizard-of-oz human studies</td>
+<td><strong>none</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The three-layer temporal structure is a genuine convergence between the two, and
+neither cites the other. EMoBeT's <strong>episodic memory of specific individuals</strong> is
+something the Hungarian lineage lacks entirely, and is directly relevant to
+<a class="wikilink" href="social-competence.html">social-competence</a> and to Q16 — a robot that remembers a particular person
+across sessions is what a longitudinal study would need.</p>
+<h2>Method and limitations</h2>
+<div class="callout callout-warning">
+<p class="callout-title">There is no evaluation, despite the section title</p>
+<p>§V is headed "Scenarios <strong>and Evaluation</strong>", but contains only <strong>worked traces</strong>:
+three scripted dialogue scenarios (father and son after a basketball game; a
+lunch-choice conversation) with tables of PAD values changing as emotions fire.
+No users, no participants, no performance or timing measurements, no comparison
+condition.</p>
+<p>The conclusion defers all of it: "For our future work, we will build richer
+scenarios in order to provide a better testbed... We will also implement it in
+the game... Finally, we will <strong>test the usability and performance of the system
+to determine if it is a viable approach</strong>."</p>
+<p>So the nearest prior art to this thesis' decision layer is a <strong>demonstration
+paper whose authors state they have not yet established that the approach is
+viable</strong>. That is a low bar to clear, and the thesis should say so accurately and
+without overclaiming — the <em>idea</em> is prior art, the <em>evidence</em> is not.</p>
+</div>
+<p>Further limitations:</p>
+<ul>
+<li><strong>8 pages, conference paper</strong>, IEEE GEM — a games/media venue, peer-reviewed but
+  not a robotics or HRI venue.</li>
+<li><strong>Thoroughly anthropomorphic.</strong> OCC, PAD, Five Factor Model, dialogue trees,
+  human social scenarios. This is precisely the affective-computing tradition that
+  <a class="wikilink" href="ethorobotics.html">ethorobotics</a> rejects — see Q5 in <a class="wikilink" href="open-questions.html">open-questions</a>.</li>
+<li><strong>Real-time claim is asserted, not measured</strong>: "can be computed in real-time on
+  standard gaming computers" with no benchmark.</li>
+<li>The related-work survey is useful and covers ground the wiki lacks: <strong>affective
+  gaming</strong>, <strong>GAMYGDALA</strong> (an OCC-based "black box appraisal" engine), and
+  cognitive architectures (<strong>SOAR</strong>, <strong>ACT-R</strong>, <strong>SHERCA</strong>). Also <strong>Johansson &amp;
+  Dell'Acqua</strong>'s earlier <em>emotional selector</em> node, which sorts children by
+  planning effort, risk and time — which Belle et al. criticise as "based on an
+  intuitive, instead of psychological approach".</li>
+</ul>
+<p><strong>A design stance worth quoting</strong>, because the thesis will face the same choice:
+their approach "focuses on simulating human-like emotions and having these emotions
+effect the decision-making process <strong>regardless of whether it is an optimal outcome
+for the NPC</strong>", explicitly against approaches that seek optimal responses. Under
+<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> this thesis is doing the opposite — optimising — and
+that tension needs an answer.</p>
+<h2>What this changes in the wiki</h2>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="wikilink" href="behaviour-trees.html">behaviour-trees</a></td>
+<td>Ref <code>[10]</code> resolved; the gating-vs-parameterising question now has prior art to differ from</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="thesis.html">thesis</a></td>
+<td>Step 7 supported for the <em>idea</em>; the novelty assessment sharpens — the perception gap is field-wide, not lineage-specific</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="emotion-engine.html">emotion-engine</a></td>
+<td>A second independent three-layer architecture; episodic memory is a gap in the Hungarian lineage</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="citation-backlog.html">citation-backlog</a></td>
+<td>Last numeric reference resolved. OCC, ALMA, GAMYGDALA, Five Factor and Ebbinghaus added as new unheld sources</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="open-questions.html">open-questions</a></td>
+<td>Q5 gains a concrete datapoint</td>
+</tr>
+</tbody>
+</table>
+<h2>Related</h2>
+<p><a class="wikilink" href="behaviour-trees.html">behaviour-trees</a> · <a class="wikilink" href="colledanchise-ogren-behavior-trees.html">colledanchise-ogren-behavior-trees</a> ·
+<a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a> · <a class="wikilink" href="emotion-engine.html">emotion-engine</a> · <a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a> ·
+<a class="wikilink" href="thesis.html">thesis</a> · <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a></p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="behaviour-trees.html">Behaviour trees</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

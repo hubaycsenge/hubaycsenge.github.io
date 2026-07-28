@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conditioning — Research wiki</title>
+<meta name="description" content="The two experimental paradigms of animal learning, and their correspondence with the two algorithm families of reinforcement learning. All of this page is…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Concepts</p>
+  <h1>Conditioning</h1>
+<dl class="meta"><div><dt>type</dt><dd>concept</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">animal-learning</span> <span class="tag">psychology</span> <span class="tag">reinforcement-learning</span></dd></div></dl>
+<p>The two experimental paradigms of animal learning, and their correspondence with
+the two algorithm families of reinforcement learning. All of this page is from
+<a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> Ch. 14 unless marked otherwise; the primary sources it
+reviews are not in the corpus (see <a class="wikilink" href="citation-backlog.html">citation-backlog</a>).</p>
+<p>This page exists because the dog behaviour this thesis models is largely
+conditioned behaviour, and <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> needs the vocabulary.</p>
+<h2>The correspondence</h2>
+<table>
+<thead>
+<tr>
+<th>Psychology</th>
+<th>Reinforcement learning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Classical (Pavlovian) conditioning</td>
+<td><strong>Prediction</strong> — policy evaluation, learning a value function</td>
+</tr>
+<tr>
+<td>Instrumental (operant) conditioning</td>
+<td><strong>Control</strong> — policy improvement</td>
+</tr>
+</tbody>
+</table>
+<p>The defining difference between the two paradigms is whether the reinforcing
+stimulus is <strong>contingent on the animal's behaviour</strong>. In classical conditioning it
+is not; in instrumental conditioning it is.</p>
+<p>The authors are careful that this is "a convenient first approximation" and not an
+identity: "There is more to classical conditioning than prediction; it also
+involves action, and so is a mode of control, sometimes called Pavlovian control"
+(§14.1). Both kinds of learning are likely engaged in most real situations.</p>
+<div class="callout callout-note">
+<p class="callout-title">"Control" means the opposite of what ethologists mean by it</p>
+<p>In this book control means <em>the agent influences its environment</em>. In psychology
+it usually means the animal's behaviour is controlled <strong>by</strong> the stimuli it
+receives (stimulus control). Both directions are at play; the book's focus is
+the agent as controller (§14 terminology). Worth watching when reading this
+alongside the ethology sources.</p>
+</div>
+<h2>Classical conditioning</h2>
+<p>Pavlov's terms, still standard: an <strong>unconditioned stimulus</strong> (US) naturally
+triggers an <strong>unconditioned response</strong> (UR); a neutral stimulus that reliably
+precedes the US becomes a <strong>conditioned stimulus</strong> (CS) and comes to trigger a
+<strong>conditioned response</strong> (CR). In <em>delay conditioning</em> the CS extends through the
+interstimulus interval; in <em>trace conditioning</em> the CS ends before the US begins.</p>
+<p>Two phenomena drove the modelling literature:</p>
+<ul>
+<li><strong>Blocking</strong> — if an animal has already learnt that a tone predicts the US,
+  adding a light to form a compound CS produces little or no learning to the
+  light. This refuted the idea that temporal contiguity alone is sufficient for
+  conditioning (Kamin 1968, via §14.2.1).</li>
+<li><strong>Higher-order conditioning</strong> — a previously conditioned CS can itself act as a
+  US for a further stimulus. Pavlov's dog learnt to salivate to a black square
+  that had only ever been followed by a metronome, in ten trials. Hard to
+  demonstrate above second order, because the higher-order reinforcer extinguishes
+  when it is no longer followed by the original US.</li>
+</ul>
+<p>The corresponding notion in instrumental conditioning is the <strong>conditioned (or
+secondary) reinforcer</strong>: a stimulus that consistently predicts primary
+reinforcement becomes reinforcing itself. Primary reinforcement is that whose
+"rewarding or penalizing quality has been built into the animal by evolution"
+(§14.2.1). This is the mechanism by which a value function can supply immediate
+feedback when the real reward is delayed — see <a class="wikilink" href="td-learning.html">td-learning</a> and
+<a class="wikilink" href="actor-critic.html">actor-critic</a>.</p>
+<p><strong>Models.</strong> The Rescorla–Wagner model (1972) explains blocking by making learning
+proportional to prediction error — "an animal only learns when events violate its
+expectations". Formally it is the Least Mean Square / Widrow–Hoff rule (§14.2.2).
+The <strong>TD model</strong> generalises it from trial-level to real time and additionally
+accounts for higher-order conditioning and for the timing of responses within a
+trial; see <a class="wikilink" href="td-learning.html">td-learning</a>.</p>
+<h2>Instrumental conditioning</h2>
+<p>Thorndike's puzzle-box experiments and the <strong>Law of Effect</strong>: successful actions
+are "stamped in", unsuccessful ones "stamped out". Sutton &amp; Barto identify two
+features shared with RL algorithms (§14.3):</p>
+<ul>
+<li><strong>selectional</strong> — try alternatives and select among them by consequence;</li>
+<li><strong>associative</strong> — the selected alternatives are attached to particular states.</li>
+</ul>
+<p>"Natural selection in evolution is a prime example of a selectional process, but
+it is not associative...; supervised learning is associative, but it is not
+selectional."</p>
+<h3>Instinctual impulses and the action set</h3>
+<p>The passage that matters most for this thesis:</p>
+<blockquote>
+<p>The cats selected actions from those that they instinctively perform in their
+current situation, which Thorndike called their "instinctual impulses." First
+placed in a puzzle box, a cat instinctively scratches, claws, and bites with
+great energy... Successful actions are selected from these and not from every
+possible action or activity. This is like the feature of our formalism where the
+action selected from a state <em>s</em> belongs to a set of admissible actions, A(s).
+<strong>Specifying these sets is an important aspect of reinforcement learning because
+it can radically simplify learning. They are like an animal's instinctual
+impulses.</strong>
+— <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §14.3</p>
+</blockquote>
+<p>The design consequence is developed in <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>: the
+ethologically-derived behaviour repertoire in <a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a> can
+<em>be</em> <code>A(s)</code>, rather than being replaced by learning.</p>
+<h3>Shaping</h3>
+<p>Skinner's technique of reinforcing successive approximations to a target
+behaviour — the pigeon-bowling anecdote in §14.3. Sutton &amp; Barto stress that it is
+"not only indispensable for animal training, it is also an effective tool for
+training reinforcement learning agents", and return to it in §17.4 as the principal
+answer to sparse reward. See <a class="wikilink" href="reward-design.html">reward-design</a>.</p>
+<p>Directly relevant here: <a class="wikilink" href="social-competence.html">social-competence</a> lists <strong>responsiveness to learning
+and training</strong> among the dog-derived properties a robot should have
+(<a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a>). Shaping is the ethologically-native form of that
+training, and it is also a legitimate RL technique. The two requirements coincide.</p>
+<h3>Motivation</h3>
+<p>The book links psychology's notion of motivation to RL in two places (§14.3):</p>
+<ul>
+<li><strong>What is rewarding is state-dependent</strong>, and the state "not only includes
+  information about what is external to the machine... but also what is internal
+  to this machine". "An animal will be more rewarded by eating when it is hungry
+  than when it has just finished a satisfying meal."</li>
+<li><strong>Value functions are the proximal motive</strong> — an agent selecting actions by
+  value is ascending the gradient of its value function.</li>
+</ul>
+<p>The first is a formal hook for the robot's own internal state in
+<a class="wikilink" href="emotion-engine.html">emotion-engine</a> — internal state as a modulator of the reward function rather
+than as another input dimension. Note what the book does <em>not</em> cover: the
+<strong>vigour</strong> of behaviour after learning (a hungry rat runs faster). It says this
+"does not link so cleanly" and points to other literature.</p>
+<h2>Delayed reinforcement</h2>
+<p>The credit-assignment problem, in Minsky's (1961) phrasing. Two mechanisms in the
+book, both with antecedents in animal-learning theory (§14.4):</p>
+<ul>
+<li><strong>Eligibility traces</strong> — decaying traces of past state visits or state–action
+  pairs, matching Pavlov's stimulus traces and Hull's "molar stimulus traces".
+  Introduced to RL by Klopf (1972).</li>
+<li><strong>Value functions learnt by TD</strong>, providing near-immediate evaluation, matching
+  Hull's account of conditioned reinforcement passing backwards from the goal.</li>
+</ul>
+<h2>Related</h2>
+<p><a class="wikilink" href="td-learning.html">td-learning</a> · <a class="wikilink" href="actor-critic.html">actor-critic</a> · <a class="wikilink" href="habitual-vs-goal-directed.html">habitual-vs-goal-directed</a> ·
+<a class="wikilink" href="reward-design.html">reward-design</a> · <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> · <a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a></p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="actor-critic.html">Actor–critic</a></li>
+<li><a href="habitual-vs-goal-directed.html">Habitual vs goal-directed behaviour</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="ostensive-signalling.html">Ostensive signalling</a></li>
+<li><a href="panksepp-2011-emotional-circuits.html">Panksepp (2011) — The basic emotional circuits of mammalian brains</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="reward-design.html">Reward design</a></li>
+<li><a href="social-competence.html">Social competence</a></li>
+<li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>
+<li><a href="td-learning.html">Temporal-difference learning</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

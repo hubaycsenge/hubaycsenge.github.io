@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Behaviour trees — Research wiki</title>
+<meta name="description" content="The execution layer of emotion-engine, and — following Csenge&#x27;s decision of 2026-07-28 — the executive method for decisions made by reinforcement learning…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Methods</p>
+  <h1>Behaviour trees</h1>
+<dl class="meta"><div><dt>type</dt><dd>method</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>3</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">robotics</span> <span class="tag">decision-making</span> <span class="tag">architecture</span></dd></div></dl>
+<p>The execution layer of <a class="wikilink" href="emotion-engine.html">emotion-engine</a>, and — following Csenge's decision of
+2026-07-28 — <strong>the executive method for decisions made by reinforcement learning
+algorithms</strong>. <code>py_trees</code> and <code>py_trees_ros</code> are installed on <a class="wikilink" href="robot-platform.html">robot-platform</a> and
+already in use in <a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a>.</p>
+<p>Primary source: <a class="wikilink" href="colledanchise-ogren-behavior-trees.html">colledanchise-ogren-behavior-trees</a>.</p>
+<h2>How a BT works</h2>
+<p>A BT is a <strong>directed rooted tree</strong> in which internal nodes are <em>control flow</em> nodes
+and leaves are <em>execution</em> nodes. The root emits <strong>ticks</strong> at some frequency; a node
+runs <strong>only if ticked</strong>, and returns one of three statuses to its parent:
+<strong>Running</strong>, <strong>Success</strong>, <strong>Failure</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th>Symbol</th>
+<th>Semantics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sequence</strong></td>
+<td><code>→</code></td>
+<td>Tick children left to right; return Failure or Running as soon as a child does; Success only if <strong>all</strong> succeed</td>
+</tr>
+<tr>
+<td><strong>Fallback</strong></td>
+<td><code>?</code></td>
+<td>Tick children left to right; return Success or Running as soon as a child does; Failure only if <strong>all</strong> fail</td>
+</tr>
+<tr>
+<td><strong>Parallel</strong></td>
+<td><code>⇒</code></td>
+<td>Tick all children; Success if <em>M</em> succeed, Failure if <em>N−M+1</em> fail</td>
+</tr>
+<tr>
+<td><strong>Decorator</strong></td>
+<td>—</td>
+<td>Custom transformation of a child's status (e.g. negation)</td>
+</tr>
+<tr>
+<td><strong>Action / Condition</strong></td>
+<td>leaf</td>
+<td>Do something / test something</td>
+</tr>
+</tbody>
+</table>
+<p>Fallback is also called <em>selector</em> or <em>priority selector</em>.</p>
+<h2>Why not an FSM — the argument that actually matters</h2>
+<blockquote>
+<p>The tradeoff between reactivity and modularity in FSMs is a <strong>one-way control
+transfer</strong> problem — the <code>goto</code> statement. To be reactive an FSM needs many
+transitions; many transitions are many one-way transfers, and as Dijkstra put it
+that is "too much an invitation to make a mess of one's program". Remove one
+component and every transition into it must be revised.</p>
+<p>BTs use <strong>two-way control transfers</strong> governed by internal nodes. A leaf is
+written <strong>without knowing which node runs next</strong> — only what status to return.
+— <a class="wikilink" href="colledanchise-ogren-behavior-trees.html">colledanchise-ogren-behavior-trees</a> §1.2, §2.6.1</p>
+</blockquote>
+<p>Everything else follows from this: modularity, reusable subtrees, hierarchical
+organisation, readability, and suitability for automatic synthesis.</p>
+<p><strong>BTs generalise</strong> FSMs, hierarchical FSMs, the Subsumption architecture,
+Teleo-Reactive programs and Decision Trees (Ch. 2, formalised in Ch. 6). So
+choosing a BT does not forfeit anything those architectures could express.</p>
+<h2>The RL integration</h2>
+<p>This is why the source was ingested. <a class="wikilink" href="colledanchise-ogren-behavior-trees.html">colledanchise-ogren-behavior-trees</a> Ch. 8
+describes <strong>RL-BT</strong>: start from a hand-designed BT and replace selected nodes with
+<strong>Learning Nodes</strong> —</p>
+<ul>
+<li>a <strong>Learning Action node</strong> wrapping Q-learning over a locally defined state,
+  action set and reward; and</li>
+<li>a <strong>Learning Control Flow node</strong>, a Fallback that learns <strong>the order to try its
+  own children</strong> given the state.</li>
+</ul>
+<div class="callout callout-important">
+<p class="callout-title">The BT does not merely execute the policy — it decomposes the problem</p>
+<p>"If RL-BT was started from scratch with a BT consisting of a single action, there
+would be no difference between RL-BT and standard RL. Instead, the point of
+combining BTs with RL is to <strong>address the curse of dimensionality, and do RL on
+smaller state spaces, while the BT connects these subproblems in a modular
+way</strong>." (§8.4)</p>
+<p>Each learning node sees a small local state space; the tree supplies structure
+that would otherwise have to be learnt. Combined with
+<a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §14.3 — the ethological repertoire as the admissible
+action set <code>A(s)</code> — this gives <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> a two-source
+architectural argument.</p>
+</div>
+<p>The price, per the authors: RL-BT needs the designer to supply the tree structure
+<strong>and</strong> the states, actions and local reward for every learning node. That is more
+hand-authoring than plain RL, not less — which suits this thesis, because
+hand-authored structure is where the ethology lives.</p>
+<p>The alternative in the same chapter, <strong>GP-BT</strong>, grows the tree itself from a single
+reward signal. Not recommended here: it would generate the behavioural structure
+that <a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a> is supposed to supply.</p>
+<h2>Safety</h2>
+<p><code>Sequence(T_safe, T_learn)</code> — a hand-authored safety subtree that <strong>overrides</strong>
+the learned tree. In GP-BT this is "the only part... that requires user input"
+(§8.2). Unsafe regions need a conservative margin so the safety action can act
+before it is too late.</p>
+<p>This is a concrete answer to the problem <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §17.5 names and
+does not solve — safe embedding of RL agents in physical environments. For a robot
+learning around untrained humans it is load-bearing, and it should be in the thesis
+architecture from the start rather than retrofitted.</p>
+<p>Watch for <strong>chattering</strong>: a naive safety sequence recharges to just over threshold,
+resumes, drops back, and oscillates (§3.4).</p>
+<h2>What the analysis chapters offer</h2>
+<ul>
+<li><strong>Ch. 5</strong> — state-space formalism for <strong>safety</strong>, <strong>robustness</strong> and
+  <strong>efficiency</strong>, and for whether these are preserved under composition.</li>
+<li><strong>Ch. 9</strong> — <em>Stochastic BTs</em> transformed into Discrete Time Markov Chains, giving
+  <strong>Mean Time To Succeed</strong>, <strong>Mean Time To Fail</strong> and success probability over
+  time, composable across subtrees.</li>
+</ul>
+<p>Ch. 9 is directly relevant to <strong>Q3</strong>: "what makes real-time in a real environment
+defensible" has wanted an operational definition since the first ingest. MTTS and
+success probability computed over the actual tree are a defensible answer, and one
+that does not require running the robot to obtain. <em>(Both chapters read for scope,
+not derived — re-read before claiming a formal guarantee.)</em></p>
+<h2>Design principles worth reusing (Ch. 3)</h2>
+<p>Explicit success conditions for readability; <strong>implicit sequences</strong> for reactivity —
+check the <em>goal</em> first, then preconditions, rather than checking outcomes;
+decision-tree structure for case handling; Sequence nodes for safety;
+<strong>backchaining</strong> to build deliberative trees; memory nodes when un-reactive
+behaviour is actually wanted; and choosing the right granularity.</p>
+<h2>Disadvantages, per the authors</h2>
+<ul>
+<li>The BT engine is complex to implement (ticking should run in parallel with action
+  execution) — mitigated by using an off-the-shelf library, which
+  <a class="wikilink" href="robot-platform.html">robot-platform</a> does.</li>
+<li><strong>Checking all conditions can be expensive.</strong> Relevant here: the platform now
+  runs two neural detectors plus fusion, so condition evaluation is not free.</li>
+<li>Feed-forward execution is fine in structured, predictable environments — BTs then
+  add nothing.</li>
+<li>BTs need a different mindset: "not focused on states but on conditions", and
+  switching is <strong>tick driven, not event driven</strong>.</li>
+<li>Tooling is less mature than for FSMs.</li>
+</ul>
+<h2>Relation to the rest of the architecture</h2>
+<p>Under <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> the tree is the <strong>executor and decomposer</strong>,
+and a learnt policy the <strong>selector</strong> — which is option 3 of the three that this
+page previously listed as undecided, and it is also what
+<a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a> already does (trees publish Nav2 goals rather than
+driving wheels).</p>
+<div class="callout callout-note">
+<p class="callout-title">Against <a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a></p>
+<p>The fuzzy automaton performs <strong>behaviour fusion</strong> — blending parallel component
+behaviours by necessity level — where a BT <strong>selects</strong>. Fuzzy fusion can express
+"somewhat anxious while still exploring"; a tick cannot, without explicit
+blending nodes. That remains a real loss.</p>
+<p>But the automaton is a <strong>state machine</strong>, and §8.2.4.1 measured FSM node count
+growing <strong>exponentially</strong> under learning while the BT's growth rate declined. If
+the behaviour layer is to be learnt, that is a decisive argument. See Q9.</p>
+</div>
+<h2>Emotion in a behaviour tree — the prior art</h2>
+<p><a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a> (reference <code>[9]</code>/<code>[10]</code>, held as of
+2026-07-28) is the only work in the corpus joining emotion to behaviour trees. Its
+<strong>EMoBeT</strong> framework adds two node types:</p>
+<ul>
+<li><strong>Emotion Adder</strong> — fires an emotion, from a developer-supplied set of OCC
+  emotions with hard-wired triggers. Single child.</li>
+<li><strong>E-Selector</strong> — selects an action from <strong>exactly two</strong> children by the <em>sign</em> of
+  the character's current mood.</li>
+</ul>
+<div class="callout callout-important">
+<p class="callout-title">It answers this page's open question — by gating, and crudely</p>
+<p>The item under <em>To establish</em> below asks whether emotional state <strong>gates</strong> the
+tree, <strong>re-weights</strong> it, or <strong>parameterises leaf actions</strong>. Belle et al. choose
+gating: an eight-octant PAD mood is collapsed to <strong>one bit</strong> at the moment of
+decision.</p>
+<p>That is prior art to differ from, not to adopt. The wiki's existing argument
+stands and is now sharper: <strong>parameterising leaf actions</strong> fits
+<a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>, where <em>approach</em> appears under joy, fear,
+neutral and anger distinguished by <strong>manner</strong> rather than kind — and it fits
+<a class="wikilink" href="robot-platform.html">robot-platform</a>, whose expressive channels (LED colour, speed, proximity, neck
+angle) are continuous rather than a choice between two scripted lines.</p>
+<p>Note also that EMoBeT's emotions are all triggered by <strong>scripted dialogue
+choices</strong> — hand-labelled events, exactly as in <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>.
+Neither the game-AI tradition nor the ethorobotics one closes the
+perception-to-emotion link. See <a class="wikilink" href="thesis.html">thesis</a>.</p>
+</div>
+<h2>Still missing</h2>
+<p>The BT-and-emotion literature the two sources point at, none of it held: <strong>ALMA</strong>
+(Gebhard) — the layered affect model EMoBeT reimplements; the <strong>OCC</strong> emotion model;
+<strong>GAMYGDALA</strong>, an OCC-based black-box appraisal engine for games; and <strong>Johansson &amp;
+Dell'Acqua</strong>'s earlier <em>emotional selector</em> node. See <a class="wikilink" href="citation-backlog.html">citation-backlog</a>.</p>
+<p>Still nothing on behaviour trees in <strong>social robotics or HRI</strong>:
+<a class="wikilink" href="colledanchise-ogren-behavior-trees.html">colledanchise-ogren-behavior-trees</a> gives one paragraph (the JIBO SDK), and
+<a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a> is about game NPCs, not robots.</p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="belle-2019-programming-with-affect.html">Belle, Gittens &amp; Graham (2019) — Programming with Affect</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="colledanchise-ogren-behavior-trees.html">Colledanchise &amp; Ögren — Behavior Trees in Robotics and AI: An Introduction</a></li>
+<li><a href="emotion-model-comparison.html">Emotion model comparison</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="fuzzy-automaton-fri.html">FRI fuzzy automaton</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="robot-platform.html">Mecanumbot — the experimental robot platform</a></li>
+<li><a href="mecanumbot-behaviours.html">mecanumbot_behaviours — the behaviour layer</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="research-proposal.html">PhD research proposal</a></li>
+<li><a href="plutchik-model.html">Plutchik&#x27;s model</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

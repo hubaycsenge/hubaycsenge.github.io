@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mecanumbot_sensorprocess_smart — the perception stack — Research wiki</title>
+<meta name="description" content="This is the front end that multimodal-emotion-recognition was written as though it did not exist. It substantially changes what that page can assume.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Systems</p>
+  <h1>mecanumbot_sensorprocess_smart — the perception stack</h1>
+<dl class="meta"><div><dt>type</dt><dd>system</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">first-party</span> <span class="tag">perception</span> <span class="tag">ros2</span> <span class="tag">core-contribution</span></dd></div></dl>
+<p><strong>Csenge's own package</strong> (<a href="https://github.com/hubaycsenge/mecanumbot_sensorprocess_smart"><code>hubaycsenge/mecanumbot_sensorprocess_smart</code></a>),
+clipped 2026-07-28 and new to the wiki. Five ROS 2 nodes that turn lidar and
+camera into tracked people in map space.</p>
+<p>This is the front end that <a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a> was written as
+though it did not exist. It substantially changes what that page can assume.</p>
+<h2>The pipeline</h2>
+<pre><code>scan   ──► mecanumbot_lidar_detect_people ──► dr_spaam/dets ─┐
+                                                             ├─► mecanumbot_locate_detections ──► people_fusion
+camera ──► mecanumbot_cam_detect_people   ──► cam_people_detections ─┘
+</code></pre>
+<p><code>people_fusion</code> (<code>geometry_msgs/PoseArray</code>, <code>map</code> frame) is what the behaviour
+trees in <a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a> consume. The lidar node additionally publishes
+<code>subject_pose</code> directly for the leading behaviours.</p>
+<h2>Nodes</h2>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mecanumbot_lidar_detect_people</code></td>
+<td>DR-SPAAM on 2D lidar → tracked people as poses</td>
+</tr>
+<tr>
+<td><code>mecanumbot_cam_detect_people</code></td>
+<td>YOLO pose (Ultralytics/PyTorch, portable) → 17-keypoint detections</td>
+</tr>
+<tr>
+<td><code>mecanumbot_onboard_cam_detect_people</code></td>
+<td>Same output via NVIDIA DeepStream, Jetson only</td>
+</tr>
+<tr>
+<td><code>mecanumbot_locate_detections</code></td>
+<td>Fuses camera + lidar, projects into map space</td>
+</tr>
+<tr>
+<td><code>mecanumbot_detect_tennis</code></td>
+<td>Tennis-ball presence from the camera</td>
+</tr>
+</tbody>
+</table>
+<p>The two camera detectors publish the same topic — run one or the other, not both.</p>
+<h2>The 17 keypoints change the thesis</h2>
+<p><code>PersonKeypoints.msg</code> carries the <strong>17 COCO pose keypoints</strong> — nose, eyes, ears,
+shoulders, elbows, wrists, hips, knees, ankles — as <code>geometry_msgs/Pose</code>, wrapped
+in <code>CamPersonDetection</code> with angular bounds.</p>
+<div class="callout callout-important">
+<p class="callout-title">The perception gap is now half closed, on the platform side only</p>
+<p><a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a> argued that with lidar only, the input set had
+to be <strong>proxemic and kinematic</strong>, and that this was arguably a better fit for
+<a class="wikilink" href="function-orientedness.html">function-orientedness</a> than facial-expression recognition.</p>
+<p>Skeletal keypoints sit <strong>between</strong> those two options, and they sit in the right
+place. They give posture, orientation, gesture, gait and inter-personal
+arrangement — bodily cues — without committing to face reading. That is much
+closer to what a dog actually reads off a human than either alternative, and it
+keeps the Q5 anthropomorphism objection answered.</p>
+<p>Two cautions. First, <strong>eyes, ears and nose are among the 17 keypoints</strong>, so a
+coarse head-orientation and gaze-direction signal is available — which reopens
+Q5 by the back door if it gets used to approximate facial attention. Second, and
+more important: <strong>having keypoints is not having affect.</strong> No node in this
+package infers emotional state. The literature gap in
+<a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a> is untouched — references <code>[5]</code> and <code>[6]</code> of
+<a class="wikilink" href="research-proposal.html">research-proposal</a> are still missing, and there is still no source in the
+corpus mapping body pose to affect. The platform gap closed; the literature gap
+did not.</p>
+</div>
+<h2>Engineering details worth keeping</h2>
+<p>Recorded because they bear on the real-time claim (Q3) and on what can be trusted.</p>
+<p><strong>Lidar detector.</strong> DR-SPAAM weights <code>dr_spaam_5_on_frog.pth</code>, trained on the
+<a href="https://robotics.upo.es/datasets/frog/laser2d_people/">FROG</a> 2D-laser people
+dataset. Confidence threshold 0.45. Scans are cleaned (inf/NaN → max range),
+median-filtered (size 3) and <strong>resampled to 240 points</strong>. Detections falling
+inside an inflated keepout mask (0.2 m) are rejected. Survivors are tracked with a
+<strong>Kalman filter plus Hungarian assignment</strong>, and a track is published only after
+≥2 hits <em>and</em> having exceeded 0.1 m/s at some point — so stationary false
+positives are suppressed.</p>
+<div class="callout callout-warning">
+<p class="callout-title">The motion gate has a cost for this thesis</p>
+<p>A person must have moved faster than 0.1 m/s to ever be published. A <strong>standing
+still, seated, or motionless</strong> human is filtered out by design. Several
+dog-derived scenarios in <a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a> — separation, being
+scolded, the stationary phases of the <a class="wikilink" href="attachment-sst.html">attachment-sst</a> — involve exactly that.
+The camera path is unaffected, so fusion partly covers it, but the <code>subject_pose</code>
+output used by the leading behaviours comes from the lidar node alone.
+<em>(Inference from the documented behaviour; not flagged in the repo.)</em></p>
+</div>
+<p><strong>Fusion.</strong> For each camera detection: find a lidar detection whose bearing falls
+inside the person's angular bounds; failing that, extrapolate range from the raw
+scan using the <strong>20th percentile</strong> of valid ranges inside the bounds, so
+background hits do not dominate; failing that, drop it. Poses landing on occupied
+map cells are ray-traced outward to free space (up to 4 m) and offset by 0.5 m.
+Runs on a 4-thread executor.</p>
+<p><strong>Camera detector.</strong> <code>yolo26n-pose.pt</code>, CUDA when available. Detections not
+yielding exactly 17 keypoints are skipped. Angular bounds come from min/max
+keypoint x and are <strong>only filled once an AMCL pose has arrived</strong> — in topic mode
+no frame is processed at all until <code>/amcl_pose</code> arrives. The DeepStream variant
+hard-codes confidence at 0.3 with per-keypoint threshold 0.15 (below which
+keypoints are emitted as <code>NaN</code>).</p>
+<h2>Known problems in the package</h2>
+<p>Recorded as first-party evidence of the system's state, not as criticism:</p>
+<ul>
+<li><strong>DeepStream config uses absolute <code>/home/ubuntu/</code> paths</strong> and must be edited per
+  machine before that node will start.</li>
+<li><code>mecanumbot_detect_tennis</code> declares <strong>no ROS parameters</strong> and loads <code>yolov8n.pt</code>,
+  which is <strong>not among the shipped model files</strong>.</li>
+<li>RViz marker publishing is <strong>disabled</strong> — publisher commented out,
+  <code>publish_rviz</code> hard-coded to <code>False</code>.</li>
+<li>Python dependencies (<code>torch</code>, <code>ultralytics</code>, <code>opencv-python</code>, <code>scipy</code>,
+  <code>filterpy</code>, <code>transforms3d</code>, <code>dr_spaam</code>, <code>pyds</code>/<code>gi</code>) are <strong>not declared in
+  <code>package.xml</code></strong>, so <code>rosdep</code> will not install them.</li>
+<li><code>param/</code> and <code>config/</code> hold identical copies of the same YAML.</li>
+<li>Only the lidar node's parameters are in YAML; camera, fusion and tennis nodes
+  rely on in-code defaults.</li>
+</ul>
+<h2>The tennis ball</h2>
+<p><code>mecanumbot_detect_tennis</code> publishes <code>tennis_ball_info</code> — seconds since a tennis
+ball was last seen (YOLO at 320 px, COCO class 32, confidence &gt; 0.5).</p>
+<p>Worth flagging because it is the only node in the stack that has no obvious role
+in leading or navigation. A ball is the canonical object of <strong>PLAY</strong> in
+dog–human interaction, and play is the one context in
+<a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>'s impact table with a strong positive valence on
+happiness. If this is groundwork for a fetch or play scenario it connects to
+<a class="wikilink" href="social-competence.html">social-competence</a> and to the PLAY circuit — but that is a guess.
+<strong>Ask Csenge what it is for.</strong> #needs-source</p>
+<h2>Related</h2>
+<p><a class="wikilink" href="robot-platform.html">robot-platform</a> · <a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a> · <a class="wikilink" href="mecanumbot-repos.html">mecanumbot-repos</a> ·
+<a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a> · <a class="wikilink" href="emotion-engine.html">emotion-engine</a> ·
+<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a></p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="albuquerque-2016-emotion-recognition.html">Albuquerque et al. (2016) — Dogs recognize dog and human emotions</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="mecanumbot-repos.html">Mecanumbot repositories</a></li>
+<li><a href="robot-platform.html">Mecanumbot — the experimental robot platform</a></li>
+<li><a href="mecanumbot-behaviours.html">mecanumbot_behaviours — the behaviour layer</a></li>
+<li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="ostensive-signalling.html">Ostensive signalling</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kovács, Vincze et al. (2009–2011) — the FRI fuzzy automaton series — Research wiki</title>
+<meta name="description" content="Ethological models are descriptive verbal models : a sparse collection of observed action–reaction rules, not a complete specification. Two consequences:">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Sources</p>
+  <h1>Kovács, Vincze et al. (2009–2011) — the FRI fuzzy automaton series</h1>
+<dl class="meta"><div><dt>type</dt><dd>source</dd></div><div><dt>status</dt><dd><span class="badge badge-solid" title="well supported and cross-referenced">solid</span></dd></div><div><dt>citekey</dt><dd>kovacs2009fri</dd></div><div><dt>authors</dt><dd>Szilveszter Kovács, Dávid Vincze, Márta Gácsi, Ádám Miklósi, Péter Korondi</dd></div><div><dt>year</dt><dd>2009-2011</dd></div><div><dt>venue</dt><dd>SYROCO&#x27;09 · SAMI 2010 · HSI 2011 · CogInfoCom 2011</dd></div><div><dt>sources</dt><dd>4</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">fuzzy-automaton</span> <span class="tag">fri</span> <span class="tag">architecture</span> <span class="tag">prior-work</span> <span class="tag">series</span></dd></div></dl>
+<div class="callout callout-note">
+<p class="callout-title">Four papers, one contribution</p>
+<p>These four are a conference series with <strong>heavily overlapping text</strong> — the same
+FRI fuzzy automaton, the same MogiRobi worked example, largely the same
+literature review. They are filed as one source page because separating them
+would imply four distinct contributions. Cite the specific venue when the
+distinction matters:</p>
+<ul>
+<li><strong>SYROCO'09</strong> — <em>Interpolation based Fuzzy Automaton for Human-Robot Interaction.</em> First statement.</li>
+<li><strong>SAMI 2010</strong> — <em>Fuzzy Automaton based Human-Robot Interaction.</em></li>
+<li><strong>HSI 2011</strong> — <em>Ethologically Inspired Robot Behavior Implementation.</em> Adds the behaviour-based control decomposition.</li>
+<li><strong>CogInfoCom 2011</strong> — <em>A novel, ethologically inspired HRI model implementation: Simulating dog-human attachment.</em> Frames the work around the Strange Situation Test.</li>
+</ul>
+</div>
+<h2>The problem they solve</h2>
+<p>Ethological models are <strong>descriptive verbal models</strong>: a sparse collection of
+observed action–reaction rules, not a complete specification. Two consequences:</p>
+<ol>
+<li>A <strong>state machine</strong> is the natural structure, since the models follow observed
+   event sequences; and states are continuous, so a <em>fuzzy</em> automaton.</li>
+<li>But a classical fuzzy rule base is <strong>exponential</strong> in the state-vector length
+   and input dimension — <code>R = n·iⁿ·jᵐ</code>. For 10–20 state variables that is
+   thousands of rules, while the actual ethological knowledge is a few dozen.</li>
+</ol>
+<p><strong>Fuzzy Rule Interpolation (FRI)</strong> resolves the contradiction: the rule base may
+be <em>sparse</em>, and FRI still yields a reasonable interpolated conclusion when no
+rule fires. Their FIVE method uses the Vague Environment concept and scaling
+functions to turn fuzzy interpolation into crisp interpolation, then applies
+Shepard-operator interpolation for cheap multidimensional evaluation. See
+<a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a>.</p>
+<p>Two properties they emphasise, both directly relevant to this thesis:</p>
+<ul>
+<li><strong>Low computational demand</strong> — "quick enough to fit the requirements of
+  real-time embedded applications". A real-time claim, though never benchmarked.</li>
+<li><strong>Human-readable rules</strong> — even after numerical optimisation, "the rules are
+  still human readable, and helps the formal validation of the model by the
+  ethological experts". A genuine advantage over a learned model.</li>
+</ul>
+<h2>The worked example</h2>
+<p>MogiRobi in an unfamiliar room with Owner and Stranger, modelling the <strong>Strange
+Situation Test</strong> (<a class="wikilink" href="attachment-sst.html">attachment-sst</a>). Fuzzy states: <code>MissTheOwner</code>,
+<code>AnxietyLevel</code>, <code>ExplorationLevel</code>. Sample rules:</p>
+<pre><code>If OwnerInTheRoom=False Then MissTheOwner=Increasing
+If OwnerToDogDistance=High And StrangerToDogDistance=Small
+   Then AnxietyLevel=Increasing
+If AnxietyLevel=High Then ExplorationLevel=Low
+</code></pre>
+<p>Run: owner leaves at step 17, stranger enters at 31 → anxiety and
+missing-the-owner rise, room exploration is abandoned.</p>
+<p>The output function <code>ω: S×X→Y</code> decomposes into parallel component behaviours plus
+behaviour fusion, giving the standard behaviour-based control structure.</p>
+<h2>Relationship to the emotional engine</h2>
+<div class="callout callout-warning">
+<p class="callout-title">Two separate architectures in the same research programme</p>
+<p>This series and the <a class="wikilink" href="szabo-2011-emotional-engine.html">Szabó engine</a> are <strong>parallel,
+not integrated</strong>. Kovács et al. model <em>behaviour state</em> (anxiety, exploration,
+missing-the-owner) with a fuzzy automaton; Szabó et al. model <em>emotional state</em>
+(happiness, fear, anger, despair, surprise) with a state-space model. Neither
+paper set cites the other's architecture as a component. <strong>Integrating them is
+an open opportunity</strong> — see Q9 in <a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+</div>
+<h2>Limitations</h2>
+<ul>
+<li>The worked example is a "tiny fragment" of a rule base, repeated verbatim across
+  all four papers. No complete model is published.</li>
+<li><strong>No evaluation of any kind</strong> — no accuracy, no timing, no user study. The
+  real-time claim is asserted from the method's cheapness, never measured.</li>
+<li>No emotion recognition: the automaton's inputs are geometric (distances,
+  presence flags), not affective.</li>
+<li>Rule bases are hand-authored from expert knowledge.</li>
+</ul>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="attachment-sst.html">Attachment and the Strange Situation Test</a></li>
+<li><a href="fuzzy-automaton-fri.html">FRI fuzzy automaton</a></li>
+<li><a href="ichikawa-numakunai-2012-roman.html">Ichikawa (2012) and Numakunai (2012) — dog-based robot behaviour in Intelligent Space</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="prior-robot-platforms.html">Prior robot platforms</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="uncanny-valley.html">The uncanny valley (and its ethological reinterpretation)</a></li>
+<li><a href="vincze-2012-interfaces-and-virca.html">Vincze et al. (2012) — HRI interfaces and the VirCA environment</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

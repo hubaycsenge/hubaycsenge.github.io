@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reinforcement learning for behaviour learning — Research wiki</title>
+<meta name="description" content="Everything here is either cited or marked as inference. Nothing in the corpus outside Sutton &amp; Barto uses learning at all, so there is no prior art in…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Synthesis</p>
+  <h1>Reinforcement learning for behaviour learning</h1>
+<dl class="meta"><div><dt>type</dt><dd>synthesis</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>8</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">architecture</span> <span class="tag">reinforcement-learning</span> <span class="tag">decision</span> <span class="tag">hub</span></dd></div></dl>
+<p><strong>The decision.</strong> Csenge, 2026-07-28: reinforcement learning algorithms are to be
+used to teach <a class="wikilink" href="robot-platform.html">robot-platform</a> behaviour patterns. This page is the design
+argument that follows, built on <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> and on what the rest of
+the corpus already constrains. It answers Q11 in <a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+<p>Everything here is either cited or marked as inference. Nothing in the corpus
+outside Sutton &amp; Barto uses learning at all, so <strong>there is no prior art in this
+lineage to inherit from</strong> — the arguments below are constructed, not reported.</p>
+<h2>The objection that has to be answered first</h2>
+<p>Both existing architectures in the corpus treat hand-authored rules as a
+<strong>virtue</strong>, not a limitation:</p>
+<blockquote>
+<p>Even after numerical optimization of the model, the rules are still human
+readable, and helps the formal validation of the model by the ethological
+experts.
+— <a class="wikilink" href="kovacs-fri-automaton-series.html">kovacs-fri-automaton-series</a>, via <a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a></p>
+</blockquote>
+<p><a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a> likewise elicits its event-impact table from
+experts. A learned policy is opaque; ethologists cannot validate it; and the whole
+methodological claim of <a class="wikilink" href="ethorobotics.html">ethorobotics</a> is that behaviour should be grounded in
+observed animal behaviour rather than in whatever an optimiser finds.</p>
+<p>This is a real objection and it is not answered by asserting that learning is
+modern.</p>
+<h2>The answer: learn <em>over</em> the ethological repertoire, not instead of it</h2>
+<blockquote>
+<p>The cats selected actions from those that they instinctively perform in their
+current situation, which Thorndike called their "instinctual impulses"... This
+is like the feature of our formalism where the action selected from a state <em>s</em>
+belongs to a set of admissible actions, A(s). <strong>Specifying these sets is an
+important aspect of reinforcement learning because it can radically simplify
+learning. They are like an animal's instinctual impulses.</strong>
+— <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §14.3, see <a class="wikilink" href="conditioning.html">conditioning</a></p>
+</blockquote>
+<p>The same book adds: "Nothing about reinforcement learning implies a tabula rasa
+view of learning and behavior. Indeed, experience with engineering applications has
+highlighted the importance of building into reinforcement learning systems
+knowledge that is analogous to what evolution provides to animals" (§14.7).</p>
+<p><strong>So the ethologically-derived behaviour repertoire becomes <code>A(s)</code>.</strong> The
+re-expressions tabulated in <a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a> — approach, back, turn
+away, orient, motionless, and their LED analogues — are the admissible actions.
+They stay hand-authored, ethologist-validatable, and legible. What is learnt is
+the <em>selection and parameterisation</em> over that set: which primitive, when, how
+strongly, in which context.</p>
+<div class="callout callout-important">
+<p class="callout-title">What this buys, and what it costs</p>
+<p><strong>Buys:</strong> every action the robot can take remains one an ethologist wrote down
+and can defend. The policy is a mapping into a small, named, meaningful action
+set, so it is inspectable in a way a policy over raw <code>cmd_vel</code> would not be. The
+objection above is substantially defused — legibility lives in <code>A(s)</code>, not in
+the update rule.</p>
+<p><strong>Costs:</strong> the learned selection is still opaque, and the claim "this behaviour
+is ethologically grounded" now holds of the <em>primitives</em> but not of their
+sequencing. Sequencing is exactly what <a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a> currently encodes
+from observed dog behaviour. That is a genuine loss and the thesis has to say so
+rather than paper over it.</p>
+<p><em>(This framing is inference from §14.3 and §14.7, applied to this wiki. Sutton &amp;
+Barto say nothing about robots, dogs or ethology.)</em></p>
+</div>
+<h2>Proposed layering</h2>
+<p>Three layers, with the RL boundary drawn where §3.1 says to draw it — "the limit
+of the agent's absolute control, not of its knowledge":</p>
+<pre><code>  perception          →  EMOTIONAL ENGINE  →   BEHAVIOUR POLICY   →  actuation
+  (lidar, leg det.,      (state model +        (learnt: actor over    (mecanum
+   internal telemetry)    reward computation)   A(s), critic on V)     drive, LEDs)
+  ─────── environment side ───────────────────┤├──── agent ────┤├─ environment ─
+</code></pre>
+<ul>
+<li><strong>The emotional engine is not learnt.</strong> It stays as
+  <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a> built it, and it sits on the <em>environment</em> side
+  of the agent boundary, where it computes the reward. §3.1 is explicit that the
+  reward computation is external to the agent "because it defines the task facing
+  the agent and thus must be beyond its ability to change arbitrarily" — which is
+  also the engineering reason not to let one loop learn both.</li>
+<li><strong>The behaviour policy is learnt</strong>, as an actor over <code>A(s)</code> with a critic
+  predicting return. See <a class="wikilink" href="actor-critic.html">actor-critic</a> for why this architecture and not
+  another.</li>
+<li><strong><code>py_trees_ros</code> becomes the executor of primitives</strong>, not the arbitrator —
+  each leaf is one member of <code>A(s)</code>. This partly dissolves Q9: fuzzy automaton
+  versus behaviour tree stops being a contest if the tree executes and the policy
+  selects. See <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a>.</li>
+</ul>
+<div class="callout callout-important">
+<p class="callout-title">The BT layer is now sourced — and it does more than execute</p>
+<p><a class="wikilink" href="colledanchise-ogren-behavior-trees.html">colledanchise-ogren-behavior-trees</a> Ch. 8 describes <strong>RL-BT</strong>: a hand-designed
+BT in which selected nodes are replaced by <strong>Learning Nodes</strong> — either a
+<em>Learning Action node</em> wrapping Q-learning over a local state/action/reward, or
+a <em>Learning Control Flow node</em>, a Fallback that learns <strong>the order to try its own
+children</strong>.</p>
+<p>§8.4 states the point:</p>
+<blockquote>
+<p>"If RL-BT was started from scratch with a BT consisting of a single action,
+there would be no difference between RL-BT and standard RL. Instead, the point
+of combining BTs with RL is to <strong>address the curse of dimensionality, and do RL
+on smaller state spaces, while the BT connects these subproblems in a modular
+way</strong>."</p>
+</blockquote>
+<p><strong>Two independent arguments now compose.</strong> <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §14.3 says
+the ethological repertoire should be the admissible action set <code>A(s)</code>;
+Colledanchise &amp; Ögren say the tree should carve the learning problem into local
+subproblems. Neither source makes the other's point. Together they give a
+layering in which the ethology supplies <em>which</em> primitives exist and the tree
+supplies <em>how the learning is decomposed between them</em> — which is a considerably
+better-founded architecture than the first draft of this page had.</p>
+<p>The authors are explicit that RL-BT demands <strong>more</strong> designer input than plain RL
+— the tree structure <em>plus</em> states, actions and local rewards per learning node.
+For this thesis that is a feature: hand-authored structure is where the ethology
+lives.</p>
+</div>
+<div class="callout callout-warning">
+<p class="callout-title">Safety has a mechanism now — use it from the start</p>
+<p><a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §17.5 names safe embedding of RL agents in physical
+environments as an open problem and offers nothing.
+<a class="wikilink" href="colledanchise-ogren-behavior-trees.html">colledanchise-ogren-behavior-trees</a> §8.2 offers <code>Sequence(T_safe, T_learn)</code> —
+a hand-authored safety subtree that <strong>overrides</strong> the learned tree, with a
+conservative margin so it can act in time.</p>
+<p>For a robot learning around untrained humans in a real environment this belongs
+in the architecture from day one, not retrofitted before the human study. Note
+the chattering failure mode (§3.4).</p>
+</div>
+<h2>A first MDP formulation</h2>
+<p>Provisional, to be attacked rather than adopted. Cast against what
+<a class="wikilink" href="robot-platform.html">robot-platform</a> actually provides.</p>
+<p><em>Revised 2026-07-28 after the platform re-clip — both the state and the action set
+are larger than the first draft assumed.</em></p>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Proposal</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>State</strong></td>
+<td>Proxemic and kinematic features (distance, bearing, approach velocity, dwell, presence) from <code>people_fusion</code>; <strong>17-keypoint body pose</strong> per person from <a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a>; place familiarity; the emotional state vector; <strong>internal telemetry</strong> — battery, per-wheel currents and error states, IMU</td>
+<td>Perception and telemetry both <strong>confirmed present</strong> (<a class="wikilink" href="mecanumbot-repos.html">mecanumbot-repos</a>). Pose is high-dimensional and will need reducing — see below</td>
+</tr>
+<tr>
+<td><strong>Actions</strong> <code>A(s)</code></td>
+<td>Dog-derived primitives on this body: approach, back, turn away, orient, remain motionless; <strong>neck gestures</strong> (orient, head up/down); grabber gestures; LED colour/pulse patterns; state-dependent admissibility</td>
+<td>From <a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>. Neck and grabbers are <strong>new</strong> and already used as a condition in <a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a>. The LED half still has <strong>no ethological grounding and no recognition baseline</strong> (Q4)</td>
+</tr>
+<tr>
+<td><strong>Reward</strong></td>
+<td>Computed by the emotional engine from event impact — the open problem</td>
+<td>See <a class="wikilink" href="reward-design.html">reward-design</a> and Q14 below</td>
+</tr>
+<tr>
+<td><strong>Episode</strong></td>
+<td>One interaction encounter</td>
+<td>Undefined; real interaction is continuing, not episodic</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-warning">
+<p class="callout-title">17 keypoints per person is not a state representation</p>
+<p>Raw pose is far too high-dimensional to learn over directly, and
+<a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §1.4 explicitly declines the problem — "our concern in
+this book is not with designing the state signal". §14.2.4 is the relevant
+lesson instead: in the TD model, <strong>the stimulus representation determines the
+behaviour of the model more than the learning rule does</strong> (<a class="wikilink" href="td-learning.html">td-learning</a>).</p>
+<p>So the design effort goes into reducing keypoints to a small set of
+ethologically meaningful features — body orientation relative to the robot,
+postural openness, height/crouch, approach gait, arm extension — rather than
+into algorithm choice. That reduction is a thesis contribution in its own right
+and has no precedent in the corpus.</p>
+</div>
+<p>Two structural warnings from the book that this formulation must survive:</p>
+<ul>
+<li><strong>The Markov property is a restriction on the state, not on the process</strong> (§3.1).
+  Proxemic features are a partial observation of an interaction whose relevant
+  history includes what happened minutes ago. §17.3 treats state construction from
+  non-Markov observations, and the book otherwise declines the problem: "our
+  concern in this book is not with designing the state signal" (§1.4).</li>
+<li><strong>Online, incremental learning on physical systems is unsolved</strong> by the authors'
+  own assessment (§17.5), and safe embedding of RL agents in physical environments
+  is named "one of the most pressing areas for future research". Any claim that
+  this is routine engineering is not supported by this source.</li>
+</ul>
+<h2>How learning happens: shaping, not deployment</h2>
+<p>Sparse reward is the expected failure mode — a single human encounter may yield
+one evaluative event (§17.4). The book's principal remedy is <strong>shaping</strong>: start
+from a reward signal that is dense given current behaviour and gradually modify it
+toward the target (<a class="wikilink" href="reward-design.html">reward-design</a>).</p>
+<p>This is also convenient in a way that should be stated openly rather than
+discovered later: shaping is <em>training</em>, and
+<a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a> already lists <strong>"responsiveness to learning and
+training"</strong> among the dog-derived properties a socially competent robot must have
+(<a class="wikilink" href="social-competence.html">social-competence</a>). A robot trained by shaping is not importing an alien
+machine-learning practice into an ethological framework — it is satisfying a
+requirement the framework already stated. This is the strongest in-corpus
+justification for the decision, and it was sitting unremarked on
+<a class="wikilink" href="social-competence.html">social-competence</a> before this ingest.</p>
+<h2>The three questions this creates</h2>
+<p><strong>Q14 — what collapses the emotional state to a scalar reward?</strong> The reward
+hypothesis needs one number (§3.2); the emotional state is a five-dimensional
+vector. The book acknowledges scalar reward is "at odds with" separate appetitive
+and aversive systems and passes over the problem (§14 terminology). This is the
+central unsolved design decision. See <a class="wikilink" href="reward-design.html">reward-design</a>.</p>
+<p><strong>Q15 — is the emotional engine the reward function, or a state feature?</strong> Two
+readable architectures. Either the engine computes <code>R</code> and the policy never sees
+the emotion vector, or the emotion vector is part of <code>S</code> and reward comes from
+somewhere else (task success, human response). The first makes emotion
+motivationally efficacious; the second makes it merely informative. They predict
+different behaviour and the choice is not forced by anything in the corpus.</p>
+<p><strong>Q16 — should the shift from goal-directed to habitual control be a measured
+outcome?</strong> <a class="wikilink" href="habitual-vs-goal-directed.html">habitual-vs-goal-directed</a> gives a documented mechanism and an
+instrument (outcome devaluation) for the one construct
+<a class="wikilink" href="social-competence.html">social-competence</a> defines and no study in the corpus tests. Attractive, and it
+would require a longitudinal design with no precedent here.</p>
+<h2>What to obtain</h2>
+<p>Highest value first; all logged in <a class="wikilink" href="citation-backlog.html">citation-backlog</a>.</p>
+<ol>
+<li><strong>Modayil &amp; Sutton (2014)</strong>, <em>Prediction driven behavior: Learning predictions
+   that drive fixed responses</em> — a <strong>real mobile robot</strong>, fixed responses driven by
+   online prediction learning, explicitly <em>not</em> reward maximisation. Structurally
+   very close to "ethologically-authored primitives plus a learned predictor".
+   Cited in §14.1 as "Pavlovian control".</li>
+<li><strong>Modayil, White &amp; Sutton (2014)</strong>, <em>Multi-timescale nexting in a reinforcement
+   learning robot</em>, Adaptive Behavior 22(2) — online prediction learning on
+   hardware.</li>
+<li><strong>Singh, Lewis &amp; Barto (2009)</strong>, <em>Where do rewards come from?</em> and Singh, Lewis,
+   Barto &amp; Sorg (2010) — the evolutionary argument that the agent's reward should
+   differ from the designer's goal. Directly load-bearing for Q14.</li>
+<li><strong>Oudeyer &amp; Kaplan (2007)</strong> and Baldassarre &amp; Mirolli (2013) on intrinsic
+   motivation — the internal-state-as-reward route.</li>
+</ol>
+<h2>Related</h2>
+<p><a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> · <a class="wikilink" href="conditioning.html">conditioning</a> · <a class="wikilink" href="td-learning.html">td-learning</a> · <a class="wikilink" href="actor-critic.html">actor-critic</a> ·
+<a class="wikilink" href="reward-design.html">reward-design</a> · <a class="wikilink" href="habitual-vs-goal-directed.html">habitual-vs-goal-directed</a> · <a class="wikilink" href="emotion-engine.html">emotion-engine</a> ·
+<a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a> · <a class="wikilink" href="open-questions.html">open-questions</a> · <a class="wikilink" href="thesis.html">thesis</a></p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="actor-critic.html">Actor–critic</a></li>
+<li><a href="behaviour-trees.html">Behaviour trees</a></li>
+<li><a href="belle-2019-programming-with-affect.html">Belle, Gittens &amp; Graham (2019) — Programming with Affect</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="colledanchise-ogren-behavior-trees.html">Colledanchise &amp; Ögren — Behavior Trees in Robotics and AI: An Introduction</a></li>
+<li><a href="conditioning.html">Conditioning</a></li>
+<li><a href="dog-human-interaction-model.html">Dog–human interaction as behaviour model</a></li>
+<li><a href="emotion-arbitration.html">Emotion arbitration</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="fuzzy-automaton-fri.html">FRI fuzzy automaton</a></li>
+<li><a href="habitual-vs-goal-directed.html">Habitual vs goal-directed behaviour</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="robot-platform.html">Mecanumbot — the experimental robot platform</a></li>
+<li><a href="mecanumbot-behaviours.html">mecanumbot_behaviours — the behaviour layer</a></li>
+<li><a href="mecanumbot-perception.html">mecanumbot_sensorprocess_smart — the perception stack</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="plutchik-1982-psychoevolutionary.html">Plutchik (1982) — A psychoevolutionary theory of emotions</a></li>
+<li><a href="plutchik-model.html">Plutchik&#x27;s model</a></li>
+<li><a href="reward-design.html">Reward design</a></li>
+<li><a href="social-competence.html">Social competence</a></li>
+<li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>
+<li><a href="td-learning.html">Temporal-difference learning</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

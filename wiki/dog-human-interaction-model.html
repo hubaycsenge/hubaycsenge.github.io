@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dog–human interaction as behaviour model — Research wiki</title>
+<meta name="description" content="Was a stub with an unargued transfer claim. The corpus now supplies both the argument and, more usefully, concrete behaviour tables .">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Models</p>
+  <h1>Dog–human interaction as behaviour model</h1>
+<dl class="meta"><div><dt>type</dt><dd>model</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>6</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">ethology</span> <span class="tag">dogs</span> <span class="tag">behaviour-model</span> <span class="tag">hub</span></dd></div></dl>
+<p>Was a stub with an unargued transfer claim. The corpus now supplies both the
+argument and, more usefully, <strong>concrete behaviour tables</strong>.</p>
+<h2>The argument, now sourced</h2>
+<p><a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a> makes the case properly: domestication (~18,800–
+32,100 years) produced an agent morphologically and behaviourally very different
+from humans that nonetheless acquired enough <a class="wikilink" href="social-competence.html">social-competence</a> to integrate
+into human society. Dogs and humans each retained independent evolutionary
+capacity, and competition between them is limited. Breeds occupy specific
+behavioural niches defined by function — the biological precedent for
+<a class="wikilink" href="function-orientedness.html">function-orientedness</a>.</p>
+<p>Dogs are also <em>pragmatically</em> suited as a model: their behaviour is unusually
+well-documented and catalogued; humans read dog emotional signals <strong>without
+specific prior experience</strong>; dog signals are <strong>partly redundant across
+modalities</strong> (posture, movement, ear set, tail carriage, vocalisation), which
+makes them unambiguous and allows a subset to be selected for a given robot
+(<a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a>).</p>
+<div class="callout callout-important">
+<p class="callout-title">The transfer claim is explicitly <em>functional analogy</em>, not imitation</p>
+<p>Every source states this. <a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a>: "we do not want
+to copy dog behaviour in any direct sense. Our goal is to observe the
+behavioural organisation of various behaviour systems in dogs and build a
+<strong>functional analogue</strong> into our robots using multimodal channels."
+<a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>: "we do not want to provide an emotional model
+of the dog. We consider the analogy as important when modelling the emotional
+space of an artificial agent."
+<a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a>: "we do not advocate to build robots that
+mimic a dog, as such attempts would constrain the behavioural repertoire and may
+lead to discomfort in some users."</p>
+<p>This resolves step 4 of <a class="wikilink" href="thesis.html">thesis</a>: the claim is not that dog behaviour transfers
+literally, but that dog behaviour is a <strong>source of legible functional
+primitives</strong> that can be re-expressed in whatever embodiment is available.</p>
+</div>
+<h2>The behaviour tables</h2>
+<h3>Expressive behaviours (Gácsi et al. 2016)</h3>
+<p>Derived from ethological observation in named contexts, then re-expressed for a
+PeopleBot with no face and no tail:</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Dog behaviour</th>
+<th>Robot re-expression</th>
+<th>Vocalisation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Joy</strong></td>
+<td>approaches; wags tail; sidles</td>
+<td>approaches; lifts one arm, moves fingers; partly spins</td>
+<td>high-pitched, tonal, staccato</td>
+</tr>
+<tr>
+<td><strong>Fear</strong></td>
+<td>approaches crawling; hanging ears, licks lips; turns, goes away</td>
+<td>approaches slowly; backs; turns away, goes away</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Neutral</strong></td>
+<td>turns toward viewer; approaches (some wagging); stops, orients</td>
+<td>turns toward viewer; approaches; stops, orients</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Sadness</strong></td>
+<td>sits down; lies down; lays head down; motionless</td>
+<td>backs; turns away; lowers arm; motionless</td>
+<td>low-pitched, moderately noisy, long-drawn</td>
+</tr>
+<tr>
+<td><strong>Anger</strong></td>
+<td>approaches crawling; wags tail; head up and down dynamically (barking), shows teeth</td>
+<td>approaches; moves arm high; swings arm several times</td>
+<td>low-pitched, noisy, loud, staccato</td>
+</tr>
+</tbody>
+</table>
+<p>Source contexts: joy = greeting the owner / going for a walk; anger = facing a
+threatening stranger / watching a stranger through the fence; fear = facing a
+threatening stranger; sadness = separation from owner / being scolded; neutral =
+'mobile owner' task.</p>
+<p><strong>Vocalisations follow Morton's rules</strong>, as dog barks do — the acoustic parameters
+map to emotional content independently of the sound's source.</p>
+<h3>Event → emotional state impact (Szabó et al. 2011)</h3>
+<p>Expert-elicited, 13 contexts × 5 states, each with arousal (1–5) and valence (↑/↓):</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>greet O</th>
+<th>leave O</th>
+<th>petted</th>
+<th>O initiates</th>
+<th>O scolds</th>
+<th>rejected</th>
+<th>familiar person</th>
+<th>ambivalent</th>
+<th>threat. stranger</th>
+<th>play</th>
+<th>threat. stimulus</th>
+<th>strange env.</th>
+<th>unpleasant state</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Happiness</td>
+<td>4↑</td>
+<td>3↓</td>
+<td>2↑</td>
+<td>1↑</td>
+<td>4↓</td>
+<td>2↓</td>
+<td>2↑</td>
+<td>2↓</td>
+<td>4↓</td>
+<td>3↑</td>
+<td>4↓</td>
+<td>2↓</td>
+<td>3↓</td>
+</tr>
+<tr>
+<td>Despair</td>
+<td>5↓</td>
+<td>3↑</td>
+<td>3↓</td>
+<td></td>
+<td>2↓</td>
+<td>4↑</td>
+<td>2↑</td>
+<td>2↓</td>
+<td></td>
+<td>3↓</td>
+<td></td>
+<td>1↑</td>
+<td></td>
+</tr>
+<tr>
+<td>Fear</td>
+<td>3↓</td>
+<td>1↑</td>
+<td>2↓</td>
+<td>1↓</td>
+<td>3↑</td>
+<td>1↓</td>
+<td>1↑</td>
+<td>3↑</td>
+<td>3↓</td>
+<td>3↑</td>
+<td>2↑</td>
+<td>1↓</td>
+<td></td>
+</tr>
+<tr>
+<td>Anger</td>
+<td>1↑</td>
+<td></td>
+<td>1↓</td>
+<td></td>
+<td>1↑</td>
+<td>3↑</td>
+<td></td>
+<td>2↓</td>
+<td>1↑</td>
+<td></td>
+<td>1↓</td>
+<td>2↑</td>
+<td></td>
+</tr>
+<tr>
+<td>Surprise</td>
+<td>1↓</td>
+<td>1↑</td>
+<td></td>
+<td>2↑</td>
+<td>1↓</td>
+<td>3↑</td>
+<td>2↑</td>
+<td></td>
+<td>1↓</td>
+<td></td>
+<td>2↑</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><em>(Transcribed from a PDF table; column alignment for sparse rows should be checked
+against the original before use.</em> #needs-source<em>)</em></p>
+<p>Plus per-emotion <strong>dynamics</strong>: fear has a very broad peak, slow decline, high
+impact on medium-term; surprise is very short with fast decline; anger declines
+fast but has slow medium-term decline. See <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>.</p>
+<h3>Behavioural states (Kovács et al.)</h3>
+<p><code>MissTheOwner</code>, <code>AnxietyLevel</code>, <code>ExplorationLevel</code>, driven by owner presence,
+owner-to-dog distance, stranger-to-dog distance, place familiarity — from the
+<a class="wikilink" href="attachment-sst.html">attachment-sst</a>. See <a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a>.</p>
+<h3>Leading interaction (Lakatos et al. demo)</h3>
+<p>Hearing-dog scenario, four components: interaction initiation, leading behaviour,
+feedback, goal-oriented attention-directing behaviour
+(<a class="wikilink" href="lakatos-2014-embodiments-demo.html">lakatos-2014-embodiments-demo</a>).</p>
+<h2>Re-reading the tables as an RL specification</h2>
+<p>Following <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>, these tables stop being a lookup and
+become two different objects:</p>
+<ul>
+<li><strong>The expressive-behaviour table is the action set <code>A(s)</code>.</strong> Its robot
+  re-expression column is a list of named, ethologically-derived primitives —
+  precisely what <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §14.3 calls an animal's "instinctual
+  impulses" and identifies with the set of admissible actions.</li>
+<li><strong>The event → impact table is a reward specification.</strong> It is already an
+  expert-elicited mapping from context to signed, scaled change in affective
+  state, which is structurally what a reward function is.</li>
+</ul>
+<p>Two cautions. First, the impact table is <strong>valenced and five-dimensional</strong>, and a
+reward signal is scalar — Q14 in <a class="wikilink" href="open-questions.html">open-questions</a>. Second, the transcription
+caveat below still applies; do not build a reward function on an unchecked table.</p>
+<h2>What remains open</h2>
+<ul>
+<li><strong>Which characteristics survive on <a class="wikilink" href="robot-platform.html">robot-platform</a>?</strong> No tail, no ears, no
+  arms, no vertical DOF. Of the re-expressions above, only <em>approach</em>, <em>back</em>,
+  <em>turn away</em>, <em>orient</em> and <em>motionless</em> are directly available; arm and antenna
+  signals are not. Q4 in <a class="wikilink" href="open-questions.html">open-questions</a>.</li>
+<li><strong>Attachment</strong> is listed first among dog-derived skills by
+  <a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a> but no source here implements it beyond the
+  <code>MissTheOwner</code> state.</li>
+<li>The primary dog-ethology sources (Topál, Gácsi 2001, Pongrácz, Faragó) are all
+  cited and <strong>none is in the corpus</strong>. See <a class="wikilink" href="citation-backlog.html">citation-backlog</a>.</li>
+</ul>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="albuquerque-2016-emotion-recognition.html">Albuquerque et al. (2016) — Dogs recognize dog and human emotions</a></li>
+<li><a href="behaviour-trees.html">Behaviour trees</a></li>
+<li><a href="belle-2019-programming-with-affect.html">Belle, Gittens &amp; Graham (2019) — Programming with Affect</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="conditioning.html">Conditioning</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="ethorobotics.html">Ethorobotics</a></li>
+<li><a href="gacsi-2016-emotion-attribution.html">Gácsi et al. (2016) — Humans attribute emotions to a robot showing dog-derived behavioural patterns</a></li>
+<li><a href="interspecific-hri.html">HRI as interspecific interaction</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="mecanumbot-repos.html">Mecanumbot repositories</a></li>
+<li><a href="robot-platform.html">Mecanumbot — the experimental robot platform</a></li>
+<li><a href="mecanumbot-perception.html">mecanumbot_sensorprocess_smart — the perception stack</a></li>
+<li><a href="miklosi-2017-ethorobotics.html">Miklósi et al. (2017) — Ethorobotics: A New Approach to Human-Robot Relationship</a></li>
+<li><a href="ostensive-signalling.html">Ostensive signalling</a></li>
+<li><a href="plutchik-1982-psychoevolutionary.html">Plutchik (1982) — A psychoevolutionary theory of emotions</a></li>
+<li><a href="plutchik-model.html">Plutchik&#x27;s model</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="social-competence.html">Social competence</a></li>
+<li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>
+<li><a href="uncanny-valley.html">The uncanny valley (and its ethological reinterpretation)</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="topal-2014-ostensive.html">Topál, Kis &amp; Oláh (2014) — Dogs&#x27; sensitivity to human ostensive cues</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

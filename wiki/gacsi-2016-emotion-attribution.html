@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gácsi et al. (2016) — Humans attribute emotions to a robot showing dog-derived behavioural patterns — Research wiki</title>
+<meta name="description" content="The strongest empirical support in the corpus for the thesis premise that emotion-attribution to a non-humanoid robot works. A candidate for [2] of…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Sources</p>
+  <h1>Gácsi et al. (2016) — Humans attribute emotions to a robot showing dog-derived behavioural patterns</h1>
+<dl class="meta"><div><dt>type</dt><dd>source</dd></div><div><dt>status</dt><dd><span class="badge badge-solid" title="well supported and cross-referenced">solid</span></dd></div><div><dt>citekey</dt><dd>gacsi2016humans</dd></div><div><dt>authors</dt><dd>Márta Gácsi, Anna Kis, Tamás Faragó, Mariusz Janiak, Robert Muszyński, Ádám Miklósi</dd></div><div><dt>year</dt><dd>2016</dd></div><div><dt>venue</dt><dd>Computers in Human Behavior 59:411–419</dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">empirical</span> <span class="tag">emotion-attribution</span> <span class="tag">dog-model</span> <span class="tag">peer-reviewed</span></dd></div></dl>
+<p>The strongest empirical support in the corpus for the thesis premise that
+<a class="wikilink" href="emotion-attribution.html">emotion-attribution</a> to a non-humanoid robot works. A candidate for <code>[2]</code> of
+<a class="wikilink" href="research-proposal.html">research-proposal</a>. #needs-source</p>
+<h2>Design</h2>
+<ul>
+<li><strong>Robot</strong>: PeopleBot (MobileRobots Inc.) on a P3-DX differential-drive base —
+  chest-level touchscreen "head" that cannot move independently, no face, no eyes,
+  no verbal ability, one 5-DOF arm plus a mock-up arm. Deliberately <em>unlike</em> both
+  humans and dogs. Industrial PC, Ubuntu + Xenomai, Player/Stage.</li>
+<li><strong>Dog</strong>: 3-year-old male Belgian malinois, cued by trainer.</li>
+<li><strong>Stimuli</strong>: 5 short video clips each (8–14 s) for joy, fear, anger, sadness,
+  neutral, recorded in a neutral lab so social context could not aid attribution.</li>
+<li><strong>N = 81</strong> (78 for the open-ended part), aged 18–26, 39 dog owners. Blind to
+  purpose; open-ended questionnaire first, then forced choice, to avoid priming.</li>
+</ul>
+<p><strong>Behaviour derivation</strong> is the methodologically important part: dog emotional
+behaviours were extracted from a meta-analysis of prior ethological studies in
+named contexts (joy = greeting the owner / going for a walk; anger = facing a
+threatening stranger; fear = facing a threatening stranger; sadness = separation
+/ being scolded; neutral = 'mobile owner' task), then <strong>re-expressed within the
+robot's embodiment</strong> — not copied. See <a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>.</p>
+<p>Robot vocalisations were synthesised to follow <strong>Morton's rules</strong> (as dog barks
+do): aggressive = low-pitched, noisy, fast-pulsing; joyful = raised pitch, less
+noisy, fast-pulsing; sad = elongated, slow-pulsing, decreasing pitch. Fear and
+neutral had no sound, because dogs rarely vocalise in those contexts.</p>
+<h2>Results</h2>
+<ul>
+<li>Participants <strong>spontaneously</strong> attributed emotions to the robot (12–57% by
+  emotion) and the dog (31–68%) with no prompting about emotion.</li>
+<li>Forced choice: <strong>all</strong> dog and <strong>all</strong> robot clips identified above chance
+  (all p &lt; 0.001). Mean success — dog 0.78, robot 0.75.</li>
+<li><strong>No effect of experience with dogs</strong> (p = 0.267) — notable, because it means
+  the model does not require the user to be dog-literate.</li>
+<li><strong>No overall dog-vs-robot difference</strong> (p = 0.16), but an order effect:
+  seeing dog videos first improved robot recognition (p = 0.002). Among
+  robot-first participants only, dogs were still recognised better (p = 0.025).</li>
+<li>Anger was sometimes read as joy, never the reverse. Robot 'sadness' → 'fear';
+  robot 'fear' → 'neutral'.</li>
+</ul>
+<p><strong>Benchmark context</strong> (facial-expression robots, from the paper):
+PeopleBot 75%, Probo 73%, Kismet 73%, Eddie 57%, Feelix 45%. Collected in
+<a class="wikilink" href="emotion-recognition-benchmarks.html">emotion-recognition-benchmarks</a>.</p>
+<h2>Notable methodological stance</h2>
+<blockquote>
+<p>"From the viewpoint of robot development, participants' impressions by
+definition cannot be false. Their subjective evaluation can best validate the
+robot's expressive behaviours."</p>
+</blockquote>
+<p>Attribution of <em>no</em> emotion, or of the "wrong" emotion, means the robot's actions
+were badly set — not that the participant erred. Directly relevant to designing
+<a class="wikilink" href="validation-study.html">validation-study</a>.</p>
+<h2>Limitations</h2>
+<ul>
+<li>Neutral lab, no social context, no interaction — the authors say results should
+  not be extrapolated to real life, where context strongly aids attribution.
+  <strong>This is exactly the gap the thesis claims to address</strong> (real-time, real
+  environments — see <a class="wikilink" href="emotion-engine.html">emotion-engine</a>).</li>
+<li>Video clips, not live interaction. Robot teleoperated.</li>
+<li>Narrow sample (university students, 18–26).</li>
+<li>Neither the dog nor the robot could fully approach the viewer, which the authors
+  believe depressed recognition rates.</li>
+</ul>
+<div class="callout callout-warning">
+<p class="callout-title">Tension with the thesis premise</p>
+<p>The introduction cites Petisca, Dias &amp; Paiva (2014) that <strong>in some cases robot
+emotion expression leads to poorer perception by humans</strong>. <a class="wikilink" href="research-proposal.html">research-proposal</a>
+assumes affect straightforwardly "helps cooperation and acceptance". The
+condition under which it helps is not established. See Q8 in <a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+</div>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="dog-human-interaction-model.html">Dog–human interaction as behaviour model</a></li>
+<li><a href="emotion-attribution.html">Emotion attribution to artificial agents</a></li>
+<li><a href="emotion-recognition-benchmarks.html">Emotion recognition rates across robots</a></li>
+<li><a href="function-orientedness.html">Function-orientedness</a></li>
+<li><a href="interspecific-hri.html">HRI as interspecific interaction</a></li>
+<li><a href="validation-study.html">Human validation study (planned)</a></li>
+<li><a href="lakatos-2014-emotion-attribution.html">Lakatos et al. (2014) — Emotion attribution to a non-humanoid robot in different social situations</a></li>
+<li><a href="lakatos-2014-embodiments-demo.html">Lakatos et al. — Dog-Inspired Social Behaviour in Robots with Different Embodiments</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="robot-platform.html">Mecanumbot — the experimental robot platform</a></li>
+<li><a href="mecanumbot-behaviours.html">mecanumbot_behaviours — the behaviour layer</a></li>
+<li><a href="miklosi-2017-ethorobotics.html">Miklósi et al. (2017) — Ethorobotics: A New Approach to Human-Robot Relationship</a></li>
+<li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="plutchik-model.html">Plutchik&#x27;s model</a></li>
+<li><a href="prior-robot-platforms.html">Prior robot platforms</a></li>
+<li><a href="social-competence.html">Social competence</a></li>
+<li><a href="hungarian-ethorobotics-network.html">The ethorobotics research network</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

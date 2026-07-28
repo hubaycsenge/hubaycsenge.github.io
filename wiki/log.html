@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log — Research wiki</title>
+<meta name="description" content="Append-only chronological record. Entry headers use a fixed prefix so the log is greppable: grep &quot;^ \[&quot; log.md tail -5 .">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Vault</p>
+  <h1>Log</h1>
+
+<p>Append-only chronological record. Entry headers use a fixed prefix so the log is
+greppable: <code>grep "^## \[" log.md | tail -5</code>.</p>
+<p>Never rewrite an entry — corrections are new entries.</p>
+<hr>
+<h2>[2026-07-27] setup | Wiki scaffolded</h2>
+<p>Created the three-layer structure: <code>raw/</code> (immutable sources), <code>wiki/</code>
+(LLM-maintained pages), <code>CLAUDE.md</code> (schema). Initialised a git repo. Added
+<code>index.md</code> and this log.</p>
+<p>Directory taxonomy chosen for an interdisciplinary robotics/ethology PhD:
+<code>models/</code> for emotion and behaviour models as first-class objects, plus
+<code>concepts/</code>, <code>methods/</code>, <code>systems/</code>, <code>datasets/</code>, <code>people/</code>, <code>experiments/</code>,
+<code>synthesis/</code>.</p>
+<h2>[2026-07-27] ingest | PhD research proposal (Hubay, own notes)</h2>
+<p><strong>Source:</strong> <code>raw/notes/2026-07-27-research-proposal.md</code> → <a class="wikilink" href="research-proposal.html">research-proposal</a></p>
+<p>First source. Self-authored proposal establishing the thesis, its theoretical
+commitments and its novelty claim.</p>
+<p><strong>Pages created (18):</strong> <a class="wikilink" href="thesis.html">thesis</a>, <a class="wikilink" href="open-questions.html">open-questions</a>, <a class="wikilink" href="citation-backlog.html">citation-backlog</a>,
+<a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a>, <a class="wikilink" href="research-proposal.html">research-proposal</a>,
+<a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a>, <a class="wikilink" href="plutchik-model.html">plutchik-model</a>,
+<a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>, <a class="wikilink" href="ethorobotics.html">ethorobotics</a>, <a class="wikilink" href="interspecific-hri.html">interspecific-hri</a>,
+<a class="wikilink" href="function-orientedness.html">function-orientedness</a>, <a class="wikilink" href="ostensive-signalling.html">ostensive-signalling</a>, <a class="wikilink" href="emotion-attribution.html">emotion-attribution</a>,
+<a class="wikilink" href="emotion-engine.html">emotion-engine</a>, <a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a>, <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a>,
+<a class="wikilink" href="robot-platform.html">robot-platform</a>, <a class="wikilink" href="validation-study.html">validation-study</a>.</p>
+<p><strong>Flagged:</strong>
+- All ten numeric references <code>[1]</code>–<code>[10]</code> are unresolved — no bibliography was
+  supplied. Logged in <a class="wikilink" href="citation-backlog.html">citation-backlog</a>; priority is <code>[8]</code>, <code>[9]</code> (candidate
+  emotion models), then <code>[7]</code>, <code>[10]</code> (nearest prior implementations).
+- The emotion model choice (Q1) is undecided and blocks the architecture.
+- No robot platform named; <a class="wikilink" href="robot-platform.html">robot-platform</a> is an empty stub blocking Q2/Q3/Q7.
+- The dog→robot transfer argument (step 4 of <a class="wikilink" href="thesis.html">thesis</a>) is asserted, not made.
+- The real-time / real-environment novelty claim has no operational definition.</p>
+<p><strong>Caveat:</strong> the wiki currently rests entirely on one unreviewed, self-authored
+source. Background knowledge added to <a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a> and
+<a class="wikilink" href="plutchik-model.html">plutchik-model</a> is marked <code>[unsourced]</code> and must be verified.</p>
+<h2>[2026-07-27] ingest | Batch of 18 sources (16 papers, 1 web-clipped article, 2 repo clips)</h2>
+<p>Batch ingest of the ethorobotics corpus. Text extracted with <code>pypdf</code>;
+<code>BartoSutton.pdf</code> (548pp) treated as a reference work, not fully ingested.</p>
+<p><strong>Sources filed (12 new source pages for 18 raw sources):</strong>
+<a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a>, <a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a>,
+<a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a>, <a class="wikilink" href="lakatos-2014-embodiments-demo.html">lakatos-2014-embodiments-demo</a>,
+<a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>, <a class="wikilink" href="szabo-2010-emotional-engine.html">szabo-2010-emotional-engine</a>,
+<a class="wikilink" href="kovacs-fri-automaton-series.html">kovacs-fri-automaton-series</a> (4 papers, one page — heavy textual overlap),
+<a class="wikilink" href="vincze-2012-interfaces-and-virca.html">vincze-2012-interfaces-and-virca</a> (2 papers), <a class="wikilink" href="vincze-2021-automatic-coding.html">vincze-2021-automatic-coding</a>,
+<a class="wikilink" href="ichikawa-numakunai-2012-roman.html">ichikawa-numakunai-2012-roman</a> (2 papers), <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a>,
+<a class="wikilink" href="mecanumbot-repos.html">mecanumbot-repos</a>.</p>
+<p><strong>Pages created (13):</strong> <a class="wikilink" href="uncanny-valley.html">uncanny-valley</a>, <a class="wikilink" href="social-competence.html">social-competence</a>,
+<a class="wikilink" href="attachment-sst.html">attachment-sst</a>, <a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a>, <a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a>,
+<a class="wikilink" href="prior-robot-platforms.html">prior-robot-platforms</a>, <a class="wikilink" href="emotion-recognition-benchmarks.html">emotion-recognition-benchmarks</a>,
+<a class="wikilink" href="hungarian-ethorobotics-network.html">hungarian-ethorobotics-network</a> + the 12 source pages above.</p>
+<p><strong>Pages substantially revised (14):</strong> <a class="wikilink" href="thesis.html">thesis</a>, <a class="wikilink" href="open-questions.html">open-questions</a>,
+<a class="wikilink" href="citation-backlog.html">citation-backlog</a>, <a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a>, <a class="wikilink" href="robot-platform.html">robot-platform</a>,
+<a class="wikilink" href="emotion-engine.html">emotion-engine</a>, <a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>,
+<a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a>, <a class="wikilink" href="plutchik-model.html">plutchik-model</a>, <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a>,
+<a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a>, <a class="wikilink" href="validation-study.html">validation-study</a>, <a class="wikilink" href="ethorobotics.html">ethorobotics</a>,
+<a class="wikilink" href="emotion-attribution.html">emotion-attribution</a>, <a class="wikilink" href="function-orientedness.html">function-orientedness</a>, <a class="wikilink" href="interspecific-hri.html">interspecific-hri</a>,
+<a class="wikilink" href="ostensive-signalling.html">ostensive-signalling</a>.</p>
+<p><strong>References resolved:</strong> <code>[1]</code> → <a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a> (likely);
+<code>[2]</code> → <a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a> / <a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a>
+(likely); <code>[7]</code> → <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a> (likely); <code>[8]</code> and <code>[9]</code>
+bibliographically identified but PDFs not held. <code>[3]</code>, <code>[4]</code>, <code>[5]</code>, <code>[6]</code>, <code>[10]</code>
+remain unresolved with nothing in the corpus addressing them.</p>
+<p><strong>Major findings:</strong>
+- <strong><a class="wikilink" href="robot-platform.html">robot-platform</a> identified as the Mecanumbot</strong> — Turtlebot3-family, mecanum
+  drive, ROS 2 Humble, Raspberry Pi, OpenCR, LDS-02 lidar, DR-SPAAM leg detector,
+  <code>py_trees_ros</code>, four addressable RGB LEDs. <code>hubaycsenge/mecanumbot_behaviours</code>
+  is Csenge's own repo. Q7 answered.
+- <strong>Q1 reframed.</strong> <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a> already built a Panksepp-grounded
+  engine — but used Panksepp for <em>architecture</em> and dog ethology for the <em>state
+  set</em>. Not the binary the wiki assumed.
+- <strong>The contribution has moved.</strong> Every prior engine runs on hand-labelled events;
+  every human study was wizard-of-aoz. The perception-to-emotion link has never
+  been closed in this lineage — that, plus robot internal state, is where the
+  novelty is.
+- <strong>No independent group in the corpus.</strong> Even the Japanese RO-MAN papers have
+  Korondi and Gácsi as co-authors (<a class="wikilink" href="hungarian-ethorobotics-network.html">hungarian-ethorobotics-network</a>).</p>
+<p><strong>Flagged / contradictions recorded:</strong>
+- <a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a> cites evidence that robot emotion expression
+  sometimes <em>worsens</em> human perception, qualifying step 1 of <a class="wikilink" href="thesis.html">thesis</a> (Q8).
+- Fear is the least recognised emotion on every robot measured (~48%) and is
+  misread as indifference, yet <a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a> gives it absolute priority
+  (Q12).
+- No camera or microphone is documented on the platform, which would make
+  <a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a> as proposed unimplementable (Q13).
+- Reference <code>[10]</code> claims behaviour-tree prior art, but <strong>no paper in the corpus
+  uses behaviour trees</strong> — the lineage uses fuzzy automata and state-space models.</p>
+<p><strong>Six new open questions</strong> added: Q8–Q13.</p>
+<p><strong>Recovery tasks logged</strong> in <a class="wikilink" href="citation-backlog.html">citation-backlog</a>: figures/confusion matrix from
+Gácsi 2016 need reading as images; Ichikawa/Numakunai experimental details
+incompletely extracted; the <code>mecanumbot_microcontrollers</code> clip is empty.</p>
+<h2>[2026-07-27] correction | Two errors in the preceding entry</h2>
+<ol>
+<li>"wizard-of-aoz" should read "wizard-of-oz".</li>
+<li>The header's breakdown miscounts. The 18 new raw sources are <strong>15 paper PDFs,
+   1 web-clipped article</strong> (the Frontiers ethorobotics paper, clipped as markdown)
+   <strong>and 2 repo clips</strong> — not "16 papers, 1 article, 2 repo clips", which totals</li>
+<li>The wiki now holds <strong>19 raw sources in total</strong>, the 18 above plus
+   <a class="wikilink" href="research-proposal.html">research-proposal</a>.</li>
+</ol>
+<p>Recorded here rather than edited in place, per the append-only rule.</p>
+<h2>[2026-07-28] ingest | Sutton &amp; Barto (2018), Reinforcement Learning: An Introduction</h2>
+<p>Full interactive ingest of <code>raw/papers/BartoSutton.pdf</code>, replacing the
+table-of-contents-only stub written during the 2026-07-27 batch. Read closely:
+<strong>Ch. 14 Psychology</strong>, <strong>Ch. 15 Neuroscience</strong>, <strong>§17.4 Designing Reward Signals</strong>,
+<strong>§17.5</strong>, plus <strong>§1.3–1.4</strong>, <strong>§3.1–3.2</strong> and the <em>Comments on Terminology</em>.
+Parts I–II recorded structurally only.</p>
+<p><strong>Csenge's steer, mid-ingest:</strong> use reinforcement learning to teach the robot
+behaviour patterns. That closes Q11 and the ingest was written accordingly.</p>
+<p><strong>What the book turned out to be.</strong> Not a source on emotion. Verified against the
+full text: <em>Panksepp</em> appears zero times, <em>emotion</em> three times (all incidental),
+<em>affective</em> twice in the body. §14.7 explicitly disclaims links to ethology and
+behavioural ecology. What it is: the formal apparatus for the animal-learning
+phenomena the rest of the corpus models by hand.</p>
+<p><strong>Key findings</strong></p>
+<ul>
+<li><strong>§14.3 — Thorndike's "instinctual impulses" are the admissible action set
+  <code>A(s)</code></strong>, and "specifying these sets... can radically simplify learning". This
+  answers the standing objection that RL trades away ethologist-validatable rules:
+  keep the dog-derived primitives as <code>A(s)</code>, learn the selection over them. The
+  whole design argument in <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> rests on this sentence.</li>
+<li><strong><a class="wikilink" href="social-competence.html">social-competence</a> already required this.</strong> <a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a>
+  lists "responsiveness to learning and training" among the dog-derived properties
+  a socially competent robot needs, and <strong>no system in the corpus satisfies it</strong>.
+  That is the in-corpus mandate for the RL decision, and it had been sitting
+  unremarked on the page since 2026-07-27.</li>
+<li><strong>Reward is internal, and the agent is not the robot</strong> (§3.1, §14 terminology).
+  Motors, sensors and the reward computation are all on the environment side. The
+  emotional engine therefore sits outside the RL agent and computes its reward.</li>
+<li><strong>Reward ≠ reinforcement</strong>; the TD error δ, not R, drives learning (§15.2).</li>
+<li><strong>Actor–critic maps onto the striatum</strong> (§15.7), and §15.10's team formulation
+  gives <a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a> a third option beside winner-take-all and rule
+  tree — plus the observation that arbitration and structural credit assignment
+  are the same question.</li>
+<li><strong>Model-free/model-based ↔ habitual/goal-directed</strong> (§14.6), with overtraining
+  converting one into the other (Adams 1982). Gives <a class="wikilink" href="social-competence.html">social-competence</a>'s
+  untested "emerges over time" construct a mechanism and an instrument.</li>
+</ul>
+<p><strong>Corrections to the previous stub</strong></p>
+<ul>
+<li>The <strong>SEEKING–dopamine bridge is not supported by this book</strong> and the earlier
+  page's speculative callout has been rewritten as a warning on
+  <a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a>. The book never mentions Panksepp; Ch. 15 is
+  about dopamine and reward prediction, not about any named affective system.</li>
+<li>The stub described the book as "reference only — role in the thesis unclear".
+  Superseded by the steer above.</li>
+</ul>
+<p><strong>Recorded as a within-source inconsistency</strong>: the reward-modulated STDP
+eligibility window is given as "up to 10 seconds" in §15.8 and §15.13 but as
+"0.3 to 2 seconds" in the bibliographic note for §15.8, both citing Yagishita et
+al. (2014). Unresolvable from the book; nothing in the wiki depends on it.</p>
+<p><strong>Counter-evidence recorded, not suppressed</strong>: §17.5 states that current methods
+"struggle to learn rapidly in the incremental, online settings", that catastrophic
+interference is unsolved, and that safe embedding of RL agents in physical
+environments is "one of the most pressing areas for future research". This
+undercuts step 8 of <a class="wikilink" href="thesis.html">thesis</a> as an engineering claim while supporting it as a
+research target. Both readings are on the page.</p>
+<p><strong>Pages created (6)</strong>: <a class="wikilink" href="conditioning.html">conditioning</a>, <a class="wikilink" href="habitual-vs-goal-directed.html">habitual-vs-goal-directed</a>,
+<a class="wikilink" href="td-learning.html">td-learning</a>, <a class="wikilink" href="actor-critic.html">actor-critic</a>, <a class="wikilink" href="reward-design.html">reward-design</a>,
+<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>.</p>
+<p><strong>Pages rewritten (1)</strong>: <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a>.</p>
+<p><strong>Pages updated (10)</strong>: <a class="wikilink" href="emotion-engine.html">emotion-engine</a>, <a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a>,
+<a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a>, <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a>, <a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a>,
+<a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>, <a class="wikilink" href="social-competence.html">social-competence</a>, <a class="wikilink" href="thesis.html">thesis</a>,
+<a class="wikilink" href="open-questions.html">open-questions</a>, <a class="wikilink" href="citation-backlog.html">citation-backlog</a>, plus <code>index.md</code>.</p>
+<p><strong>Question status</strong>: Q11 answered; Q9 partly dissolved (behaviour tree becomes
+executor, learnt policy becomes selector); <strong>Q14</strong> (what collapses the
+five-dimensional emotional state to a scalar reward — the book concedes scalar
+reward is "at odds with" separate appetitive and aversive systems and passes over
+the problem), <strong>Q15</strong> (is the engine the reward function or a state feature?) and
+<strong>Q16</strong> (should habit formation be a measured outcome?) opened.</p>
+<p><strong>Backlog additions</strong>: a full RL section in <a class="wikilink" href="citation-backlog.html">citation-backlog</a>. Highest value is
+<strong>Modayil &amp; Sutton (2014)</strong>, <em>Prediction driven behavior</em> — "Pavlovian control" on
+a real mobile robot, fixed responses driven by online prediction learning and
+explicitly not reward maximisation, which is structurally the nearest published
+thing to what this thesis now proposes.</p>
+<h2>[2026-07-28] ingest | Robot platform repositories, re-clipped</h2>
+<p>Five README clips in <code>raw/repos/Robot_platform/</code>, replacing the two from
+2026-07-27. Batch ingest of first-party repository material.</p>
+<p><strong>The platform is not what the wiki described.</strong> Four load-bearing claims were
+wrong, all in the same direction — the robot is considerably more capable than
+recorded.</p>
+<table>
+<thead>
+<tr>
+<th>The wiki said</th>
+<th>Reality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Onboard compute: <strong>Raspberry Pi</strong></td>
+<td><strong>NVIDIA Jetson Orin Nano</strong>, JetPack 6</td>
+</tr>
+<tr>
+<td><strong>No camera</strong> — the basis of Q13</td>
+<td><strong>CSI camera</strong>, full YOLO-pose detection pipeline</td>
+</tr>
+<tr>
+<td><strong>No internal-state telemetry</strong> — the Q2 blocker</td>
+<td><code>OpenCRState.msg</code> + <code>orin_battery_state</code></td>
+</tr>
+<tr>
+<td><strong>No face, head, neck or arms</strong></td>
+<td><strong>Neck + two grabbers</strong> on <code>/cmd_accessory_pos</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Two new first-party system pages.</strong></p>
+<ul>
+<li><a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a> — <code>hubaycsenge/mecanumbot_sensorprocess_smart</code>, new to
+  the wiki. Five nodes: DR-SPAAM on lidar, YOLO pose on camera (two variants,
+  PyTorch and DeepStream), fusion into <code>people_fusion</code> in map space, and a tennis
+  ball detector. Publishes the <strong>17 COCO pose keypoints</strong> per person.</li>
+<li><a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a> — <code>hubaycsenge/mecanumbot_behaviours</code>. Contains <strong>an
+  experiment already implemented</strong>: three leading-behaviour trees (<code>Control</code>,
+  <code>Doglike</code> via neck/gripper gesture, <code>LED</code>) on one Nav2 substrate.</li>
+</ul>
+<p><strong>Consequences recorded</strong></p>
+<ul>
+<li>The <strong>perception gap is now literature-only.</strong> The robot can see bodies; nothing
+  in the corpus maps body pose to affect. <a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a>
+  rewritten around this, with a concrete search brief (skeleton-based emotion
+  recognition, bodily expression, gait and affect).</li>
+<li>Keypoints land <strong>between</strong> the two options that page was choosing between —
+  neither bare proxemics nor facial expression — which is a better position for
+  <a class="wikilink" href="function-orientedness.html">function-orientedness</a> and keeps Q5 answered. Noted that eyes/ears/nose are
+  among the 17, so gaze approximation could reopen Q5 by the back door.</li>
+<li><a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>'s draft MDP revised: state and action set both
+  expand. Added a warning that 17 keypoints is not a state representation, and
+  that per <a class="wikilink" href="td-learning.html">td-learning</a> §14.2.4 the <strong>stimulus representation matters more than
+  the learning rule</strong> — so the reduction to ethologically meaningful features is
+  where the work goes.</li>
+<li><a class="wikilink" href="validation-study.html">validation-study</a> gains three implemented conditions, recording-scheme
+  services for data capture, and <code>SimBehaviorEvaluation</code> /
+  <code>SimDetectionEvaluation</code> automatic scoring (bears on Q10). Flagged explicitly
+  that the implemented experiment is a <strong>signalling-legibility</strong> study, not a test
+  of the emotional engine, and that conflating them would be easy.</li>
+</ul>
+<p><strong>Flagged in the packages</strong> (first-party evidence of system state, not criticism):
+runtime dependencies undeclared in <code>package.xml</code> in both of Csenge's repos;
+DeepStream config uses absolute <code>/home/ubuntu/</code> paths; <code>mecanumbot_detect_tennis</code>
+loads a checkpoint that is not shipped; <code>hide_and_seek.py</code> complete but not
+registered as an executable; demo launch file points at unregistered nodes.</p>
+<p><strong>A design consequence worth watching</strong>: the lidar detector publishes a track only
+after it has exceeded 0.1 m/s, so a <strong>motionless person is filtered out</strong>. Several
+dog-derived scenarios — separation, being scolded, the stationary phases of the
+<a class="wikilink" href="attachment-sst.html">attachment-sst</a> — are exactly that case, and <code>subject_pose</code> for the leading
+behaviours comes from the lidar node alone.</p>
+<p><strong>Still missing, and asked rather than assumed</strong> (per <code>CLAUDE.md</code>, do not assume a
+repo has been run): whether the full stack has run end to end on hardware; whether
+<code>mecanumbot_audio</code> is capture, playback or both; <strong>commit SHAs for all five repos</strong>
+(none recorded — the clips are undated snapshots); licences for three of five
+(Apache-2.0 recorded for <code>mecanumbot_msgs</code> and <code>mecanumbot_remote</code>); camera
+specification and mounting height; LED mode/colour enumerations; and what the
+tennis-ball detector is for.</p>
+<p><strong>Question status</strong>: Q2 loses its data blocker and becomes modelling-only; Q4 is
+less severe (neck restores <em>head up and down dynamically</em>); Q7 answered and
+corrected; Q13 reframed — its premise was false.</p>
+<p><strong>Pages created (2)</strong>: <a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a>, <a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a>.
+<strong>Pages rewritten (2)</strong>: <a class="wikilink" href="mecanumbot-repos.html">mecanumbot-repos</a>, <a class="wikilink" href="robot-platform.html">robot-platform</a>.
+<strong>Pages updated (6)</strong>: <a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a>, <a class="wikilink" href="emotion-engine.html">emotion-engine</a>,
+<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>, <a class="wikilink" href="validation-study.html">validation-study</a>, <a class="wikilink" href="open-questions.html">open-questions</a>, plus
+<code>index.md</code>.</p>
+<p><strong>Not done in this pass</strong>: the Panksepp (2011) and Plutchik (1982) primaries were
+read on 2026-07-28 but are <strong>not yet written up</strong>, pending a steer on whether to
+file the Panksepp-architecture / Plutchik-state-set hybrid as the Q1 decision.</p>
+<h2>[2026-07-28] ingest | Panksepp (2005, 2011), Plutchik (1982), Topál (2014), Albuquerque (2016)</h2>
+<p>Five primaries, ingested in one pass. Csenge supplied the <strong>full thesis reference
+list</strong> in the same message, which resolves the numeric-reference bookkeeping that
+has been open since 2026-07-27.</p>
+<p><strong>Reference list resolved.</strong> All ten numeric refs of <a class="wikilink" href="research-proposal.html">research-proposal</a> are now
+identified; six held. Three earlier wiki guesses were wrong:</p>
+<ul>
+<li><code>[3]</code> is <strong>Topál, Kis &amp; Oláh (2014)</strong> in <em>The Social Dog</em>, not the
+  "topal-2009-ostensive" placeholder.</li>
+<li><code>[9]</code> is <strong>Plutchik (1982)</strong>, Social Science Information, not Plutchik (2001).</li>
+<li><code>[2]</code> is <strong>Lakatos (2014)</strong>, not Gácsi 2016 — the wiki was unsure.</li>
+</ul>
+<p><strong>Two problems recorded in the supplied list</strong>, both flagged in
+<a class="wikilink" href="citation-backlog.html">citation-backlog</a>:</p>
+<ol>
+<li><strong><code>[9]</code> is used twice</strong> — Plutchik (1982) and Belle, Gittens &amp; Graham (2019).
+   The thesis document needs renumbering.</li>
+<li><strong><code>[7]</code> is IECON 2012, not 2011.</strong> doi:10.1109/iecon.2012.6389513, pp.
+   5516–5522. The wiki dated it 2011 from the raw filename
+   <code>Szabó 2011 IECON Canada.pdf</code>; IECON 2012 was in Montréal, and the PDF title
+   page matches the 2012 entry exactly.</li>
+</ol>
+<h2>[2026-07-28] correction | Szabó emotional-engine paper is 2012, not 2011</h2>
+<p>The page <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a> carried <code>year: 2011</code>, <code>citekey:
+szabo2011building</code> and venue "IECON 2011". All three were wrong, inherited from
+the raw PDF's filename. Corrected in frontmatter to <strong>2012</strong>,
+<code>szabo2012building</code>, IECON 2012 pp. 5516–5522.</p>
+<p><strong>The page filename was deliberately left unchanged.</strong> 22 pages link to
+<code>szabo-2011-emotional-engine</code>, and <code>log.md</code> is append-only so its existing links
+cannot be rewritten. A rename is a clean mechanical follow-up if wanted. Cite the
+paper as <strong>2012</strong> regardless of the page name.</p>
+<h2>[2026-07-28] ingest | (continued) findings from the five primaries</h2>
+<p><strong>Panksepp — the SEEKING/RPE bridge is refuted by its own putative source.</strong>
+On 2026-07-27 this wiki floated a bridge from Panksepp's SEEKING circuit to the TD
+reward-prediction error and flagged it <code>[unsourced]</code>, pending a Panksepp primary.
+The primary arrived and rejects it: §7 of
+<a class="wikilink" href="panksepp-2005-affective-consciousness.html">panksepp-2005-affective-consciousness</a> is titled <em>"The
+SEEKING/expectancy/wanting system of the brain: It's not just 'reward prediction
+error'"</em>. Recorded as a <code>&gt; [!warning] Contradiction</code> on
+<a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a> and <a class="wikilink" href="td-learning.html">td-learning</a>, with both positions quoted and
+the asymmetry stated: Panksepp disputes that RPE <em>exhausts</em> SEEKING, not that
+SEEKING is dopaminergic; <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> never discusses affect.</p>
+<p><strong>Panksepp — a second correction.</strong> "All primal emotional systems interact with
+each other in primal inhibitory and excitatory relationships that no one has yet
+mapped empirically." <a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a> previously claimed
+inter-circuit inhibition gives a principled basis for arbitration rules. It does
+not. Second problem for <a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a>, on top of the obsolete
+triune-brain justification.</p>
+<p><strong>Plutchik is stronger than the corpus made him look.</strong> The <strong>functional
+language</strong> — fear→Protection, anger→Destruction, anticipation→Exploration — is
+<a class="wikilink" href="function-orientedness.html">function-orientedness</a> arriving from emotion theory in 1982, and the
+behavioural column maps onto motion primitives a faceless robot has. Also explains
+<em>surprise</em>, which Szabó implemented and Panksepp has no circuit for.</p>
+<p><strong>Q1 — recommendation filed, not decided.</strong> <a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a> now
+carries a recommendation: <strong>Panksepp for architecture, Plutchik for the state set
+and behaviour mapping</strong>, with the cost stated (two incompatible ontologies stapled
+together; neither author would endorse it). Explicitly awaiting sign-off.</p>
+<p><strong>Q2 — three traditions converge.</strong> Panksepp splits homeostatic from emotional
+affects; Plutchik splits motivation from emotion; <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §14.3
+makes internal state a modulator of what is rewarding. All three say internal
+state is a <em>different category</em>, not another dimension of the affect vector. Best
+support Q2 has had.</p>
+<p><strong><a class="wikilink" href="ostensive-signalling.html">ostensive-signalling</a> goes from stub to draft.</strong> <a class="wikilink" href="topal-2014-ostensive.html">topal-2014-ostensive</a>
+supplies a five-item build specification — monitor, gain, maintain, shift
+attention, share a common focus — none of it requiring theory of mind, all of it
+implementable from what <a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a> publishes. And it reframes the
+target from knowledge transfer to <strong>behavioural synchronisation</strong>.</p>
+<p><strong>A failure mode imported with the dog model</strong>: ostensively cued instructions
+override the dog's own evidence — deceptive pointing, empty containers, smaller
+food quantities. A dog-like ostension-responsive robot inherits this. Recorded as
+a warning, with the observation that it is the same mechanism that makes shaping
+work: trainability and manipulability are the same property.</p>
+<p><strong>First independent source in the corpus.</strong> <a class="wikilink" href="albuquerque-2016-emotion-recognition.html">albuquerque-2016-emotion-recognition</a>
+is from Lincoln and São Paulo — outside <a class="wikilink" href="hungarian-ethorobotics-network.html">hungarian-ethorobotics-network</a>. N=17,
+cross-modal preferential looking, congruence index 0.19 ± 0.03 (p &lt; 0.0001), with
+a null neutral-sound control. <strong>But dogs were more than twice as sensitive to
+conspecific than heterospecific cues (0.26 vs 0.12)</strong> — the dog's competence is
+weakest exactly where the robot's task lies. Recorded on
+<a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a> as a ceiling on expectations.</p>
+<p><strong>A mismatch worth naming</strong>: refs <code>[5]</code> and <code>[6]</code> turn out to be surveys of
+<em>speech</em> emotion recognition and <em>facial expression</em> recognition. The proposal's
+perception plan was face + voice; the platform delivers body pose. <strong>The
+literature the thesis needs — skeleton-based / bodily affect recognition — is not
+on the reference list at all.</strong></p>
+<p><strong>Pages created (5)</strong>: <a class="wikilink" href="panksepp-2005-affective-consciousness.html">panksepp-2005-affective-consciousness</a>,
+<a class="wikilink" href="panksepp-2011-emotional-circuits.html">panksepp-2011-emotional-circuits</a>, <a class="wikilink" href="plutchik-1982-psychoevolutionary.html">plutchik-1982-psychoevolutionary</a>,
+<a class="wikilink" href="topal-2014-ostensive.html">topal-2014-ostensive</a>, <a class="wikilink" href="albuquerque-2016-emotion-recognition.html">albuquerque-2016-emotion-recognition</a>.
+<strong>Pages rewritten (3)</strong>: <a class="wikilink" href="plutchik-model.html">plutchik-model</a>, <a class="wikilink" href="ostensive-signalling.html">ostensive-signalling</a>,
+<a class="wikilink" href="citation-backlog.html">citation-backlog</a> (numeric-reference table).
+<strong>Pages updated (8)</strong>: <a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a>,
+<a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a>, <a class="wikilink" href="open-questions.html">open-questions</a>, <a class="wikilink" href="td-learning.html">td-learning</a>,
+<a class="wikilink" href="social-competence.html">social-competence</a>, <a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a>,
+<a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>, plus <code>index.md</code>.</p>
+<p><strong>Not ingested</strong>: <code>raw/papers/9780429489105_previewpdf-1.pdf</code> turns out to be a
+45-page preview of <strong>Colledanchise &amp; Ögren, <em>Behavior Trees in Robotics and AI</em></strong>.
+Not requested, so left alone — but it is directly relevant to the
+"behaviour trees in HRI: nothing" coverage gap. Awaiting instruction.</p>
+<h2>[2026-07-28] ingest | Colledanchise &amp; Ögren, Behavior Trees in Robotics and AI</h2>
+<p>Full 198-page version, replacing the 45-page preview clipped earlier the same day.
+Ingested on Csenge's steer: <strong>behaviour trees as the executive method for decisions
+made by reinforcement learning algorithms</strong>.</p>
+<p><strong>Provenance recorded</strong>: the PDF is <strong>arXiv:1709.00084v6, dated 25 Oct 2022</strong>,
+printed from a browser — not the CRC Press 2018 print edition, and four years
+newer. Cited by chapter and section, never by page.</p>
+<p><strong>Read closely</strong>: Ch. 1 (formulation, node semantics, applications), Ch. 2 (relation
+to FSMs, HFSMs, Subsumption, Teleo-Reactive, Decision Trees, and the
+advantages/disadvantages list), Ch. 3 (design principles), <strong>Ch. 8 (machine
+learning)</strong>. Chapters 5, 6, 7 and 9 read for scope only — recorded by what they
+deliver, not derived. Flagged on the source page so no formal guarantee gets
+claimed from a chapter that was skimmed.</p>
+<p><strong>The finding that matters.</strong> §8.4:</p>
+<blockquote>
+<p>"If RL-BT was started from scratch with a BT consisting of a single action, there
+would be no difference between RL-BT and standard RL. Instead, the point of
+combining BTs with RL is to address the curse of dimensionality, and do RL on
+smaller state spaces, while the BT connects these subproblems in a modular way."</p>
+</blockquote>
+<p>So the BT is not downstream plumbing — it <strong>decomposes the learning problem</strong>.
+That is a stronger claim than the steer assumed, and it composes with
+<a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §14.3 (ethological repertoire as <code>A(s)</code>): the ethology
+supplies which primitives exist, the tree supplies how the learning is carved up
+between them. Neither source makes the other's point.</p>
+<p><strong>RL-BT mechanics recorded</strong>: a hand-designed BT with selected nodes replaced by
+<strong>Learning Nodes</strong> — a <em>Learning Action node</em> wrapping Q-learning over a local
+state/action/reward, and a <em>Learning Control Flow node</em>, a Fallback that learns
+<strong>the order to try its own children</strong>. Costs more designer input than plain RL, not
+less; for this thesis that is a feature.</p>
+<p><strong>Safety now has a mechanism.</strong> <code>Sequence(T_safe, T_learn)</code> — a hand-authored
+safety subtree that overrides the learned tree, with a conservative margin. This is
+a concrete answer to the problem <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §17.5 names and does not
+solve. Recorded on <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> with the chattering failure mode.</p>
+<p><strong>Q9 settled — behaviour tree, with learning nodes.</strong> BTs generalise FSMs, HFSMs,
+Subsumption, Teleo-Reactive programs and Decision Trees, so nothing expressible in
+<a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a> is lost by structure. And §8.2.4.1 measured an FSM-based
+learner's node count growing <strong>exponentially</strong> while the BT's growth rate declined;
+§2.6 gives the reason — FSM transitions are one-way control transfers, Dijkstra's
+<code>goto</code>. A fuzzy automaton is a state machine, so its transition function is both
+what learning displaces <em>and</em> the part that scales badly under it.</p>
+<p><strong>The residue of Q9, kept explicit</strong>: the automaton does <strong>behaviour fusion</strong>
+(continuous blending by necessity level — "somewhat anxious while still
+exploring"); a BT <strong>selects</strong>. That loss is real and is not resolved by this
+source.</p>
+<p><strong>Q3 gains an analytic tool.</strong> Ch. 9 converts Stochastic BTs into Discrete Time
+Markov Chains, yielding Mean Time To Succeed, Mean Time To Fail and success
+probability over time, composable across subtrees — a defensible answer to "will it
+complete in time and how often will it fail" that does not require running the
+robot. Pairs with the measured end-to-end latency already proposed.</p>
+<p><strong>Coverage gap only partly closed, and this matters.</strong> The book has <strong>no emotion
+content whatever</strong>, and its only social-robotics entry is a <strong>single paragraph</strong> on
+the JIBO SDK. The wiki's "behaviour trees in HRI — nothing" gap survives.
+<strong>Belle, Gittens &amp; Graham (2019)</strong>, <em>Programming with Affect</em> (IEEE GEM 2019) is
+now the single most important unheld source: it is the only item in the thesis
+reference list joining behaviour trees to emotion, and the nearest prior art to the
+decision layer.</p>
+<p><strong>Disadvantages recorded from §2.6.2</strong> rather than glossed: the engine is complex
+to implement; <strong>checking all conditions can be expensive</strong> (relevant — the platform
+now runs two neural detectors plus fusion); feed-forward execution is fine in
+structured environments; BTs need a different mindset (condition-driven and
+tick-driven, not state- and event-driven); tooling is less mature than for FSMs.</p>
+<p><strong>Pages created (1)</strong>: <a class="wikilink" href="colledanchise-ogren-behavior-trees.html">colledanchise-ogren-behavior-trees</a>.
+<strong>Pages rewritten (1)</strong>: <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a>.
+<strong>Pages updated (6)</strong>: <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>, <a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a>,
+<a class="wikilink" href="open-questions.html">open-questions</a> (Q3, Q9), <a class="wikilink" href="thesis.html">thesis</a> (step 7), <a class="wikilink" href="citation-backlog.html">citation-backlog</a>, plus
+<code>index.md</code>.</p>
+<h2>[2026-07-28] ingest | Belle, Gittens &amp; Graham (2019), Programming with Affect</h2>
+<p>The last unheld numeric reference (<code>[9]</code>/<code>[10]</code>), and the one flagged in the
+preceding entry as most important. IEEE GEM 2019, 8 pages, downloaded via ELTE from
+IEEE Xplore. <strong>All ten numeric references of <a class="wikilink" href="research-proposal.html">research-proposal</a> are now
+identified and eight are held</strong>; only <code>[5]</code> and <code>[6]</code> remain outstanding.</p>
+<p><strong>What it is.</strong> <strong>EMoBeT</strong> — a behaviour-tree extension making mood a first-class
+property, via two node types: an <strong>Emotion Adder</strong> (fires a developer-specified OCC
+emotion from a hard-wired trigger) and an <strong>E-Selector</strong> (chooses between exactly
+two children by the sign of the character's mood). Built on a light-weight
+reimplementation of Gebhard's <strong>ALMA</strong>, with OCC emotions, a <strong>PAD</strong> mood space of
+eight octants, <strong>Five Factor</strong> personality setting default mood and scaling emotion
+intensity, and a memory module decaying on the <strong>Ebbinghaus</strong> curve that re-triggers
+emotions when a previously-met player returns.</p>
+<p><strong>The finding that matters most.</strong> Every emotion in every scenario is fired by a
+<strong>scripted player dialogue choice</strong> with a hard-wired trigger — hand-labelled
+discrete events, exactly as in <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>'s MATLAB GUI.</p>
+<p>Two entirely independent traditions — Hungarian ethorobotics, and Caribbean/Canadian
+game AI using OCC and PAD instead of Panksepp and dog ethology — arrive at the same
+three-layer architecture and <strong>stop at the same place</strong>. Neither closes the
+perception-to-emotion link, and neither cites the other. Recorded on <a class="wikilink" href="thesis.html">thesis</a>:
+the gap is <strong>field-wide, not lineage-specific</strong>, which materially strengthens the
+contribution claim.</p>
+<p><strong>Novelty assessment, stated precisely.</strong> EMoBeT <em>does</em> pre-empt "behaviour-tree
+nodes that make affective state first-class in action selection" — that idea is
+prior art as of 2019 and the thesis cannot claim it. It does <em>not</em> have a robot,
+sensing of any kind, learning, agent internal state, a real environment, or <strong>any
+evaluation</strong>: §V is titled "Scenarios and Evaluation" but contains only worked
+traces of PAD values through three scripted dialogues, and the conclusion defers
+usability and performance testing — "to determine if it is a viable approach" — to
+future work. The idea is prior art; the evidence is not.</p>
+<p><strong>A live design question now has prior art to differ from.</strong> <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a>
+asked whether emotional state should <strong>gate</strong> the tree, <strong>re-weight</strong> it, or
+<strong>parameterise leaf actions</strong>. Belle et al. gate, and collapse an eight-octant PAD
+mood to <strong>one bit</strong> at the decision point. The wiki's existing argument for
+parameterising leaf actions stands and is sharper for having an alternative:
+<em>approach</em> appears under joy, fear, neutral and anger in
+<a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>, distinguished by <strong>manner</strong>, and
+<a class="wikilink" href="robot-platform.html">robot-platform</a>'s channels (LED colour, speed, proximity, neck angle) are
+continuous.</p>
+<p><strong>Two things EMoBeT has that the Hungarian lineage lacks</strong>, recorded on
+<a class="wikilink" href="emotion-engine.html">emotion-engine</a>: <strong>episodic memory of specific individuals</strong> with decay — which
+is what a longitudinal test of <a class="wikilink" href="social-competence.html">social-competence</a> would need (Q16) — and a
+<strong>retained long-term/personality layer</strong>, where Szabó's long-term layer appears in
+2010 and is gone by 2012.</p>
+<p><strong>Q5 gains a clear datapoint.</strong> EMoBeT is built entirely from human psychology —
+OCC, PAD, Five Factor, human dialogue — and none of it would survive translation to
+a faceless wheeled robot. Their stated stance, simulating human-like emotion
+"regardless of whether it is an optimal outcome", is also the opposite of what
+<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> proposes; that tension needs an answer in the thesis.</p>
+<p><strong>New unheld sources logged</strong>: ALMA (Gebhard), the <strong>OCC</strong> model — a third emotion
+model in the corpus alongside Panksepp and Plutchik — GAMYGDALA, Johansson &amp;
+Dell'Acqua's emotional selector, the Five Factor Model, and Ebbinghaus.</p>
+<p><strong>Pages created (1)</strong>: <a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a>.
+<strong>Pages updated (6)</strong>: <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a>, <a class="wikilink" href="thesis.html">thesis</a>, <a class="wikilink" href="emotion-engine.html">emotion-engine</a>,
+<a class="wikilink" href="open-questions.html">open-questions</a> (Q5), <a class="wikilink" href="citation-backlog.html">citation-backlog</a>, plus <code>index.md</code>.</p>
+
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

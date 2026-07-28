@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emotion arbitration — Research wiki</title>
+<meta name="description" content="The step between having an emotional state vector and doing something about it: which emotion, of several simultaneously active, gets expressed? The wiki…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Methods</p>
+  <h1>Emotion arbitration</h1>
+<dl class="meta"><div><dt>type</dt><dd>method</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>2</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">architecture</span> <span class="tag">emotion</span> <span class="tag">decision-making</span></dd></div></dl>
+<p>The step between having an emotional state vector and doing something about it:
+<strong>which emotion, of several simultaneously active, gets expressed?</strong> The wiki did
+not have this concept before ingesting <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>; it is a
+required component of <a class="wikilink" href="emotion-engine.html">emotion-engine</a>.</p>
+<h2>Two approaches in the corpus</h2>
+<p><strong>Winner-take-all</strong> — Kismet's approach. The strongest dimension is expressed.
+Simple; produces abrupt switching and cannot express ambivalence.</p>
+<p><strong>Hierarchical rule tree</strong> — <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>, explicitly proposed
+<em>against</em> winner-take-all:</p>
+<ol>
+<li>Exactly one positive dimension → express it.</li>
+<li>Several positive dimensions:
+   - <strong>a.</strong> fear &gt; 3 (medium) → express <strong>fear</strong>, regardless of all others;
+   - <strong>b.</strong> a strict maximum exists → express it;
+   - <strong>c.</strong> tie → fixed hierarchy <strong>fear &gt; surprise &gt; anger &gt; happiness = despair</strong>;
+   - <strong>d.</strong> tie at ≥ 3 → express the top two as <strong>mixed or alternating behaviour</strong>.</li>
+</ol>
+<p><strong>A team of units under one broadcast signal</strong> — a third option, from
+<a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> §15.10 and <a class="wikilink" href="actor-critic.html">actor-critic</a>. Several behaviour units each
+receive the same scalar reinforcement signal δ, each explores independently, and
+the expressed behaviour is their collective output. No explicit selection rule at
+all. Williams (1992) showed such a team ascends the gradient of the shared reward
+without the units communicating.</p>
+<div class="callout callout-important">
+<p class="callout-title">Arbitration and credit assignment are the same question</p>
+<p>§15.10 recasts winner-take-all not as a naïve default but as a deliberate
+simplification of <strong>structural credit assignment</strong>: "An extreme case is a
+winner-take-all arrangement (for example, the result of lateral inhibition in
+the brain) that restricts collective actions to those to which only one, or a
+few, team members contribute. In this case the winners get the credit or blame."</p>
+<p>Once behaviour is learnt (<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>), this matters
+concretely. A hierarchical rule tree gives no way to attribute an outcome back
+to the components that produced it, because the rule, not the outcome, decides.
+Winner-take-all does. <strong>The choice of arbitration scheme therefore constrains
+what can be learnt</strong>, which is an argument the corpus does not contain and which
+partly reopens the case for the option Szabó et al. rejected.
+<em>(Inference from §15.10; the book discusses neither emotion nor arbitration.)</em></p>
+</div>
+<h2>The biological justification, and its weakness</h2>
+<p>Grounded in <strong>MacLean's triune brain</strong>: fear and anger are ancestral ("reptilian"),
+happiness and despair belong to newer cortical regions associated with higher
+cognition and social contexts. Surprise sits between, as the startle reaction —
+whose function is to supply extra information to the nervous system and speed up
+decisions about an adaptive response.</p>
+<div class="callout callout-warning">
+<p class="callout-title">The authors undercut their own justification</p>
+<p><a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a> states plainly that the triune-brain hypothesis
+"is obsolete in the light of newer neurobiological findings", then uses it
+anyway because it "can be valid and helpful in setting up the hierarchy". The
+arbitration hierarchy is therefore <strong>motivated by a superseded model</strong>. Any
+reuse in this thesis needs either a better justification or an empirical one
+(e.g. tune the hierarchy to what humans actually read correctly).</p>
+</div>
+<h2>Mixed emotions — and what they are not</h2>
+<p>Rule 2d means <strong>ambivalent behaviour across modalities</strong>: the example given is an
+animal threatened by an approaching stranger that lowers itself submissively
+(fear) while emitting aggressive vocalisations. Or the same modality alternating
+rapidly, depending on the system's expressive capacity.</p>
+<p>This is explicitly <strong>not</strong> Plutchik's secondary/tertiary dyads
+(<a class="wikilink" href="plutchik-model.html">plutchik-model</a>) — the paper cites Plutchik only to disclaim the resemblance.</p>
+<h2>Open issues carried forward</h2>
+<ul>
+<li><strong>The medium-term layer is not integrated.</strong> Arbitration uses only short-term
+  output <code>yR</code>; the authors call integrating <code>yM</code> future work. So the robot's
+  "mood" influences the state but never directly the decision. Unresolved.</li>
+<li><strong>The fear-override rule may be counterproductive in HRI.</strong> Fear is the least
+  reliably recognised emotion across every robot measured
+  (<a class="wikilink" href="emotion-recognition-benchmarks.html">emotion-recognition-benchmarks</a>) and is typically misread as indifference,
+  provoking negative user reactions (<a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a>). A rule
+  that prioritises it maximises exposure to the failure mode. Q12 in
+  <a class="wikilink" href="open-questions.html">open-questions</a>.</li>
+<li><strong>Mixed/alternating expression is untested.</strong> No study in the corpus measures
+  whether humans can read a mixed emotional display at all.</li>
+<li>On <a class="wikilink" href="robot-platform.html">robot-platform</a>, "different modalities" means <strong>motion vs LEDs</strong> — the
+  natural place for ambivalent expression, and an untried one.</li>
+</ul>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="actor-critic.html">Actor–critic</a></li>
+<li><a href="emotion-model-comparison.html">Emotion model comparison</a></li>
+<li><a href="emotion-recognition-benchmarks.html">Emotion recognition rates across robots</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="panksepp-2011-emotional-circuits.html">Panksepp (2011) — The basic emotional circuits of mammalian brains</a></li>
+<li><a href="panksepp-affective-systems.html">Panksepp&#x27;s affective systems</a></li>
+<li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>
+<li><a href="szabo-2011-emotional-engine.html">Szabó et al. (2012) — Building a Human-Dog Interaction Inspired Emotional Engine Model</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

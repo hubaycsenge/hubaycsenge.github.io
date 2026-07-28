@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Csenge Hubay — PhD researcher — emotion modelling for social robots</title>
+<meta name="description" content="Csenge Hubay — PhD researcher — emotion modelling for social robots. Ethorobotics, emotion modelling for social robots, and an open research wiki.">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="index.html">Csenge Hubay</a>
+  <nav>
+    <a href="index.html" class="on">Home</a>
+    <a href="wiki/index.html">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<section class="hero">
+  <h1>Csenge Hubay</h1>
+  <p class="tagline">PhD researcher — emotion modelling for social robots</p>
+  
+  <p class="links"><a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a> · <a href="https://github.com/hubaycsenge">GitHub</a></p>
+</section>
+
+<section class="prose about">
+<h2>About</h2>
+<p>I build <strong>emotional engines for social robots</strong>, in the <em>ethorobotics</em> tradition:
+the view that a social robot should be treated as a species adapted to its own
+niche rather than as an imitation of a human being.</p>
+<p>My work sits on a specific bet. Most affective computing in human–robot
+interaction models only the human. I am building an engine that fuses <strong>two</strong>
+input streams — the perceived affective state of the person, and the robot's own
+internal state: battery, sensor health, motor load — and generates behaviour
+from their combination. Behaviour is modelled on <strong>dog–human interaction</strong>, not
+by imitation but by functional analogy: dog ethology supplies legible social
+primitives, which are re-expressed in whatever embodiment is available.</p>
+<p>The behaviour layer is learnt rather than hand-authored — reinforcement learning
+over an ethologically derived action set, with behaviour trees executing the
+primitives — and the target is validation <strong>on human subjects in real
+environments</strong>, not in the lab.</p>
+<h2>Research themes</h2>
+<ul>
+<li><strong>Ethorobotics and function-orientedness</strong> — why robot form should follow
+  function, and what the uncanny valley looks like when reread as a problem of
+  agent categorisation.</li>
+<li><strong>Emotion attribution to artificial agents</strong> — people ascribe emotions to
+  robots spontaneously and act on the ascription; the affective layer is
+  licensed by that, and undermined when it misreads.</li>
+<li><strong>Grounding models</strong> — Panksepp's neural affective systems against Plutchik's
+  adaptive continuous states, and the case for a hybrid.</li>
+<li><strong>Perception-to-affect</strong> — reading affect from body pose and multimodal
+  signals in real time. This is the open gap, in the field as much as in the
+  thesis.</li>
+<li><strong>Learning the behaviour layer</strong> — reward design for an agent whose reward
+  signal is partly its own internal state.</li>
+</ul>
+<h2>Platform</h2>
+<p>Experiments run on <strong>Mecanumbot</strong>: a mecanum-drive mobile robot with a Jetson
+Orin Nano, lidar and camera, a 17-keypoint body-pose pipeline, a neck and
+grabbers, and LED panels used for expressive output. The perception stack fuses
+DR-SPAAM person detection with YOLO-pose; the behaviour layer is built on
+<code>py_trees_ros</code>.</p>
+</section>
+
+<details class="wikifield" id="wikillm">
+  <summary>
+    <span class="wf-text">
+      <span class="wf-eyebrow">Doctoral research · open to browse</span>
+      <span class="wf-title">WikiLLM — the PhD research wiki</span>
+      <span class="wf-desc">A living, LLM-maintained wiki on emotion modelling for social
+      robots. Every factual claim is traceable to an ingested source; disagreements between
+      sources are recorded rather than resolved. 55 pages, 20 sources
+      ingested, 9 rated solid.</span>
+    </span>
+    <span class="wf-cue" aria-hidden="true"><span class="wf-open">Open</span><span class="wf-close">Close</span></span>
+  </summary>
+  <div class="wf-body">
+    <div class="wf-stats">
+      <div class="stat"><b>55</b><span>pages</span></div>
+      <div class="stat"><b>20</b><span>sources ingested</span></div>
+      <div class="stat"><b>9</b><span>solid</span></div>
+      <div class="stat"><b>44</b><span>draft</span></div>
+    </div>
+    <p class="wf-note">The wiki is a working document, not a publication. Status labels are
+    honest: <em>stub</em> means barely populated, <em>draft</em> means real content with gaps,
+    <em>solid</em> means it would survive a supervisor reading it. Source PDFs and unpublished
+    notes stay in a private vault — only the wiki's own prose is published.</p>
+<div class="browser" data-browser data-index="wiki/search.json">
+  <div class="searchrow">
+    <input type="search" id="home-q" class="search" data-search-input
+           placeholder="Search 55 pages — titles, summaries, tags, contents…"
+           autocomplete="off" aria-label="Search the wiki">
+    <div class="filters" role="group" aria-label="Filter by status">
+      <button type="button" class="chip on" data-filter="all">All</button>
+      <button type="button" class="chip" data-filter="solid">solid</button>
+      <button type="button" class="chip" data-filter="draft">draft</button>
+      <button type="button" class="chip" data-filter="stub">stub</button>
+    </div>
+  </div>
+  <p class="hits" data-hits aria-live="polite"></p>
+<section class="catblock" data-cat="synthesis">
+  <h3 class="cat-h">Synthesis <span class="cat-n">6</span></h3>
+  <p class="cat-blurb">The thesis argument, landscape maps, comparisons and open questions.</p>
+  <div class="cards">
+<a class="card" href="wiki/citation-backlog.html" data-slug="citation-backlog"
+   data-search="citation backlog unresolved references and sources to hunt down. resolve by dropping the pdf into raw/papers/ and asking for an ingest. hub bookkeeping synthesis"
+   data-status="draft" data-category="synthesis">
+  <span class="card-head"><span class="card-title">Citation backlog</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Unresolved references and sources to hunt down. Resolve by dropping the PDF into raw/papers/ and asking for an ingest.</span>
+</a>
+<a class="card" href="wiki/emotion-model-comparison.html" data-slug="emotion-model-comparison"
+   data-search="emotion model comparison the decision page for q1 in open-questions. the corpus has changed this question substantially — it is no longer a straight two-way choice. comparison emotion-model decision synthesis"
+   data-status="draft" data-category="synthesis">
+  <span class="card-head"><span class="card-title">Emotion model comparison</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">The decision page for Q1 in open-questions. The corpus has changed this question substantially — it is no longer a straight two-way choice.</span>
+</a>
+<a class="card" href="wiki/emotion-recognition-benchmarks.html" data-slug="emotion-recognition-benchmarks"
+   data-search="emotion recognition rates across robots every figure in the corpus for how well humans identify a robot&#x27;s expressed emotion . this is the bar validation-study has to clear, and the table that justifies the dog-derived approach. comparison evaluation benchmarks synthesis"
+   data-status="draft" data-category="synthesis">
+  <span class="card-head"><span class="card-title">Emotion recognition rates across robots</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Every figure in the corpus for how well humans identify a robot&#x27;s expressed emotion . This is the bar validation-study has to clear, and the table that justifies the dog-derived approach.</span>
+</a>
+<a class="card" href="wiki/open-questions.html" data-slug="open-questions"
+   data-search="open questions live uncertainties, each to be closed by a source, an experiment, or a recorded decision. q1 and q7 are largely answered, q6 has a template. q11 is answered by csenge&#x27;s decision to use rl for the behaviour layer and q9… hub questions synthesis"
+   data-status="draft" data-category="synthesis">
+  <span class="card-head"><span class="card-title">Open questions</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Live uncertainties, each to be closed by a source, an experiment, or a recorded decision. Q1 and Q7 are largely answered, Q6 has a template. Q11 is answered by Csenge&#x27;s decision to use RL for the behaviour layer and Q9…</span>
+</a>
+<a class="card" href="wiki/rl-for-behaviour-learning.html" data-slug="rl-for-behaviour-learning"
+   data-search="reinforcement learning for behaviour learning everything here is either cited or marked as inference. nothing in the corpus outside sutton &amp; barto uses learning at all, so there is no prior art in this lineage to inherit from — the arguments below are constructed… architecture reinforcement-learning decision hub synthesis"
+   data-status="draft" data-category="synthesis">
+  <span class="card-head"><span class="card-title">Reinforcement learning for behaviour learning</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Everything here is either cited or marked as inference. Nothing in the corpus outside Sutton &amp; Barto uses learning at all, so there is no prior art in this lineage to inherit from — the arguments below are constructed…</span>
+</a>
+<a class="card" href="wiki/thesis.html" data-slug="thesis"
+   data-search="thesis — evolving argument the central claim as it now stands after ingesting 18 sources. steps 1–4 are well supported ; step 5 is partly settled by prior work; the contribution has moved to steps 6–8. thesis hub synthesis"
+   data-status="draft" data-category="synthesis">
+  <span class="card-head"><span class="card-title">Thesis — evolving argument</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">The central claim as it now stands after ingesting 18 sources. Steps 1–4 are well supported ; step 5 is partly settled by prior work; the contribution has moved to steps 6–8.</span>
+</a>
+  </div>
+</section><section class="catblock" data-cat="sources">
+  <h3 class="cat-h">Sources <span class="cat-n">20</span></h3>
+  <p class="cat-blurb">One page per ingested source — the citation targets.</p>
+  <div class="cards">
+<a class="card" href="wiki/albuquerque-2016-emotion-recognition.html" data-slug="albuquerque-2016-emotion-recognition"
+   data-search="albuquerque et al. (2016) — dogs recognize dog and human emotions natalia albuquerque, kun guo, anna wilkinson, carine savalli, emma otta &amp; daniel mills, dogs recognize dog and human emotions , biology letters 12(1):20150883 , january 2016. doi:10.1098/rsbl.2015.0883 ethology dogs emotion-recognition primary-source empirical ref-4 sources"
+   data-status="draft" data-category="sources">
+  <span class="card-head"><span class="card-title">Albuquerque et al. (2016) — Dogs recognize dog and human emotions</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Natalia Albuquerque, Kun Guo, Anna Wilkinson, Carine Savalli, Emma Otta &amp; Daniel Mills, Dogs recognize dog and human emotions , Biology Letters 12(1):20150883 , January 2016. doi:10.1098/rsbl.2015.0883</span>
+</a>
+<a class="card" href="wiki/belle-2019-programming-with-affect.html" data-slug="belle-2019-programming-with-affect"
+   data-search="belle, gittens &amp; graham (2019) — programming with affect shakir belle, curtis gittens (university of the west indies, barbados) and t.c. nicholas graham (queen&#x27;s university, kingston), programming with affect: how behaviour trees and a lightweight cognitive architecture… behaviour-trees emotion game-ai nearest-prior ref-10 sources"
+   data-status="draft" data-category="sources">
+  <span class="card-head"><span class="card-title">Belle, Gittens &amp; Graham (2019) — Programming with Affect</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Shakir Belle, Curtis Gittens (University of the West Indies, Barbados) and T.C. Nicholas Graham (Queen&#x27;s University, Kingston), Programming with Affect: How Behaviour Trees and a Lightweight Cognitive Architecture…</span>
+</a>
+<a class="card" href="wiki/colledanchise-ogren-behavior-trees.html" data-slug="colledanchise-ogren-behavior-trees"
+   data-search="colledanchise &amp; ögren — behavior trees in robotics and ai: an introduction michele colledanchise and petter ögren, behavior trees in robotics and ai: an introduction . crc press, 2018. behaviour-trees architecture reinforcement-learning textbook sources"
+   data-status="draft" data-category="sources">
+  <span class="card-head"><span class="card-title">Colledanchise &amp; Ögren — Behavior Trees in Robotics and AI: An Introduction</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Michele Colledanchise and Petter Ögren, Behavior Trees in Robotics and AI: An Introduction . CRC Press, 2018.</span>
+</a>
+<a class="card" href="wiki/gacsi-2016-emotion-attribution.html" data-slug="gacsi-2016-emotion-attribution"
+   data-search="gácsi et al. (2016) — humans attribute emotions to a robot showing dog-derived behavioural patterns the strongest empirical support in the corpus for the thesis premise that emotion-attribution to a non-humanoid robot works. a candidate for [2] of research-proposal. needs-source empirical emotion-attribution dog-model peer-reviewed sources"
+   data-status="solid" data-category="sources">
+  <span class="card-head"><span class="card-title">Gácsi et al. (2016) — Humans attribute emotions to a robot showing dog-derived behavioural patterns</span><span class="badge badge-solid" title="well supported and cross-referenced">solid</span></span>
+  <span class="card-sum">The strongest empirical support in the corpus for the thesis premise that emotion-attribution to a non-humanoid robot works. A candidate for [2] of research-proposal. needs-source</span>
+</a>
+<a class="card" href="wiki/ichikawa-numakunai-2012-roman.html" data-slug="ichikawa-numakunai-2012-roman"
+   data-search="ichikawa (2012) and numakunai (2012) — dog-based robot behaviour in intelligent space two ro-man 2012 papers from chuo university (niitsuma, hashimoto) with korondi and gácsi as hungarian co-authors. not an independent corroboration — this is the same collaboration network extended to japan… japan ispace home-care dog-model application sources"
+   data-status="draft" data-category="sources">
+  <span class="card-head"><span class="card-title">Ichikawa (2012) and Numakunai (2012) — dog-based robot behaviour in Intelligent Space</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Two RO-MAN 2012 papers from Chuo University (Niitsuma, Hashimoto) with Korondi and Gácsi as Hungarian co-authors. Not an independent corroboration — this is the same collaboration network extended to Japan…</span>
+</a>
+<a class="card" href="wiki/kovacs-fri-automaton-series.html" data-slug="kovacs-fri-automaton-series"
+   data-search="kovács, vincze et al. (2009–2011) — the fri fuzzy automaton series ethological models are descriptive verbal models : a sparse collection of observed action–reaction rules, not a complete specification. two consequences: fuzzy-automaton fri architecture prior-work series sources"
+   data-status="solid" data-category="sources">
+  <span class="card-head"><span class="card-title">Kovács, Vincze et al. (2009–2011) — the FRI fuzzy automaton series</span><span class="badge badge-solid" title="well supported and cross-referenced">solid</span></span>
+  <span class="card-sum">Ethological models are descriptive verbal models : a sparse collection of observed action–reaction rules, not a complete specification. Two consequences:</span>
+</a>
+<a class="card" href="wiki/lakatos-2014-emotion-attribution.html" data-slug="lakatos-2014-emotion-attribution"
+   data-search="lakatos et al. (2014) — emotion attribution to a non-humanoid robot in different social situations the companion empirical study to gacsi-2016-emotion-attribution, and the more directly relevant of the two: live interaction rather than video, and it tests a secondary emotion (guilt), not just primary ones. empirical emotion-attribution dog-model peer-reviewed mogirobi sources"
+   data-status="solid" data-category="sources">
+  <span class="card-head"><span class="card-title">Lakatos et al. (2014) — Emotion attribution to a non-humanoid robot in different social situations</span><span class="badge badge-solid" title="well supported and cross-referenced">solid</span></span>
+  <span class="card-sum">The companion empirical study to gacsi-2016-emotion-attribution, and the more directly relevant of the two: live interaction rather than video, and it tests a secondary emotion (guilt), not just primary ones.</span>
+</a>
+<a class="card" href="wiki/lakatos-2014-embodiments-demo.html" data-slug="lakatos-2014-embodiments-demo"
+   data-search="lakatos et al. — dog-inspired social behaviour in robots with different embodiments a two-page demo paper. thin on evidence, but it makes the single most useful claim in the corpus for this thesis&#x27; architecture : the same dog-derived behavioural design was implemented across four robots with radically… embodiment demo hearing-robot prior-work sources"
+   data-status="draft" data-category="sources">
+  <span class="card-head"><span class="card-title">Lakatos et al. — Dog-Inspired Social Behaviour in Robots with Different Embodiments</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">A two-page demo paper. Thin on evidence, but it makes the single most useful claim in the corpus for this thesis&#x27; architecture : the same dog-derived behavioural design was implemented across four robots with radically…</span>
+</a>
+<a class="card" href="wiki/mecanumbot-repos.html" data-slug="mecanumbot-repos"
+   data-search="mecanumbot repositories clipped readme material for the robot platform. see robot-platform for the synthesised platform page, mecanumbot-perception and mecanumbot-behaviours for csenge&#x27;s two own packages. repo robot-platform ros2 first-party sources"
+   data-status="draft" data-category="sources">
+  <span class="card-head"><span class="card-title">Mecanumbot repositories</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Clipped README material for the robot platform. See robot-platform for the synthesised platform page, mecanumbot-perception and mecanumbot-behaviours for Csenge&#x27;s two own packages.</span>
+</a>
+<a class="card" href="wiki/miklosi-2017-ethorobotics.html" data-slug="miklosi-2017-ethorobotics"
+   data-search="miklósi et al. (2017) — ethorobotics: a new approach to human-robot relationship the theoretical foundation of the thesis. peer-reviewed, widely cited. ethorobotics framing foundational peer-reviewed sources"
+   data-status="solid" data-category="sources">
+  <span class="card-head"><span class="card-title">Miklósi et al. (2017) — Ethorobotics: A New Approach to Human-Robot Relationship</span><span class="badge badge-solid" title="well supported and cross-referenced">solid</span></span>
+  <span class="card-sum">The theoretical foundation of the thesis. Peer-reviewed, widely cited.</span>
+</a>
+<a class="card" href="wiki/panksepp-2005-affective-consciousness.html" data-slug="panksepp-2005-affective-consciousness"
+   data-search="panksepp (2005) — affective consciousness: core emotional feelings in animals and humans jaak panksepp, affective consciousness: core emotional feelings in animals and humans , consciousness and cognition 14(1):30–80 , march 2005. doi:10.1016/j.concog.2004.10.004 affective-neuroscience primary-source emotion-model ref-8 sources"
+   data-status="draft" data-category="sources">
+  <span class="card-head"><span class="card-title">Panksepp (2005) — Affective consciousness: core emotional feelings in animals and humans</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Jaak Panksepp, Affective consciousness: Core emotional feelings in animals and humans , Consciousness and Cognition 14(1):30–80 , March 2005. doi:10.1016/j.concog.2004.10.004</span>
+</a>
+<a class="card" href="wiki/panksepp-2011-emotional-circuits.html" data-slug="panksepp-2011-emotional-circuits"
+   data-search="panksepp (2011) — the basic emotional circuits of mammalian brains jaak panksepp, the basic emotional circuits of mammalian brains: do animals have affective lives? , neuroscience and biobehavioral reviews 35(9):1791–1804 , 2011. doi:10.1016/j.neubiorev.2011.08.003 affective-neuroscience primary-source emotion-model sources"
+   data-status="draft" data-category="sources">
+  <span class="card-head"><span class="card-title">Panksepp (2011) — The basic emotional circuits of mammalian brains</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Jaak Panksepp, The basic emotional circuits of mammalian brains: Do animals have affective lives? , Neuroscience and Biobehavioral Reviews 35(9):1791–1804 , 2011. doi:10.1016/j.neubiorev.2011.08.003</span>
+</a>
+<a class="card" href="wiki/research-proposal.html" data-slug="research-proposal"
+   data-search="phd research proposal first-party source. states the thesis, the theoretical commitments, and the claimed novelty. everything currently in this wiki traces back here, which means the wiki is currently unvalidated against published literature… own-notes foundational sources"
+   data-status="solid" data-category="sources">
+  <span class="card-head"><span class="card-title">PhD research proposal</span><span class="badge badge-solid" title="well supported and cross-referenced">solid</span></span>
+  <span class="card-sum">First-party source. States the thesis, the theoretical commitments, and the claimed novelty. Everything currently in this wiki traces back here, which means the wiki is currently unvalidated against published literature…</span>
+</a>
+<a class="card" href="wiki/plutchik-1982-psychoevolutionary.html" data-slug="plutchik-1982-psychoevolutionary"
+   data-search="plutchik (1982) — a psychoevolutionary theory of emotions robert plutchik, a psychoevolutionary theory of emotions , social science information 21(4–5):529–553 , 1982. doi:10.1177/053901882021004003 emotion-model primary-source ethology ref-9 sources"
+   data-status="draft" data-category="sources">
+  <span class="card-head"><span class="card-title">Plutchik (1982) — A psychoevolutionary theory of emotions</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Robert Plutchik, A psychoevolutionary theory of emotions , Social Science Information 21(4–5):529–553 , 1982. doi:10.1177/053901882021004003</span>
+</a>
+<a class="card" href="wiki/sutton-barto-2018-rl.html" data-slug="sutton-barto-2018-rl"
+   data-search="sutton &amp; barto (2018) — reinforcement learning: an introduction (2nd ed.) richard s. sutton and andrew g. barto, reinforcement learning: an introduction , second edition. mit press, 2018. the standard textbook of the field. textbook reinforcement-learning animal-learning neuroscience sources"
+   data-status="draft" data-category="sources">
+  <span class="card-head"><span class="card-title">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction , second edition. MIT Press, 2018. The standard textbook of the field.</span>
+</a>
+<a class="card" href="wiki/szabo-2010-emotional-engine.html" data-slug="szabo-2010-emotional-engine"
+   data-search="szabó et al. (2010) — an emotional engine model inspired by human-dog interaction the first version of the engine that szabo-2011-emotional-engine extends. read the 2011 paper for the mature model; this one is valuable for two things the successor drops. emotional-engine architecture prior-work sources"
+   data-status="solid" data-category="sources">
+  <span class="card-head"><span class="card-title">Szabó et al. (2010) — An Emotional Engine Model Inspired by Human-Dog Interaction</span><span class="badge badge-solid" title="well supported and cross-referenced">solid</span></span>
+  <span class="card-sum">The first version of the engine that szabo-2011-emotional-engine extends. Read the 2011 paper for the mature model; this one is valuable for two things the successor drops.</span>
+</a>
+<a class="card" href="wiki/szabo-2011-emotional-engine.html" data-slug="szabo-2011-emotional-engine"
+   data-search="szabó et al. (2012) — building a human-dog interaction inspired emotional engine model supersedes and extends szabo-2010-emotional-engine. emotional-engine panksepp architecture prior-work nearest-prior sources"
+   data-status="solid" data-category="sources">
+  <span class="card-head"><span class="card-title">Szabó et al. (2012) — Building a Human-Dog Interaction Inspired Emotional Engine Model</span><span class="badge badge-solid" title="well supported and cross-referenced">solid</span></span>
+  <span class="card-sum">Supersedes and extends szabo-2010-emotional-engine.</span>
+</a>
+<a class="card" href="wiki/topal-2014-ostensive.html" data-slug="topal-2014-ostensive"
+   data-search="topál, kis &amp; oláh (2014) — dogs&#x27; sensitivity to human ostensive cues józsef topál, anna kis and katalin oláh, dogs&#x27; sensitivity to human ostensive cues: a unique adaptation? , chapter 11 of the social dog: behavior and cognition , elsevier, 2014, pp. 319–346.… ethology dogs ostensive-signalling primary-source ref-3 sources"
+   data-status="draft" data-category="sources">
+  <span class="card-head"><span class="card-title">Topál, Kis &amp; Oláh (2014) — Dogs&#x27; sensitivity to human ostensive cues</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">József Topál, Anna Kis and Katalin Oláh, Dogs&#x27; Sensitivity to Human Ostensive Cues: A Unique Adaptation? , chapter 11 of The Social Dog: Behavior and Cognition , Elsevier, 2014, pp. 319–346.…</span>
+</a>
+<a class="card" href="wiki/vincze-2012-interfaces-and-virca.html" data-slug="vincze-2012-interfaces-and-virca"
+   data-search="vincze et al. (2012) — hri interfaces and the virca environment two papers about tooling around the fri fuzzy automaton, not about new behaviour models. their value to this thesis is methodological. simulation tooling prior-work sources"
+   data-status="draft" data-category="sources">
+  <span class="card-head"><span class="card-title">Vincze et al. (2012) — HRI interfaces and the VirCA environment</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Two papers about tooling around the FRI fuzzy automaton, not about new behaviour models. Their value to this thesis is methodological.</span>
+</a>
+<a class="card" href="wiki/vincze-2021-automatic-coding.html" data-slug="vincze-2021-automatic-coding"
+   data-search="vincze et al. (2021) — towards automatic observation and coding of simple behaviours in ethological experiments behavioural coding — categorising observed behaviour into predefined elements — is done by trained human observers, in real time or from video. it is resource-hungry, observers disagree with each other, and even skilled… methodology automatic-coding evaluation most-recent sources"
+   data-status="draft" data-category="sources">
+  <span class="card-head"><span class="card-title">Vincze et al. (2021) — Towards automatic observation and coding of simple behaviours in ethological experiments</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Behavioural coding — categorising observed behaviour into predefined elements — is done by trained human observers, in real time or from video. It is resource-hungry, observers disagree with each other, and even skilled…</span>
+</a>
+  </div>
+</section><section class="catblock" data-cat="models">
+  <h3 class="cat-h">Models <span class="cat-n">3</span></h3>
+  <p class="cat-blurb">Emotion and behaviour models treated as first-class objects.</p>
+  <div class="cards">
+<a class="card" href="wiki/dog-human-interaction-model.html" data-slug="dog-human-interaction-model"
+   data-search="dog–human interaction as behaviour model was a stub with an unargued transfer claim. the corpus now supplies both the argument and, more usefully, concrete behaviour tables . ethology dogs behaviour-model hub models"
+   data-status="draft" data-category="models">
+  <span class="card-head"><span class="card-title">Dog–human interaction as behaviour model</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Was a stub with an unargued transfer claim. The corpus now supplies both the argument and, more usefully, concrete behaviour tables .</span>
+</a>
+<a class="card" href="wiki/panksepp-affective-systems.html" data-slug="panksepp-affective-systems"
+   data-search="panksepp&#x27;s affective systems core affects are associated with distinct subcortical regions belonging to different brain circuits , differentiable pharmacologically, neurologically and behaviourally. the circuits named in szabo-2011-emotional-engine: emotion-model affective-neuroscience candidate-base-model models"
+   data-status="draft" data-category="models">
+  <span class="card-head"><span class="card-title">Panksepp&#x27;s affective systems</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Core affects are associated with distinct subcortical regions belonging to different brain circuits , differentiable pharmacologically, neurologically and behaviourally. The circuits named in szabo-2011-emotional-engine:</span>
+</a>
+<a class="card" href="wiki/plutchik-model.html" data-slug="plutchik-model"
+   data-search="plutchik&#x27;s model the wiki previously guessed reference [9] was plutchik (2001), the nature of emotions , american scientist 89(4). that was wrong. csenge&#x27;s thesis reference list gives: emotion-model psychology candidate-base-model models"
+   data-status="draft" data-category="models">
+  <span class="card-head"><span class="card-title">Plutchik&#x27;s model</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">The wiki previously guessed reference [9] was Plutchik (2001), The nature of emotions , American Scientist 89(4). That was wrong. Csenge&#x27;s thesis reference list gives:</span>
+</a>
+  </div>
+</section><section class="catblock" data-cat="concepts">
+  <h3 class="cat-h">Concepts <span class="cat-n">10</span></h3>
+  <p class="cat-blurb">Ethology, affective computing and HRI concepts.</p>
+  <div class="cards">
+<a class="card" href="wiki/attachment-sst.html" data-slug="attachment-sst"
+   data-search="attachment and the strange situation test the strange situation test (sst) is the paradigm running through most of this corpus — several source pdfs are even filed with sst in the filename. ethology dogs experimental-paradigm concepts"
+   data-status="draft" data-category="concepts">
+  <span class="card-head"><span class="card-title">Attachment and the Strange Situation Test</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">The Strange Situation Test (SST) is the paradigm running through most of this corpus — several source PDFs are even filed with sst in the filename.</span>
+</a>
+<a class="card" href="wiki/conditioning.html" data-slug="conditioning"
+   data-search="conditioning the two experimental paradigms of animal learning, and their correspondence with the two algorithm families of reinforcement learning. all of this page is from sutton-barto-2018-rl ch. 14 unless marked otherwise; the… animal-learning psychology reinforcement-learning concepts"
+   data-status="draft" data-category="concepts">
+  <span class="card-head"><span class="card-title">Conditioning</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">The two experimental paradigms of animal learning, and their correspondence with the two algorithm families of reinforcement learning. All of this page is from sutton-barto-2018-rl Ch. 14 unless marked otherwise; the…</span>
+</a>
+<a class="card" href="wiki/emotion-attribution.html" data-slug="emotion-attribution"
+   data-search="emotion attribution to artificial agents people attribute emotions to artificial agents, and this facilitates interaction research-proposal. now the best-evidenced claim in the wiki — two studies in the corpus test it directly. hri affective-computing psychology concepts"
+   data-status="solid" data-category="concepts">
+  <span class="card-head"><span class="card-title">Emotion attribution to artificial agents</span><span class="badge badge-solid" title="well supported and cross-referenced">solid</span></span>
+  <span class="card-sum">People attribute emotions to artificial agents, and this facilitates interaction research-proposal. Now the best-evidenced claim in the wiki — two studies in the corpus test it directly.</span>
+</a>
+<a class="card" href="wiki/ethorobotics.html" data-slug="ethorobotics"
+   data-search="ethorobotics the framing discipline of this thesis, named and defined in miklosi-2017-ethorobotics: an interdisciplinary science relying on evolutionary, ecological and ethological concepts for developing social robots. ethology framing hub concepts"
+   data-status="solid" data-category="concepts">
+  <span class="card-head"><span class="card-title">Ethorobotics</span><span class="badge badge-solid" title="well supported and cross-referenced">solid</span></span>
+  <span class="card-sum">The framing discipline of this thesis, named and defined in miklosi-2017-ethorobotics: an interdisciplinary science relying on evolutionary, ecological and ethological concepts for developing social robots.</span>
+</a>
+<a class="card" href="wiki/function-orientedness.html" data-slug="function-orientedness"
+   data-search="function-orientedness an ethorobotics principle: start from function and environment, then design the best-suited agent , independent of similarity to humans miklosi-2017-ethorobotics. ethology design-principle framing concepts"
+   data-status="draft" data-category="concepts">
+  <span class="card-head"><span class="card-title">Function-orientedness</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">An ethorobotics principle: start from function and environment, then design the best-suited agent , independent of similarity to humans miklosi-2017-ethorobotics.</span>
+</a>
+<a class="card" href="wiki/habitual-vs-goal-directed.html" data-slug="habitual-vs-goal-directed"
+   data-search="habitual vs goal-directed behaviour psychology&#x27;s distinction between two modes of behavioural control, and its correspondence with rl&#x27;s model-free/model-based distinction. from sutton-barto-2018-rl §14.5–14.6 and §15.11. animal-learning psychology reinforcement-learning longitudinal concepts"
+   data-status="draft" data-category="concepts">
+  <span class="card-head"><span class="card-title">Habitual vs goal-directed behaviour</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Psychology&#x27;s distinction between two modes of behavioural control, and its correspondence with RL&#x27;s model-free/model-based distinction. From sutton-barto-2018-rl §14.5–14.6 and §15.11.</span>
+</a>
+<a class="card" href="wiki/interspecific-hri.html" data-slug="interspecific-hri"
+   data-search="hri as interspecific interaction human–robot interaction should be represented as an inter-specific relationship rather than an intra-specific one — an interaction between two different kinds, &quot;characterised by not only different anatomy but also… ethology hri framing concepts"
+   data-status="draft" data-category="concepts">
+  <span class="card-head"><span class="card-title">HRI as interspecific interaction</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Human–robot interaction should be represented as an inter-specific relationship rather than an intra-specific one — an interaction between two different kinds, &quot;characterised by not only different anatomy but also…</span>
+</a>
+<a class="card" href="wiki/ostensive-signalling.html" data-slug="ostensive-signalling"
+   data-search="ostensive signalling verbal and visual cues that mark communicative intent — signals that say &quot;this is addressed to you&quot; before the content arrives. ethology communication dogs hri concepts"
+   data-status="draft" data-category="concepts">
+  <span class="card-head"><span class="card-title">Ostensive signalling</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Verbal and visual cues that mark communicative intent — signals that say &quot;this is addressed to you&quot; before the content arrives.</span>
+</a>
+<a class="card" href="wiki/social-competence.html" data-slug="social-competence"
+   data-search="social competence the target property for an ethorobot. defined in miklosi-2017-ethorobotics as ethology hri definition concepts"
+   data-status="draft" data-category="concepts">
+  <span class="card-head"><span class="card-title">Social competence</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">The target property for an ethorobot. Defined in miklosi-2017-ethorobotics as</span>
+</a>
+<a class="card" href="wiki/uncanny-valley.html" data-slug="uncanny-valley"
+   data-search="the uncanny valley (and its ethological reinterpretation) mori&#x27;s 1970 hypothesis: affinity toward an agent rises with human likeness, then collapses in a narrow band of very-close-but-imperfect similarity, before recovering at perfect humanness miklosi-2017-ethorobotics. ethology framing hri concepts"
+   data-status="draft" data-category="concepts">
+  <span class="card-head"><span class="card-title">The uncanny valley (and its ethological reinterpretation)</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Mori&#x27;s 1970 hypothesis: affinity toward an agent rises with human likeness, then collapses in a narrow band of very-close-but-imperfect similarity, before recovering at perfect humanness miklosi-2017-ethorobotics.</span>
+</a>
+  </div>
+</section><section class="catblock" data-cat="methods">
+  <h3 class="cat-h">Methods <span class="cat-n">8</span></h3>
+  <p class="cat-blurb">Techniques, architectures and pipelines.</p>
+  <div class="cards">
+<a class="card" href="wiki/actor-critic.html" data-slug="actor-critic"
+   data-search="actor–critic the rl architecture that maps most cleanly onto both the mammalian brain and the structure this thesis already has. from sutton-barto-2018-rl §13.5, §15.7–15.8 and §15.10. reinforcement-learning architecture neuroscience decision-making methods"
+   data-status="draft" data-category="methods">
+  <span class="card-head"><span class="card-title">Actor–critic</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">The RL architecture that maps most cleanly onto both the mammalian brain and the structure this thesis already has. From sutton-barto-2018-rl §13.5, §15.7–15.8 and §15.10.</span>
+</a>
+<a class="card" href="wiki/behaviour-trees.html" data-slug="behaviour-trees"
+   data-search="behaviour trees the execution layer of emotion-engine, and — following csenge&#x27;s decision of 2026-07-28 — the executive method for decisions made by reinforcement learning algorithms . py trees and py trees ros are installed on… robotics decision-making architecture methods"
+   data-status="draft" data-category="methods">
+  <span class="card-head"><span class="card-title">Behaviour trees</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">The execution layer of emotion-engine, and — following Csenge&#x27;s decision of 2026-07-28 — the executive method for decisions made by reinforcement learning algorithms . py trees and py trees ros are installed on…</span>
+</a>
+<a class="card" href="wiki/emotion-arbitration.html" data-slug="emotion-arbitration"
+   data-search="emotion arbitration the step between having an emotional state vector and doing something about it: which emotion, of several simultaneously active, gets expressed? the wiki did not have this concept before ingesting… architecture emotion decision-making methods"
+   data-status="draft" data-category="methods">
+  <span class="card-head"><span class="card-title">Emotion arbitration</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">The step between having an emotional state vector and doing something about it: which emotion, of several simultaneously active, gets expressed? The wiki did not have this concept before ingesting…</span>
+</a>
+<a class="card" href="wiki/emotion-engine.html" data-slug="emotion-engine"
+   data-search="emotional engine the system this thesis builds: recognise events in context and simulate an emotional state for the robot which drives feedback research-proposal. architecture core-contribution hub methods"
+   data-status="draft" data-category="methods">
+  <span class="card-head"><span class="card-title">Emotional engine</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">The system this thesis builds: recognise events in context and simulate an emotional state for the robot which drives feedback research-proposal.</span>
+</a>
+<a class="card" href="wiki/fuzzy-automaton-fri.html" data-slug="fuzzy-automaton-fri"
+   data-search="fri fuzzy automaton the behaviour-control architecture of the hungarian ethorobotics programme, developed by kovács and vincze at miskolc (kovacs-fri-automaton-series). distinct from — and never integrated with — the szabó emotional engine. architecture fuzzy-logic behaviour-control methods"
+   data-status="draft" data-category="methods">
+  <span class="card-head"><span class="card-title">FRI fuzzy automaton</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">The behaviour-control architecture of the Hungarian ethorobotics programme, developed by Kovács and Vincze at Miskolc (kovacs-fri-automaton-series). Distinct from — and never integrated with — the Szabó emotional engine.</span>
+</a>
+<a class="card" href="wiki/multimodal-emotion-recognition.html" data-slug="multimodal-emotion-recognition"
+   data-search="multimodal emotion recognition the perception front-end of emotion-engine — and, after ingesting the corpus, the largest hole in both the literature and the platform . affective-computing perception ai gap methods"
+   data-status="draft" data-category="methods">
+  <span class="card-head"><span class="card-title">Multimodal emotion recognition</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">The perception front-end of emotion-engine — and, after ingesting the corpus, the largest hole in both the literature and the platform .</span>
+</a>
+<a class="card" href="wiki/reward-design.html" data-slug="reward-design"
+   data-search="reward design &quot;the use of a reward signal to formalize the idea of a goal is one of the most distinctive features of reinforcement learning.&quot; it is stated as a hypothesis, not a result, and it is where a multi-dimensional emotional… reinforcement-learning design-problem core-contribution methods"
+   data-status="draft" data-category="methods">
+  <span class="card-head"><span class="card-title">Reward design</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">&quot;The use of a reward signal to formalize the idea of a goal is one of the most distinctive features of reinforcement learning.&quot; It is stated as a hypothesis, not a result, and it is where a multi-dimensional emotional…</span>
+</a>
+<a class="card" href="wiki/td-learning.html" data-slug="td-learning"
+   data-search="temporal-difference learning the central algorithmic idea of sutton-barto-2018-rl — the authors call ch. 6 &quot;the most important for the subject and for the rest of the book&quot; — and the point where the book makes contact with animal behaviour and with… reinforcement-learning neuroscience prediction methods"
+   data-status="draft" data-category="methods">
+  <span class="card-head"><span class="card-title">Temporal-difference learning</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">The central algorithmic idea of sutton-barto-2018-rl — the authors call Ch. 6 &quot;the most important for the subject and for the rest of the book&quot; — and the point where the book makes contact with animal behaviour and with…</span>
+</a>
+  </div>
+</section><section class="catblock" data-cat="systems">
+  <h3 class="cat-h">Systems <span class="cat-n">4</span></h3>
+  <p class="cat-blurb">Robot platforms, software stacks and ingested repositories.</p>
+  <div class="cards">
+<a class="card" href="wiki/robot-platform.html" data-slug="robot-platform"
+   data-search="mecanumbot — the experimental robot platform a turtlebot3-family robot rebuilt with mecanum-wheel drive , intended to &quot;fit into the turtlebot3 family&quot;. derived from the turtlebot3 humble packages, substantially modified for four independently driven mecanum wheels. hardware ros2 platform systems"
+   data-status="draft" data-category="systems">
+  <span class="card-head"><span class="card-title">Mecanumbot — the experimental robot platform</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">A Turtlebot3-family robot rebuilt with mecanum-wheel drive , intended to &quot;fit into the Turtlebot3 family&quot;. Derived from the Turtlebot3 humble packages, substantially modified for four independently driven mecanum wheels.</span>
+</a>
+<a class="card" href="wiki/mecanumbot-behaviours.html" data-slug="mecanumbot-behaviours"
+   data-search="mecanumbot_behaviours — the behaviour layer the previous clip established only that this repository existed. it turns out to contain an experiment design, already implemented — which changes what validation-study has to build. first-party behaviour-trees experiment core-contribution systems"
+   data-status="draft" data-category="systems">
+  <span class="card-head"><span class="card-title">mecanumbot_behaviours — the behaviour layer</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">The previous clip established only that this repository existed. It turns out to contain an experiment design, already implemented — which changes what validation-study has to build.</span>
+</a>
+<a class="card" href="wiki/mecanumbot-perception.html" data-slug="mecanumbot-perception"
+   data-search="mecanumbot_sensorprocess_smart — the perception stack this is the front end that multimodal-emotion-recognition was written as though it did not exist. it substantially changes what that page can assume. first-party perception ros2 core-contribution systems"
+   data-status="draft" data-category="systems">
+  <span class="card-head"><span class="card-title">mecanumbot_sensorprocess_smart — the perception stack</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">This is the front end that multimodal-emotion-recognition was written as though it did not exist. It substantially changes what that page can assume.</span>
+</a>
+<a class="card" href="wiki/prior-robot-platforms.html" data-slug="prior-robot-platforms"
+   data-search="prior robot platforms every robot named across the corpus, and what it contributes. compare against robot-platform. comparison platforms hub systems"
+   data-status="draft" data-category="systems">
+  <span class="card-head"><span class="card-title">Prior robot platforms</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Every robot named across the corpus, and what it contributes. Compare against robot-platform.</span>
+</a>
+  </div>
+</section><section class="catblock" data-cat="people">
+  <h3 class="cat-h">People <span class="cat-n">1</span></h3>
+  <p class="cat-blurb">Researchers and labs.</p>
+  <div class="cards">
+<a class="card" href="wiki/hungarian-ethorobotics-network.html" data-slug="hungarian-ethorobotics-network"
+   data-search="the ethorobotics research network nearly the entire corpus is produced by one collaboration network . knowing its shape matters for two practical reasons: it tells csenge who to cite, read and talk to, and it tells the wiki how much of the &quot;converging… people labs network people"
+   data-status="draft" data-category="people">
+  <span class="card-head"><span class="card-title">The ethorobotics research network</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Nearly the entire corpus is produced by one collaboration network . Knowing its shape matters for two practical reasons: it tells Csenge who to cite, read and talk to, and it tells the wiki how much of the &quot;converging…</span>
+</a>
+  </div>
+</section><section class="catblock" data-cat="experiments">
+  <h3 class="cat-h">Experiments <span class="cat-n">1</span></h3>
+  <p class="cat-blurb">Own studies — design, status and results.</p>
+  <div class="cards">
+<a class="card" href="wiki/validation-study.html" data-slug="validation-study"
+   data-search="human validation study (planned) integrate the emotion analysis into the robot&#x27;s behavioural structure and validate its responses by testing on humans research-proposal. human-subjects planned evaluation experiments"
+   data-status="draft" data-category="experiments">
+  <span class="card-head"><span class="card-title">Human validation study (planned)</span><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></span>
+  <span class="card-sum">Integrate the emotion analysis into the robot&#x27;s behavioural structure and validate its responses by testing on humans research-proposal.</span>
+</a>
+  </div>
+</section><section class="catblock" data-cat="vault">
+  <h3 class="cat-h">Vault <span class="cat-n">2</span></h3>
+  <p class="cat-blurb">The wiki&#x27;s own catalogue and chronological research log.</p>
+  <div class="cards">
+<a class="card" href="wiki/log.html" data-slug="log"
+   data-search="log append-only chronological record. entry headers use a fixed prefix so the log is greppable: grep &quot;^ \[&quot; log.md tail -5 .  vault"
+   data-status="" data-category="vault">
+  <span class="card-head"><span class="card-title">Log</span></span>
+  <span class="card-sum">Append-only chronological record. Entry headers use a fixed prefix so the log is greppable: grep &quot;^ \[&quot; log.md tail -5 .</span>
+</a>
+<a class="card" href="wiki/catalog.html" data-slug="catalog"
+   data-search="wiki index catalog of every page. read this first when answering a question, then drill into the relevant pages. maintained by the llm — see claude.md .  vault"
+   data-status="" data-category="vault">
+  <span class="card-head"><span class="card-title">Wiki index</span></span>
+  <span class="card-sum">Catalog of every page. Read this first when answering a question, then drill into the relevant pages. Maintained by the LLM — see CLAUDE.md .</span>
+</a>
+  </div>
+</section>
+  <p class="noresults" data-noresults hidden>No page matches that.</p>
+</div>
+    <p class="wf-more"><a class="btn" href="wiki/index.html">Open the full wiki →</a></p>
+  </div>
+</details>
+
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

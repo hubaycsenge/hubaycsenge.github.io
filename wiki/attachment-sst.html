@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Attachment and the Strange Situation Test — Research wiki</title>
+<meta name="description" content="The Strange Situation Test (SST) is the paradigm running through most of this corpus — several source PDFs are even filed with sst in the filename.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Concepts</p>
+  <h1>Attachment and the Strange Situation Test</h1>
+<dl class="meta"><div><dt>type</dt><dd>concept</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>3</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">ethology</span> <span class="tag">dogs</span> <span class="tag">experimental-paradigm</span></dd></div></dl>
+<p>The <strong>Strange Situation Test (SST)</strong> is the paradigm running through most of this
+corpus — several source PDFs are even filed with <code>sst</code> in the filename.</p>
+<p>Originally developed to study attachment in human infants toward their mother,
+adapted for dogs. It revealed that <strong>the dog–owner relationship is analogous to
+child–parent attachment behaviour</strong>, leading to the claim that the dog possesses a
+behaviour-organising 'software' that fits specifically into the human social world
+<a class="wikilink" href="kovacs-fri-automaton-series.html">kovacs-fri-automaton-series</a>.</p>
+<h2>Mechanics</h2>
+<p>Separation from the attachment figure in an <strong>unfamiliar environment</strong> evokes
+moderate stress and anxiety, expressed as <strong>proximity seeking</strong> (e.g. standing by
+the door). Reunion with the caregiver evokes <strong>contact-seeking</strong> behaviours
+(approach, physical contact) <a class="wikilink" href="kovacs-fri-automaton-series.html">kovacs-fri-automaton-series</a>.</p>
+<p>Attachment is bi-directional: dogs show behavioural signs toward their owner, and
+owners perceive the relationship as an emotional bond.</p>
+<h2>Why it recurs</h2>
+<p>The SST is doing three jobs across the corpus:</p>
+<ol>
+<li><strong>Evidence</strong> that dog–human social organisation is deep enough to model
+   (<a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a> lists attachment first among dog-derived skills
+   for robots).</li>
+<li><strong>A rule source.</strong> "Considering dogs' major behaviour patterns shown in the
+   SST, we could define a limited number of rules that could control the behaviour
+   of the simulated companion" — the SST is where the fuzzy automaton's rule base
+   comes from (<a class="wikilink" href="kovacs-fri-automaton-series.html">kovacs-fri-automaton-series</a>).</li>
+<li><strong>A test scenario.</strong> Owner/stranger presence and absence in an unfamiliar room
+   is the worked example throughout, and the base for the exploratory behaviour
+   model in <a class="wikilink" href="ichikawa-numakunai-2012-roman.html">ichikawa-numakunai-2012-roman</a>.</li>
+</ol>
+<h2>Concrete instantiation</h2>
+<p>The fuzzy-automaton states derived from it — <code>MissTheOwner</code>, <code>AnxietyLevel</code>,
+<code>ExplorationLevel</code> — are driven by rules over owner presence, owner-to-dog
+distance, stranger-to-dog distance and place familiarity
+(<a class="wikilink" href="kovacs-fri-automaton-series.html">kovacs-fri-automaton-series</a>).</p>
+<div class="callout callout-note">
+<p class="callout-title">These inputs are all obtainable on <a class="wikilink" href="robot-platform.html">robot-platform</a></p>
+<p>Presence, distance and movement history are exactly what a lidar plus the
+DR-SPAAM leg detector provide. Unlike facial-expression recognition, the SST
+input set is <strong>directly implementable on the actual hardware</strong> — see the sensing
+warning on <a class="wikilink" href="robot-platform.html">robot-platform</a> and Q13 in <a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+</div>
+<h2>Gaps</h2>
+<ul>
+<li>No primary SST source in the corpus. Topál et al. (2005), Gácsi et al. (2001)
+  are cited throughout but not held — see <a class="wikilink" href="citation-backlog.html">citation-backlog</a>. #needs-source</li>
+<li>Attachment is described qualitatively; no operational thresholds (what distance
+  counts as proximity seeking, over what duration).</li>
+</ul>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="dog-human-interaction-model.html">Dog–human interaction as behaviour model</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="ichikawa-numakunai-2012-roman.html">Ichikawa (2012) and Numakunai (2012) — dog-based robot behaviour in Intelligent Space</a></li>
+<li><a href="kovacs-fri-automaton-series.html">Kovács, Vincze et al. (2009–2011) — the FRI fuzzy automaton series</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="mecanumbot-perception.html">mecanumbot_sensorprocess_smart — the perception stack</a></li>
+<li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="social-competence.html">Social competence</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wiki index — Research wiki</title>
+<meta name="description" content="Catalog of every page. Read this first when answering a question, then drill into the relevant pages. Maintained by the LLM — see CLAUDE.md .">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Vault</p>
+  <h1>Wiki index</h1>
+<dl class="meta"><div><dt>type</dt><dd>index</dd></div><div><dt>sources</dt><dd>26</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div></dl>
+<p>Catalog of every page. Read this first when answering a question, then drill into
+the relevant pages. Maintained by the LLM — see <code>CLAUDE.md</code>.</p>
+<p><strong>Status key:</strong> <code>stub</code> barely populated · <code>draft</code> real content, gaps remain ·
+<code>solid</code> well supported and cross-referenced.</p>
+<div class="callout callout-info">
+<p class="callout-title">State of the wiki</p>
+<p>26 sources ingested. The framing, the dog
+model and the emotion-attribution evidence are now well supported. The
+<strong>perception-to-emotion link has no literature at all</strong> — see
+<a class="wikilink" href="citation-backlog.html">citation-backlog</a> — and that is where the thesis' contribution sits.
+<em>(Superseded — see the 2026-07-28 entries below.)</em></p>
+<p><strong>2026-07-28</strong>: <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> fully ingested and the behaviour layer
+is now committed to reinforcement learning — see <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>.
+The reward signal is undefined (Q14) and is the sharpest open problem in the
+wiki after the perception gap.</p>
+<p><strong>2026-07-28, later</strong>: the robot platform repositories were re-clipped and the
+platform turns out to be <strong>materially more capable</strong> than the wiki recorded —
+Jetson Orin Nano, a camera with a 17-keypoint pose pipeline, full internal-state
+telemetry, and a neck plus grabbers. Four claims corrected; Q2, Q4, Q7 and Q13
+all move. The perception gap is now <strong>literature-only</strong>: the robot can see, but
+nothing in the corpus says how to read affect off a body pose.</p>
+<p><strong>2026-07-28, third pass</strong>: the thesis reference list resolved <strong>all ten numeric
+references</strong> (<a class="wikilink" href="citation-backlog.html">citation-backlog</a>) and five primaries are now held —
+Panksepp ×2, Plutchik, Topál, Albuquerque. Q1 has a <strong>recommendation awaiting
+sign-off</strong> on <a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a>. Two corrections: <code>[7]</code> is a <strong>2012</strong>
+paper, not 2011; and the thesis list numbers <code>[9]</code> twice.</p>
+<p><strong>2026-07-28, fourth pass</strong>: <a class="wikilink" href="colledanchise-ogren-behavior-trees.html">colledanchise-ogren-behavior-trees</a> ingested on
+the steer that BTs are the <strong>executive layer for RL decisions</strong>. Q9 settled in
+favour of behaviour trees; Q3 gains an analytic tool (MTTS/MTTF). The BT+emotion
+reference (Belle et al. 2019) is now the most important unheld source.</p>
+<p><strong>2026-07-28, fifth pass</strong>: <a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a> held — the
+last numeric reference. It pre-empts <em>BT nodes that make affect first-class</em>,
+but has no robot, no sensing, no learning and <strong>no evaluation</strong>. Crucially it
+confirms the perception gap is <strong>field-wide</strong>, not specific to this lineage.</p>
+</div>
+<h2>Hubs</h2>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Summary</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="wikilink" href="thesis.html">thesis</a></td>
+<td>The argument in 8 steps; where the contribution actually is</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="open-questions.html">open-questions</a></td>
+<td>16 questions. Q1 recommendation filed; Q2/Q4/Q7/Q13 moved by the platform update</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="citation-backlog.html">citation-backlog</a></td>
+<td><strong>All ten numeric refs resolved</strong>; 6 held, 3 to obtain. Coverage gaps</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a></td>
+<td>Q1 decision page — reframed as a hybrid, not a binary</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="emotion-recognition-benchmarks.html">emotion-recognition-benchmarks</a></td>
+<td>Every recognition rate in the corpus, and what they support</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a></td>
+<td><strong>The RL design argument</strong>: learn over <code>A(s)</code>, keep the ethology. Answers Q11</td>
+<td>draft</td>
+</tr>
+</tbody>
+</table>
+<h2>Sources</h2>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Summary</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a></td>
+<td>Frontiers 2017. Defines ethorobotics; ref <code>[1]</code>. Theory, no results</td>
+<td>solid</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a></td>
+<td>Comput Hum Behav. PeopleBot, 5 emotions, N=81, 75% vs dog's 78%</td>
+<td>solid</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a></td>
+<td>PLoS ONE. MogiRobi, live wizard-of-oz, joy 83%/fear 48%, NARS drop</td>
+<td>solid</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="lakatos-2014-embodiments-demo.html">lakatos-2014-embodiments-demo</a></td>
+<td>2-page demo. Same design across 4 embodiments — the transfer evidence</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a></td>
+<td>IECON <strong>2012</strong> (page name says 2011 — filename error). <strong>Nearest prior work</strong>; ref <code>[7]</code></td>
+<td>solid</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="szabo-2010-emotional-engine.html">szabo-2010-emotional-engine</a></td>
+<td>ROBIO. Earlier version; unique long-term layer and robot survey</td>
+<td>solid</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="kovacs-fri-automaton-series.html">kovacs-fri-automaton-series</a></td>
+<td>4 papers, one contribution: FRI fuzzy automaton for ethological models</td>
+<td>solid</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="vincze-2012-interfaces-and-virca.html">vincze-2012-interfaces-and-virca</a></td>
+<td>Tooling: simulation interfaces and the VirCA 3D environment</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="vincze-2021-automatic-coding.html">vincze-2021-automatic-coding</a></td>
+<td>SII 2021, newest source. Auto-codes behaviour from position data alone</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="ichikawa-numakunai-2012-roman.html">ichikawa-numakunai-2012-roman</a></td>
+<td>RO-MAN ×2. iSpace home-care; behavioural factors and exploration</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="panksepp-2005-affective-consciousness.html">panksepp-2005-affective-consciousness</a></td>
+<td><strong>Ref <code>[8]</code></strong>. Cons. &amp; Cognition 14(1). Seven circuits; affect taxonomy; rejects the RPE reduction</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="panksepp-2011-emotional-circuits.html">panksepp-2011-emotional-circuits</a></td>
+<td>Neurosci. Biobehav. Rev. 35(9). Per-circuit summaries; "Law of Affect"; PLAY builds social competence</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="plutchik-1982-psychoevolutionary.html">plutchik-1982-psychoevolutionary</a></td>
+<td><strong>Ref <code>[9]</code></strong>. Soc. Sci. Info 21(4–5). Three languages; eight functional prototypes; the cone</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="topal-2014-ostensive.html">topal-2014-ostensive</a></td>
+<td><strong>Ref <code>[3]</code></strong>. <em>The Social Dog</em> ch. 11. Ostensive cues; synchronisation not pedagogy</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="albuquerque-2016-emotion-recognition.html">albuquerque-2016-emotion-recognition</a></td>
+<td><strong>Ref <code>[4]</code></strong>. Biol. Lett. 12(1). N=17, cross-modal. <strong>Independent of the network</strong></td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a></td>
+<td>RL textbook. Ch. 14–15 + §17.4 read closely: animal learning, dopamine, reward design. <strong>No emotion content</strong></td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="mecanumbot-repos.html">mecanumbot-repos</a></td>
+<td>GitHub clips, re-taken 2026-07-28. <strong>Overturns four platform claims</strong></td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="research-proposal.html">research-proposal</a></td>
+<td>Hubay 2026, own notes. Thesis, commitments, novelty claim</td>
+<td>solid</td>
+</tr>
+</tbody>
+</table>
+<h2>Models</h2>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Summary</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a></td>
+<td>7 circuits, now first-hand; affect taxonomy; the RPE contradiction</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="plutchik-model.html">plutchik-model</a></td>
+<td><strong>Primary held (1982, not 2001)</strong>. Functional language; the case is stronger than it looked</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a></td>
+<td>The behaviour tables — expressive, event-impact, SST, leading</td>
+<td>draft</td>
+</tr>
+</tbody>
+</table>
+<h2>Concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Summary</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="wikilink" href="ethorobotics.html">ethorobotics</a></td>
+<td>The framing discipline: robots as species adapted to a niche</td>
+<td>solid</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="emotion-attribution.html">emotion-attribution</a></td>
+<td>Best-evidenced claim in the wiki — plus when it backfires</td>
+<td>solid</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="uncanny-valley.html">uncanny-valley</a></td>
+<td>Mori, and its reinterpretation as agent categorisation</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="function-orientedness.html">function-orientedness</a></td>
+<td>Form follows use; now empirically supported, not just argued</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="interspecific-hri.html">interspecific-hri</a></td>
+<td>HRI as asymmetric, non-linguistic, any-age interaction</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="social-competence.html">social-competence</a></td>
+<td>Defined; emerges over time — which no study in the corpus tests</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="attachment-sst.html">attachment-sst</a></td>
+<td>The Strange Situation Test: evidence, rule source and test scenario</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="ostensive-signalling.html">ostensive-signalling</a></td>
+<td>Refs <code>[3]</code>/<code>[4]</code> resolved. Five-item attention spec; the deceptive-pointing failure mode</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="conditioning.html">conditioning</a></td>
+<td>Classical ↔ prediction, instrumental ↔ control; blocking, shaping, <code>A(s)</code></td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="habitual-vs-goal-directed.html">habitual-vs-goal-directed</a></td>
+<td>Model-free ↔ habit, model-based ↔ goal-directed; outcome devaluation</td>
+<td>draft</td>
+</tr>
+</tbody>
+</table>
+<h2>Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Summary</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="wikilink" href="emotion-engine.html">emotion-engine</a></td>
+<td>The system being built; what is prior art and what is left</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a></td>
+<td>Which emotion gets expressed: winner-take-all vs rule tree</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a></td>
+<td>Sparse-rule fuzzy automaton; the lineage's behaviour architecture</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a></td>
+<td>The biggest hole — no source closes the perception loop</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="behaviour-trees.html">behaviour-trees</a></td>
+<td>Node semantics, two-way transfers, RL-BT learning nodes, safety subtree. <strong>Q9 settled</strong></td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="td-learning.html">td-learning</a></td>
+<td>The TD error; TD model of conditioning; the dopamine RPE hypothesis and its limits</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="actor-critic.html">actor-critic</a></td>
+<td>Actor/critic split = control/prediction; striatal mapping; teams and credit assignment</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="reward-design.html">reward-design</a></td>
+<td>Reward is internal; the failure modes; shaping; the scalar-vs-vector problem (Q14)</td>
+<td>draft</td>
+</tr>
+</tbody>
+</table>
+<h2>Systems</h2>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Summary</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="wikilink" href="robot-platform.html">robot-platform</a></td>
+<td><strong>Mecanumbot</strong> — Jetson Orin Nano, lidar + camera, neck/grabbers, 4 LED panels, mecanum drive</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a></td>
+<td><strong>Csenge's</strong> DR-SPAAM + YOLO-pose fusion stack; 17-keypoint body pose</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a></td>
+<td><strong>Csenge's</strong> <code>py_trees</code> behaviour layer; three leading conditions already coded</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="prior-robot-platforms.html">prior-robot-platforms</a></td>
+<td>MogiRobi, Ethon, PeopleBot, Sunflower, FLASH + 6 surveyed robots</td>
+<td>draft</td>
+</tr>
+</tbody>
+</table>
+<h2>People</h2>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Summary</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="wikilink" href="hungarian-ethorobotics-network.html">hungarian-ethorobotics-network</a></td>
+<td>ELTE / BME / Miskolc / Chuo / Wrocław / Herts — and why it is not independent</td>
+<td>draft</td>
+</tr>
+</tbody>
+</table>
+<h2>Experiments</h2>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Summary</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="wikilink" href="validation-study.html">validation-study</a></td>
+<td>Planned human study; full protocol template now inherited</td>
+<td>draft</td>
+</tr>
+</tbody>
+</table>
+<h2>Empty categories</h2>
+<p><code>wiki/datasets/</code> — still empty. No ingested source uses a public affect corpus,
+which is itself a finding. See <a class="wikilink" href="citation-backlog.html">citation-backlog</a>.</p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="thesis.html">Thesis — evolving argument</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>
