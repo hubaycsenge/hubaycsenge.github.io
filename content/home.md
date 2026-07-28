@@ -1,31 +1,20 @@
 ---
 name: Csenge Hubay
-tagline: PhD researcher — emotion modelling for social robots
-affiliation: ""            # e.g. "Doctoral School of Informatics, …" — fill in or leave blank to hide
-email: csengehubay@gmail.com
+tagline: PhD student — emotion modelling for social robots
+affiliation: "HUN-REN ELTE Comparative Ethology Research Group; ELTE Department of Artificial Intelligence"            # e.g. "Doctoral School of Informatics, …" — fill in or leave blank to hide
+email: csengehubay@inf.elte.hu
 github: hubaycsenge
-scholar: ""                # optional Google Scholar URL
-orcid: ""                  # optional ORCID URL
+scholar: "Kc63u3YAAAAJ&hl=hu"                # optional Google Scholar URL
+orcid: "/0009-0006-1444-2194"                  # optional ORCID URL
 ---
 
 ## About
 
-I build **emotional engines for social robots**, in the *ethorobotics* tradition:
-the view that a social robot should be treated as a species adapted to its own
-niche rather than as an imitation of a human being.
+Hi!
+I'm Csenge, I'm completing my PhD degree in ethorobotics at ELTE.This webpage is mainly made to contain the theoretical background for my research. The intended use is personal, but if you're here, feel free to take a look. I'm also open to suggestions if you're missing something important:D
+**DISCLAIMER**
+Sorry for sounding square, this webpage is mainly edited with AI and by no means reflects my artistic aspirations.
 
-My work sits on a specific bet. Most affective computing in human–robot
-interaction models only the human. I am building an engine that fuses **two**
-input streams — the perceived affective state of the person, and the robot's own
-internal state: battery, sensor health, motor load — and generates behaviour
-from their combination. Behaviour is modelled on **dog–human interaction**, not
-by imitation but by functional analogy: dog ethology supplies legible social
-primitives, which are re-expressed in whatever embodiment is available.
-
-The behaviour layer is learnt rather than hand-authored — reinforcement learning
-over an ethologically derived action set, with behaviour trees executing the
-primitives — and the target is validation **on human subjects in real
-environments**, not in the lab.
 
 ## Research themes
 
