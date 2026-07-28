@@ -4,8 +4,8 @@ tagline: PhD student — emotion modelling for social robots
 affiliation: "HUN-REN ELTE Comparative Ethology Research Group; ELTE Department of Artificial Intelligence"            # e.g. "Doctoral School of Informatics, …" — fill in or leave blank to hide
 email: csengehubay@inf.elte.hu
 github: hubaycsenge
-scholar: "Kc63u3YAAAAJ&hl=hu"                # optional Google Scholar URL
-orcid: "/0009-0006-1444-2194"                  # optional ORCID URL
+scholar: "https://scholar.google.com/citations?user=Kc63u3YAAAAJ&hl=hu"                # optional Google Scholar URL
+orcid: "https://orcid.org/0009-0006-1444-2194"                  # optional ORCID URL
 ---
 
 ## About
