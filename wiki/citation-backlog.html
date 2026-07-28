@@ -22,7 +22,7 @@
 <article class="prose page">
   <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Synthesis</p>
   <h1>Citation backlog</h1>
-<dl class="meta"><div><dt>type</dt><dd>synthesis</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>12</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">hub</span> <span class="tag">bookkeeping</span></dd></div></dl>
+<dl class="meta"><div><dt>type</dt><dd>synthesis</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>13</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">hub</span> <span class="tag">bookkeeping</span></dd></div></dl>
 <p>Unresolved references and sources to hunt down. Resolve by dropping the PDF into
 <code>raw/papers/</code> and asking for an ingest.</p>
 <h2>Numeric references from <a class="wikilink" href="research-proposal.html">research-proposal</a> — RESOLVED</h2>
@@ -119,11 +119,12 @@ mechanical follow-up if wanted — say the word.</p>
    does not currently support. <strong>The literature the thesis actually needs —
    skeleton-based / bodily affect recognition — is not in the reference list at
    all.</strong> See <a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a>.</li>
-<li><strong>The affect models behind <a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a></strong>, none held
-   and all now load-bearing for the comparison with prior art:
+<li><strong>The affect models behind <a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a></strong>, all but one
+   still unheld and all load-bearing for the comparison with prior art:
    <strong>ALMA</strong> (Gebhard) — the layered model of affect EMoBeT reimplements;
-   the <strong>OCC</strong> model (Ortony, Clore &amp; Collins) — a <em>third</em> emotion model in the
-   corpus alongside Panksepp and Plutchik, and the one game AI actually uses;
+   ~~the <strong>OCC</strong> model~~ — ✅ <strong>held 2026-07-28</strong> as
+   <a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a>, and in its <strong>2nd edition (2022)</strong>, not the
+   1988 one Belle et al. cite. See <a class="wikilink" href="occ-model.html">occ-model</a>;
    <strong>GAMYGDALA</strong> (Popescu et al.) — an OCC-based black-box appraisal engine;
    <strong>Johansson &amp; Dell'Acqua</strong>'s <em>emotional selector</em> BT node; the <strong>Five Factor
    Model</strong> of personality; and the <strong>Ebbinghaus</strong> forgetting curve. See
@@ -284,21 +285,59 @@ textbook)</p>
 <li><a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a> — the Szabó impact table transcription should be
   checked against the original for sparse-row column alignment.</li>
 <li><a class="wikilink" href="mecanumbot-repos.html">mecanumbot-repos</a> — the <code>mecanumbot_microcontrollers</code> clip is empty; re-clip.</li>
+<li><a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> — <strong><code>pdftotext</code> drops every Arabic digit from
+  this PDF.</strong> All page numbers, years and figure numbers must be read from rendered
+  page images. Anything cited from this source with a page number taken from
+  extracted text is unreliable.</li>
 </ul>
+<h2>Opened by <a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> — 2026-07-28</h2>
+<p>A new frontier, and the first one in the wiki that is about <em>computational</em> appraisal
+rather than emotion theory. Priority order:</p>
+<ol>
+<li><strong>L. F. Barrett et al.</strong> on the weak link between facial/bodily expression and
+   internal state — cited at p. 242 for the claim that surface cues are insufficient.
+   <strong>The highest-value acquisition in the wiki right now</strong>: if it holds, it reframes
+   <a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a> and Q19, and it bears on the thesis' central
+   novelty claim.</li>
+<li><strong>Sloman &amp; Croucher (1981)</strong>, <em>Why robots will have emotions</em> — the counter-position
+   to OCC's denial that machines can have emotions, from within AI. Needed for
+   <a class="wikilink" href="machine-emotion-question.html">machine-emotion-question</a> / Q18. Also <strong>Frijda &amp; Swagerman (1987)</strong> and
+   <strong>Adolphs &amp; Anderson (2018)</strong>, cited in the same breath at p. 219.</li>
+<li><strong>Gratch &amp; Marsella on EMA</strong> — the domain-independent appraisal-and-coping model,
+   in SOAR. The nearest thing in any literature to an implementable appraisal front
+   end. Several papers; Marsella &amp; Gratch's synthesis is the one to find. Bears on
+   Q17 and <a class="wikilink" href="appraisal-theory.html">appraisal-theory</a>.</li>
+<li><strong>Gratch's Émile</strong> and <strong>Elliott's Affective Reasoner</strong> — the two systems that
+   bracket the hand-authored/derived distinction. Historical but load-bearing for the
+   argument that appraisal need not be hand-coded.</li>
+<li><strong>Ortony &amp; Turner</strong> — cited at p. 242 alongside Barrett. Likely <em>What's basic about
+   basic emotions?</em>, which would also bear on <a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a>. Unverified;
+   do not cite until the reference list is checked. #needs-source</li>
+<li><strong>Lazarus</strong>, <strong>Arnold</strong>, <strong>Scherer et al.</strong> — the appraisal tradition OCC sits in.
+   Background rather than urgent; <a class="wikilink" href="appraisal-theory.html">appraisal-theory</a> currently rests on OCC's own
+   characterisation of them, which is a single-source account of a whole field.</li>
+</ol>
+<p>The reference list of <a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> (pp. 259–283) has not been
+mined systematically — only the works cited in the passages read closely. A pass over
+Ch. 10's references would likely yield more of the affective-computing frontier.</p>
 <section class="backlinks">
   <h2>Linked from</h2>
-  <ul><li><a href="attachment-sst.html">Attachment and the Strange Situation Test</a></li>
+  <ul><li><a href="appraisal-theory.html">Appraisal theory</a></li>
+<li><a href="attachment-sst.html">Attachment and the Strange Situation Test</a></li>
 <li><a href="behaviour-trees.html">Behaviour trees</a></li>
 <li><a href="belle-2019-programming-with-affect.html">Belle, Gittens &amp; Graham (2019) — Programming with Affect</a></li>
+<li><a href="machine-emotion-question.html">Can a robot have emotions?</a></li>
 <li><a href="colledanchise-ogren-behavior-trees.html">Colledanchise &amp; Ögren — Behavior Trees in Robotics and AI: An Introduction</a></li>
 <li><a href="conditioning.html">Conditioning</a></li>
 <li><a href="dog-human-interaction-model.html">Dog–human interaction as behaviour model</a></li>
 <li><a href="emotion-attribution.html">Emotion attribution to artificial agents</a></li>
 <li><a href="emotion-model-comparison.html">Emotion model comparison</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
 <li><a href="interspecific-hri.html">HRI as interspecific interaction</a></li>
 <li><a href="lakatos-2014-embodiments-demo.html">Lakatos et al. — Dog-Inspired Social Behaviour in Robots with Different Embodiments</a></li>
 <li><a href="log.html">Log</a></li>
 <li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="ortony-2022-cognitive-structure.html">Ortony, Clore &amp; Collins (2022) — The Cognitive Structure of Emotions</a></li>
 <li><a href="research-proposal.html">PhD research proposal</a></li>
 <li><a href="plutchik-1982-psychoevolutionary.html">Plutchik (1982) — A psychoevolutionary theory of emotions</a></li>
 <li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>

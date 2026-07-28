@@ -22,7 +22,7 @@
 <article class="prose page">
   <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Synthesis</p>
   <h1>Reinforcement learning for behaviour learning</h1>
-<dl class="meta"><div><dt>type</dt><dd>synthesis</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>8</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">architecture</span> <span class="tag">reinforcement-learning</span> <span class="tag">decision</span> <span class="tag">hub</span></dd></div></dl>
+<dl class="meta"><div><dt>type</dt><dd>synthesis</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>9</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">architecture</span> <span class="tag">reinforcement-learning</span> <span class="tag">decision</span> <span class="tag">hub</span></dd></div></dl>
 <p><strong>The decision.</strong> Csenge, 2026-07-28: reinforcement learning algorithms are to be
 used to teach <a class="wikilink" href="robot-platform.html">robot-platform</a> behaviour patterns. This page is the design
 argument that follows, built on <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> and on what the rest of
@@ -250,13 +250,54 @@ would require a longitudinal design with no precedent here.</p>
 <li><strong>Oudeyer &amp; Kaplan (2007)</strong> and Baldassarre &amp; Mirolli (2013) on intrinsic
    motivation — the internal-state-as-reward route.</li>
 </ol>
+<h2>A third vote against, from the appraisal tradition — 2026-07-28</h2>
+<div class="callout callout-warning">
+<p class="callout-title">Contradiction — OCC prefers hand-coding, explicitly</p>
+<p>"While it is possible that machine learning techniques could lead to the
+development of these prerequisites, <strong>we believe that hand-coding the kinds of
+representations and cognition–emotion relationships that we have outlined is likely
+to be at least as effective</strong>" (<a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> p. 219).</p>
+<p><strong>How much weight it carries.</strong> Less than it looks. The claim is offered as a
+belief, with no evidence, no comparison and no benchmark, in a monograph whose
+empirical subject is human emotion rather than learning algorithms. It is also
+about the <em>appraisal</em> layer — how situations map to emotions — not about the
+behaviour policy this page is concerned with. On its own terms it is weakly
+supported.</p>
+<p><strong>Why it still matters.</strong> It is now the <strong>third independent instance</strong> of the same
+choice: <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a> hand-authored every rule,
+<a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a> hand-scripted every trigger, and OCC
+recommends doing so. The corpus contains <strong>three votes for hand-coding and none for
+learning.</strong> This thesis is departing from unanimous practice, and the argument on
+this page has to be strong enough to carry that.</p>
+</div>
+<p>The departure is also narrower than the tally suggests, and worth stating precisely:
+all three hand-code the <strong>appraisal</strong> step (event → emotion), which is Q17. This page
+argues for learning the <strong>behaviour</strong> step (state → action). Those are separable, and
+the thesis could reasonably learn the second while deriving the first structurally —
+see <a class="wikilink" href="appraisal-theory.html">appraisal-theory</a>, where Gratch and Marsella propose a third option that is
+neither hand-authoring nor learning: reading appraisal variables off planning
+representations the agent maintains anyway.</p>
+<p>That reading makes the corpus much less hostile than a raw count implies. <strong>The
+strongest version of the thesis' position</strong>: hand-authoring appraisal <em>rules</em> does not
+scale and nobody defends it on evidence; learning the <em>policy</em> is supported by
+<a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> and by <a class="wikilink" href="social-competence.html">social-competence</a>'s own requirement of
+responsiveness to training; and the appraisal layer can be derived rather than
+authored or learnt.</p>
+<p>There is one further datapoint on the other side, already recorded on
+<a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a>: EMoBeT's authors explicitly design for
+emotional behaviour "<strong>regardless of whether it is an optimal outcome</strong>", against
+approaches that seek optimal responses. Under RL this thesis is optimising. Whether
+an optimised social robot is a <em>legible</em> one remains open — and it is not answered by
+any source in the corpus.</p>
 <h2>Related</h2>
 <p><a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> · <a class="wikilink" href="conditioning.html">conditioning</a> · <a class="wikilink" href="td-learning.html">td-learning</a> · <a class="wikilink" href="actor-critic.html">actor-critic</a> ·
 <a class="wikilink" href="reward-design.html">reward-design</a> · <a class="wikilink" href="habitual-vs-goal-directed.html">habitual-vs-goal-directed</a> · <a class="wikilink" href="emotion-engine.html">emotion-engine</a> ·
-<a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a> · <a class="wikilink" href="open-questions.html">open-questions</a> · <a class="wikilink" href="thesis.html">thesis</a></p>
+<a class="wikilink" href="fuzzy-automaton-fri.html">fuzzy-automaton-fri</a> · <a class="wikilink" href="appraisal-theory.html">appraisal-theory</a> · <a class="wikilink" href="occ-model.html">occ-model</a> ·
+<a class="wikilink" href="open-questions.html">open-questions</a> · <a class="wikilink" href="thesis.html">thesis</a></p>
 <section class="backlinks">
   <h2>Linked from</h2>
   <ul><li><a href="actor-critic.html">Actor–critic</a></li>
+<li><a href="appraisal-theory.html">Appraisal theory</a></li>
 <li><a href="behaviour-trees.html">Behaviour trees</a></li>
 <li><a href="belle-2019-programming-with-affect.html">Belle, Gittens &amp; Graham (2019) — Programming with Affect</a></li>
 <li><a href="citation-backlog.html">Citation backlog</a></li>
@@ -272,6 +313,7 @@ would require a longitudinal design with no precedent here.</p>
 <li><a href="mecanumbot-behaviours.html">mecanumbot_behaviours — the behaviour layer</a></li>
 <li><a href="mecanumbot-perception.html">mecanumbot_sensorprocess_smart — the perception stack</a></li>
 <li><a href="open-questions.html">Open questions</a></li>
+<li><a href="ortony-2022-cognitive-structure.html">Ortony, Clore &amp; Collins (2022) — The Cognitive Structure of Emotions</a></li>
 <li><a href="plutchik-1982-psychoevolutionary.html">Plutchik (1982) — A psychoevolutionary theory of emotions</a></li>
 <li><a href="plutchik-model.html">Plutchik&#x27;s model</a></li>
 <li><a href="reward-design.html">Reward design</a></li>

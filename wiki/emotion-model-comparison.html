@@ -22,7 +22,7 @@
 <article class="prose page">
   <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Synthesis</p>
   <h1>Emotion model comparison</h1>
-<dl class="meta"><div><dt>type</dt><dd>synthesis</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>4</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">comparison</span> <span class="tag">emotion-model</span> <span class="tag">decision</span></dd></div></dl>
+<dl class="meta"><div><dt>type</dt><dd>synthesis</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>5</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">comparison</span> <span class="tag">emotion-model</span> <span class="tag">decision</span></dd></div></dl>
 <p>The decision page for <strong>Q1</strong> in <a class="wikilink" href="open-questions.html">open-questions</a>. The corpus has changed this
 question substantially — it is no longer a straight two-way choice.</p>
 <div class="callout callout-important">
@@ -75,6 +75,78 @@ dropping surprise. If the priority is legible expression on a faceless robot,
 go further toward Plutchik and treat the neural grounding as motivation rather
 than as structure.</p>
 </div>
+<h2>A third model arrives — and it is not on the same axis</h2>
+<p><em>Added 2026-07-28 after ingesting <a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a>. </em><em>The
+recommendation above is deliberately left untouched</em><em>; Csenge's steer was to record
+OCC and decide later.</em></p>
+<p><a class="wikilink" href="occ-model.html">occ-model</a> is now held as a primary, and it is the model affective computing
+actually uses (<a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a>, GAMYGDALA, ALMA). The obvious
+move would be to reopen Q1 as a three-way choice. <strong>That would be a mistake, because
+the three models do not answer the same question.</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Answers <em>what the states are</em></th>
+<th>Answers <em>how a situation produces one</em></th>
+<th>Answers <em>what the state then does</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a></td>
+<td>✅ 7 circuits</td>
+<td>partly — broad activators only</td>
+<td>partly — approach/avoid</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="plutchik-model.html">plutchik-model</a></td>
+<td>✅ 8 prototypes</td>
+<td>✗ thin</td>
+<td>✅ behavioural column</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="occ-model.html">occ-model</a></td>
+<td>✅ 24 types</td>
+<td>✅ <strong>the only one that does</strong></td>
+<td>✗ <strong>nothing at all</strong></td>
+</tr>
+</tbody>
+</table>
+<p>OCC has <strong>no behavioural output</strong>. It differentiates 24 emotion types and says
+nothing about what an agent should do in any of them — no action tendency, no
+expression, no behavioural column. It is a theory of the <em>front end</em>.</p>
+<p>Panksepp and Plutchik are the reverse: strong on states and (for Plutchik) on
+behaviour, thin on the path from event to state. Szabó's implemented hybrid
+inherits that weakness — its inputs were <strong>hand-labelled events</strong>, which is precisely
+the appraisal step OCC formalises.</p>
+<div class="callout callout-important">
+<p class="callout-title">Q1 has been the wrong shape</p>
+<p>The wiki has framed Q1 as <em>which model grounds the engine</em>, and answered it with a
+state set. But an engine needs at least three things — an appraisal front end, a
+state representation, and a behaviour mapping — and <strong>no single model in the corpus
+supplies all three</strong>. The existing Panksepp+Plutchik recommendation covers the
+second and third. It says nothing about the first, and the first is where every
+implementation in the corpus resorted to hand-labelling.</p>
+<p>This does not overturn the recommendation. It suggests Q1 should be <strong>split</strong>, and
+that the appraisal layer is a separate decision that has not yet been taken.
+Filed as a proposal in <a class="wikilink" href="open-questions.html">open-questions</a>, not as a change to the recommendation.</p>
+</div>
+<p>The live option, then, is not "OCC <em>instead of</em>" but <strong>OCC as the appraisal front end
+feeding a Panksepp/Plutchik state set</strong> — with the caveat that mapping 24 OCC types
+onto 5–8 states is itself an unsolved design problem, and that OCC's own value
+system (goals, standards, tastes) would have to be represented explicitly on
+<a class="wikilink" href="robot-platform.html">robot-platform</a>. See <a class="wikilink" href="appraisal-theory.html">appraisal-theory</a> for the route Gratch and Marsella
+propose, which avoids hand-authoring the appraisal rules.</p>
+<p>Two further considerations for whenever Q1 is settled:</p>
+<ul>
+<li><strong>OCC rejects dimensional representation outright</strong> — emotions "cannot be arranged
+  informatively into any single space of reasonably low dimensionality". If the
+  engine goes continuous for LED expression (the argument recorded below), that is a
+  point <em>against</em> OCC and in Plutchik's favour.</li>
+<li><strong>OCC denies robots can have emotions at all</strong> (p. 219). Compatible with a
+  functional engine, but it needs saying out loud — see <a class="wikilink" href="machine-emotion-question.html">machine-emotion-question</a>.</li>
+</ul>
 <h2>The finding that reframes the question</h2>
 <p><a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a> did not pick between an emotion theory and dog
 ethology. It used <strong>Panksepp as architectural justification</strong> for a state set
@@ -97,6 +169,7 @@ the circuit inventory nor the ethological table provides?</p>
 <th>Axis</th>
 <th><a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a></th>
 <th><a class="wikilink" href="plutchik-model.html">plutchik-model</a></th>
+<th><a class="wikilink" href="occ-model.html">occ-model</a></th>
 <th>Szabó's hybrid (implemented)</th>
 </tr>
 </thead>
@@ -105,53 +178,62 @@ the circuit inventory nor the ethological table provides?</p>
 <td>Representation</td>
 <td>discrete circuits</td>
 <td>continuous states</td>
+<td>24 discrete types, hierarchical</td>
 <td>5 discrete states, continuous levels in [−1,1]</td>
 </tr>
 <tr>
 <td>Grounding</td>
 <td>neural / mechanistic</td>
 <td>evolutionary / adaptive</td>
+<td>cognitive appraisal</td>
 <td>Panksepp for architecture, dog ethology for content</td>
 </tr>
 <tr>
 <td>Intensity</td>
 <td>not native</td>
 <td><strong>native</strong></td>
+<td><strong>native — global + local variables</strong></td>
 <td>hand-built: saturation, peak width, decline rates</td>
 </tr>
 <tr>
 <td>Blending</td>
 <td>inhibition between circuits</td>
 <td><strong>native (dyads)</strong></td>
+<td>compounds (4 types only)</td>
 <td>ambivalent cross-modal expression, explicitly <em>not</em> Plutchik dyads</td>
 </tr>
 <tr>
 <td>Mapping to <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a></td>
 <td>clean (discrete)</td>
 <td>needs discretisation</td>
+<td>clean but <strong>no behaviour to map</strong></td>
 <td>clean</td>
 </tr>
 <tr>
 <td>Handles robot internal state (Q2)</td>
 <td>no</td>
 <td>no</td>
+<td>no — but see <a class="wikilink" href="appraisal-theory.html">appraisal-theory</a></td>
 <td><strong>no</strong> — the gap is universal</td>
 </tr>
 <tr>
 <td>Prior robot implementations</td>
 <td><a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a></td>
 <td>none in corpus</td>
+<td>none in corpus; NPCs only</td>
 <td>this is it</td>
 </tr>
 <tr>
 <td>Computability from sensor input</td>
 <td>untested</td>
 <td>untested</td>
+<td><strong>the only model that specifies the path</strong></td>
 <td><strong>untested — inputs were hand-labelled</strong></td>
 </tr>
 <tr>
 <td>Fit with supervisors / lineage</td>
 <td>strong</td>
+<td>none</td>
 <td>none</td>
 <td>strongest</td>
 </tr>
@@ -183,11 +265,15 @@ characterisations (<a class="wikilink" href="citation-backlog.html">citation-bac
 reasons, the sources and what was given up, then update step 5 of <a class="wikilink" href="thesis.html">thesis</a>.</p>
 <section class="backlinks">
   <h2>Linked from</h2>
-  <ul><li><a href="belle-2019-programming-with-affect.html">Belle, Gittens &amp; Graham (2019) — Programming with Affect</a></li>
+  <ul><li><a href="appraisal-theory.html">Appraisal theory</a></li>
+<li><a href="belle-2019-programming-with-affect.html">Belle, Gittens &amp; Graham (2019) — Programming with Affect</a></li>
+<li><a href="machine-emotion-question.html">Can a robot have emotions?</a></li>
 <li><a href="citation-backlog.html">Citation backlog</a></li>
 <li><a href="log.html">Log</a></li>
 <li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="occ-model.html">OCC model</a></li>
 <li><a href="open-questions.html">Open questions</a></li>
+<li><a href="ortony-2022-cognitive-structure.html">Ortony, Clore &amp; Collins (2022) — The Cognitive Structure of Emotions</a></li>
 <li><a href="panksepp-2005-affective-consciousness.html">Panksepp (2005) — Affective consciousness: core emotional feelings in animals and humans</a></li>
 <li><a href="panksepp-affective-systems.html">Panksepp&#x27;s affective systems</a></li>
 <li><a href="plutchik-1982-psychoevolutionary.html">Plutchik (1982) — A psychoevolutionary theory of emotions</a></li>

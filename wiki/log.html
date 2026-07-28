@@ -507,6 +507,94 @@ Dell'Acqua's emotional selector, the Five Factor Model, and Ebbinghaus.</p>
 <p><strong>Pages created (1)</strong>: <a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a>.
 <strong>Pages updated (6)</strong>: <a class="wikilink" href="behaviour-trees.html">behaviour-trees</a>, <a class="wikilink" href="thesis.html">thesis</a>, <a class="wikilink" href="emotion-engine.html">emotion-engine</a>,
 <a class="wikilink" href="open-questions.html">open-questions</a> (Q5), <a class="wikilink" href="citation-backlog.html">citation-backlog</a>, plus <code>index.md</code>.</p>
+<h2>[2026-07-28] ingest | Ortony, Clore &amp; Collins — The Cognitive Structure of Emotions (2nd edn, 2022)</h2>
+<p><strong>Source</strong>: Ortony, Clore &amp; Collins, <em>The Cognitive Structure of Emotions</em>, 2nd edn,
+Cambridge University Press 2022 (313 pp.), in <code>raw/papers/</code>
+→ <a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a></p>
+<p>Interactive ingest. Discussed before writing; Csenge steered two decisions —
+<strong>record OCC and leave the Q1 recommendation untouched</strong>, and <strong>escalate the
+contradictions to a dedicated synthesis page</strong> rather than only annotating affected
+pages.</p>
+<p><strong>The OCC primary, held at last.</strong> <a class="wikilink" href="citation-backlog.html">citation-backlog</a> item 2 listed it as the third
+emotion model in the corpus and the one game AI actually uses, reached until now only
+second-hand through <a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a>.</p>
+<p><strong>It is the 2022 second edition, not the 1988 original</strong>, and the difference matters:
+22 → 24 emotion types; "eliciting conditions" replaced by <strong>emergence conditions</strong>
+(a deliberate move toward constructivism); intensity substantially expanded; and a
+new contributed chapter by <strong>Gratch and Marsella</strong> on OCC and affective computing.
+Belle et al. cite the 1988 edition, so their emotion set cannot be assumed identical.</p>
+<h3>Four new pages</h3>
+<ul>
+<li><a class="wikilink" href="occ-model.html">occ-model</a> — 24 types in six groups; desirability/praiseworthiness/appeal;
+  global and local intensity variables; the two-stage potential→threshold formalism.</li>
+<li><a class="wikilink" href="appraisal-theory.html">appraisal-theory</a> — the tradition; appraisal variables as by-products of
+  competent agency; the appraisal→coping→reappraisal loop; reverse appraisal.</li>
+<li><a class="wikilink" href="machine-emotion-question.html">machine-emotion-question</a> — three positions in the corpus on whether a robot can
+  have emotions, and the argument that functional language dissolves the objection.</li>
+<li><a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> — the source page.</li>
+</ul>
+<h3>What moved</h3>
+<ul>
+<li><strong>A stage the wiki had never named.</strong> The engine runs <em>events → state →
+  expression</em>, with no account of how an event becomes an <em>appraised</em> event. Every
+  implementation in the corpus hand-labelled it — Szabó via a MATLAB GUI, Belle et al.
+  via scripted dialogue. That stage is appraisal, and OCC is the only model held that
+  formalises it. <strong>New Q17</strong>, arguably sharper than Q1.</li>
+<li><strong>Q1 proposed to split.</strong> Not reopened — the Panksepp+Plutchik recommendation stands
+  per Csenge's steer. But an engine needs an appraisal front end, a state set and a
+  behaviour mapping, and no single model supplies all three: OCC has 24 types and
+  <strong>no behavioural output at all</strong>; Panksepp and Plutchik are thin on the trigger
+  side. Proposed as Q1a/Q1b on <a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a>.</li>
+<li><strong><a class="wikilink" href="emotion-attribution.html">emotion-attribution</a> gains a criterion, from outside HRI.</strong> OCC's Attraction
+  emotions split on whether the object is construed as <strong>emotion-capable</strong>, and the
+  criterion is <em>responsiveness and apparent reciprocity</em> — gaze exchange, contingent
+  reaction to small movements — explicitly <strong>not</strong> resemblance or animacy. The
+  worked cases are a dog versus a pet skunk, and <strong>domestic robots are named</strong> (p. 180).
+  This closes the page's own open item ("morphology, contingency, or both?") in favour
+  of contingency, and it is buildable and manipulable on <a class="wikilink" href="robot-platform.html">robot-platform</a>.</li>
+<li><strong><a class="wikilink" href="function-orientedness.html">function-orientedness</a> corroborated from the tradition Q5 warns about.</strong></li>
+<li><strong><a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a> gains two mechanisms</strong>: per-person, per-time emotion
+  thresholds — which make competing emotions commensurable and give Q12 a better
+  answer than a fear-override rule — and EMA's control-based coping selection.</li>
+<li><strong>The perception gap may be mis-specified. New Q19.</strong> Gratch and Marsella:
+  "external expressions have only a loose connection to internal states"; accuracy
+  needs preceding events and the person's goals (p. 242). If right, no classifier over
+  pose closes the gap, and the robot's interaction history becomes load-bearing.</li>
+</ul>
+<h3>Two contradictions recorded</h3>
+<p>Both from Ch. 9 §Computational Tractability, p. 219, in the authors' own voice.</p>
+<ol>
+<li><strong>OCC denies robots can have emotions</strong> — "not the kinds of things that can be
+   conscious". Narrower than it reads: it denies <em>experience</em>, not function, and the
+   same paragraph affirms emotion's relevance to robotics. <a class="wikilink" href="machine-emotion-question.html">machine-emotion-question</a>
+   argues the thesis should adopt functional language explicitly and the objection
+   dissolves. Q18. Opposing camp — Sloman &amp; Croucher (1981) — unheld.</li>
+<li><strong>OCC prefers hand-coding to learning.</strong> Asserted without evidence, and about the
+   appraisal layer rather than the policy — but it is now the <strong>third independent vote
+   for hand-coding, against none for learning</strong>. <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> argues
+   the departure is defensible and narrower than the tally implies.</li>
+</ol>
+<h3>Corrections and cautions</h3>
+<ul>
+<li><strong><code>pdftotext</code> silently drops every Arabic digit from this PDF.</strong> All page numbers,
+  years, figure numbers and citation years on the new pages were read from <strong>rendered
+  page images</strong> instead. Recorded in <a class="wikilink" href="citation-backlog.html">citation-backlog</a> under recovery tasks —
+  anything later cited from this source with a page number from extracted text is
+  unreliable.</li>
+<li>The text-only pass <strong>missed Chapter 3 entirely</strong> ("Appraisal, the Value System, and
+  Primary Sources of Intensity", p. 49) because chapter numbers did not extract. Found
+  via the contents page image. Ch. 3 is not yet read closely — a gap in this ingest.</li>
+<li>Citation verified against the copyright page image: first edition © 1988, second
+  edition © 2022, DOI 10.1017/9781108934053, ISBN 978-1-108-84424-6.</li>
+</ul>
+<h3>New citation frontier</h3>
+<p>The first frontier in the wiki about <em>computational</em> appraisal rather than emotion
+theory. Priority: <strong>L. F. Barrett et al.</strong> on the weak expression–state link (the
+highest-value acquisition in the wiki now — it bears on the thesis' central novelty
+claim); <strong>Sloman &amp; Croucher (1981)</strong>; <strong>Gratch &amp; Marsella on EMA</strong>; Émile; Elliott's
+Affective Reasoner; Ortony &amp; Turner. The book's reference list (pp. 259–283) has not
+been mined systematically.</p>
+<p>Pages touched: 4 created, 12 updated, plus <code>index.md</code> and this log.</p>
 
 </article>
 </main>

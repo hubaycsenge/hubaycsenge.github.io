@@ -22,7 +22,7 @@
 <article class="prose page">
   <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Methods</p>
   <h1>Emotion arbitration</h1>
-<dl class="meta"><div><dt>type</dt><dd>method</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>2</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">architecture</span> <span class="tag">emotion</span> <span class="tag">decision-making</span></dd></div></dl>
+<dl class="meta"><div><dt>type</dt><dd>method</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>3</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">architecture</span> <span class="tag">emotion</span> <span class="tag">decision-making</span></dd></div></dl>
 <p>The step between having an emotional state vector and doing something about it:
 <strong>which emotion, of several simultaneously active, gets expressed?</strong> The wiki did
 not have this concept before ingesting <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>; it is a
@@ -99,14 +99,52 @@ rapidly, depending on the system's expressive capacity.</p>
 <li>On <a class="wikilink" href="robot-platform.html">robot-platform</a>, "different modalities" means <strong>motion vs LEDs</strong> — the
   natural place for ambivalent expression, and an untried one.</li>
 </ul>
+<h2>Two mechanisms added — 2026-07-28</h2>
+<p><a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> supplies two arbitration mechanisms the corpus
+did not have. Neither is proposed by its authors <em>for</em> arbitration — both are
+recorded here as design options, not findings. #needs-source</p>
+<h3>Emotion thresholds</h3>
+<p>OCC separates <strong>potential</strong> from <strong>intensity</strong> (Ch. 9, pp. 215–228). An event
+generates emotion-potential; an emotion emerges only if potential exceeds a
+<strong>per-person, per-time threshold</strong>, and its intensity is then the <em>discrepancy</em> from
+that threshold. Sub-threshold potential is not necessarily discarded — OCC notes it
+"can always be preserved". Full formalism on <a class="wikilink" href="occ-model.html">occ-model</a>.</p>
+<div class="callout callout-important">
+<p class="callout-title">A third arbitration option, and the only commensurable one</p>
+<p>The corpus has offered winner-take-all (highest activation wins) and Szabó's
+hierarchical rule tree. Both compare raw activation levels across emotions that are
+<strong>not obviously on the same scale</strong> — is fear at 0.6 stronger than joy at 0.7?</p>
+<p>Thresholds make the comparison well-posed: emotions compete by <strong>how far each is
+past its own threshold</strong>, which normalises across types. It also gives a principled
+place to put individual difference and current state — the threshold is
+<code>THRESHOLD(p, t)</code>, not a constant — and a natural implementation of temperament,
+which <a class="wikilink" href="szabo-2010-emotional-engine.html">szabo-2010-emotional-engine</a>'s dropped long-term layer was reaching for.</p>
+<p>And it directly addresses <strong>Q12</strong>: rather than a rule that always prioritises fear,
+fear gets a <em>lower threshold</em>. It still wins when genuinely warranted, without
+categorically overriding everything — which is the failure mode Q12 identifies.</p>
+</div>
+<h3>Control-based coping selection</h3>
+<p>EMA selects its response by the <strong>control</strong> appraisal: high perceived control leads
+to <em>problem-focused</em> coping (act on the situation), low control to <em>emotion-focused</em>
+coping (act on one's own beliefs, attention or goals)
+(<a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> p. 239). See <a class="wikilink" href="appraisal-theory.html">appraisal-theory</a>.</p>
+<p>This arbitrates at a different level from the mechanisms above — not <em>which emotion
+is expressed</em> but <em>which class of response the emotion selects</em>. On
+<a class="wikilink" href="robot-platform.html">robot-platform</a> the analogue is close to hand: whether a plan exists to address
+the situation is computable from the behaviour tree. It maps onto
+<a class="wikilink" href="habitual-vs-goal-directed.html">habitual-vs-goal-directed</a> more naturally than onto anything currently on this
+page, and is worth holding open when Q9's executive layer is specified.</p>
 <section class="backlinks">
   <h2>Linked from</h2>
   <ul><li><a href="actor-critic.html">Actor–critic</a></li>
+<li><a href="appraisal-theory.html">Appraisal theory</a></li>
 <li><a href="emotion-model-comparison.html">Emotion model comparison</a></li>
 <li><a href="emotion-recognition-benchmarks.html">Emotion recognition rates across robots</a></li>
 <li><a href="emotion-engine.html">Emotional engine</a></li>
 <li><a href="log.html">Log</a></li>
+<li><a href="occ-model.html">OCC model</a></li>
 <li><a href="open-questions.html">Open questions</a></li>
+<li><a href="ortony-2022-cognitive-structure.html">Ortony, Clore &amp; Collins (2022) — The Cognitive Structure of Emotions</a></li>
 <li><a href="panksepp-2011-emotional-circuits.html">Panksepp (2011) — The basic emotional circuits of mammalian brains</a></li>
 <li><a href="panksepp-affective-systems.html">Panksepp&#x27;s affective systems</a></li>
 <li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>

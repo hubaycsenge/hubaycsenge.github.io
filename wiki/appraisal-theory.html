@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Appraisal theory — Research wiki</title>
+<meta name="description" content="The family of emotion theories holding that emotions arise from an individual&#x27;s cognitive evaluation of how their goals and preferences are impacted by…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Concepts</p>
+  <h1>Appraisal theory</h1>
+<dl class="meta"><div><dt>type</dt><dd>concept</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">affective-computing</span> <span class="tag">emotion-model</span> <span class="tag">appraisal</span> <span class="tag">framing</span></dd></div></dl>
+<p>The family of emotion theories holding that <strong>emotions arise from an individual's
+cognitive evaluation of how their goals and preferences are impacted by external
+circumstances</strong> — not from the stimulus itself, but from its construal.
+<a class="wikilink" href="occ-model.html">occ-model</a> is the member of this family that affective computing adopted;
+<a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> Ch. 10 names Arnold and Scherer et al. as others
+in the tradition, and Lazarus as the psychologist whose work made appraisal
+mainstream. <em>(Those three are unheld — see <a class="wikilink" href="citation-backlog.html">citation-backlog</a>.)</em></p>
+<p>The core commitment: <strong>the same event produces different emotions in different
+agents, and the difference is explained by the agent's value system</strong>, not by the
+event. An appraisal theory therefore has two halves — a set of <em>appraisal variables</em>
+computed from the situation, and a mapping from variable patterns to affective
+states.</p>
+<h2>Why this matters to a robot architecture</h2>
+<p>Appraisal theory is the only tradition in the corpus that takes <strong>the path from
+situation to emotion</strong> as its subject. Both other models in the wiki are theories of
+<em>what the states are</em>:</p>
+<ul>
+<li><a class="wikilink" href="panksepp-affective-systems.html">panksepp-affective-systems</a> grounds states in neural circuits, and says what
+  activates each circuit only in broad terms.</li>
+<li><a class="wikilink" href="plutchik-model.html">plutchik-model</a> grounds states in adaptive function, and maps each to a
+  behaviour, but the trigger side is thin.</li>
+<li>Appraisal theory is almost entirely about the trigger side, and almost silent on
+  what the emotion then does.</li>
+</ul>
+<p>The wiki has been treating Q1 as a choice of state set. Appraisal theory shows that
+is only half the engine, and the half the corpus has said least about. See
+<a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a>.</p>
+<h2>Appraisal variables as by-products of competent agency</h2>
+<p>The most useful idea for this thesis comes from Gratch and Marsella's chapter in
+<a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> (Ch. 10, pp. 235–237). Early appraisal systems
+hand-authored rules mapping situations to appraisals — Elliott's <strong>Affective
+Reasoner</strong> would encode "if a team scores and the person is a fan, the event is
+desirable". This obviously does not scale.</p>
+<p>Their argument for what replaced it: appraisals "summarize key judgments that <strong>any
+intelligent system would need to make to act adaptively in the world</strong>". A system
+with goals must already assess goal congruence; a system acting under uncertainty
+must already assess likelihood; a system in a social setting must already reason
+about norms. So appraisal variables can be <em>read off</em> an agent's existing planning
+machinery rather than authored separately. Gratch's <strong>Émile</strong> derives them from
+classical AI planning representations; <strong>EMA</strong> generalises this into a
+domain-independent model of appraisal and coping, implemented in <strong>SOAR</strong>.</p>
+<div class="callout callout-important">
+<p class="callout-title">This is the route past the hand-authoring objection</p>
+<p><a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> states a preference for hand-coding
+cognition–emotion relationships over learning them (p. 219), and
+<a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a> and <a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a> both did
+exactly that. But Gratch and Marsella's move is a <em>third</em> option, and neither
+hand-authoring nor learning: <strong>derive the appraisal variables from representations
+the agent needs anyway.</strong></p>
+<p>On <a class="wikilink" href="robot-platform.html">robot-platform</a> the analogues exist. A <code>py_trees</code> behaviour tree already
+encodes goals and their status; navigation already computes reachability, which is
+a control estimate; the perception stack already produces detections with
+confidences, which is a likelihood estimate. Whether desirability, praiseworthiness
+and appeal can be read off <code>py_trees_ros</code> blackboard state is an <strong>open engineering
+question and a good candidate for an early experiment.</strong> #needs-source</p>
+<p>It also bears directly on Q2: if appraisal variables are read off internal planning
+state, then battery and motor health are <em>already in the same representation</em> as
+the goal statuses that produce event-based appraisals — which would make them
+commensurable by construction rather than by a conversion the wiki has not been able
+to specify. Speculative; recorded as a direction. See <a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+</div>
+<h2>Coping, and appraisal as a loop</h2>
+<p>Appraisal theories in the Lazarus line do not stop at generating an emotion. The
+cycle is <strong>appraisal → coping → reappraisal</strong>: the emotion prompts a response, the
+response changes the situation or the agent's construal of it, and the situation is
+appraised again.</p>
+<p>EMA makes coping selection depend on the <strong>control</strong> appraisal: high perceived
+control selects <em>problem-focused</em> coping (act on the situation), low control selects
+<em>emotion-focused</em> coping (act on one's own beliefs, attention or goals)
+(<a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> p. 239). Gratch and Marsella describe their own
+theoretical movement over time as going from coping-as-a-side-effect to <strong>coping as
+the central control mechanism for a social agent</strong> — emotion and decision-making as
+"different views on the same underlying mechanism".</p>
+<p>That is a strong claim and it lands close to this thesis: it says the emotional
+engine is not a module hanging off the behaviour layer, it <em>is</em> the behaviour layer's
+control policy. Compare <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>, which reaches a structurally
+similar conclusion from a completely different direction, and
+<a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a>.</p>
+<h2>Reverse appraisal</h2>
+<p>If observers know the mapping from situations and values to emotions, they can run it
+backwards: infer an agent's <strong>goals and standards from its emotional displays</strong>
+(<a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> p. 243). Demonstrated to change human decisions
+in social tasks, including with card-playing robots whose displays let players infer
+their dispositions.</p>
+<p>This gives <a class="wikilink" href="emotion-attribution.html">emotion-attribution</a> a mechanism rather than just an observed effect —
+people are not merely projecting, they are solving for the agent's value system. It
+also implies expressive behaviour is <strong>informative</strong>, not decorative, and that a
+robot expressing an emotion it does not act consistently with will teach observers a
+value system it does not have.</p>
+<h2>Limits and objections</h2>
+<ul>
+<li><strong>Cognitivist by construction.</strong> Appraisal presumes evaluation. Panksepp's
+  position — that affect is generated subcortically and does not require cognitive
+  appraisal — is a direct challenge, and
+  <a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> does not engage with it.</li>
+<li><strong>Object-based emotions are the authors' own exception.</strong> OCC states Attraction
+  emotions are experienced "more or less directly" and "tend to have little or no
+  interesting cognitive basis", because tastes are "cognitively unanalyzable and
+  irreducible" (Ch. 8). So even within OCC, one of the three branches is not really
+  appraisal-driven — and it is the branch that covers how people feel about robots.</li>
+<li><strong>Anthropocentric.</strong> Goals, standards, tastes and responsibility attribution are
+  human value structures. Whether they transfer to <a class="wikilink" href="interspecific-hri.html">interspecific-hri</a> is untested.</li>
+</ul>
+<h2>Related</h2>
+<p><a class="wikilink" href="occ-model.html">occ-model</a> · <a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> · <a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a> ·
+<a class="wikilink" href="emotion-engine.html">emotion-engine</a> · <a class="wikilink" href="emotion-arbitration.html">emotion-arbitration</a> · <a class="wikilink" href="emotion-attribution.html">emotion-attribution</a> ·
+<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> · <a class="wikilink" href="machine-emotion-question.html">machine-emotion-question</a></p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="machine-emotion-question.html">Can a robot have emotions?</a></li>
+<li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="emotion-arbitration.html">Emotion arbitration</a></li>
+<li><a href="emotion-attribution.html">Emotion attribution to artificial agents</a></li>
+<li><a href="emotion-model-comparison.html">Emotion model comparison</a></li>
+<li><a href="emotion-engine.html">Emotional engine</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="occ-model.html">OCC model</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="ortony-2022-cognitive-structure.html">Ortony, Clore &amp; Collins (2022) — The Cognitive Structure of Emotions</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

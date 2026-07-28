@@ -22,7 +22,7 @@
 <article class="prose page">
   <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Methods</p>
   <h1>Multimodal emotion recognition</h1>
-<dl class="meta"><div><dt>type</dt><dd>method</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>4</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">affective-computing</span> <span class="tag">perception</span> <span class="tag">ai</span> <span class="tag">gap</span></dd></div></dl>
+<dl class="meta"><div><dt>type</dt><dd>method</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>5</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">affective-computing</span> <span class="tag">perception</span> <span class="tag">ai</span> <span class="tag">gap</span></dd></div></dl>
 <p>The perception front-end of <a class="wikilink" href="emotion-engine.html">emotion-engine</a> — and, after ingesting the corpus,
 <strong>the largest hole in both the literature and the platform</strong>.</p>
 <h2>The state of things</h2>
@@ -131,10 +131,56 @@ kind. Worth stating before a reviewer does.</p>
 <li>Whether it presupposes a human-like agent (Q5)</li>
 <li>Output format — must match whatever <a class="wikilink" href="emotion-model-comparison.html">emotion-model-comparison</a> settles on</li>
 </ul>
+<h2>The gap may be mis-specified — 2026-07-28</h2>
+<p>This page has framed the problem as <em>no source says how to read affect off a body
+pose</em>. <a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> Ch. 10 argues the frame itself is wrong.</p>
+<blockquote>
+<p>"Much of affective computing focuses on recognizing a person's emotions from
+<strong>surface cues alone, yet external expressions have only a loose connection to
+internal states</strong>. Rather, observers are more accurate at forming affective
+inferences when they bring to bear knowledge such as information about the
+immediately preceding events." (Gratch &amp; Marsella, p. 242, citing L. F. Barrett et
+al. and Ortony &amp; Turner — <strong>both unheld</strong>, see <a class="wikilink" href="citation-backlog.html">citation-backlog</a>)</p>
+</blockquote>
+<p>Their proposed remedy is <a class="wikilink" href="appraisal-theory.html">appraisal-theory</a>: if a system knows a person's goals and
+can derive appraisals from the situation, it can predict how they would feel — and
+appraisal judgements, they report, "explain much of the variance of people's
+self-reported feelings" better than surface characteristics do.</p>
+<div class="callout callout-warning">
+<p class="callout-title">Contradiction — with this page's own working assumption</p>
+<p>The wiki has assumed the perception gap closes with a better classifier over
+richer body-pose data, and that <a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a>'s 17-keypoint pipeline
+put the platform most of the way there. Gratch and Marsella's claim is that <strong>no
+classifier over surface features closes it</strong>, because the signal is not there to be
+extracted.</p>
+<p>Which is better supported? Their claim rests on citations this corpus does not
+hold, so it cannot be verified here. But it is consistent with a pattern the wiki
+has already recorded independently: recognition rates in
+<a class="wikilink" href="emotion-recognition-benchmarks.html">emotion-recognition-benchmarks</a> plateau well short of ceiling, and
+<a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a> found fear read correctly only 48% of the time
+— <em>for a robot deliberately signalling it</em>. If deliberate expression is read at
+48%, incidental pose is unlikely to do better.</p>
+<p><strong>Not resolved.</strong> Recorded as Q19 in <a class="wikilink" href="open-questions.html">open-questions</a>. Obtaining Barrett et al.
+is now the highest-value acquisition for this page.</p>
+</div>
+<p>If the claim holds, the consequences are architectural rather than incremental:</p>
+<ul>
+<li>Pose becomes <strong>one input among several</strong>, not the input.</li>
+<li>The robot's <strong>event and interaction history</strong> becomes load-bearing — it must know
+  what just happened to the person, not only what they look like now.</li>
+<li>The perception module stops being separable from the emotion engine, because
+  appraisal needs the same world model the engine uses.</li>
+<li>It changes what <a class="wikilink" href="validation-study.html">validation-study</a> measures: recognition accuracy in isolation
+  would be the wrong endpoint.</li>
+</ul>
+<p>This does not make the platform's pose pipeline wasted — it is necessary, and it is
+the part that is built. It makes it insufficient.</p>
 <h2>Gaps</h2>
 <p><code>wiki/datasets/</code> is still empty — no corpus or benchmark is recorded, because no
 ingested source uses one. If the lidar route is taken, the relevant "dataset" may
-be <strong>recorded interaction sessions</strong>, not a public affect corpus.</p>
+be <strong>recorded interaction sessions</strong>, not a public affect corpus. The 2026-07-28
+reframing strengthens that guess: sessions carry the event history that isolated
+affect corpora strip out.</p>
 <section class="backlinks">
   <h2>Linked from</h2>
   <ul><li><a href="albuquerque-2016-emotion-recognition.html">Albuquerque et al. (2016) — Dogs recognize dog and human emotions</a></li>
@@ -145,6 +191,7 @@ be <strong>recorded interaction sessions</strong>, not a public affect corpus.</
 <li><a href="robot-platform.html">Mecanumbot — the experimental robot platform</a></li>
 <li><a href="mecanumbot-perception.html">mecanumbot_sensorprocess_smart — the perception stack</a></li>
 <li><a href="open-questions.html">Open questions</a></li>
+<li><a href="ortony-2022-cognitive-structure.html">Ortony, Clore &amp; Collins (2022) — The Cognitive Structure of Emotions</a></li>
 <li><a href="szabo-2011-emotional-engine.html">Szabó et al. (2012) — Building a Human-Dog Interaction Inspired Emotional Engine Model</a></li>
 <li><a href="thesis.html">Thesis — evolving argument</a></li>
 <li><a href="catalog.html">Wiki index</a></li></ul>

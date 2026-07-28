@@ -22,7 +22,7 @@
 <article class="prose page">
   <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Concepts</p>
   <h1>Emotion attribution to artificial agents</h1>
-<dl class="meta"><div><dt>type</dt><dd>concept</dd></div><div><dt>status</dt><dd><span class="badge badge-solid" title="well supported and cross-referenced">solid</span></dd></div><div><dt>sources</dt><dd>4</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">hri</span> <span class="tag">affective-computing</span> <span class="tag">psychology</span></dd></div></dl>
+<dl class="meta"><div><dt>type</dt><dd>concept</dd></div><div><dt>status</dt><dd><span class="badge badge-solid" title="well supported and cross-referenced">solid</span></dd></div><div><dt>sources</dt><dd>5</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">hri</span> <span class="tag">affective-computing</span> <span class="tag">psychology</span></dd></div></dl>
 <p>People attribute emotions to artificial agents, and this facilitates interaction
 <a class="wikilink" href="research-proposal.html">research-proposal</a>. <strong>Now the best-evidenced claim in the wiki</strong> — two studies
 in the corpus test it directly.</p>
@@ -79,12 +79,63 @@ That reframes evaluation as a design signal and should shape
 <li>Over-attribution risk: expectations the robot cannot meet. Not studied in the
   corpus. #needs-source</li>
 </ul>
+<h2>An independent criterion, from cognitive psychology — 2026-07-28</h2>
+<p><a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> reaches this concept from outside HRI entirely,
+and supplies something the ethology literature has not: <strong>a stated criterion for when
+it happens.</strong></p>
+<p>OCC's Attraction emotions split on whether the object is <em>implicitly viewed by the
+experiencer as being capable or incapable of experiencing emotions</em> (Table 8.1,
+p. 180). Emotion-capable objects afford <strong>"Affection"</strong> and <strong>"Enmity"</strong>;
+emotion-incapable ones afford only <strong>"Appreciation"</strong> and <strong>"Distaste"</strong>. The
+authors name the exception explicitly: people "sometimes personify certain kinds of
+inanimate objects such as houseplants and <strong>domestic robots</strong>".</p>
+<p>The criterion given is not animacy and not human-likeness:</p>
+<blockquote>
+<p>"Affection" emotions "are contingent on a view of the object, <strong>however misguided</strong>,
+as being somehow capable of at least the possibility of some <strong>reciprocity of
+feeling or concern</strong>." (p. 180)</p>
+</blockquote>
+<p>And the worked example is a dog against a pet skunk. The dog qualifies because it is
+"highly responsive to others", exchanges gaze, and responds "to even slight movements
+on [its] owner's part"; the skunk fails because it is "remarkably oblivious to humans,
+never exchanging gazes".</p>
+<div class="callout callout-important">
+<p class="callout-title">Attribution is not a feeling humans have <em>about</em> a robot — it is a category assignment, and it has a testable trigger</p>
+<p>The corpus has established <strong>that</strong> people attribute emotions to robots
+(<a class="wikilink" href="gacsi-2016-emotion-attribution.html">gacsi-2016-emotion-attribution</a>, <a class="wikilink" href="lakatos-2014-emotion-attribution.html">lakatos-2014-emotion-attribution</a>) and that
+the effect survives across embodiments (<a class="wikilink" href="lakatos-2014-embodiments-demo.html">lakatos-2014-embodiments-demo</a>). It has
+not said <strong>what causes the assignment</strong>. OCC proposes: <em>apparent responsiveness and
+possible reciprocity</em>, evidenced by gaze exchange and contingent reaction to small
+movements.</p>
+<p>This closes the open item above — "morphology, behavioural contingency, or both?" —
+in favour of <strong>contingency</strong>, from a source with no stake in the answer, and it
+matches the wiki's own indirect evidence.</p>
+<p>It is also directly buildable. <a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a> already tracks people and
+body pose; gaze-like orientation and motion-contingent response are within reach on
+<a class="wikilink" href="robot-platform.html">robot-platform</a>. <strong>Contingent responsiveness may be a cheaper route to
+attribution than expressive fidelity is</strong> — and it is measurable in
+<a class="wikilink" href="validation-study.html">validation-study</a> as a manipulation: same expressions, contingent versus
+delayed/random response.</p>
+<p><em>Synthesis drawn here. OCC does not cite the HRI literature; the HRI sources in
+this corpus do not cite OCC.</em></p>
+</div>
+<p><a class="wikilink" href="appraisal-theory.html">appraisal-theory</a> adds a mechanism for the same phenomenon from the other end:
+<strong>reverse appraisal</strong> — observers infer an agent's goals and standards <em>backwards</em>
+from its emotional displays (<a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> p. 243). On that
+account attribution is not projection but inference, which implies a robot whose
+displays are inconsistent with its actions teaches observers a value system it does
+not have.</p>
 <section class="backlinks">
   <h2>Linked from</h2>
   <ul><li><a href="albuquerque-2016-emotion-recognition.html">Albuquerque et al. (2016) — Dogs recognize dog and human emotions</a></li>
+<li><a href="appraisal-theory.html">Appraisal theory</a></li>
+<li><a href="machine-emotion-question.html">Can a robot have emotions?</a></li>
+<li><a href="function-orientedness.html">Function-orientedness</a></li>
 <li><a href="gacsi-2016-emotion-attribution.html">Gácsi et al. (2016) — Humans attribute emotions to a robot showing dog-derived behavioural patterns</a></li>
 <li><a href="interspecific-hri.html">HRI as interspecific interaction</a></li>
 <li><a href="log.html">Log</a></li>
+<li><a href="occ-model.html">OCC model</a></li>
+<li><a href="ortony-2022-cognitive-structure.html">Ortony, Clore &amp; Collins (2022) — The Cognitive Structure of Emotions</a></li>
 <li><a href="research-proposal.html">PhD research proposal</a></li>
 <li><a href="thesis.html">Thesis — evolving argument</a></li>
 <li><a href="catalog.html">Wiki index</a></li></ul>

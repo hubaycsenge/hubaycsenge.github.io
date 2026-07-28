@@ -22,7 +22,7 @@
 <article class="prose page">
   <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Methods</p>
   <h1>Emotional engine</h1>
-<dl class="meta"><div><dt>type</dt><dd>method</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>6</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-27</dd></div><div><dt>tags</dt><dd><span class="tag">architecture</span> <span class="tag">core-contribution</span> <span class="tag">hub</span></dd></div></dl>
+<dl class="meta"><div><dt>type</dt><dd>method</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>7</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">architecture</span> <span class="tag">core-contribution</span> <span class="tag">hub</span></dd></div></dl>
 <p>The system this thesis builds: recognise <strong>events in context</strong> and simulate an
 emotional state for the robot which drives feedback <a class="wikilink" href="research-proposal.html">research-proposal</a>.</p>
 <p>After ingesting the corpus, the picture has changed substantially: <strong>most of this
@@ -194,9 +194,37 @@ Q15 in <a class="wikilink" href="open-questions.html">open-questions</a>.</p>
 <li><strong>What collapses the five-dimensional state to a scalar reward?</strong> (Q14, see
   <a class="wikilink" href="reward-design.html">reward-design</a> — the sharpest question this architecture creates.)</li>
 </ul>
+<h2>The missing front end — 2026-07-28</h2>
+<p><a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> exposes a stage this page has not named. The
+canonical structure above runs <em>events → emotional state → expression</em>, but says
+nothing about how an event becomes an appraised event. Every implementation in the
+corpus filled that stage by hand: <a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a> with a MATLAB GUI,
+<a class="wikilink" href="belle-2019-programming-with-affect.html">belle-2019-programming-with-affect</a> with scripted dialogue choices.</p>
+<p><a class="wikilink" href="occ-model.html">occ-model</a> formalises the stage — desirability against goals, praiseworthiness
+against standards, appeal against tastes — and gives a two-stage
+potential-then-threshold rule form (Ch. 9). <a class="wikilink" href="appraisal-theory.html">appraisal-theory</a> gives the route past
+hand-authoring: derive the appraisal variables from representations the agent needs
+anyway, as Émile and EMA do from planning state.</p>
+<p><strong>Recorded as Q17 in <a class="wikilink" href="open-questions.html">open-questions</a></strong> — arguably a sharper open problem than Q1,
+because it is where every prior system in the corpus stopped.</p>
+<div class="callout callout-warning">
+<p class="callout-title">Contradiction — OCC denies that this engine can exist</p>
+<p>"We do not consider it possible for computers to have any kind of experience,
+emotional or otherwise… computational artifacts, be they robots or virtual
+characters, are simply not the kinds of things that can be conscious"
+(<a class="wikilink" href="ortony-2022-cognitive-structure.html">ortony-2022-cognitive-structure</a> p. 219). OCC is built to predict and explain
+<em>human</em> emotions, not to give a robot its own.</p>
+<p>The engine on this page does the latter. The two positions are compatible <strong>only</strong>
+if the engine's states are claimed functionally rather than phenomenally — which
+costs nothing and is what <a class="wikilink" href="function-orientedness.html">function-orientedness</a> already implies. Argued in full
+on <a class="wikilink" href="machine-emotion-question.html">machine-emotion-question</a>; tracked as Q18.</p>
+<p>The opposing camp — Sloman &amp; Croucher (1981), <em>Why robots will have emotions</em> — is
+cited by OCC and <strong>unheld</strong>. See <a class="wikilink" href="citation-backlog.html">citation-backlog</a>.</p>
+</div>
 <section class="backlinks">
   <h2>Linked from</h2>
   <ul><li><a href="actor-critic.html">Actor–critic</a></li>
+<li><a href="appraisal-theory.html">Appraisal theory</a></li>
 <li><a href="behaviour-trees.html">Behaviour trees</a></li>
 <li><a href="belle-2019-programming-with-affect.html">Belle, Gittens &amp; Graham (2019) — Programming with Affect</a></li>
 <li><a href="conditioning.html">Conditioning</a></li>
@@ -211,7 +239,9 @@ Q15 in <a class="wikilink" href="open-questions.html">open-questions</a>.</p>
 <li><a href="mecanumbot-behaviours.html">mecanumbot_behaviours — the behaviour layer</a></li>
 <li><a href="mecanumbot-perception.html">mecanumbot_sensorprocess_smart — the perception stack</a></li>
 <li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="occ-model.html">OCC model</a></li>
 <li><a href="open-questions.html">Open questions</a></li>
+<li><a href="ortony-2022-cognitive-structure.html">Ortony, Clore &amp; Collins (2022) — The Cognitive Structure of Emotions</a></li>
 <li><a href="ostensive-signalling.html">Ostensive signalling</a></li>
 <li><a href="panksepp-2005-affective-consciousness.html">Panksepp (2005) — Affective consciousness: core emotional feelings in animals and humans</a></li>
 <li><a href="panksepp-affective-systems.html">Panksepp&#x27;s affective systems</a></li>
