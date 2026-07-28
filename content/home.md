@@ -12,7 +12,9 @@ orcid: "https://orcid.org/0009-0006-1444-2194"                  # optional ORCID
 
 Hi!
 I'm Csenge, I'm completing my PhD degree in ethorobotics at ELTE.This webpage is mainly made to contain the theoretical background for my research. The intended use is personal, but if you're here, feel free to take a look. I'm also open to suggestions if you're missing something important:D
+
 **DISCLAIMER**
+
 Sorry for sounding square, this webpage is mainly edited with AI and by no means reflects my artistic aspirations.
 
 
