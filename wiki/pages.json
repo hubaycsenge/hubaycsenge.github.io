@@ -245,6 +245,13 @@
   "url": "wiki/occ-model.html"
  },
  {
+  "slug": "okumura-2020-ostension-attention",
+  "title": "Okumura et al. (2020) — Ostension affects infant learning more than attention",
+  "category": "sources",
+  "status": "draft",
+  "url": "wiki/okumura-2020-ostension-attention.html"
+ },
+ {
   "slug": "open-questions",
   "title": "Open questions",
   "category": "synthesis",
@@ -285,6 +292,13 @@
   "category": "models",
   "status": "draft",
   "url": "wiki/panksepp-affective-systems.html"
+ },
+ {
+  "slug": "pedagogical-stance",
+  "title": "Pedagogical stance",
+  "category": "concepts",
+  "status": "draft",
+  "url": "wiki/pedagogical-stance.html"
  },
  {
   "slug": "research-proposal",
@@ -383,6 +397,13 @@
   "category": "synthesis",
   "status": "draft",
   "url": "wiki/thesis.html"
+ },
+ {
+  "slug": "topal-2008-perseverative",
+  "title": "Topál et al. (2008) — Infants' perseverative search errors are induced by pragmatic misinterpretation",
+  "category": "sources",
+  "status": "draft",
+  "url": "wiki/topal-2008-perseverative.html"
  },
  {
   "slug": "topal-2014-ostensive",

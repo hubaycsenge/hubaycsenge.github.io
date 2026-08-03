@@ -22,7 +22,7 @@
 <article class="prose page">
   <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Systems</p>
   <h1>Mecanumbot — the experimental robot platform</h1>
-<dl class="meta"><div><dt>type</dt><dd>system</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>5</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">hardware</span> <span class="tag">ros2</span> <span class="tag">platform</span></dd></div></dl>
+<dl class="meta"><div><dt>type</dt><dd>system</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>6</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-30</dd></div><div><dt>tags</dt><dd><span class="tag">hardware</span> <span class="tag">ros2</span> <span class="tag">platform</span></dd></div></dl>
 <p>A <strong>Turtlebot3-family robot rebuilt with mecanum-wheel drive</strong>, intended to "fit
 into the Turtlebot3 family". Derived from the Turtlebot3 <code>humble</code> packages,
 substantially modified for four independently driven mecanum wheels.</p>
@@ -65,7 +65,7 @@ wiki assumed. See <a class="wikilink" href="mecanumbot-repos.html">mecanumbot-re
 </tr>
 <tr>
 <td>Audio</td>
-<td><code>mecanumbot_audio</code> + <code>AudioInfo</code> / <code>AudioData</code> msgs — <strong>capture or playback undetermined</strong></td>
+<td><code>mecanumbot_audio</code> + <code>AudioInfo</code> / <code>AudioData</code> msgs — <strong>capture confirmed</strong> (Csenge, 2026-07-30). Playback still undetermined</td>
 </tr>
 <tr>
 <td>Power sensing</td>
@@ -151,14 +151,14 @@ table is materially better than it was:</p>
 </tr>
 <tr>
 <td>Vocalisation following Morton's rules</td>
-<td><strong>depends on whether audio is playback</strong></td>
+<td><strong>still unknown — capture is confirmed, playback is not</strong></td>
 </tr>
 </tbody>
 </table>
 <p>Q4 in <a class="wikilink" href="open-questions.html">open-questions</a> is correspondingly less severe. Of the Gácsi
 re-expressions, <em>approach</em>, <em>back</em>, <em>turn away</em>, <em>orient</em> and <em>motionless</em> were
 already available; <em>head up and down dynamically</em> now is too.</p>
-<h2>The two unknowns are resolved</h2>
+<h2>The two unknowns are resolved — and a third, partly</h2>
 <div class="callout callout-note">
 <p class="callout-title">Both blockers from 2026-07-27 are cleared</p>
 <p><strong>1. There is a camera.</strong> A CSI camera on the Jetson, with a full detection
@@ -174,11 +174,25 @@ goal and measured wheel velocities, positions, currents and accelerations,
 genuine "how am I doing" signal rather than just a charge level. Q2 no longer
 has a data blocker; only the modelling question remains.</p>
 </div>
-<p>Still open on sensing: <strong>whether <code>mecanumbot_audio</code> is capture, playback or
-both.</strong> It decides two different things — capture would open vocal affect input,
-playback would enable Morton's-rules vocalisation
-(<a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>), and the corpus uses vocalisation heavily.
-Nothing in the clips settles it. #needs-source</p>
+<div class="callout callout-note">
+<p class="callout-title">And the third is now half-cleared — <strong>audio captures</strong></p>
+<p><strong>Csenge confirmed on 2026-07-30 that the robot can capture sound.</strong> First-party
+report, given directly rather than in a raw file; nothing in the repository clips
+settles it, so this page is the record.</p>
+<p>That opens the <strong>inbound</strong> half: vocal affect input, and — the reason it was
+reclassified from housekeeping to blocking two hours earlier — <strong>directed-speech
+prosody</strong>, the only ostensive cue experimentally shown to produce referential
+learning (<a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a>). The first stage of the pipeline on
+<a class="wikilink" href="pedagogical-stance.html">pedagogical-stance</a> is no longer platform-blocked. Q21 becomes a design and
+implementation question rather than a hardware one.</p>
+<p><strong>Playback is still undetermined</strong>, and it is the half that Morton's-rules
+vocalisation needs (<a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>). Capture does not imply a
+speaker. Still to ask.</p>
+<p>Also still unspecified, and it matters for prosody: <strong>microphone count, placement
+and quality</strong>, and the sample rate <code>AudioInfo</code> actually reports. Fundamental-
+frequency contour off a single low-cost mic at 2–3 m in a room with a mecanum
+drive running is a different proposition from close-talk audio. #needs-source</p>
+</div>
 <h2>Consequences for the thesis</h2>
 <ul>
 <li><strong><a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a></strong> must be rewritten around body pose. The
@@ -197,8 +211,10 @@ Nothing in the clips settles it. #needs-source</p>
 <ul>
 <li><strong>Has the full stack been run end to end on the robot</strong>, and which nodes have
   actually executed on hardware rather than merely built?</li>
-<li>Is <code>mecanumbot_audio</code> capture, playback, or both? Is there a microphone? A
-  speaker?</li>
+<li>~~Is <code>mecanumbot_audio</code> capture?~~ <strong>Answered 2026-07-30: yes.</strong> Still open:
+  <strong>is there also playback / a speaker?</strong>, and the <strong>microphone specification</strong> —
+  count, placement, sample rate. Both bear on whether directed-speech prosody is
+  recoverable at interaction distance (<a class="wikilink" href="pedagogical-stance.html">pedagogical-stance</a>, Q21).</li>
 <li>Camera specification — resolution, frame rate, FOV, mounting height and pitch.
   Mounting matters: a low camera sees legs and torsos, not faces.</li>
 <li>Commit SHAs and licences for the three repos recording neither
@@ -237,6 +253,7 @@ Nothing in the clips settles it. #needs-source</p>
 <li><a href="open-questions.html">Open questions</a></li>
 <li><a href="ortony-2022-cognitive-structure.html">Ortony, Clore &amp; Collins (2022) — The Cognitive Structure of Emotions</a></li>
 <li><a href="ostensive-signalling.html">Ostensive signalling</a></li>
+<li><a href="pedagogical-stance.html">Pedagogical stance</a></li>
 <li><a href="research-proposal.html">PhD research proposal</a></li>
 <li><a href="plutchik-1982-psychoevolutionary.html">Plutchik (1982) — A psychoevolutionary theory of emotions</a></li>
 <li><a href="plutchik-model.html">Plutchik&#x27;s model</a></li>

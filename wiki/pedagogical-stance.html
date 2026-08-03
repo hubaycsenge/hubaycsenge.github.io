@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pedagogical stance — Research wiki</title>
+<meta name="description" content="The interpretive mode a learner enters when it judges that a demonstration is addressed to it and intended to teach — and in which it encodes what it sees…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki/index.html" class="on">Research wiki</a>
+  </nav>
+</header>
+<main id="main">
+<article class="prose page">
+  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Concepts</p>
+  <h1>Pedagogical stance</h1>
+<dl class="meta"><div><dt>type</dt><dd>concept</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>3</dd></div><div><dt>created</dt><dd>2026-07-30</dd></div><div><dt>updated</dt><dd>2026-07-30</dd></div><div><dt>tags</dt><dd><span class="tag">natural-pedagogy</span> <span class="tag">ostensive-signalling</span> <span class="tag">learning</span> <span class="tag">architecture</span> <span class="tag">core-contribution</span></dd></div></dl>
+<p>The interpretive mode a learner enters when it judges that a demonstration is
+<strong>addressed to it and intended to teach</strong> — and in which it encodes what it sees as
+a <strong>generalisable rule</strong> rather than as one observation of how the world happens to
+be right now.</p>
+<p>Named here on 2026-07-30 to hold the target Csenge specified for the engine:</p>
+<blockquote>
+<p>perceive ostensive cues → infer that this demonstration or reward signal is
+pedagogically intended → <strong>reinterpret it pragmatically rather than as sampled
+behaviour</strong></p>
+</blockquote>
+<p>The wiki had <a class="wikilink" href="ostensive-signalling.html">ostensive-signalling</a> for the first stage and nothing for the
+second and third. This page is the second and third.</p>
+<h2>The core distinction</h2>
+<p>The same physical event supports two readings, and which one the learner takes is
+determined by the communicative framing, not by the event
+(<a class="wikilink" href="topal-2008-perseverative.html">topal-2008-perseverative</a>):</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Non-ostensive framing</th>
+<th>Ostensive framing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What is encoded</td>
+<td><strong>episodic</strong> — "the object is now under A"</td>
+<td><strong>generic</strong> — "this kind of object is found in A"</td>
+</tr>
+<tr>
+<td>Scope</td>
+<td>this token, here, now</td>
+<td>the kind, in general</td>
+</tr>
+<tr>
+<td>Exposures needed</td>
+<td>several</td>
+<td>one or few</td>
+</tr>
+<tr>
+<td>Memory system</td>
+<td>episodic; decays</td>
+<td><strong>semantic; persists</strong></td>
+</tr>
+<tr>
+<td>Serial position effect</td>
+<td>recency</td>
+<td><strong>primacy</strong></td>
+</tr>
+<tr>
+<td>Status of the observation</td>
+<td>a sample from the world</td>
+<td>a <strong>claim about</strong> the world</td>
+</tr>
+</tbody>
+</table>
+<p>The last row is the one that matters for <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>. A sample
+gets averaged in. A claim does not.</p>
+<h2>The evidence, in three parts</h2>
+<p><strong>1. The switch exists, and the framing alone flips it.</strong>
+<a class="wikilink" href="topal-2008-perseverative.html">topal-2008-perseverative</a> held the demonstration, the motor experience and the
+object constant, and varied only whether the demonstrator made eye contact, used
+infant-directed speech and alternated gaze. Perseverative search errors went from
+0.81 to 0.48 (noncommunicative) and 0.41 (nonsocial) — the same hands doing the
+same hiding, read as a lesson in one condition and as an event in the others.</p>
+<p><strong>2. It is not attention.</strong> <a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a> separated
+orienting from learning across seven conditions (N = 140). Shivering, a beep, and a
+beep with matched mouth movement all produced gaze-following as strongly as
+infant-directed speech did — and <strong>none of them produced any object learning</strong>.
+Only the ostensive cue did. Salience gets the head to turn; ostension changes what
+is stored.</p>
+<p><strong>3. Both were reported by the failure case, not the success case.</strong> Topál's
+infants entered the stance and were <em>wrong to</em>. That is the reason the effect is
+visible at all — see the warning below.</p>
+<h2>Why the wiki needs this as a separate concept</h2>
+<p><a class="wikilink" href="ostensive-signalling.html">ostensive-signalling</a> answers <em>how does the robot know it is being addressed</em>.
+It says nothing about <em>what the robot should then do differently</em>, and the answer
+is not "pay more attention" — that is exactly the hypothesis
+<a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a> rules out. The answer is <strong>switch how the
+observation is interpreted</strong>, and that is a claim about the learning rule, not
+about the perception front end.</p>
+<p>This puts ostension on the critical path of <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> rather
+than in the perception chapter, which is a structural change to <a class="wikilink" href="thesis.html">thesis</a>.</p>
+<h2>The translation into the learning architecture</h2>
+<p>Speculative. <strong>No source in the corpus proposes this</strong>; the mapping below is this
+wiki's, built from <a class="wikilink" href="topal-2008-perseverative.html">topal-2008-perseverative</a> plus
+<a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a>. Marked so it is not later mistaken for reported work.
+<code>[unsourced]</code> #needs-source</p>
+<table>
+<thead>
+<tr>
+<th>Pedagogy claim</th>
+<th>RL reading</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ostensive observations are generic</td>
+<td>the update should generalise <strong>across the kind</strong>, i.e. over a feature abstraction, not over the specific state visited</td>
+</tr>
+<tr>
+<td>One or few exposures suffice</td>
+<td>a <strong>high effective learning rate</strong>, or a one-shot write, not incremental averaging at α</td>
+</tr>
+<tr>
+<td>Semantic, persisting; primacy not recency</td>
+<td>it should <strong>not be overwritten</strong> by subsequent contradicting episodes at the normal rate — which is precisely why the B-trials fail</td>
+</tr>
+<tr>
+<td>Non-ostensive observations are episodic</td>
+<td>ordinary sample-based update, ordinary α, ordinary decay</td>
+</tr>
+<tr>
+<td>The stance is entered, not blended</td>
+<td>a <strong>discrete gate</strong> on the learning rule, keyed on the ostension detector</td>
+</tr>
+</tbody>
+</table>
+<p>Three things this immediately makes concrete, all of which were vague before:</p>
+<ul>
+<li><strong>Q14 (scalar reward) acquires a second dimension.</strong> The question was <em>what
+  collapses the emotional state into a number</em>. The pipeline adds: <strong>a reward is
+  not only a magnitude, it also has an interpretive status</strong>. A treat given
+  silently is one sample of <code>R</code>. A treat given with eye contact and dog-directed
+  speech is a statement about the policy. Nothing in <a class="wikilink" href="reward-design.html">reward-design</a> can express
+  that difference, and the reward hypothesis (§3.2) has no slot for it.</li>
+<li><strong>The <code>A(s)</code> argument gets a companion.</strong> <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> keeps the
+  ethology in the admissible action set and learns the selection. The pedagogical
+  stance says the <em>learning rate is also a place where ethology lives</em> — dogs and
+  infants do not update uniformly, they update differently depending on whether
+  they were addressed.</li>
+<li><strong>Shaping is already this, unacknowledged.</strong> <a class="wikilink" href="reward-design.html">reward-design</a>'s remedy for sparse
+  reward is shaping, which in practice means a human deliberately signalling to the
+  learner. That signalling is ostensive. The wiki has been assuming an
+  ostension-blind learner and an ostension-using trainer.</li>
+</ul>
+<h2>Can a dog-modelled robot have this stance?</h2>
+<div class="callout callout-warning">
+<p class="callout-title">The competence the pipeline needs is documented in infants and explicitly denied in dogs</p>
+<p><a class="wikilink" href="topal-2014-ostensive.html">topal-2014-ostensive</a> is unambiguous: human ostensive signals are
+"<strong>insufficient to create an 'infant-like' expectation to receive generic
+information</strong>" in dogs. What ostension induces in a dog is a "ready-to-learn or
+ready-to-obey" attitude that is "largely <strong>tied to the here and now</strong>" — dogs meet
+two of the three criteria for being a pedagogical recipient and fail the third,
+and the third is the one this pipeline is built on.</p>
+<p>So the pipeline as specified is an <strong>infant</strong> competence. The thesis' model
+species does not have it.</p>
+<p><strong>This is not a contradiction between sources</strong> — Topál et al. are authors of both
+(<a class="wikilink" href="topal-2008-perseverative.html">topal-2008-perseverative</a> is the infant result; the chapter reports the dog
+comparison), and they draw the contrast deliberately. It is a <strong>design tension</strong>,
+and it has three possible resolutions, none yet taken:</p>
+<ol>
+<li><strong>Build the dog version.</strong> Ostension gates <em>obedience and here-and-now
+   responsiveness</em>, not generic encoding. Best supported by the ethology,
+   consistent with <a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>, and it gives up the third stage
+   of the pipeline — the interesting one.</li>
+<li><strong>Build the infant version and say so.</strong> The robot exceeds its model species on
+   one axis. Defensible — <a class="wikilink" href="function-orientedness.html">function-orientedness</a> never required fidelity to dog
+   <em>cognition</em>, only that the design be justified by function — but it breaks the
+   "dog as model" argument at exactly the point where the thesis leans on it, and
+   invites the question of why the model species is a dog at all.</li>
+<li><strong>Treat it as the empirical question.</strong> Whether an artificial agent that encodes
+   generically from ostensive cues is <em>more or less</em> legible to untrained humans
+   than one that does not, is measurable on <a class="wikilink" href="robot-platform.html">robot-platform</a> and nobody has
+   measured it. This is the most thesis-shaped of the three.</li>
+</ol>
+<p>Recorded as <strong>Q20</strong> in <a class="wikilink" href="open-questions.html">open-questions</a>. It needs Csenge's decision, and the
+honest position until then is that the wiki does not know.</p>
+</div>
+<p>The nearest available evidence is <em>Topál et al. (2009a)</em> — the dog A-not-B study,
+cited in <a class="wikilink" href="topal-2014-ostensive.html">topal-2014-ostensive</a> §11.3.1.3 for dogs selecting an empty container
+after ostensive cueing. Almost certainly the direct dog counterpart of
+<a class="wikilink" href="topal-2008-perseverative.html">topal-2008-perseverative</a>, run by overlapping authors. <strong>Not held.</strong> It is now
+the single highest-value acquisition for this line and is at the top of
+<a class="wikilink" href="citation-backlog.html">citation-backlog</a>.</p>
+<h2>The failure mode is not a bug in the implementation</h2>
+<div class="callout callout-warning">
+<p class="callout-title">Every result on this page is the stance misfiring</p>
+<p><a class="wikilink" href="topal-2008-perseverative.html">topal-2008-perseverative</a> does not show infants learning something true. It
+shows them learning something false, <em>because</em> they were addressed. The
+pedagogical stance is visible in the data only where it produces error.</p>
+<p>The dog literature is the same shape: ostensively cued instructions override the
+animal's own evidence — deceptive pointing, empty containers, the smaller food
+quantity (<a class="wikilink" href="topal-2014-ostensive.html">topal-2014-ostensive</a>).</p>
+<p>A robot with this stage in its pipeline will therefore <strong>prefer an ostensively
+delivered instruction over its own perception</strong>, by construction, and the more
+effectively the stage works the more strongly it will do so. For a robot operating
+around untrained people in a real environment that is a safety property, not a
+curiosity. It should be a designed and bounded decision — a hand-authored override
+in the <code>T_safe</code> subtree (<a class="wikilink" href="behaviour-trees.html">behaviour-trees</a>,
+<a class="wikilink" href="colledanchise-ogren-behavior-trees.html">colledanchise-ogren-behavior-trees</a> §8.2) rather than an emergent one.</p>
+<p>Read the other way, as <a class="wikilink" href="ostensive-signalling.html">ostensive-signalling</a> already records, this is the same
+mechanism that makes shaping work. <strong>Trainability and manipulability are one
+property</strong>, and this page is where the thesis should say so.</p>
+</div>
+<h2>What has to exist for the pipeline to run</h2>
+<p>Stage by stage, against what <a class="wikilink" href="robot-platform.html">robot-platform</a> actually has:</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Needs</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Detect ostensive cues</td>
+<td>dog-directed / infant-directed speech → <strong>microphone</strong>; eye contact → gaze, or head orientation as a proxy</td>
+<td><strong>Available.</strong> Csenge confirmed 2026-07-30 that the robot <strong>captures audio</strong> (<a class="wikilink" href="robot-platform.html">robot-platform</a>), so the cue with direct experimental backing is on the hardware. Head orientation is derivable from the nose/eye/ear keypoints on <a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a>; true gaze is not</td>
+</tr>
+<tr>
+<td>Discriminate ostension from salience</td>
+<td>must fire on IDS, must <strong>not</strong> fire on a matched beep</td>
+<td>The acceptance test is specified by <a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a> Exp 3–4. Nothing built. <strong>Q21</strong></td>
+</tr>
+<tr>
+<td>Identify that <em>this agent</em> is addressed</td>
+<td>address detection, not just presence</td>
+<td>Unattempted anywhere in the corpus</td>
+</tr>
+<tr>
+<td>Switch the interpretive mode</td>
+<td>a gated learning rule, per the table above</td>
+<td>Unattempted; no prior art found</td>
+</tr>
+</tbody>
+</table>
+<p><strong>No stage is platform-blocked.</strong> Stage 1 was, for about two hours on 2026-07-30,
+and is not. The remaining constraint on it is signal quality rather than
+availability: microphone count, placement and sample rate are unrecorded, and
+recovering a fundamental-frequency contour at interaction distance over a running
+mecanum drive is not the same problem as close-talk audio. That is a feasibility
+question to measure, not a blocker to wait on.</p>
+<div class="callout callout-important">
+<p class="callout-title">Stage 1 is now the obvious first build, and it is self-contained</p>
+<p>It needs no decision on Q20 — whether the robot should end up with the dog version
+or the infant version of the stance, the detector is the same. It has an
+experimentally specified pass/fail criterion. It uses two signals the platform
+already produces. And <strong>nothing in the corpus has built one</strong>, in either the
+ethorobotics or the affective-computing lineage.</p>
+<p>A detector over prosody plus head-orientation-toward-robot, scored against the
+<a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a> stimulus pair, is a complete small
+experiment that yields the gate everything else on this page depends on.</p>
+</div>
+<p>Stages 2–4 are research, not engineering, and stage 4 is where Q20 has to be
+answered before anything can be written.</p>
+<h2>Related</h2>
+<p><a class="wikilink" href="topal-2008-perseverative.html">topal-2008-perseverative</a> · <a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a> ·
+<a class="wikilink" href="ostensive-signalling.html">ostensive-signalling</a> · <a class="wikilink" href="topal-2014-ostensive.html">topal-2014-ostensive</a> ·
+<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> · <a class="wikilink" href="reward-design.html">reward-design</a> · <a class="wikilink" href="conditioning.html">conditioning</a> ·
+<a class="wikilink" href="appraisal-theory.html">appraisal-theory</a> · <a class="wikilink" href="social-competence.html">social-competence</a> · <a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a> ·
+<a class="wikilink" href="emotion-engine.html">emotion-engine</a> · <a class="wikilink" href="open-questions.html">open-questions</a></p>
+<section class="backlinks">
+  <h2>Linked from</h2>
+  <ul><li><a href="citation-backlog.html">Citation backlog</a></li>
+<li><a href="interspecific-hri.html">HRI as interspecific interaction</a></li>
+<li><a href="log.html">Log</a></li>
+<li><a href="robot-platform.html">Mecanumbot — the experimental robot platform</a></li>
+<li><a href="mecanumbot-perception.html">mecanumbot_sensorprocess_smart — the perception stack</a></li>
+<li><a href="okumura-2020-ostension-attention.html">Okumura et al. (2020) — Ostension affects infant learning more than attention</a></li>
+<li><a href="open-questions.html">Open questions</a></li>
+<li><a href="ostensive-signalling.html">Ostensive signalling</a></li>
+<li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
+<li><a href="reward-design.html">Reward design</a></li>
+<li><a href="social-competence.html">Social competence</a></li>
+<li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="topal-2008-perseverative.html">Topál et al. (2008) — Infants&#x27; perseverative search errors are induced by pragmatic misinterpretation</a></li>
+<li><a href="topal-2014-ostensive.html">Topál, Kis &amp; Oláh (2014) — Dogs&#x27; sensitivity to human ostensive cues</a></li>
+<li><a href="catalog.html">Wiki index</a></li></ul>
+</section>
+</article>
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

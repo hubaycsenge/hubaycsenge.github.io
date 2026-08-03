@@ -22,7 +22,7 @@
 <article class="prose page">
   <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Vault</p>
   <h1>Wiki index</h1>
-<dl class="meta"><div><dt>type</dt><dd>index</dd></div><div><dt>sources</dt><dd>27</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div></dl>
+<dl class="meta"><div><dt>type</dt><dd>index</dd></div><div><dt>sources</dt><dd>29</dd></div><div><dt>updated</dt><dd>2026-07-30</dd></div></dl>
 <p>Catalog of every page. Read this first when answering a question, then drill into
 the relevant pages. Maintained by the LLM — see <code>CLAUDE.md</code>.</p>
 <p><strong>Status key:</strong> <code>stub</code> barely populated · <code>draft</code> real content, gaps remain ·
@@ -67,6 +67,20 @@ paradigm cases</strong>. It reframes the perception gap — surface cues may be
 insufficient <em>in principle</em> (<strong>Q19</strong>). And it contradicts the thesis twice: OCC's
 authors deny robots can have emotions at all, and prefer hand-coding to learning.
 See <a class="wikilink" href="machine-emotion-question.html">machine-emotion-question</a>.</p>
+<p><strong>2026-07-30, ostension</strong>: <a class="wikilink" href="topal-2008-perseverative.html">topal-2008-perseverative</a> and
+<a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a> ingested on Csenge's steer — the pipeline
+<em>perceive ostensive cues → infer pedagogical intent → reinterpret pragmatically
+rather than as sampled behaviour</em>. New page <a class="wikilink" href="pedagogical-stance.html">pedagogical-stance</a> holds it. Three
+things moved. <strong>Ostension is not a perception topic</strong> — it gates the <em>learning
+rule</em>, which puts it on the critical path of <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> and
+restructures step 7 of <a class="wikilink" href="thesis.html">thesis</a>. <strong>The pipeline is an infant competence that
+dogs are explicitly denied</strong> (<a class="wikilink" href="topal-2014-ostensive.html">topal-2014-ostensive</a>) — <strong>Q20</strong>, and it needs a
+decision, not a source. And <strong>Q7's audio question briefly became blocking</strong> — the
+only cue experimentally shown to produce learning is directed <em>speech</em> — then
+<strong>Csenge confirmed the same day that the robot captures audio</strong>. Nothing in the
+pipeline is platform-blocked; the ostension detector (Q21) is now the most
+self-contained piece of work in the wiki, and nobody in either lineage has built
+one. Playback and microphone specification remain unknown.</p>
 </div>
 <h2>Hubs</h2>
 <table>
@@ -85,12 +99,12 @@ See <a class="wikilink" href="machine-emotion-question.html">machine-emotion-que
 </tr>
 <tr>
 <td><a class="wikilink" href="open-questions.html">open-questions</a></td>
-<td><strong>19 questions.</strong> Q17 (appraisal layer), Q18 (machine emotion), Q19 (is pose the wrong target?) added by the OCC ingest</td>
+<td><strong>22 questions.</strong> Q20 (may a dog-modelled robot have the pedagogical stance? — needs a decision), Q21 (ostension detector + its falsification test), Q22 (can a robot <em>emit</em> ostension?) added 2026-07-30</td>
 <td>draft</td>
 </tr>
 <tr>
 <td><a class="wikilink" href="citation-backlog.html">citation-backlog</a></td>
-<td>All ten numeric refs resolved; OCC now held. <strong>New frontier: computational appraisal</strong> — Barrett et al. is the top acquisition</td>
+<td>All ten numeric refs resolved; OCC now held. Two live frontiers: computational appraisal, and <strong>natural pedagogy</strong>. <strong>Top acquisition: Topál et al. (2009) — the <em>dog</em> A-not-B study, which alone can answer Q20</strong></td>
 <td>draft</td>
 </tr>
 <tr>
@@ -192,7 +206,17 @@ See <a class="wikilink" href="machine-emotion-question.html">machine-emotion-que
 </tr>
 <tr>
 <td><a class="wikilink" href="topal-2014-ostensive.html">topal-2014-ostensive</a></td>
-<td><strong>Ref <code>[3]</code></strong>. <em>The Social Dog</em> ch. 11. Ostensive cues; synchronisation not pedagogy</td>
+<td><strong>Ref <code>[3]</code></strong>. <em>The Social Dog</em> ch. 11. Ostensive cues; synchronisation not pedagogy — and dogs are <strong>denied</strong> the generic-encoding stance (Q20)</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="topal-2008-perseverative.html">topal-2008-perseverative</a></td>
+<td><strong>Science 321.</strong> A-not-B error is pragmatic misinterpretation: framing alone flips episodic → generic encoding, error 0.48 → 0.81. <strong>Inside the Budapest network</strong></td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a></td>
+<td><strong>Cognition 195.</strong> N = 140, 7 conditions. Attention and ostension dissociate <strong>at the learning stage</strong>, not at orienting. <strong>Independent</strong> (Kyoto/Osaka)</td>
 <td>draft</td>
 </tr>
 <tr>
@@ -301,7 +325,12 @@ See <a class="wikilink" href="machine-emotion-question.html">machine-emotion-que
 </tr>
 <tr>
 <td><a class="wikilink" href="ostensive-signalling.html">ostensive-signalling</a></td>
-<td>Refs <code>[3]</code>/<code>[4]</code> resolved. Five-item attention spec; the deceptive-pointing failure mode</td>
+<td><strong>Detection only</strong> since 2026-07-30. "Not attention" is now experimentally proven, not asserted; robot-emitted ostension has negative first evidence</td>
+<td>draft</td>
+</tr>
+<tr>
+<td><a class="wikilink" href="pedagogical-stance.html">pedagogical-stance</a></td>
+<td><strong>Csenge's pipeline.</strong> Ostensive framing switches encoding from episodic sample to generic rule — so ostension gates the <em>learning rule</em>, not attention. Q20–Q22 live here</td>
 <td>draft</td>
 </tr>
 <tr>
@@ -385,7 +414,7 @@ See <a class="wikilink" href="machine-emotion-question.html">machine-emotion-que
 <tbody>
 <tr>
 <td><a class="wikilink" href="robot-platform.html">robot-platform</a></td>
-<td><strong>Mecanumbot</strong> — Jetson Orin Nano, lidar + camera, neck/grabbers, 4 LED panels, mecanum drive</td>
+<td><strong>Mecanumbot</strong> — Jetson Orin Nano, lidar + camera, <strong>audio capture</strong>, neck/grabbers, 4 LED panels, mecanum drive</td>
 <td>draft</td>
 </tr>
 <tr>

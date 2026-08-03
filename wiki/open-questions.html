@@ -22,11 +22,15 @@
 <article class="prose page">
   <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Synthesis</p>
   <h1>Open questions</h1>
-<dl class="meta"><div><dt>type</dt><dd>synthesis</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>13</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">hub</span> <span class="tag">questions</span></dd></div></dl>
+<dl class="meta"><div><dt>type</dt><dd>synthesis</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>15</dd></div><div><dt>created</dt><dd>2026-07-27</dd></div><div><dt>updated</dt><dd>2026-07-30</dd></div><div><dt>tags</dt><dd><span class="tag">hub</span> <span class="tag">questions</span></dd></div></dl>
 <p>Live uncertainties, each to be closed by a source, an experiment, or a recorded
 decision. Q1 and Q7 are largely answered, Q6 has a template. <strong>Q11 is answered by
 Csenge's decision to use RL for the behaviour layer</strong> and Q9 is partly dissolved
 by it; Q14–Q16 open in their place.</p>
+<p><em>2026-07-30</em>: <strong>Q20–Q22</strong> added by the ostension ingest. <strong>Q20 needs a decision,
+not a source</strong> — the pipeline Csenge specified is an infant competence that
+<a class="wikilink" href="topal-2014-ostensive.html">topal-2014-ostensive</a> denies to dogs. Q7's surviving audio question has gone
+from housekeeping to <strong>blocking</strong>.</p>
 <h2>Q1 — Which emotion model grounds the engine? <em>(recommendation filed, awaiting sign-off)</em></h2>
 <p>Prior work in the lineage settled on a <strong>hybrid</strong>: Panksepp for architecture, dog
 ethology for the state set (<a class="wikilink" href="szabo-2011-emotional-engine.html">szabo-2011-emotional-engine</a>).</p>
@@ -147,6 +151,26 @@ a camera, and internal-state telemetry is exposed. The earlier answer said
 Raspberry Pi, no camera and no telemetry — all wrong. One sensing question
 survives: <strong>is <code>mecanumbot_audio</code> capture, playback, or both?</strong> It decides whether
 vocal affect input and Morton's-rules vocalisation are on the table.</p>
+<p><em>Update 2026-07-30 — the audio question briefly became blocking, and is now
+answered.</em> The strongest ostensive cue in the only experiment that isolates one is
+<strong>speech prosody</strong> (<a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a>: infant-directed speech
+produced referential learning; a beep matched for duration and volume did not). Had
+there been no microphone, the first stage of the pipeline on
+<a class="wikilink" href="pedagogical-stance.html">pedagogical-stance</a> would have had to run on head orientation alone.</p>
+<p><strong>Csenge confirmed the same day that the robot can capture sound.</strong> The pipeline's
+input side is not platform-blocked. Q21 becomes a design question rather than a
+hardware one, and Q7 is answered on the sensing side.</p>
+<p><strong>Two things this does not settle</strong>, both now on <a class="wikilink" href="robot-platform.html">robot-platform</a>:</p>
+<ul>
+<li><strong>Playback is still unknown.</strong> Capture does not imply a speaker, and playback is
+  the half that Morton's-rules vocalisation needs
+  (<a class="wikilink" href="dog-human-interaction-model.html">dog-human-interaction-model</a>) — and the half Q22 would need if the robot is
+  ever to <em>emit</em> an auditory ostensive cue.</li>
+<li><strong>Microphone specification</strong> — count, placement, sample rate. Recovering a
+  fundamental-frequency contour from a single low-cost mic at interaction distance,
+  over a running mecanum drive, is a different problem from close-talk audio, and it
+  is the actual feasibility question behind Q21. #needs-source</li>
+</ul>
 <hr>
 <h2>New questions from this ingest</h2>
 <h2>Q8 — When does emotion expression help, and when does it backfire?</h2>
@@ -223,6 +247,15 @@ animals, and explicitly pass over the problem (§14 terminology).</p>
 vector-valued signal as §15.4 hints dopamine may actually be? <strong>This is the
 central unsolved design decision created by the RL commitment.</strong> See
 <a class="wikilink" href="reward-design.html">reward-design</a> and <a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>. #needs-source</p>
+<p><em>Update 2026-07-30, a second axis</em>: the question above is about <strong>magnitude</strong>. The
+ostension ingest adds one about <strong>interpretive status</strong>. A treat delivered silently
+is one draw of <code>R</code>; the same treat delivered with eye contact and dog-directed
+speech is a claim about the policy in general, to be encoded generically and once
+rather than averaged in (<a class="wikilink" href="topal-2008-perseverative.html">topal-2008-perseverative</a>,
+<a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a>). The reward hypothesis (§3.2) admits a
+scalar and nothing else. The two axes are orthogonal, and the second may be the
+easier of the two — the flag is one bit, and the bit is what an ostension detector
+outputs. See <a class="wikilink" href="pedagogical-stance.html">pedagogical-stance</a> and <a class="wikilink" href="reward-design.html">reward-design</a>.</p>
 <h2>Q15 — Is the emotional engine the reward function, or a state feature?</h2>
 <p>Two readable architectures, predicting different behaviour. Either the engine
 computes <code>R</code> and the policy never sees the emotion vector — emotion is
@@ -279,6 +312,90 @@ but not sufficient, and no amount of skeleton data closes the gap. It would make
 robot's <strong>event and interaction history</strong> load-bearing rather than incidental — which
 is a larger architectural claim than the wiki has been making, and one that changes
 what the validation study has to measure. #needs-source</p>
+<hr>
+<p><em>Q20–Q22 added 2026-07-30 from <a class="wikilink" href="topal-2008-perseverative.html">topal-2008-perseverative</a> and
+<a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a>. All three concern the pipeline on
+<a class="wikilink" href="pedagogical-stance.html">pedagogical-stance</a>: perceive ostensive cues → infer pedagogical intent →
+reinterpret pragmatically rather than as sampled behaviour.</em></p>
+<h2>Q20 — Is a dog-modelled robot entitled to the pedagogical stance? <em>(the sharpest of the three)</em></h2>
+<p>The third stage of the pipeline — treating an ostensively framed demonstration as a
+<strong>generalisable claim</strong> rather than an episodic sample — is now well evidenced
+<strong>in infants</strong> (<a class="wikilink" href="topal-2008-perseverative.html">topal-2008-perseverative</a>, N = 42; perseverative error 0.81 → 0.48
+when only the communicative framing is removed).</p>
+<p>It is <strong>explicitly denied in dogs.</strong> <a class="wikilink" href="topal-2014-ostensive.html">topal-2014-ostensive</a>: human ostensive
+signals are "insufficient to create an 'infant-like' expectation to receive generic
+information"; what they induce is a "ready-to-learn or ready-to-obey" attitude
+"largely tied to the here and now". Dogs meet two of three criteria for pedagogical
+recipiency and fail the third — which is the one this pipeline is built on.</p>
+<p>Not a contradiction between sources; Topál et al. author both sides and draw the
+contrast deliberately. It is a design tension with three resolutions, argued on
+<a class="wikilink" href="pedagogical-stance.html">pedagogical-stance</a>:</p>
+<ol>
+<li><strong>Build the dog version</strong> — ostension gates obedience and here-and-now
+   responsiveness. Best supported by the ethology; gives up the interesting stage.</li>
+<li><strong>Build the infant version and say so</strong> — the robot exceeds its model species.
+   Defensible under <a class="wikilink" href="function-orientedness.html">function-orientedness</a>, but it strains the dog-as-model
+   argument exactly where <a class="wikilink" href="thesis.html">thesis</a> step 4 leans on it.</li>
+<li><strong>Make it the empirical question</strong> — whether an agent that generalises from
+   ostensive cues is <em>more or less legible</em> to untrained humans than one that does
+   not. Measurable on <a class="wikilink" href="robot-platform.html">robot-platform</a>, unmeasured by anyone.</li>
+</ol>
+<p><strong>Needs a decision from Csenge.</strong> The wiki does not know, and (3) is the most
+thesis-shaped.</p>
+<p>The evidence that would most change this is <em>Topál et al. (2009a)</em> — the <strong>dog</strong>
+A-not-B study, cited in <a class="wikilink" href="topal-2014-ostensive.html">topal-2014-ostensive</a> §11.3.1.3 and almost certainly the
+direct counterpart of <a class="wikilink" href="topal-2008-perseverative.html">topal-2008-perseverative</a>. <strong>Not held; top of
+<a class="wikilink" href="citation-backlog.html">citation-backlog</a>.</strong></p>
+<h2>Q21 — What detects ostension on this platform, and how is it falsified?</h2>
+<p>The pipeline's first stage does not exist in any form, and it has a <strong>failure mode
+that will pass a naive test</strong>: a salience detector reproduces every gaze-following
+result in the literature and none of the learning results
+(<a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a>). Build one by accident and the robot switches
+into pedagogical mode on every loud event in the room.</p>
+<p>The acceptance test is already specified by that paper's Experiments 3 and 4: the
+detector must fire on <strong>directed speech</strong> and not on a <strong>beep matched for duration
+and volume</strong>, nor on the same beep with matched mouth movement.</p>
+<p>Platform constraints, from <a class="wikilink" href="pedagogical-stance.html">pedagogical-stance</a>:</p>
+<ul>
+<li><strong>Speech prosody</strong> — needs a microphone. <strong>Available</strong>: Csenge confirmed audio
+  capture on 2026-07-30. This is the cue with the direct experimental backing, so
+  it should be the one built first. What remains is a signal-processing feasibility
+  question, not an availability one — mic count, placement and sample rate are
+  unrecorded, and the drive is a noise source.</li>
+<li><strong>Eye contact</strong> — head orientation is derivable from the nose/eye/ear keypoints
+  <a class="wikilink" href="mecanumbot-perception.html">mecanumbot-perception</a> publishes; true gaze is not. Whether head pose is a
+  sufficient proxy is untested by any source.</li>
+<li><strong>Addressee identification</strong> — knowing that <em>this agent</em> is the one being
+  addressed, rather than that ostensive signalling is occurring nearby. Unattempted
+  anywhere in the corpus. #needs-source</li>
+</ul>
+<div class="callout callout-important">
+<p class="callout-title">With audio confirmed, this is now a buildable question — 2026-07-30</p>
+<p>Q21 no longer waits on anything. The cue with experimental backing is available on
+the hardware, the discriminating test is specified, and both signals feed a single
+bit.</p>
+<p>The smallest version that would be a real result: a detector over prosody
+(fundamental-frequency range and contour, the "doggerel"/motherese profile) plus
+head-orientation-toward-robot from the pose keypoints, scored against the
+<a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a> stimulus pair — <strong>fires on directed speech,
+does not fire on a matched beep</strong>. That is a self-contained experiment on
+<a class="wikilink" href="robot-platform.html">robot-platform</a>, it produces the gate the whole of <a class="wikilink" href="pedagogical-stance.html">pedagogical-stance</a>
+depends on, and <strong>nothing in the corpus has built one</strong>.</p>
+</div>
+<h2>Q22 — Can a robot successfully <em>emit</em> ostensive signals?</h2>
+<p><a class="wikilink" href="ostensive-signalling.html">ostensive-signalling</a> proposed the outbound direction — the robot signalling
+that a person is being addressed before it expresses anything — as this wiki's own
+design idea. The first evidence bearing on it is <strong>negative</strong>: infants followed a
+robot's gaze but <strong>did not learn from it</strong>, while following <em>and</em> learning from an
+equivalent human, "because infants attribute communicative intentions to humans,
+but not to robot agents" (Okumura et al. 2013a/b, Boyer et al. 2011 — reported
+second-hand in <a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a>, <strong>both unheld</strong>).</p>
+<p>Producing the cue is evidently not sufficient to be read as ostending. But the
+robot was a humanoid in Kanda and Ishiguro's lineage and the subjects were infants.
+<a class="wikilink" href="function-orientedness.html">function-orientedness</a> predicts a <em>dog-like</em> signal on a non-humanoid body might
+succeed where a human-imitating one fails, precisely because it does not invite a
+comparison it loses. Untested, testable here, and a better claim than the one the
+wiki was making. Get the 2013 papers first — Q22 cannot be argued from a citation.</p>
 <section class="backlinks">
   <h2>Linked from</h2>
   <ul><li><a href="appraisal-theory.html">Appraisal theory</a></li>
@@ -304,10 +421,12 @@ what the validation study has to measure. #needs-source</p>
 <li><a href="mecanumbot-repos.html">Mecanumbot repositories</a></li>
 <li><a href="robot-platform.html">Mecanumbot — the experimental robot platform</a></li>
 <li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="okumura-2020-ostension-attention.html">Okumura et al. (2020) — Ostension affects infant learning more than attention</a></li>
 <li><a href="ortony-2022-cognitive-structure.html">Ortony, Clore &amp; Collins (2022) — The Cognitive Structure of Emotions</a></li>
 <li><a href="panksepp-2005-affective-consciousness.html">Panksepp (2005) — Affective consciousness: core emotional feelings in animals and humans</a></li>
 <li><a href="panksepp-2011-emotional-circuits.html">Panksepp (2011) — The basic emotional circuits of mammalian brains</a></li>
 <li><a href="panksepp-affective-systems.html">Panksepp&#x27;s affective systems</a></li>
+<li><a href="pedagogical-stance.html">Pedagogical stance</a></li>
 <li><a href="research-proposal.html">PhD research proposal</a></li>
 <li><a href="plutchik-model.html">Plutchik&#x27;s model</a></li>
 <li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
@@ -316,6 +435,7 @@ what the validation study has to measure. #needs-source</p>
 <li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>
 <li><a href="szabo-2011-emotional-engine.html">Szabó et al. (2012) — Building a Human-Dog Interaction Inspired Emotional Engine Model</a></li>
 <li><a href="thesis.html">Thesis — evolving argument</a></li>
+<li><a href="topal-2008-perseverative.html">Topál et al. (2008) — Infants&#x27; perseverative search errors are induced by pragmatic misinterpretation</a></li>
 <li><a href="vincze-2021-automatic-coding.html">Vincze et al. (2021) — Towards automatic observation and coding of simple behaviours in ethological experiments</a></li>
 <li><a href="catalog.html">Wiki index</a></li></ul>
 </section>

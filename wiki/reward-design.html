@@ -22,7 +22,7 @@
 <article class="prose page">
   <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Methods</p>
   <h1>Reward design</h1>
-<dl class="meta"><div><dt>type</dt><dd>method</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">reinforcement-learning</span> <span class="tag">design-problem</span> <span class="tag">core-contribution</span></dd></div></dl>
+<dl class="meta"><div><dt>type</dt><dd>method</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>3</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-30</dd></div><div><dt>tags</dt><dd><span class="tag">reinforcement-learning</span> <span class="tag">design-problem</span> <span class="tag">core-contribution</span></dd></div></dl>
 <p><strong>The hard part.</strong> If the behaviour layer is to be learnt
 (<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a>), the reward signal is the design decision the whole
 thing rests on, and <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> offers warnings rather than recipes.
@@ -179,9 +179,52 @@ we are passing over these possibilities.
 <p>So the collapse from emotional state to scalar reward is a <strong>design decision this
 thesis has to make and defend</strong>, and the book explicitly declines to help. It is
 the sharpest open question created by this ingest — Q14 in <a class="wikilink" href="open-questions.html">open-questions</a>.</p>
+<h2>A reward has an interpretive status, not just a magnitude — 2026-07-30</h2>
+<div class="callout callout-important">
+<p class="callout-title">The same reward means two different things depending on how it was delivered</p>
+<p>Everything above treats <code>Rt</code> as a number arriving at a timestep. Under natural
+pedagogy that is incomplete: <strong>how the reward was delivered determines what the
+learner should conclude from it.</strong></p>
+<ul>
+<li>Delivered silently, with no communicative framing → one <strong>sample</strong>. The learner
+  updates its estimate by α, as this page assumes throughout.</li>
+<li>Delivered with eye contact and dog-directed speech → a <strong>claim</strong> about the
+  policy in general. The learner should update as though told a rule: few
+  exposures, generalising over the kind, persisting rather than decaying.</li>
+</ul>
+<p>The evidence for the distinction is <a class="wikilink" href="topal-2008-perseverative.html">topal-2008-perseverative</a> (framing alone
+flips episodic to generic encoding) and <a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a>
+(matched attention-grabbing cues produce orienting and <em>no</em> learning, so this is
+not a salience effect). Full argument on <a class="wikilink" href="pedagogical-stance.html">pedagogical-stance</a>.</p>
+<p><strong>The reward hypothesis has no slot for this.</strong> §3.2 admits a scalar; a reward
+here needs a scalar <em>and</em> an interpretive flag. That is a second dimension on Q14,
+orthogonal to the vector-to-scalar collapse the page already records, and it is
+arguably easier to answer — a flag is one bit, and the bit is what the ostension
+detector produces.</p>
+</div>
+<p>Two things on this page look different in that light:</p>
+<p><strong>Shaping is ostensive communication and the page treats it as signal engineering.</strong>
+The shaping remedy above is described purely as modifying the reward function over
+time. In practice a trainer shaping a dog is <em>addressing</em> it — the ostensive cues
+are how the animal knows a trial is a trial. <a class="wikilink" href="social-competence.html">social-competence</a>'s
+"responsiveness to learning and training" (<a class="wikilink" href="miklosi-2017-ethorobotics.html">miklosi-2017-ethorobotics</a>) plausibly
+means responsiveness to <em>being trained</em>, i.e. to the communicative frame, and not
+merely sensitivity to a reward stream. If so, an ostension-blind robot fails that
+requirement even with a perfect reward function.</p>
+<p><strong>"The agent's goal need not be the designer's goal" acquires a channel.</strong> The
+callout above argues the emotional state is a fast observable proxy for interaction
+quality, since the designer's real objective is unobservable to the robot. An
+ostension detector is a <em>second</em> such proxy, and a more direct one: it does not
+estimate whether the interaction is going well, it detects that a human is
+currently trying to tell the robot something. That is closer to the designer's goal
+than any internally computed signal, and it is cheap.</p>
+<p><em>Both readings are this wiki's. <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a> never discusses ostension,
+communication or teaching signals; the natural-pedagogy sources never discuss
+reward functions.</em> <code>[unsourced]</code> #needs-source</p>
 <h2>Related</h2>
 <p><a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> · <a class="wikilink" href="td-learning.html">td-learning</a> · <a class="wikilink" href="actor-critic.html">actor-critic</a> ·
-<a class="wikilink" href="emotion-engine.html">emotion-engine</a> · <a class="wikilink" href="conditioning.html">conditioning</a> · <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a></p>
+<a class="wikilink" href="emotion-engine.html">emotion-engine</a> · <a class="wikilink" href="conditioning.html">conditioning</a> · <a class="wikilink" href="pedagogical-stance.html">pedagogical-stance</a> ·
+<a class="wikilink" href="ostensive-signalling.html">ostensive-signalling</a> · <a class="wikilink" href="topal-2008-perseverative.html">topal-2008-perseverative</a> · <a class="wikilink" href="sutton-barto-2018-rl.html">sutton-barto-2018-rl</a></p>
 <section class="backlinks">
   <h2>Linked from</h2>
   <ul><li><a href="conditioning.html">Conditioning</a></li>
@@ -192,10 +235,12 @@ the sharpest open question created by this ingest — Q14 in <a class="wikilink"
 <li><a href="panksepp-2005-affective-consciousness.html">Panksepp (2005) — Affective consciousness: core emotional feelings in animals and humans</a></li>
 <li><a href="panksepp-2011-emotional-circuits.html">Panksepp (2011) — The basic emotional circuits of mammalian brains</a></li>
 <li><a href="panksepp-affective-systems.html">Panksepp&#x27;s affective systems</a></li>
+<li><a href="pedagogical-stance.html">Pedagogical stance</a></li>
 <li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
 <li><a href="social-competence.html">Social competence</a></li>
 <li><a href="sutton-barto-2018-rl.html">Sutton &amp; Barto (2018) — Reinforcement Learning: An Introduction (2nd ed.)</a></li>
 <li><a href="td-learning.html">Temporal-difference learning</a></li>
+<li><a href="topal-2008-perseverative.html">Topál et al. (2008) — Infants&#x27; perseverative search errors are induced by pragmatic misinterpretation</a></li>
 <li><a href="topal-2014-ostensive.html">Topál, Kis &amp; Oláh (2014) — Dogs&#x27; sensitivity to human ostensive cues</a></li>
 <li><a href="catalog.html">Wiki index</a></li></ul>
 </section>

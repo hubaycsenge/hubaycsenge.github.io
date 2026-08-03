@@ -22,7 +22,7 @@
 <article class="prose page">
   <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / Systems</p>
   <h1>mecanumbot_sensorprocess_smart — the perception stack</h1>
-<dl class="meta"><div><dt>type</dt><dd>system</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>1</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-28</dd></div><div><dt>tags</dt><dd><span class="tag">first-party</span> <span class="tag">perception</span> <span class="tag">ros2</span> <span class="tag">core-contribution</span></dd></div></dl>
+<dl class="meta"><div><dt>type</dt><dd>system</dd></div><div><dt>status</dt><dd><span class="badge badge-draft" title="real content from at least one source, gaps remain">draft</span></dd></div><div><dt>sources</dt><dd>2</dd></div><div><dt>created</dt><dd>2026-07-28</dd></div><div><dt>updated</dt><dd>2026-07-30</dd></div><div><dt>tags</dt><dd><span class="tag">first-party</span> <span class="tag">perception</span> <span class="tag">ros2</span> <span class="tag">core-contribution</span></dd></div></dl>
 <p><strong>Csenge's own package</strong> (<a href="https://github.com/hubaycsenge/mecanumbot_sensorprocess_smart"><code>hubaycsenge/mecanumbot_sensorprocess_smart</code></a>),
 clipped 2026-07-28 and new to the wiki. Five ROS 2 nodes that turn lidar and
 camera into tracked people in map space.</p>
@@ -150,10 +150,59 @@ dog–human interaction, and play is the one context in
 happiness. If this is groundwork for a fetch or play scenario it connects to
 <a class="wikilink" href="social-competence.html">social-competence</a> and to the PLAY circuit — but that is a guess.
 <strong>Ask Csenge what it is for.</strong> #needs-source</p>
+<h2>What ostension detection would need from this stack — 2026-07-30</h2>
+<p><a class="wikilink" href="pedagogical-stance.html">pedagogical-stance</a> puts an <strong>ostension detector</strong> on the critical path of the
+learning architecture. Assessed against what this package actually publishes:</p>
+<table>
+<thead>
+<tr>
+<th>Cue</th>
+<th>Available here?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Directed-speech prosody</strong> — the only cue experimentally shown to produce referential learning (<a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a>)</td>
+<td><strong>Not in this package</strong>, but the robot <strong>does capture audio</strong> (Csenge, 2026-07-30 — see <a class="wikilink" href="robot-platform.html">robot-platform</a>). So this is a <em>missing node</em>, not a missing sensor: nothing in the perception stack touches <code>mecanumbot_audio</code>, and an ostension detector would be the first consumer</td>
+</tr>
+<tr>
+<td><strong>Eye contact</strong></td>
+<td>Approximable. Nose, eyes and ears are among the 17 keypoints, giving coarse head orientation. <strong>True gaze is not available</strong> at this resolution, and the DeepStream variant emits <code>NaN</code> for keypoints below 0.15 confidence — facial keypoints on a distant or turned person will be exactly the ones that drop</td>
+</tr>
+<tr>
+<td><strong>Gaze alternation</strong> between the robot and a referent — the cue in <a class="wikilink" href="topal-2008-perseverative.html">topal-2008-perseverative</a>'s OC condition</td>
+<td>Would need head orientation tracked <em>over time</em> against a known referent. Nothing here does temporal analysis of keypoints; detections are per-frame</td>
+</tr>
+<tr>
+<td><strong>Being the addressee</strong> rather than a bystander</td>
+<td>Needs bearing from the person to the robot — derivable from <code>people_fusion</code> plus head orientation. Nobody in the corpus has attempted it</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-warning">
+<p class="callout-title">Two properties of this stack work against ostension detection specifically</p>
+<p><strong>The motion gate.</strong> A person ostending <em>stops moving and orients</em> — that is much
+of what ostending is. The lidar node publishes a track only after it has exceeded
+0.1 m/s, and <code>subject_pose</code> comes from the lidar node alone. The camera path
+covers it, so this argues that any ostension detector must be <strong>camera-primary</strong>,
+not fusion-primary. The warning above about motionless humans applies with extra
+force here.</p>
+<p><strong>The AMCL dependency.</strong> In topic mode the camera detector processes no frame at
+all until <code>/amcl_pose</code> arrives. An ostension detector inherits that startup
+coupling to localisation, which is architecturally odd for a social-signal
+detector — recognising that you are being addressed should not require knowing
+where you are on a map.</p>
+</div>
+<p><strong>And the acceptance test comes free.</strong> <a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a>
+Experiments 3 and 4 supply a matched stimulus pair: the detector must fire on
+directed speech and <strong>not</strong> on a beep of equal duration and volume, nor on that
+beep with matched mouth movement. Any detector that passes gaze-following
+benchmarks but fails this is a salience detector. Q21.</p>
 <h2>Related</h2>
 <p><a class="wikilink" href="robot-platform.html">robot-platform</a> · <a class="wikilink" href="mecanumbot-behaviours.html">mecanumbot-behaviours</a> · <a class="wikilink" href="mecanumbot-repos.html">mecanumbot-repos</a> ·
 <a class="wikilink" href="multimodal-emotion-recognition.html">multimodal-emotion-recognition</a> · <a class="wikilink" href="emotion-engine.html">emotion-engine</a> ·
-<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a></p>
+<a class="wikilink" href="rl-for-behaviour-learning.html">rl-for-behaviour-learning</a> · <a class="wikilink" href="pedagogical-stance.html">pedagogical-stance</a> · <a class="wikilink" href="ostensive-signalling.html">ostensive-signalling</a> ·
+<a class="wikilink" href="okumura-2020-ostension-attention.html">okumura-2020-ostension-attention</a></p>
 <section class="backlinks">
   <h2>Linked from</h2>
   <ul><li><a href="albuquerque-2016-emotion-recognition.html">Albuquerque et al. (2016) — Dogs recognize dog and human emotions</a></li>
@@ -165,9 +214,11 @@ happiness. If this is groundwork for a fetch or play scenario it connects to
 <li><a href="robot-platform.html">Mecanumbot — the experimental robot platform</a></li>
 <li><a href="mecanumbot-behaviours.html">mecanumbot_behaviours — the behaviour layer</a></li>
 <li><a href="multimodal-emotion-recognition.html">Multimodal emotion recognition</a></li>
+<li><a href="okumura-2020-ostension-attention.html">Okumura et al. (2020) — Ostension affects infant learning more than attention</a></li>
 <li><a href="open-questions.html">Open questions</a></li>
 <li><a href="ortony-2022-cognitive-structure.html">Ortony, Clore &amp; Collins (2022) — The Cognitive Structure of Emotions</a></li>
 <li><a href="ostensive-signalling.html">Ostensive signalling</a></li>
+<li><a href="pedagogical-stance.html">Pedagogical stance</a></li>
 <li><a href="rl-for-behaviour-learning.html">Reinforcement learning for behaviour learning</a></li>
 <li><a href="catalog.html">Wiki index</a></li></ul>
 </section>
