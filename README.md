@@ -90,7 +90,7 @@ Do these in order: the deploy script refuses to upload until step 3 is in place.
 1. **Log wrangler in and create the project** (the name becomes the URL):
    ```sh
    npx wrangler@4 login
-   npx wrangler@4 pages project create csenge-wiki --production-branch main
+   npx wrangler@4 pages project create csenge-wiki --production-branch main --force
    ```
    If `csenge-wiki` is taken, choose another name and export
    `WIKI_PROJECT=<name>` before running the deploy script.

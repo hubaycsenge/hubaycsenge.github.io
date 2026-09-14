@@ -15,6 +15,15 @@ WRANGLER=(npx --yes wrangler@4)
 
 [ -f _private/index.html ] || { echo "No _private/ build — run ./build.sh first." >&2; exit 1; }
 
+# If the Pages project does not exist, recent wrangler versions hand `pages`
+# commands to Cloudflare Workers instead, which would publish to a workers.dev
+# hostname that the Access check below does not cover. Require the project.
+if ! "${WRANGLER[@]}" pages project list --json 2>/dev/null | grep -q "\"${PROJECT}\""; then
+  echo "Refusing to deploy: Pages project '${PROJECT}' not found (or wrangler is not logged in)." >&2
+  echo "Create it once with: npx wrangler@4 pages project create ${PROJECT} --production-branch main --force" >&2
+  exit 1
+fi
+
 guarded() {
   # Access answers an unauthenticated request with a redirect to its login page.
   local url="$1" location
