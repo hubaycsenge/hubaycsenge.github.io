@@ -3,10 +3,19 @@
 Static site generator for hubaycsenge.github.io.
 
 Reads the PhD research vault's *prose* layer only — `wiki/**/*.md`, plus the
-vault's own `index.md` and `log.md` — and renders it to standalone HTML in this
-repository. The vault's `raw/` directory (paper PDFs, scanned notes, cloned
-repos) is never opened, never copied and never referenced in the output; see
-README.md and .gitignore.
+vault's own `index.md` and `log.md` — and renders it to standalone HTML. The
+vault's `raw/` directory (paper PDFs, scanned notes, cloned repos) is never
+opened, never copied and never referenced in the output; see README.md and
+.gitignore.
+
+Two sites come out of one run:
+
+* the **public** homepage, `index.html` in this repository, served by GitHub
+  Pages. It contains nothing derived from the vault — only `content/home.md`
+  and a link to the restricted wiki.
+* the **private** site in `_private/` (gitignored): the homepage with the
+  WikiLLM panel, every wiki page and the search index. It is deployed to
+  Cloudflare Pages behind Cloudflare Access by `deploy-wiki.sh`, never to GitHub.
 
 Usage:
     ./build.sh                       # bootstraps a venv, then runs this
@@ -32,6 +41,7 @@ except ImportError:  # pragma: no cover
 
 SITE = Path(__file__).resolve().parent
 DEFAULT_VAULT = SITE.parent / "PhD_research"
+PRIVATE_OUT = SITE / "_private"
 
 # Directories under the vault that hold prose we are allowed to publish.
 # `raw/` is deliberately absent and is asserted against below.
@@ -367,8 +377,29 @@ def render_bodies(pages: list[Page]) -> None:
 # --------------------------------------------------------------------------
 
 
-def shell(*, title: str, description: str, body: str, depth: int, active: str, extra_head: str = "") -> str:
+PRIVATE_HEAD = '<meta name="robots" content="noindex, nofollow">'
+
+
+def shell(
+    *,
+    title: str,
+    description: str,
+    body: str,
+    depth: int,
+    active: str,
+    extra_head: str = "",
+    wiki_href: str | None = None,
+    footnote: str | None = None,
+) -> str:
+    """`wiki_href` defaults to the local wiki; pass "" to drop the nav link."""
     up = "../" if depth else ""
+    if wiki_href is None:
+        wiki_href = f"{up}wiki/index.html"
+    on = ' class="on"' if active == "wiki" else ""
+    wiki_nav = f'\n    <a href="{html.escape(wiki_href)}"{on}>Research wiki</a>' if wiki_href else ""
+    if footnote is None:
+        footnote = """Wiki prose is generated from a private research vault. The underlying
+  sources — paper PDFs and unpublished notes — are not published here."""
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -385,8 +416,7 @@ def shell(*, title: str, description: str, body: str, depth: int, active: str, e
 <header class="topbar">
   <a class="brand" href="{up}index.html">Csenge Hubay</a>
   <nav>
-    <a href="{up}index.html"{' class="on"' if active == "home" else ""}>Home</a>
-    <a href="{up}wiki/index.html"{' class="on"' if active == "wiki" else ""}>Research wiki</a>
+    <a href="{up}index.html"{' class="on"' if active == "home" else ""}>Home</a>{wiki_nav}
   </nav>
 </header>
 <main id="main">
@@ -394,8 +424,7 @@ def shell(*, title: str, description: str, body: str, depth: int, active: str, e
 </main>
 <footer class="foot">
   <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
-  <p class="fine">Wiki prose is generated from a private research vault. The underlying
-  sources — paper PDFs and unpublished notes — are not published here.</p>
+  <p class="fine">{footnote}</p>
 </footer>
 <script src="{up}assets/site.js" defer></script>
 </body>
@@ -467,13 +496,12 @@ def browser_markup(pages: list[Page], prefix: str, id_prefix: str) -> str:
 </div>"""
 
 
-def render_home(cfg: dict, about_html: str, pages: list[Page]) -> str:
+def home_intro(cfg: dict, about_html: str) -> str:
+    """Hero and about text — everything on the homepage that comes from
+    content/home.md rather than the vault."""
     name = cfg.get("name", "Csenge Hubay")
     tagline = cfg.get("tagline", "")
     affiliation = (cfg.get("affiliation") or "").strip()
-    sources = max((int(p.meta.get("sources") or 0) for p in pages), default=0)
-    n_sources = len([p for p in pages if p.category == "sources"])
-    solid = len([p for p in pages if p.status == "solid"])
 
     links = []
     if cfg.get("email"):
@@ -487,7 +515,7 @@ def render_home(cfg: dict, about_html: str, pages: list[Page]) -> str:
 
     aff = f'<p class="aff">{html.escape(affiliation)}</p>' if affiliation else ""
 
-    body = f"""<section class="hero">
+    return f"""<section class="hero">
   <h1>{html.escape(name)}</h1>
   <p class="tagline">{html.escape(tagline)}</p>
   {aff}
@@ -497,7 +525,54 @@ def render_home(cfg: dict, about_html: str, pages: list[Page]) -> str:
 <section class="prose about">
 {about_html}
 </section>
+"""
 
+
+def render_public_home(cfg: dict, about_html: str) -> str:
+    """The GitHub Pages homepage. Takes no pages on purpose: nothing from the
+    vault — not a title, not a count — may reach the public repository."""
+    name = cfg.get("name", "Csenge Hubay")
+    tagline = cfg.get("tagline", "")
+    wiki_url = (cfg.get("wiki_url") or "").strip()
+    email = (cfg.get("email") or "").strip()
+
+    ask = f' Ask me at <a href="mailto:{html.escape(email)}">{html.escape(email)}</a> for access.' if email else ""
+    cta = (
+        f'<p class="wf-more"><a class="btn" href="{html.escape(wiki_url)}">Sign in to the wiki →</a></p>'
+        if wiki_url
+        else ""
+    )
+    body = f"""{home_intro(cfg, about_html)}
+<section class="wikifield wf-locked" id="wikillm">
+  <div class="wf-body">
+    <p class="wf-eyebrow">Doctoral research · restricted access</p>
+    <h2 class="wf-title">WikiLLM — the PhD research wiki</h2>
+    <p class="wf-desc">A living, LLM-maintained wiki on emotion modelling for social robots.
+    Access is limited to invited readers, who sign in with their email address.{ask}</p>
+    {cta}
+  </div>
+</section>
+"""
+    desc = f"{name} — {tagline}. Ethorobotics and emotion modelling for social robots."
+    return shell(
+        title=f"{name} — {tagline}",
+        description=desc,
+        body=body,
+        depth=0,
+        active="home",
+        wiki_href=wiki_url,
+        footnote="The research wiki is hosted separately and is available to invited readers only.",
+    )
+
+
+def render_home(cfg: dict, about_html: str, pages: list[Page]) -> str:
+    """The homepage of the private site, with the WikiLLM panel."""
+    name = cfg.get("name", "Csenge Hubay")
+    tagline = cfg.get("tagline", "")
+    n_sources = len([p for p in pages if p.category == "sources"])
+    solid = len([p for p in pages if p.status == "solid"])
+
+    body = f"""{home_intro(cfg, about_html)}
 <details class="wikifield" id="wikillm">
   <summary>
     <span class="wf-text">
@@ -526,8 +601,10 @@ def render_home(cfg: dict, about_html: str, pages: list[Page]) -> str:
   </div>
 </details>
 """
-    desc = f"{name} — {tagline}. Ethorobotics, emotion modelling for social robots, and an open research wiki."
-    return shell(title=f"{name} — {tagline}", description=desc, body=body, depth=0, active="home")
+    desc = f"{name} — {tagline}. Ethorobotics, emotion modelling for social robots, and a research wiki."
+    return shell(
+        title=f"{name} — {tagline}", description=desc, body=body, depth=0, active="home", extra_head=PRIVATE_HEAD
+    )
 
 
 def render_wiki_index(pages: list[Page]) -> str:
@@ -548,6 +625,7 @@ def render_wiki_index(pages: list[Page]) -> str:
         body=body,
         depth=1,
         active="wiki",
+        extra_head=PRIVATE_HEAD,
     )
 
 
@@ -597,6 +675,7 @@ def render_page(page: Page, by_slug: dict[str, Page]) -> str:
         body=body,
         depth=1,
         active="wiki",
+        extra_head=PRIVATE_HEAD,
     )
 
 
@@ -619,11 +698,17 @@ def main() -> int:
     if not (vault / "wiki").is_dir():
         return print(f"No wiki/ under {vault}", file=sys.stderr) or 1
 
-    print(f"vault  {vault}")
-    print(f"output {SITE}")
+    print(f"vault   {vault}")
+    print(f"public  {SITE / 'index.html'}")
+    print(f"private {PRIVATE_OUT}")
 
     cfg, about_md = split_frontmatter((SITE / "content" / "home.md").read_text(encoding="utf-8"))
     about_html = markdown.Markdown(extensions=["tables", "sane_lists", "attr_list"]).convert(about_md)
+
+    # Public site: rendered before the vault is even read.
+    (SITE / "index.html").write_text(render_public_home(cfg, about_html), encoding="utf-8")
+    if (SITE / "wiki").exists():
+        print("  ! a wiki/ directory exists in the public repo — delete it, it must not be committed", file=sys.stderr)
 
     pages = collect(vault, include_vault_pages=not args.no_vault_pages)
     if not pages:
@@ -631,15 +716,18 @@ def main() -> int:
     render_bodies(pages)
     by_slug = {p.slug: p for p in pages}
 
-    out_wiki = SITE / "wiki"
-    if out_wiki.exists():
-        shutil.rmtree(out_wiki)
+    if PRIVATE_OUT.exists():
+        shutil.rmtree(PRIVATE_OUT)
+    out_wiki = PRIVATE_OUT / "wiki"
     out_wiki.mkdir(parents=True)
+    shutil.copytree(SITE / "assets", PRIVATE_OUT / "assets")
 
     for page in pages:
         (out_wiki / f"{page.slug}.html").write_text(render_page(page, by_slug), encoding="utf-8")
     (out_wiki / "index.html").write_text(render_wiki_index(pages), encoding="utf-8")
-    (SITE / "index.html").write_text(render_home(cfg, about_html, pages), encoding="utf-8")
+    (PRIVATE_OUT / "index.html").write_text(render_home(cfg, about_html, pages), encoding="utf-8")
+    # Belt and braces: if the Access policy is ever switched off, keep crawlers out.
+    (PRIVATE_OUT / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
 
     (out_wiki / "pages.json").write_text(
         json.dumps(

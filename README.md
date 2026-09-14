@@ -1,8 +1,13 @@
 # hubaycsenge.github.io
 
-Personal site for Csenge Hubay, published with GitHub Pages. The homepage carries
-a short research statement and an **openable panel** — *WikiLLM* — that expands
-into a browsable, searchable rendering of the PhD research wiki.
+Personal site for Csenge Hubay. It is two sites built from one generator:
+
+- the **public homepage** (`index.html`), published with GitHub Pages. It holds the
+  bio and research themes from `content/home.md` and a link to the wiki — nothing
+  derived from the research vault;
+- the **restricted wiki** — *WikiLLM*, a browsable, searchable rendering of the PhD
+  research wiki — built into the gitignored `_private/` and served from
+  Cloudflare Pages behind Cloudflare Access, so only invited people can read it.
 
 ## Raw materials are not in this repository
 
@@ -11,10 +16,10 @@ This is the constraint the build is designed around.
 The wiki lives in a **separate, unpublished** vault at `../PhD_research`. That
 vault has three layers:
 
-| Layer | Contents | Published here? |
+| Layer | Contents | Published? |
 |---|---|---|
 | `raw/` | Paper PDFs, scanned notes, cloned repos — 47 MB of third-party, mostly copyrighted material | **No.** Never read, never copied. |
-| `wiki/` | The wiki's own prose, written about those sources | Yes, rendered to HTML. |
+| `wiki/` | The wiki's own prose, written about those sources | To invited readers only, rendered to HTML in `_private/`. |
 | `CLAUDE.md` | Vault operating instructions | No. |
 
 Four things enforce this:
@@ -29,27 +34,72 @@ Four things enforce this:
 
 Note that wiki *prose* sometimes names a source file (`BartoSutton.pdf`) or
 mentions the `raw/papers/` path when describing an ingest. Those are filenames in
-sentences, not the materials themselves. If you would rather they were not
-public, the pages to look at are `wiki/log.html` and `wiki/citation-backlog.html`.
+sentences, not the materials themselves. If you would rather invited readers did
+not see them either, the pages to look at are `wiki/log.html` and
+`wiki/citation-backlog.html`.
 
 ## Building
 
 ```sh
-./build.sh                          # reads ../PhD_research, writes HTML here
+./build.sh                          # reads ../PhD_research
 ./build.sh --vault ~/elsewhere      # different vault location
-./build.sh --no-vault-pages         # publish wiki/** only, omitting the
-                                    # vault's index.md catalogue and log.md
+./build.sh --no-vault-pages         # omit the vault's index.md catalogue and log.md
 ```
 
-First run creates a gitignored `.venv` with `markdown` and `pyyaml`. The build is
-fully static — there is no GitHub Action, and GitHub never sees the vault. Rerun
-it whenever the wiki changes, then commit the regenerated HTML.
+One run writes both sites:
+
+| Output | Contents | Goes to |
+|---|---|---|
+| `index.html` | public homepage, no vault content | GitHub (commit it) |
+| `_private/` | homepage with the WikiLLM panel, `wiki/*.html`, `search.json`, `assets/` | Cloudflare (`./deploy-wiki.sh`) |
+
+First run creates a gitignored `.venv` with `markdown` and `pyyaml`. There is no
+GitHub Action, and GitHub never sees the vault or the rendered wiki. When the wiki
+changes, rerun the build and `./deploy-wiki.sh`; commit only when `content/home.md`
+or the generator changed.
 
 Preview locally:
 
 ```sh
-python3 -m http.server 8765 && open http://127.0.0.1:8765/
+python3 -m http.server 8765 -d _private    # the full site, wiki included
+python3 -m http.server 8765                # the public homepage only
 ```
+
+## The restricted wiki
+
+GitHub Pages cannot restrict who reads a site (short of GitHub Enterprise Cloud),
+so the wiki lives on **Cloudflare Pages** and **Cloudflare Access** decides who may
+open it. Access is free for up to 50 users. A reader visits the wiki URL, signs in
+— with a one-time code sent to their email, or with GitHub if you enable that
+login method — and gets in only if their email address is on your list.
+
+### One-time setup
+
+Do these in order: the deploy script refuses to upload until step 3 is in place.
+
+1. **Log wrangler in and create the project** (the name becomes the URL):
+   ```sh
+   npx wrangler@4 login
+   npx wrangler@4 pages project create csenge-wiki --production-branch main
+   ```
+   If `csenge-wiki` is taken, choose another name and export
+   `WIKI_PROJECT=<name>` before running the deploy script.
+2. **Open Zero Trust** in the Cloudflare dashboard and pick a team name (free plan).
+3. **Access → Applications → Add an application → Self-hosted.**
+   - Application domains: add **both** `csenge-wiki.pages.dev` **and**
+     `*.csenge-wiki.pages.dev`. The wildcard covers per-deployment preview URLs,
+     which otherwise stay publicly reachable.
+   - Policy: action *Allow*, include *Emails* — list the people you permit.
+     (*Emails ending in* `@inf.elte.hu` admits a whole domain; a *GitHub
+     organization* rule is available once GitHub is a login method.)
+   - Login methods: *One-time PIN* works with no further setup. For "Sign in
+     with GitHub", add GitHub under *Settings → Authentication* first.
+4. **Deploy:** `./deploy-wiki.sh`
+5. Put the URL in `content/home.md` as `wiki_url`, rebuild, commit, push — the
+   public homepage then links to it.
+
+To grant or revoke access later, edit the emails in the Access policy. No
+rebuild or redeploy needed.
 
 ## What the build does
 
@@ -62,7 +112,7 @@ python3 -m http.server 8765 && open http://127.0.0.1:8765/
 - Converts Obsidian callouts (`> [!warning] …`) into styled blocks, so
   recorded contradictions between sources stay visually distinct.
 - Computes **backlinks** for every page, shown under "Linked from".
-- Emits `wiki/search.json`, a full-text index fetched lazily on the first
+- Emits `_private/wiki/search.json`, a full-text index fetched lazily on the first
   keystroke. Before it loads — and on `file://` URLs — search still works over
   titles, summaries and tags.
 
@@ -72,14 +122,17 @@ survives verbatim.
 ## Layout
 
 ```
-index.html            generated homepage (do not edit by hand)
-wiki/*.html           generated wiki pages
-wiki/search.json      generated full-text index
-wiki/pages.json       generated page manifest
-content/home.md       ← EDIT THIS: bio, tagline, contact links, research themes
+index.html            generated public homepage (do not edit by hand)
+_private/             generated restricted site — gitignored, deployed to Cloudflare
+  index.html            homepage with the WikiLLM panel
+  wiki/*.html           wiki pages
+  wiki/search.json      full-text index
+  wiki/pages.json       page manifest
+content/home.md       ← EDIT THIS: bio, tagline, contact links, wiki_url, research themes
 assets/style.css      hand-written
 assets/site.js        hand-written
 build.py, build.sh    the generator
+deploy-wiki.sh        uploads _private/ to Cloudflare Pages, after checking Access
 ```
 
 To change the homepage text, edit `content/home.md` and rebuild. Its frontmatter
@@ -99,4 +152,9 @@ branch*, branch `main`, folder `/ (root)`. The site appears at
 <https://hubaycsenge.github.io> within a minute or two.
 
 A user site repository must be **public** for Pages to serve it on a free plan.
-Everything committed here is world-readable — which is why the vault stays out.
+Everything committed here is world-readable — which is why both the vault and the
+rendered wiki stay out. `.gitignore` blocks `_private/`, `wiki/` and the JSON
+indexes as a second line of defence.
+
+The wiki was public here until September 2026; the repository history was
+rewritten then to remove every rendered wiki page.

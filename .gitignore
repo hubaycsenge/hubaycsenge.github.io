@@ -15,6 +15,17 @@ raw/
 *.docx
 *.pptx
 
+# ---------------------------------------------------------------------------
+# The rendered wiki is restricted. It is built into _private/ and deployed to
+# Cloudflare Pages behind Cloudflare Access (deploy-wiki.sh) — never to GitHub,
+# because anything in this repository is world-readable.
+# ---------------------------------------------------------------------------
+_private/
+/wiki/
+search.json
+pages.json
+.wrangler/
+
 # Build tooling
 .venv/
 __pycache__/

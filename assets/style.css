@@ -166,6 +166,13 @@ main { max-width: 62rem; margin: 0 auto; padding: 0 1.5rem 5rem; }
 .stat span { font: 500 .78rem/1.4 var(--sans); color: var(--ink-faint); text-transform: uppercase; letter-spacing: .06em; }
 .wf-note { max-width: 62ch; color: var(--ink-soft); font-size: .93rem; margin: 0 0 1.6rem; }
 .wf-more { margin: 1.8rem 0 0; }
+/* public homepage: the wiki is restricted, so the panel is a plain card */
+.wf-locked .wf-body {
+  border-top: 0; padding-top: 1.5rem; max-width: 62ch;
+}
+.wf-locked { background: linear-gradient(180deg, var(--accent-soft), var(--panel) 78%); }
+.wf-locked p.wf-eyebrow { margin: 0; }
+.wf-locked .wf-more { margin-top: 1.2rem; }
 .btn {
   display: inline-block; font: 600 .88rem/1 var(--sans); text-decoration: none;
   color: var(--paper); background: var(--accent);
