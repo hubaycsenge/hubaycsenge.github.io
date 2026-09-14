@@ -6,7 +6,7 @@ email: csengehubay@inf.elte.hu
 github: hubaycsenge
 scholar: "https://scholar.google.com/citations?user=Kc63u3YAAAAJ&hl=hu"                # optional Google Scholar URL
 orcid: "https://orcid.org/0009-0006-1444-2194"                  # optional ORCID URL
-wiki_url: ""               # URL of the sign-in-protected wiki, e.g. "https://csenge-wiki.pages.dev" — blank hides the link
+wiki_url: "https://csenge-wiki.pages.dev"             # URL of the sign-in-protected wiki, e.g. "https://csenge-wiki.pages.dev" — blank hides the link
 ---
 
 ## About
