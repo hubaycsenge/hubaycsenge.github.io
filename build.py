@@ -378,6 +378,9 @@ def render_bodies(pages: list[Page]) -> None:
 
 
 PRIVATE_HEAD = '<meta name="robots" content="noindex, nofollow">'
+# The public site links here instead of to the wiki: a page explaining that the
+# wiki is restricted, with sign-in (Cloudflare Access) and request-access links.
+WIKI_GATE = "wikillm.html"
 
 
 def shell(
@@ -391,12 +394,12 @@ def shell(
     wiki_href: str | None = None,
     footnote: str | None = None,
 ) -> str:
-    """`wiki_href` defaults to the local wiki; pass "" to drop the nav link."""
+    """`wiki_href` defaults to the local wiki; the public site passes WIKI_GATE."""
     up = "../" if depth else ""
     if wiki_href is None:
         wiki_href = f"{up}wiki/index.html"
     on = ' class="on"' if active == "wiki" else ""
-    extra_nav = f'\n    <a href="{html.escape(wiki_href)}"{on}>Research wiki</a>' if wiki_href else ""
+    extra_nav = f'\n    <a href="{html.escape(wiki_href)}"{on}>WikiLLM</a>' if wiki_href else ""
     on = ' class="on"' if active == "projects" else ""
     extra_nav += f'\n    <a href="{up}projects.html"{on}>Open projects</a>'
     if footnote is None:
@@ -535,25 +538,17 @@ def render_public_home(cfg: dict, about_html: str) -> str:
     vault — not a title, not a count — may reach the public repository."""
     name = cfg.get("name", "Csenge Hubay")
     tagline = cfg.get("tagline", "")
-    wiki_url = (cfg.get("wiki_url") or "").strip()
-    email = (cfg.get("email") or "").strip()
 
-    ask = f' Ask me at <a href="mailto:{html.escape(email)}">{html.escape(email)}</a> for access.' if email else ""
-    cta = (
-        f'<p class="wf-more"><a class="btn" href="{html.escape(wiki_url)}">Sign in to the wiki →</a></p>'
-        if wiki_url
-        else ""
-    )
     body = f"""{home_intro(cfg, about_html)}
-<section class="wikifield wf-locked" id="wikillm">
-  <div class="wf-body">
-    <p class="wf-eyebrow">Doctoral research · restricted access</p>
-    <h2 class="wf-title">WikiLLM — the PhD research wiki</h2>
-    <p class="wf-desc">A living, LLM-maintained wiki on emotion modelling for social robots.
-    Access is limited to invited readers, who sign in with their email address.{ask}</p>
-    {cta}
-  </div>
-</section>
+<a class="wikifield wf-locked" id="wikillm" href="{WIKI_GATE}">
+  <span class="wf-body">
+    <span class="wf-eyebrow">Doctoral research · restricted access</span>
+    <span class="wf-title">WikiLLM — the PhD research wiki</span>
+    <span class="wf-desc">A living, LLM-maintained wiki on emotion modelling for social robots.
+    Access is limited to invited readers, who sign in with their email address.</span>
+    <span class="wf-more"><span class="btn">Open WikiLLM →</span></span>
+  </span>
+</a>
 """
     desc = f"{name} — {tagline}. Ethorobotics and emotion modelling for social robots."
     return shell(
@@ -562,7 +557,58 @@ def render_public_home(cfg: dict, about_html: str) -> str:
         body=body,
         depth=0,
         active="home",
-        wiki_href=wiki_url,
+        wiki_href=WIKI_GATE,
+        footnote="The research wiki is hosted separately and is available to invited readers only.",
+    )
+
+
+def render_wiki_gate(cfg: dict) -> str:
+    """Public landing page for WikiLLM. Unauthorised visitors end here; invited
+    readers continue to the Cloudflare Access login at `wiki_url`."""
+    name = cfg.get("name", "Csenge Hubay")
+    wiki_url = (cfg.get("wiki_url") or "").strip()
+    email = (cfg.get("email") or "").strip()
+
+    if wiki_url:
+        signin = f'<a class="btn" href="{html.escape(wiki_url)}">Sign in</a>'
+        signin_note = """<p class="gate-fine">You will be asked for your email address and sent a one-time
+    code. If it says you are not authorised, your address is not on the reader list yet —
+    request access below.</p>"""
+    else:
+        signin = '<span class="btn btn-off" aria-disabled="true">Sign in</span>'
+        signin_note = '<p class="gate-fine">Sign-in is not open yet.</p>'
+    request = ""
+    if email:
+        subject = html.escape("WikiLLM access request", quote=True)
+        request = f"""<div class="gate-row">
+    <h2>Not on the list?</h2>
+    <p>Write to <a href="mailto:{html.escape(email)}?subject={subject}">{html.escape(email)}</a>
+    with the email address you want to sign in with, and a line on why you would like to read it.</p>
+  </div>"""
+
+    body = f"""<section class="gate">
+  <p class="gate-lock" aria-hidden="true">🔒</p>
+  <p class="wf-eyebrow">Restricted access</p>
+  <h1>WikiLLM</h1>
+  <p class="lede">The PhD research wiki on emotion modelling for social robots is open to
+  invited readers only.</p>
+  <div class="gate-row">
+    <h2>Invited?</h2>
+    <p class="gate-cta">{signin}</p>
+    {signin_note}
+  </div>
+  {request}
+  <p class="gate-back"><a href="index.html">← Back to the homepage</a> ·
+  <a href="projects.html">Open projects</a></p>
+</section>
+"""
+    return shell(
+        title=f"WikiLLM — restricted — {name}",
+        description="WikiLLM, the PhD research wiki, is available to invited readers only.",
+        body=body,
+        depth=0,
+        active="wiki",
+        wiki_href=WIKI_GATE,
         footnote="The research wiki is hosted separately and is available to invited readers only.",
     )
 
@@ -821,9 +867,9 @@ def main() -> int:
 
     # Public site: rendered before the vault is even read.
     (SITE / "index.html").write_text(render_public_home(cfg, about_html), encoding="utf-8")
+    (SITE / WIKI_GATE).write_text(render_wiki_gate(cfg), encoding="utf-8")
     if projects:
-        wiki_url = (cfg.get("wiki_url") or "").strip()
-        (SITE / "projects.html").write_text(render_projects(cfg, projects, wiki_href=wiki_url), encoding="utf-8")
+        (SITE / "projects.html").write_text(render_projects(cfg, projects, wiki_href=WIKI_GATE), encoding="utf-8")
     if (SITE / "wiki").exists():
         print("  ! a wiki/ directory exists in the public repo — delete it, it must not be committed", file=sys.stderr)
 

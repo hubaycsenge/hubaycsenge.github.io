@@ -9,6 +9,11 @@ Personal site for Csenge Hubay. It is two sites built from one generator:
   research wiki — built into the gitignored `_private/` and served from
   Cloudflare Pages behind Cloudflare Access, so only invited people can read it.
 
+The public site links to the wiki through **`wikillm.html`**, a restricted-access
+page with a *Sign in* button (to `wiki_url`, where Cloudflare Access asks for an
+email and one-time code and turns away anyone not on the list) and a
+request-access email. Until `wiki_url` is set, the button shows as disabled.
+
 A public **Open projects** page (`projects.html`) lists work open to students and
 collaborators. It is generated from `content/projects.yml` — edit that file, not
 the HTML. Like the homepage it contains nothing from the vault, so keep
@@ -129,6 +134,7 @@ survives verbatim.
 ```
 index.html            generated public homepage (do not edit by hand)
 projects.html         generated public Open projects page
+wikillm.html          generated public WikiLLM sign-in / restricted page
 _private/             generated restricted site — gitignored, deployed to Cloudflare
   index.html            homepage with the WikiLLM panel
   wiki/*.html           wiki pages

@@ -168,11 +168,36 @@ main { max-width: 62rem; margin: 0 auto; padding: 0 1.5rem 5rem; }
 .wf-more { margin: 1.8rem 0 0; }
 /* public homepage: the wiki is restricted, so the panel is a plain card */
 .wf-locked .wf-body {
-  border-top: 0; padding-top: 1.5rem; max-width: 62ch;
+  display: block; border-top: 0; padding-top: 1.5rem; max-width: 62ch;
 }
-.wf-locked { background: linear-gradient(180deg, var(--accent-soft), var(--panel) 78%); }
-.wf-locked p.wf-eyebrow { margin: 0; }
-.wf-locked .wf-more { margin-top: 1.2rem; }
+.wf-locked {
+  display: block; text-decoration: none; color: inherit;
+  background: linear-gradient(180deg, var(--accent-soft), var(--panel) 78%);
+  transition: border-color .15s;
+}
+.wf-locked:hover { border-color: var(--accent); }
+.wf-locked:hover .btn { filter: brightness(1.08); }
+.wf-locked .wf-more { display: block; margin-top: 1.2rem; }
+
+/* --- WikiLLM gate (public) ------------------------------------------------ */
+
+.gate {
+  max-width: 34rem; margin: 3.5rem auto 0; padding: 2rem 1.8rem;
+  border: 1px solid var(--rule-firm); border-radius: 12px;
+  background: linear-gradient(180deg, var(--accent-soft), var(--panel) 45%);
+  box-shadow: var(--shadow);
+}
+.gate-lock { margin: 0 0 .6rem; font-size: 2rem; line-height: 1; }
+.gate h1 { margin: .3rem 0 .6rem; font-size: clamp(1.8rem, 5vw, 2.3rem); }
+.gate .lede { margin: 0 0 1.4rem; }
+.gate-row { padding: 1.1rem 0 .2rem; border-top: 1px solid var(--rule); }
+.gate-row h2 { margin: 0 0 .6rem; font: 600 .8rem/1.3 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); }
+.gate-row p { margin: 0 0 .9rem; font: 400 .93rem/1.55 var(--sans); color: var(--ink-soft); }
+.gate-cta .btn { padding: .8rem 1.6rem; font-size: .95rem; }
+.gate-fine { font-size: .85rem !important; color: var(--ink-faint) !important; }
+.gate-back { margin: 1.2rem 0 0; font: 500 .86rem/1.5 var(--sans); }
+.btn-off { opacity: .45; cursor: not-allowed; }
+.btn-off:hover { filter: none; }
 .btn {
   display: inline-block; font: 600 .88rem/1 var(--sans); text-decoration: none;
   color: var(--paper); background: var(--accent);
