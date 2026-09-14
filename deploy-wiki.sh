@@ -48,6 +48,15 @@ for path in / /wiki/ /wiki/search.json /assets/style.css; do
   echo "  ${path} -> ${code}"
   [ "$code" = 401 ] || failed=1
 done
+# The client ID is public (it is in the link to GitHub); the secret must never be.
+# Secrets are 40 hex characters, IDs are not — catch the two being swapped.
+client_id=$(curl -s -o /dev/null -w '%{redirect_url}' --max-time 20 "https://${PROJECT}.pages.dev/auth/login" |
+  sed -nE 's/.*[?&]client_id=([^&]*).*/\1/p')
+if [[ "$client_id" =~ ^[0-9a-f]{40}$ ]]; then
+  echo "WARNING: GITHUB_CLIENT_ID looks like a client secret, and /auth/login shows it publicly." >&2
+  echo "Regenerate the client secret on GitHub, then set GITHUB_CLIENT_ID to the Client ID and redeploy." >&2
+  failed=1
+fi
 if [ "$failed" = 1 ]; then
   echo "WARNING: a signed-out request was not answered with 401. Check https://${PROJECT}.pages.dev/ now." >&2
   echo "(Right after a deploy the edge can briefly serve the previous deployment; rerun the check in a minute.)" >&2
