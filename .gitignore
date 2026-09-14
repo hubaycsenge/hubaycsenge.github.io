@@ -17,7 +17,7 @@ raw/
 
 # ---------------------------------------------------------------------------
 # The rendered wiki is restricted. It is built into _private/ and deployed to
-# Cloudflare Pages behind Cloudflare Access (deploy-wiki.sh) — never to GitHub,
+# Cloudflare Pages behind a GitHub sign-in (deploy-wiki.sh) — never to GitHub,
 # because anything in this repository is world-readable.
 # ---------------------------------------------------------------------------
 _private/

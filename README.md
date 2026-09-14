@@ -7,11 +7,11 @@ Personal site for Csenge Hubay. It is two sites built from one generator:
   derived from the research vault;
 - the **restricted wiki** — *WikiLLM*, a browsable, searchable rendering of the PhD
   research wiki — built into the gitignored `_private/` and served from
-  Cloudflare Pages behind Cloudflare Access, so only invited people can read it.
+  Cloudflare Pages behind a GitHub sign-in, so only invited people can read it.
 
 The public site links to the wiki through **`wikillm.html`**, a restricted-access
-page with a *Sign in* button (to `wiki_url`, where Cloudflare Access asks for an
-email and one-time code and turns away anyone not on the list) and a
+page with a *Sign in with GitHub* button (to `wiki_url`, where the sign-in turns
+away anyone not on the reader list) and a
 request-access email. Until `wiki_url` is set, the button shows as disabled.
 
 A public **Open projects** page (`projects.html`) lists work open to students and
@@ -78,38 +78,55 @@ python3 -m http.server 8765                # the public homepage only
 ## The restricted wiki
 
 GitHub Pages cannot restrict who reads a site (short of GitHub Enterprise Cloud),
-so the wiki lives on **Cloudflare Pages** and **Cloudflare Access** decides who may
-open it. Access is free for up to 50 users. A reader visits the wiki URL, signs in
-— with a one-time code sent to their email, or with GitHub if you enable that
-login method — and gets in only if their email address is on your list.
+so the wiki lives on **Cloudflare Pages** (free, no payment details) as project
+`csenge-wiki`. In front of every request — pages, search index and assets —
+runs `cloudflare/functions/_middleware.js`: visitors **sign in with GitHub**, and
+only usernames in the `ALLOWED_GITHUB_USERS` secret get in. Others see a sign-in
+page (401) or a not-authorised page (403). If any secret is missing it answers
+503 for everything; it never falls back to serving the wiki. Sessions last 7
+days, and the reader list is re-checked on every request.
+
+The public `wikillm.html` page on github.io links to the sign-in.
 
 ### One-time setup
 
-Do these in order: the deploy script refuses to upload until step 3 is in place.
-
-1. **Log wrangler in and create the project** (the name becomes the URL):
+1. **Log wrangler in and create the project** (done for `csenge-wiki`):
    ```sh
    npx wrangler@4 login
    npx wrangler@4 pages project create csenge-wiki --production-branch main --force
    ```
-   If `csenge-wiki` is taken, choose another name and export
-   `WIKI_PROJECT=<name>` before running the deploy script.
-2. **Open Zero Trust** in the Cloudflare dashboard and pick a team name (free plan).
-3. **Access → Applications → Add an application → Self-hosted.**
-   - Application domains: add **both** `csenge-wiki.pages.dev` **and**
-     `*.csenge-wiki.pages.dev`. The wildcard covers per-deployment preview URLs,
-     which otherwise stay publicly reachable.
-   - Policy: action *Allow*, include *Emails* — list the people you permit.
-     (*Emails ending in* `@inf.elte.hu` admits a whole domain; a *GitHub
-     organization* rule is available once GitHub is a login method.)
-   - Login methods: *One-time PIN* works with no further setup. For "Sign in
-     with GitHub", add GitHub under *Settings → Authentication* first.
-4. **Deploy:** `./deploy-wiki.sh`
-5. Put the URL in `content/home.md` as `wiki_url`, rebuild, commit, push — the
-   public homepage then links to it.
+   `--force` is needed only here: without it, current wrangler creates a Workers
+   project instead of a Pages one.
+2. **Create a GitHub OAuth App** at GitHub → Settings → Developer settings →
+   OAuth Apps → *New OAuth App*:
+   - Homepage URL: `https://hubaycsenge.github.io`
+   - Authorization callback URL: `https://csenge-wiki.pages.dev/auth/callback`
 
-To grant or revoke access later, edit the emails in the Access policy. No
-rebuild or redeploy needed.
+   Copy the *Client ID*, then *Generate a new client secret*.
+3. **Set the four secrets** (each command prompts for the value):
+   ```sh
+   cd ~/Documents/hubaycsenge.github.io
+   npx wrangler@4 pages secret put GITHUB_CLIENT_ID     --project-name csenge-wiki
+   npx wrangler@4 pages secret put GITHUB_CLIENT_SECRET --project-name csenge-wiki
+   npx wrangler@4 pages secret put ALLOWED_GITHUB_USERS --project-name csenge-wiki   # e.g. hubaycsenge, alice, bob
+   openssl rand -hex 32 | npx wrangler@4 pages secret put SESSION_SECRET --project-name csenge-wiki
+   ```
+4. **Deploy:** `./build.sh && ./deploy-wiki.sh`. The script refuses to upload if
+   the project or a secret is missing, and afterwards checks that signed-out
+   requests get 401.
+5. `wiki_url: "https://csenge-wiki.pages.dev"` in `content/home.md` turns on the
+   *Sign in with GitHub* button on `wikillm.html`; rebuild, commit, push.
+
+### Granting and revoking access
+
+Put the new list into `ALLOWED_GITHUB_USERS` (step 3) and run `./deploy-wiki.sh`
+— Pages applies secret changes to new deployments only. Removed users lose access
+on their next request, even with a live session. To sign everyone out, replace
+`SESSION_SECRET` and redeploy.
+
+Test the sign-in locally, without GitHub, with
+`cd cloudflare && npx wrangler@4 pages dev ../_private -b CANONICAL_HOST=127.0.0.1 -b …`
+plus the four secrets as `-b NAME=value` bindings.
 
 ## What the build does
 
@@ -145,7 +162,8 @@ content/projects.yml  ← EDIT THIS: open projects and task descriptions
 assets/style.css      hand-written
 assets/site.js        hand-written
 build.py, build.sh    the generator
-deploy-wiki.sh        uploads _private/ to Cloudflare Pages, after checking Access
+cloudflare/functions/_middleware.js   GitHub sign-in in front of the wiki (Cloudflare Pages Functions)
+deploy-wiki.sh        uploads _private/ with the sign-in to Cloudflare Pages
 ```
 
 To change the homepage text, edit `content/home.md` and rebuild. Its frontmatter

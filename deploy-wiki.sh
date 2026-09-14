@@ -4,40 +4,53 @@
 #   ./deploy-wiki.sh                          # project "csenge-wiki"
 #   WIKI_PROJECT=other-name ./deploy-wiki.sh
 #
-# Refuses to upload unless Cloudflare Access already guards both the production
-# hostname and the preview hostnames, so the wiki is never public, even briefly.
+# Access control is cloudflare/functions/_middleware.js — GitHub sign-in, with a
+# list of permitted usernames. It is uploaded with every deployment and fails
+# closed when unconfigured. This script refuses to upload unless the project and
+# all its secrets exist, and afterwards checks that a signed-out request is refused.
 # One-time setup is described in README.md ("The restricted wiki").
 set -euo pipefail
 cd "$(dirname "$0")"
 
 PROJECT="${WIKI_PROJECT:-csenge-wiki}"
 WRANGLER=(npx --yes wrangler@4)
+SECRETS=(GITHUB_CLIENT_ID GITHUB_CLIENT_SECRET SESSION_SECRET ALLOWED_GITHUB_USERS)
 
 [ -f _private/index.html ] || { echo "No _private/ build — run ./build.sh first." >&2; exit 1; }
+[ -f cloudflare/functions/_middleware.js ] || { echo "Missing cloudflare/functions/_middleware.js." >&2; exit 1; }
 
 # If the Pages project does not exist, recent wrangler versions hand `pages`
-# commands to Cloudflare Workers instead, which would publish to a workers.dev
-# hostname that the Access check below does not cover. Require the project.
+# commands to Cloudflare Workers instead, which would publish without the
+# sign-in middleware. Require the project.
 if ! "${WRANGLER[@]}" pages project list --json 2>/dev/null | grep -q "\"${PROJECT}\""; then
   echo "Refusing to deploy: Pages project '${PROJECT}' not found (or wrangler is not logged in)." >&2
   echo "Create it once with: npx wrangler@4 pages project create ${PROJECT} --production-branch main --force" >&2
   exit 1
 fi
 
-guarded() {
-  # Access answers an unauthenticated request with a redirect to its login page.
-  local url="$1" location
-  location=$(curl -s -o /dev/null -w '%{redirect_url}' --max-time 20 "$url" || true)
-  [[ "$location" == *cloudflareaccess.com* ]]
-}
-
-for url in "https://${PROJECT}.pages.dev/" "https://access-check.${PROJECT}.pages.dev/"; do
-  if ! guarded "$url"; then
-    echo "Refusing to deploy: $url is not behind Cloudflare Access." >&2
-    echo "Add both ${PROJECT}.pages.dev and *.${PROJECT}.pages.dev to the Access application first." >&2
+secrets=$("${WRANGLER[@]}" pages secret list --project-name "$PROJECT" 2>/dev/null || true)
+for name in "${SECRETS[@]}"; do
+  if ! grep -q "$name" <<<"$secrets"; then
+    echo "Refusing to deploy: secret $name is not set on '${PROJECT}'." >&2
+    echo "Set it with: npx wrangler@4 pages secret put $name --project-name ${PROJECT}" >&2
     exit 1
   fi
 done
-echo "Access guards ${PROJECT}.pages.dev and its previews."
 
-"${WRANGLER[@]}" pages deploy _private --project-name "$PROJECT" --branch main --commit-dirty=true
+# Functions are picked up from the working directory, so deploy from cloudflare/.
+(cd cloudflare && "${WRANGLER[@]}" pages deploy ../_private --project-name "$PROJECT" --branch main --commit-dirty=true)
+
+echo "Checking that the live wiki refuses signed-out visitors…"
+sleep 5
+failed=0
+for path in / /wiki/ /wiki/search.json /assets/style.css; do
+  code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "https://${PROJECT}.pages.dev${path}" || echo 000)
+  echo "  ${path} -> ${code}"
+  [ "$code" = 401 ] || failed=1
+done
+if [ "$failed" = 1 ]; then
+  echo "WARNING: a signed-out request was not answered with 401. Check https://${PROJECT}.pages.dev/ now." >&2
+  echo "(Right after a deploy the edge can briefly serve the previous deployment; rerun the check in a minute.)" >&2
+  exit 1
+fi
+echo "OK: the wiki is behind GitHub sign-in."

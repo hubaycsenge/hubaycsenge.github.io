@@ -15,7 +15,7 @@ Two sites come out of one run:
   and a link to the restricted wiki.
 * the **private** site in `_private/` (gitignored): the homepage with the
   WikiLLM panel, every wiki page and the search index. It is deployed to
-  Cloudflare Pages behind Cloudflare Access by `deploy-wiki.sh`, never to GitHub.
+  Cloudflare Pages behind a GitHub sign-in by `deploy-wiki.sh`, never to GitHub.
 
 Usage:
     ./build.sh                       # bootstraps a venv, then runs this
@@ -379,7 +379,7 @@ def render_bodies(pages: list[Page]) -> None:
 
 PRIVATE_HEAD = '<meta name="robots" content="noindex, nofollow">'
 # The public site links here instead of to the wiki: a page explaining that the
-# wiki is restricted, with sign-in (Cloudflare Access) and request-access links.
+# wiki is restricted, with GitHub sign-in and request-access links.
 WIKI_GATE = "wikillm.html"
 
 
@@ -545,7 +545,7 @@ def render_public_home(cfg: dict, about_html: str) -> str:
     <span class="wf-eyebrow">Doctoral research · restricted access</span>
     <span class="wf-title">WikiLLM — the PhD research wiki</span>
     <span class="wf-desc">A living, LLM-maintained wiki on emotion modelling for social robots.
-    Access is limited to invited readers, who sign in with their email address.</span>
+    Access is limited to invited readers, who sign in with GitHub.</span>
     <span class="wf-more"><span class="btn">Open WikiLLM →</span></span>
   </span>
 </a>
@@ -564,18 +564,17 @@ def render_public_home(cfg: dict, about_html: str) -> str:
 
 def render_wiki_gate(cfg: dict) -> str:
     """Public landing page for WikiLLM. Unauthorised visitors end here; invited
-    readers continue to the Cloudflare Access login at `wiki_url`."""
+    readers continue to the GitHub sign-in in front of `wiki_url`."""
     name = cfg.get("name", "Csenge Hubay")
     wiki_url = (cfg.get("wiki_url") or "").strip()
     email = (cfg.get("email") or "").strip()
 
     if wiki_url:
-        signin = f'<a class="btn" href="{html.escape(wiki_url)}">Sign in</a>'
-        signin_note = """<p class="gate-fine">You will be asked for your email address and sent a one-time
-    code. If it says you are not authorised, your address is not on the reader list yet —
-    request access below.</p>"""
+        signin = f'<a class="btn" href="{html.escape(wiki_url.rstrip("/"))}/auth/login">Sign in with GitHub</a>'
+        signin_note = """<p class="gate-fine">Readers are invited by GitHub account. If it says you are not
+    authorised, your GitHub username is not on the reader list yet — request access below.</p>"""
     else:
-        signin = '<span class="btn btn-off" aria-disabled="true">Sign in</span>'
+        signin = '<span class="btn btn-off" aria-disabled="true">Sign in with GitHub</span>'
         signin_note = '<p class="gate-fine">Sign-in is not open yet.</p>'
     request = ""
     if email:
@@ -583,7 +582,7 @@ def render_wiki_gate(cfg: dict) -> str:
         request = f"""<div class="gate-row">
     <h2>Not on the list?</h2>
     <p>Write to <a href="mailto:{html.escape(email)}?subject={subject}">{html.escape(email)}</a>
-    with the email address you want to sign in with, and a line on why you would like to read it.</p>
+    with your GitHub username, and a line on why you would like to read it.</p>
   </div>"""
 
     body = f"""<section class="gate">
@@ -893,7 +892,7 @@ def main() -> int:
         (PRIVATE_OUT / "projects.html").write_text(
             render_projects(cfg, projects, extra_head=PRIVATE_HEAD), encoding="utf-8"
         )
-    # Belt and braces: if the Access policy is ever switched off, keep crawlers out.
+    # Belt and braces: if the sign-in is ever switched off, keep crawlers out.
     (PRIVATE_OUT / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
 
     (out_wiki / "pages.json").write_text(
