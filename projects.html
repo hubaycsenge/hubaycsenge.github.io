@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open projects — Csenge Hubay</title>
+<meta name="description" content="Open research projects and student tasks with Csenge Hubay: social robotics, ethorobotics, perception and 3D reconstruction.">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="index.html">Csenge Hubay</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="projects.html" class="on">Open projects</a>
+  </nav>
+</header>
+<main id="main">
+<section class="prose pagehead">
+  <p class="crumb"><a href="index.html">Home</a> / Open projects</p>
+  <h1>Open projects</h1>
+  <div class="lede"><p>Projects around my PhD in <strong>ethorobotics</strong> — building robots whose behaviour draws on
+what we know about animals, especially dogs — that have well-defined pieces of work
+open for students and collaborators. Each task can be scoped up or down; the size
+label is a starting point, not a contract. If one looks interesting, write to me and
+we will agree on the scope together.</p></div>
+  <ul class="sizes"><li><span class="badge badge-small" title="a few weeks — a course assignment or internship">small</span> a few weeks — a course assignment or internship</li>
+<li><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span> about a semester — a BSc thesis or project course</li>
+<li><span class="badge badge-large" title="a year or more — an MSc thesis or TDK work">large</span> a year or more — an MSc thesis or TDK work</li></ul>
+  <ul class="toc"><li><a href="#mecanumbot">MecanumBot</a> <span class="cat-n">6</span></li>
+<li><a href="#biscee">Biscee — emotions expressed with crests</a> <span class="cat-n">4</span></li>
+<li><a href="#citizen-science">Citizen Science Portal</a> <span class="cat-n">3</span></li></ul>
+</section>
+
+<div class="browser" data-browser>
+  <div class="searchrow">
+    <input type="search" class="search" data-search-input
+           placeholder="Search 13 tasks — topics, skills…"
+           autocomplete="off" aria-label="Search open tasks">
+    <div class="filters" role="group" aria-label="Filter by size">
+      <button type="button" class="chip on" data-filter="all">All</button>
+      <button type="button" class="chip" data-filter="small">small</button><button type="button" class="chip" data-filter="medium">medium</button><button type="button" class="chip" data-filter="large">large</button>
+    </div>
+  </div>
+  <p class="hits" data-hits aria-live="polite"></p>
+<section class="catblock project" id="mecanumbot">
+  <div class="project-head">
+    <h2>MecanumBot</h2>
+    <span class="badge">active</span>
+  </div>
+  <div class="prose project-sum"><p>A small omnidirectional robot (mecanum wheels, Jetson Orin Nano, LiDAR and camera)
+used to study dog-inspired human–robot interaction. It detects people, can lead a
+person somewhere using gestures, lights or movement alone, reacts to pointing, plays
+fetch and searches for objects. The research question: does behaviour borrowed from
+dogs make a robot easier for people to understand? The software is ROS 2, with a
+2D simulator and a MuJoCo digital twin for work away from the robot.</p></div>
+  
+  <div class="cards tasks">
+<article class="card task" data-status="medium"
+   data-search="mecanumbot first real-world runs of the object-search behaviour the robot&#x27;s explore-then-search pipeline passes its tests but has not yet run on the physical robot. take it into a real room: tune navigation, check the camera mounting and height, find out what breaks, and turn the fixes into a repeatable launch procedure. ros 2 nav2 python field testing medium">
+  <div class="card-head"><h3 class="card-title">First real-world runs of the object-search behaviour</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
+  <div class="task-desc"><p>The robot's explore-then-search pipeline passes its tests but has not yet run on
+the physical robot. Take it into a real room: tune navigation, check the camera
+mounting and height, find out what breaks, and turn the fixes into a repeatable
+launch procedure.</p></div>
+  <p class="task-skills"><span class="tag">ROS 2</span> <span class="tag">Nav2</span> <span class="tag">Python</span> <span class="tag">field testing</span></p>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: MecanumBot — First real-world runs of the object-search behaviour">Ask about this task →</a>
+</article>
+<article class="card task" data-status="medium"
+   data-search="mecanumbot full behaviour stack in the mujoco digital twin the robot has a physics-simulated twin, but the behaviour tree does not yet start together with the rest of the stack from one launch. integrate it, and improve the simulation where it matters most: wheel–ground contact and more realistic (articulated) simulated people. ros 2 mujoco launch files simulation medium">
+  <div class="card-head"><h3 class="card-title">Full behaviour stack in the MuJoCo digital twin</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
+  <div class="task-desc"><p>The robot has a physics-simulated twin, but the behaviour tree does not yet start
+together with the rest of the stack from one launch. Integrate it, and improve the
+simulation where it matters most: wheel–ground contact and more realistic
+(articulated) simulated people.</p></div>
+  <p class="task-skills"><span class="tag">ROS 2</span> <span class="tag">MuJoCo</span> <span class="tag">launch files</span> <span class="tag">simulation</span></p>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: MecanumBot — Full behaviour stack in the MuJoCo digital twin">Ask about this task →</a>
+</article>
+<article class="card task" data-status="large"
+   data-search="mecanumbot learning the leading behaviour from data a top-down simulator already records sessions in which people are led by the robot. collect scripted baseline sessions, train a behaviour-cloning policy, then an offline reinforcement-learning policy, and compare them against the scripted behaviour. part of the work is refactoring the study code so that it scales. python reinforcement learning behaviour cloning pygame large">
+  <div class="card-head"><h3 class="card-title">Learning the leading behaviour from data</h3><span class="badge badge-large" title="a year or more — an MSc thesis or TDK work">large</span></div>
+  <div class="task-desc"><p>A top-down simulator already records sessions in which people are led by the
+robot. Collect scripted baseline sessions, train a behaviour-cloning policy, then
+an offline reinforcement-learning policy, and compare them against the scripted
+behaviour. Part of the work is refactoring the study code so that it scales.</p></div>
+  <p class="task-skills"><span class="tag">Python</span> <span class="tag">reinforcement learning</span> <span class="tag">behaviour cloning</span> <span class="tag">pygame</span></p>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: MecanumBot — Learning the leading behaviour from data">Ask about this task →</a>
+</article>
+<article class="card task" data-status="medium"
+   data-search="mecanumbot a fear response for the robot dogs freeze, avoid, or seek attention when something startles them. a first version of this behaviour exists on paper and in a training environment. connect the environment to real lidar input, add the discrete response actions, and run it in simulation and then on the robot. reinforcement learning gym-style environments ros 2 medium">
+  <div class="card-head"><h3 class="card-title">A fear response for the robot</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
+  <div class="task-desc"><p>Dogs freeze, avoid, or seek attention when something startles them. A first
+version of this behaviour exists on paper and in a training environment. Connect
+the environment to real LiDAR input, add the discrete response actions, and run it
+in simulation and then on the robot.</p></div>
+  <p class="task-skills"><span class="tag">reinforcement learning</span> <span class="tag">Gym-style environments</span> <span class="tag">ROS 2</span></p>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: MecanumBot — A fear response for the robot">Ask about this task →</a>
+</article>
+<article class="card task" data-status="small"
+   data-search="mecanumbot robust framing for the motor-controller serial link the link to the stepper controller sends raw fixed-size packets with no framing, so a single lost byte corrupts the stream until reconnect. design a small framed protocol (start marker, length, checksum) and implement it on both the firmware and the ros 2 side. embedded c arduino / opencr serial protocols small">
+  <div class="card-head"><h3 class="card-title">Robust framing for the motor-controller serial link</h3><span class="badge badge-small" title="a few weeks — a course assignment or internship">small</span></div>
+  <div class="task-desc"><p>The link to the stepper controller sends raw fixed-size packets with no framing,
+so a single lost byte corrupts the stream until reconnect. Design a small framed
+protocol (start marker, length, checksum) and implement it on both the firmware
+and the ROS 2 side.</p></div>
+  <p class="task-skills"><span class="tag">embedded C</span> <span class="tag">Arduino / OpenCR</span> <span class="tag">serial protocols</span></p>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: MecanumBot — Robust framing for the motor-controller serial link">Ask about this task →</a>
+</article>
+<article class="card task" data-status="medium"
+   data-search="mecanumbot hearing the human — prosody as a social cue people address dogs with a particular tone of voice, and dogs use it to tell whether a gesture is meant for them. the robot already records audio, but nothing uses it. build a detector for this &quot;addressing&quot; speech prosody and feed it into the perception stack. audio signal processing python ros 2 medium">
+  <div class="card-head"><h3 class="card-title">Hearing the human — prosody as a social cue</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
+  <div class="task-desc"><p>People address dogs with a particular tone of voice, and dogs use it to tell
+whether a gesture is meant for them. The robot already records audio, but nothing
+uses it. Build a detector for this "addressing" speech prosody and feed it into
+the perception stack.</p></div>
+  <p class="task-skills"><span class="tag">audio signal processing</span> <span class="tag">Python</span> <span class="tag">ROS 2</span></p>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: MecanumBot — Hearing the human — prosody as a social cue">Ask about this task →</a>
+</article>
+  </div>
+</section><section class="catblock project" id="biscee">
+  <div class="project-head">
+    <h2>Biscee — emotions expressed with crests</h2>
+    <span class="badge">active</span>
+  </div>
+  <div class="prose project-sum"><p>Biscee is a social robot with an expressive head and three pairs of movable crests,
+a little like a bird's feathers. Can people read emotions such as happiness, fear or
+anger from crest movements alone? If so, simple non-humanlike body parts are enough
+to carry emotional signals. Movement patterns for several emotions and intensities
+exist; the next step is turning them into a validated video study.</p></div>
+  
+  <div class="cards tasks">
+<article class="card task" data-status="small"
+   data-search="biscee — emotions expressed with crests make the crest emotions distinguishable some emotions currently end in very similar crest postures. redesign the movement patterns so each emotion has its own recognisable shape and timing, drawing on how birds and mammals use crests and ears to signal. python ros motion design small">
+  <div class="card-head"><h3 class="card-title">Make the crest emotions distinguishable</h3><span class="badge badge-small" title="a few weeks — a course assignment or internship">small</span></div>
+  <div class="task-desc"><p>Some emotions currently end in very similar crest postures. Redesign the movement
+patterns so each emotion has its own recognisable shape and timing, drawing on how
+birds and mammals use crests and ears to signal.</p></div>
+  <p class="task-skills"><span class="tag">Python</span> <span class="tag">ROS</span> <span class="tag">motion design</span></p>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: Biscee — emotions expressed with crests — Make the crest emotions distinguishable">Ask about this task →</a>
+</article>
+<article class="card task" data-status="medium"
+   data-search="biscee — emotions expressed with crests intensity levels and a control condition decide how emotional intensity should show in the movement — larger, faster, or by recruiting more crests — and design a control display (for example, the same movements with the order scrambled) so the study can show that viewers read the emotion, not just the motion. experimental design motion design python medium">
+  <div class="card-head"><h3 class="card-title">Intensity levels and a control condition</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
+  <div class="task-desc"><p>Decide how emotional intensity should show in the movement — larger, faster, or by
+recruiting more crests — and design a control display (for example, the same
+movements with the order scrambled) so the study can show that viewers read the
+emotion, not just the motion.</p></div>
+  <p class="task-skills"><span class="tag">experimental design</span> <span class="tag">motion design</span> <span class="tag">Python</span></p>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: Biscee — emotions expressed with crests — Intensity levels and a control condition">Ask about this task →</a>
+</article>
+<article class="card task" data-status="medium"
+   data-search="biscee — emotions expressed with crests stimulus videos and online questionnaire film the robot performing each movement pattern under consistent conditions, and build the questionnaire versions and presentation orders for an online emotion-recognition study. video production survey design medium">
+  <div class="card-head"><h3 class="card-title">Stimulus videos and online questionnaire</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
+  <div class="task-desc"><p>Film the robot performing each movement pattern under consistent conditions, and
+build the questionnaire versions and presentation orders for an online
+emotion-recognition study.</p></div>
+  <p class="task-skills"><span class="tag">video production</span> <span class="tag">survey design</span></p>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: Biscee — emotions expressed with crests — Stimulus videos and online questionnaire">Ask about this task →</a>
+</article>
+<article class="card task" data-status="medium"
+   data-search="biscee — emotions expressed with crests analysis plan and power analysis write the analysis plan before any data exists: the statistical models, a power analysis for the sample size, and a coding scheme for free-text answers. statistics r study preregistration medium">
+  <div class="card-head"><h3 class="card-title">Analysis plan and power analysis</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
+  <div class="task-desc"><p>Write the analysis plan before any data exists: the statistical models, a power
+analysis for the sample size, and a coding scheme for free-text answers.</p></div>
+  <p class="task-skills"><span class="tag">statistics</span> <span class="tag">R</span> <span class="tag">study preregistration</span></p>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: Biscee — emotions expressed with crests — Analysis plan and power analysis">Ask about this task →</a>
+</article>
+  </div>
+</section><section class="catblock project" id="citizen-science">
+  <div class="project-head">
+    <h2>Citizen Science Portal</h2>
+    <span class="badge">working prototype</span>
+  </div>
+  <div class="prose project-sum"><p>A web portal where researchers publish short questionnaire studies and members of
+the public take part — a way to reach far more participants than lab studies can.
+Researchers can draft, publish and export studies; the interface is available in
+English, Hungarian and German. It currently runs on a single machine.</p></div>
+  
+  <div class="cards tasks">
+<article class="card task" data-status="medium"
+   data-search="citizen science portal make it ready for the public internet harden the deployment: secrets management, https behind a reverse proxy, database authentication, and a proper consent and data-protection notice for participants. node.js mongodb devops https / reverse proxy medium">
+  <div class="card-head"><h3 class="card-title">Make it ready for the public internet</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
+  <div class="task-desc"><p>Harden the deployment: secrets management, HTTPS behind a reverse proxy, database
+authentication, and a proper consent and data-protection notice for participants.</p></div>
+  <p class="task-skills"><span class="tag">Node.js</span> <span class="tag">MongoDB</span> <span class="tag">DevOps</span> <span class="tag">HTTPS / reverse proxy</span></p>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: Citizen Science Portal — Make it ready for the public internet">Ask about this task →</a>
+</article>
+<article class="card task" data-status="small"
+   data-search="citizen science portal shared rate limiting request limits are currently counted in memory per process. move them to redis so they hold across restarts and multiple server processes. node.js express redis small">
+  <div class="card-head"><h3 class="card-title">Shared rate limiting</h3><span class="badge badge-small" title="a few weeks — a course assignment or internship">small</span></div>
+  <div class="task-desc"><p>Request limits are currently counted in memory per process. Move them to Redis so
+they hold across restarts and multiple server processes.</p></div>
+  <p class="task-skills"><span class="tag">Node.js</span> <span class="tag">Express</span> <span class="tag">Redis</span></p>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: Citizen Science Portal — Shared rate limiting">Ask about this task →</a>
+</article>
+<article class="card task" data-status="medium"
+   data-search="citizen science portal video-rating questions studies can ask single-choice, multiple-choice and free-text questions. add a question type that shows a video and collects ratings, so robot-behaviour studies such as the biscee crest study can run on the portal. javascript front end back end medium">
+  <div class="card-head"><h3 class="card-title">Video-rating questions</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
+  <div class="task-desc"><p>Studies can ask single-choice, multiple-choice and free-text questions. Add a
+question type that shows a video and collects ratings, so robot-behaviour studies
+such as the Biscee crest study can run on the portal.</p></div>
+  <p class="task-skills"><span class="tag">JavaScript</span> <span class="tag">front end</span> <span class="tag">back end</span></p>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: Citizen Science Portal — Video-rating questions">Ask about this task →</a>
+</article>
+  </div>
+</section>
+  <p class="noresults" data-noresults hidden>No task matches that.</p>
+</div>
+
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Tasks are open unless marked otherwise. Get in touch before starting — scope is agreed per student.</p>
+</footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

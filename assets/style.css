@@ -241,6 +241,32 @@ main { max-width: 62rem; margin: 0 auto; padding: 0 1.5rem 5rem; }
 .badge-solid { background: var(--green-soft); color: var(--green); }
 .badge-draft { background: var(--amber-soft); color: var(--amber); }
 
+/* --- open projects -------------------------------------------------------- */
+
+.badge-small { background: var(--green-soft); color: var(--green); }
+.badge-medium { background: var(--amber-soft); color: var(--amber); }
+.badge-large { background: var(--accent-soft); color: var(--accent); }
+.prose .sizes, .prose .toc { list-style: none; padding: 0; margin: 1.2rem 0; font: 400 .9rem/1.5 var(--sans); }
+.prose .sizes li { display: flex; gap: .6rem; align-items: baseline; margin: .3rem 0; color: var(--ink-soft); }
+.sizes .badge { min-width: 4.2rem; text-align: center; }
+.prose .toc { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; }
+.prose .toc li { margin: 0; }
+.project { margin: 3rem 0; scroll-margin-top: 1.5rem; }
+.project-head { display: flex; flex-wrap: wrap; gap: .7rem; align-items: baseline; }
+.project-head h2 { margin: 0; font-size: 1.5rem; }
+.project-sum { margin: .6rem 0 .4rem; color: var(--ink-soft); }
+.project-links { margin: 0 0 1rem; font: 500 .88rem/1.5 var(--sans); }
+.tasks { grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); gap: .8rem; }
+.card.task { background: var(--panel); padding: 1rem 1.1rem; }
+.card.task:hover { border-color: var(--rule-firm); }
+.card.task:hover .card-title { color: var(--ink); }
+.task h3.card-title { margin: 0; font-size: 1.02rem; line-height: 1.35; }
+.task-desc { font: 400 .9rem/1.55 var(--sans); color: var(--ink-soft); }
+.task-desc p { margin: 0 0 .6rem; }
+.task-desc ul { margin: 0 0 .6rem; padding-left: 1.2rem; }
+.task-skills { margin: auto 0 0; }
+.task-ask { font: 600 .84rem/1.4 var(--sans); }
+
 /* --- wiki pages ----------------------------------------------------------- */
 
 .pagehead, .page { padding-top: 2.5rem; }

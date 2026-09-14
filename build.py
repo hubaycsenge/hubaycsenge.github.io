@@ -396,7 +396,9 @@ def shell(
     if wiki_href is None:
         wiki_href = f"{up}wiki/index.html"
     on = ' class="on"' if active == "wiki" else ""
-    wiki_nav = f'\n    <a href="{html.escape(wiki_href)}"{on}>Research wiki</a>' if wiki_href else ""
+    extra_nav = f'\n    <a href="{html.escape(wiki_href)}"{on}>Research wiki</a>' if wiki_href else ""
+    on = ' class="on"' if active == "projects" else ""
+    extra_nav += f'\n    <a href="{up}projects.html"{on}>Open projects</a>'
     if footnote is None:
         footnote = """Wiki prose is generated from a private research vault. The underlying
   sources — paper PDFs and unpublished notes — are not published here."""
@@ -416,7 +418,7 @@ def shell(
 <header class="topbar">
   <a class="brand" href="{up}index.html">Csenge Hubay</a>
   <nav>
-    <a href="{up}index.html"{' class="on"' if active == "home" else ""}>Home</a>{wiki_nav}
+    <a href="{up}index.html"{' class="on"' if active == "home" else ""}>Home</a>{extra_nav}
   </nav>
 </header>
 <main id="main">
@@ -565,6 +567,115 @@ def render_public_home(cfg: dict, about_html: str) -> str:
     )
 
 
+TASK_SIZES = {
+    "small": "a few weeks — a course assignment or internship",
+    "medium": "about a semester — a BSc thesis or project course",
+    "large": "a year or more — an MSc thesis or TDK work",
+}
+
+
+def render_projects(cfg: dict, data: dict, *, wiki_href: str | None = None, extra_head: str = "") -> str:
+    """Open projects page, from content/projects.yml. Public: nothing here may
+    come from the vault."""
+    md = markdown.Markdown(extensions=["tables", "sane_lists", "attr_list"])
+
+    def mdc(text: str) -> str:
+        md.reset()
+        return md.convert(str(text or ""))
+
+    email = (data.get("contact") or cfg.get("email") or "").strip()
+    projects = data.get("projects") or []
+    n_tasks = sum(len(p.get("tasks") or []) for p in projects)
+
+    toc = "\n".join(
+        f'<li><a href="#{html.escape(p["id"])}">{html.escape(p["name"])}</a> '
+        f'<span class="cat-n">{len(p.get("tasks") or [])}</span></li>'
+        for p in projects
+    )
+
+    blocks = []
+    for p in projects:
+        cards = []
+        for t in p.get("tasks") or []:
+            size = str(t.get("size", "")).lower()
+            skills = [str(s) for s in t.get("skills") or []]
+            haystack = " ".join([p["name"], t["title"], plain_text(str(t.get("description", ""))), " ".join(skills), size])
+            subject = f"Open project: {p['name']} — {t['title']}"
+            ask = (
+                f'<a class="task-ask" href="mailto:{html.escape(email)}?subject={html.escape(subject, quote=True)}">Ask about this task →</a>'
+                if email
+                else ""
+            )
+            tags = " ".join(f'<span class="tag">{html.escape(s)}</span>' for s in skills)
+            cards.append(f"""<article class="card task" data-status="{html.escape(size)}"
+   data-search="{html.escape(haystack.lower(), quote=True)}">
+  <div class="card-head"><h3 class="card-title">{html.escape(t["title"])}</h3>{badge_for_size(size)}</div>
+  <div class="task-desc">{mdc(t.get("description"))}</div>
+  <p class="task-skills">{tags}</p>
+  {ask}
+</article>""")
+
+        links = " · ".join(
+            f'<a href="{html.escape(l["url"])}">{html.escape(l["label"])}</a>' for l in p.get("links") or []
+        )
+        status = str(p.get("status", "") or "")
+        blocks.append(f"""<section class="catblock project" id="{html.escape(p["id"])}">
+  <div class="project-head">
+    <h2>{html.escape(p["name"])}</h2>
+    {f'<span class="badge">{html.escape(status)}</span>' if status else ""}
+  </div>
+  <div class="prose project-sum">{mdc(p.get("summary"))}</div>
+  {f'<p class="project-links">{links}</p>' if links else ""}
+  <div class="cards tasks">
+{chr(10).join(cards)}
+  </div>
+</section>""")
+
+    sizes = "\n".join(
+        f'<li>{badge_for_size(s)} {html.escape(blurb)}</li>' for s, blurb in TASK_SIZES.items()
+    )
+    body = f"""<section class="prose pagehead">
+  <p class="crumb"><a href="index.html">Home</a> / Open projects</p>
+  <h1>{html.escape(data.get("title") or "Open projects")}</h1>
+  <div class="lede">{mdc(data.get("intro"))}</div>
+  <ul class="sizes">{sizes}</ul>
+  <ul class="toc">{toc}</ul>
+</section>
+
+<div class="browser" data-browser>
+  <div class="searchrow">
+    <input type="search" class="search" data-search-input
+           placeholder="Search {n_tasks} tasks — topics, skills…"
+           autocomplete="off" aria-label="Search open tasks">
+    <div class="filters" role="group" aria-label="Filter by size">
+      <button type="button" class="chip on" data-filter="all">All</button>
+      {"".join(f'<button type="button" class="chip" data-filter="{s}">{s}</button>' for s in TASK_SIZES)}
+    </div>
+  </div>
+  <p class="hits" data-hits aria-live="polite"></p>
+{"".join(blocks)}
+  <p class="noresults" data-noresults hidden>No task matches that.</p>
+</div>
+"""
+    name = cfg.get("name", "Csenge Hubay")
+    return shell(
+        title=f"Open projects — {name}",
+        description=f"Open research projects and student tasks with {name}: social robotics, ethorobotics, perception and 3D reconstruction.",
+        body=body,
+        depth=0,
+        active="projects",
+        extra_head=extra_head,
+        wiki_href=wiki_href,
+        footnote="Tasks are open unless marked otherwise. Get in touch before starting — scope is agreed per student.",
+    )
+
+
+def badge_for_size(size: str) -> str:
+    if not size:
+        return ""
+    return f'<span class="badge badge-{html.escape(size)}" title="{html.escape(TASK_SIZES.get(size, ""))}">{html.escape(size)}</span>'
+
+
 def render_home(cfg: dict, about_html: str, pages: list[Page]) -> str:
     """The homepage of the private site, with the WikiLLM panel."""
     name = cfg.get("name", "Csenge Hubay")
@@ -705,8 +816,14 @@ def main() -> int:
     cfg, about_md = split_frontmatter((SITE / "content" / "home.md").read_text(encoding="utf-8"))
     about_html = markdown.Markdown(extensions=["tables", "sane_lists", "attr_list"]).convert(about_md)
 
+    projects_file = SITE / "content" / "projects.yml"
+    projects = yaml.safe_load(projects_file.read_text(encoding="utf-8")) if projects_file.is_file() else None
+
     # Public site: rendered before the vault is even read.
     (SITE / "index.html").write_text(render_public_home(cfg, about_html), encoding="utf-8")
+    if projects:
+        wiki_url = (cfg.get("wiki_url") or "").strip()
+        (SITE / "projects.html").write_text(render_projects(cfg, projects, wiki_href=wiki_url), encoding="utf-8")
     if (SITE / "wiki").exists():
         print("  ! a wiki/ directory exists in the public repo — delete it, it must not be committed", file=sys.stderr)
 
@@ -726,6 +843,10 @@ def main() -> int:
         (out_wiki / f"{page.slug}.html").write_text(render_page(page, by_slug), encoding="utf-8")
     (out_wiki / "index.html").write_text(render_wiki_index(pages), encoding="utf-8")
     (PRIVATE_OUT / "index.html").write_text(render_home(cfg, about_html, pages), encoding="utf-8")
+    if projects:
+        (PRIVATE_OUT / "projects.html").write_text(
+            render_projects(cfg, projects, extra_head=PRIVATE_HEAD), encoding="utf-8"
+        )
     # Belt and braces: if the Access policy is ever switched off, keep crawlers out.
     (PRIVATE_OUT / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
 

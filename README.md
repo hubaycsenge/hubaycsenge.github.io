@@ -9,6 +9,11 @@ Personal site for Csenge Hubay. It is two sites built from one generator:
   research wiki — built into the gitignored `_private/` and served from
   Cloudflare Pages behind Cloudflare Access, so only invited people can read it.
 
+A public **Open projects** page (`projects.html`) lists work open to students and
+collaborators. It is generated from `content/projects.yml` — edit that file, not
+the HTML. Like the homepage it contains nothing from the vault, so keep
+unpublished results, participant data, collaborator names and host names out of it.
+
 ## Raw materials are not in this repository
 
 This is the constraint the build is designed around.
@@ -123,12 +128,14 @@ survives verbatim.
 
 ```
 index.html            generated public homepage (do not edit by hand)
+projects.html         generated public Open projects page
 _private/             generated restricted site — gitignored, deployed to Cloudflare
   index.html            homepage with the WikiLLM panel
   wiki/*.html           wiki pages
   wiki/search.json      full-text index
   wiki/pages.json       page manifest
 content/home.md       ← EDIT THIS: bio, tagline, contact links, wiki_url, research themes
+content/projects.yml  ← EDIT THIS: open projects and task descriptions
 assets/style.css      hand-written
 assets/site.js        hand-written
 build.py, build.sh    the generator
