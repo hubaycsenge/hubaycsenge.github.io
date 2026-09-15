@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Open projects — Csenge Hubay</title>
-<meta name="description" content="Open research projects and student tasks with Csenge Hubay: social robotics, ethorobotics, perception and 3D reconstruction.">
+<title>Student projects — Csenge Hubay</title>
+<meta name="description" content="Student project topics supervised by Csenge Hubay: task descriptions, background and requirements in social robotics, ethorobotics, perception and human experiments.">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
 
@@ -16,205 +16,234 @@
   <nav>
     <a href="index.html">Home</a>
     <a href="wikillm.html">WikiLLM</a>
-    <a href="projects.html" class="on">Open projects</a>
+    <a href="projects.html" class="on">Student projects</a>
   </nav>
 </header>
 <main id="main">
 <section class="prose pagehead">
-  <p class="crumb"><a href="index.html">Home</a> / Open projects</p>
-  <h1>Open projects</h1>
-  <div class="lede"><p>Projects around my PhD in <strong>ethorobotics</strong> — building robots whose behaviour draws on
-what we know about animals, especially dogs — that have well-defined pieces of work
-open for students and collaborators. Each task can be scoped up or down; the size
-label is a starting point, not a contract. If one looks interesting, write to me and
-we will agree on the scope together.</p></div>
-  <ul class="sizes"><li><span class="badge badge-small" title="a few weeks — a course assignment or internship">small</span> a few weeks — a course assignment or internship</li>
-<li><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span> about a semester — a BSc thesis or project course</li>
-<li><span class="badge badge-large" title="a year or more — an MSc thesis or TDK work">large</span> a year or more — an MSc thesis or TDK work</li></ul>
-  <ul class="toc"><li><a href="#mecanumbot">MecanumBot</a> <span class="cat-n">6</span></li>
-<li><a href="#biscee">Biscee — emotions expressed with crests</a> <span class="cat-n">4</span></li>
-<li><a href="#citizen-science">Citizen Science Portal</a> <span class="cat-n">3</span></li></ul>
+  <p class="crumb"><a href="index.html">Home</a> / Student projects</p>
+  <h1>Student projects</h1>
+  <div class="lede"><p>Topics I supervise for student project courses, all connected to my PhD in
+<strong>ethorobotics</strong> — building robots whose behaviour draws on what we know about animals,
+especially dogs. Each topic is a task specification: what the work is, why it matters,
+and what the finished system has to do. The scope can be adjusted to the course and
+the team; if a topic looks interesting, write to me before applying.</p></div>
+  <ul class="toc"><li><a href="#ai-lab">AI lab</a> <span class="cat-n">2</span></li>
+<li><a href="#ci">Computational Intelligence (CI)</a> <span class="cat-n">2</span></li>
+<li><a href="#ei">Embodied Intelligence (EI)</a> <span class="cat-n">2</span></li></ul>
 </section>
 
-<div class="browser" data-browser>
+<div class="browser" data-browser data-noun="topic">
   <div class="searchrow">
     <input type="search" class="search" data-search-input
-           placeholder="Search 13 tasks — topics, skills…"
-           autocomplete="off" aria-label="Search open tasks">
-    <div class="filters" role="group" aria-label="Filter by size">
+           placeholder="Search 6 topics — methods, skills…"
+           autocomplete="off" aria-label="Search student project topics">
+    <div class="filters" role="group" aria-label="Filter by course">
       <button type="button" class="chip on" data-filter="all">All</button>
-      <button type="button" class="chip" data-filter="small">small</button><button type="button" class="chip" data-filter="medium">medium</button><button type="button" class="chip" data-filter="large">large</button>
+      <button type="button" class="chip" data-filter="ai-lab">AI lab</button><button type="button" class="chip" data-filter="ci">CI</button><button type="button" class="chip" data-filter="ei">EI</button>
     </div>
   </div>
   <p class="hits" data-hits aria-live="polite"></p>
-<section class="catblock project" id="mecanumbot">
+<section class="catblock project" id="ai-lab">
   <div class="project-head">
-    <h2>MecanumBot</h2>
-    <span class="badge">active</span>
+    <h2>AI lab</h2>
   </div>
-  <div class="prose project-sum"><p>A small omnidirectional robot (mecanum wheels, Jetson Orin Nano, LiDAR and camera)
-used to study dog-inspired human–robot interaction. It detects people, can lead a
-person somewhere using gestures, lights or movement alone, reacts to pointing, plays
-fetch and searches for objects. The research question: does behaviour borrowed from
-dogs make a robot easier for people to understand? The software is ROS 2, with a
-2D simulator and a MuJoCo digital twin for work away from the robot.</p></div>
-  
-  <div class="cards tasks">
-<article class="card task" data-status="medium"
-   data-search="mecanumbot first real-world runs of the object-search behaviour the robot&#x27;s explore-then-search pipeline passes its tests but has not yet run on the physical robot. take it into a real room: tune navigation, check the camera mounting and height, find out what breaks, and turn the fixes into a repeatable launch procedure. ros 2 nav2 python field testing medium">
-  <div class="card-head"><h3 class="card-title">First real-world runs of the object-search behaviour</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
-  <div class="task-desc"><p>The robot's explore-then-search pipeline passes its tests but has not yet run on
-the physical robot. Take it into a real room: tune navigation, check the camera
-mounting and height, find out what breaks, and turn the fixes into a repeatable
-launch procedure.</p></div>
-  <p class="task-skills"><span class="tag">ROS 2</span> <span class="tag">Nav2</span> <span class="tag">Python</span> <span class="tag">field testing</span></p>
-  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: MecanumBot — First real-world runs of the object-search behaviour">Ask about this task →</a>
+  <div class="prose project-sum"><p>Research-oriented topics on MecanumBot, a small omnidirectional robot (mecanum
+wheels, Jetson Orin Nano, 2D LiDAR and camera) used to study dog-inspired
+human–robot interaction. Its software is ROS 2, with a top-down 2D simulator and a
+MuJoCo digital twin for work away from the robot.</p></div>
+  <div class="tasks">
+<article class="card task" data-status="ai-lab"
+   data-search="ai lab navigation strategies for deep3r-based object search python ros 2 nav2 behaviour trees search algorithms the robot has to find an object in a room it has seen before. in a first visit it explores the room while a gpu server builds a 3d reconstruction of it from the robot&#x27;s camera stream (the deep3r pipeline). later, in a second visit, it is given a target — named in words — and has to find it, even if the object has been moved in the meantime. this task is about how the robot moves during both visits: which exploration strategy produces a map good enough to search in, when to stop exploring, how to return to where the object was last seen, and how to search when it is not there any more. several strategies are implemented, run side by side in simulation and on the robot, and compared. object search is a classic problem in active perception, and animals are very good at it. a dog that sees a toy hidden and then taken away first goes to where it last saw the toy, and then searches around that spot — searching intensively near the last evidence and widening out as time passes, a pattern ethology calls area-restricted search . foraging theory adds a principled answer to when to give up on an area. robotic search, by contrast, usually relies on frontier-based exploration or on full coverage, which treat every unexplored cell alike. on the technological side, the robot&#x27;s 2d lidar sees only one horizontal plane, while the server-side 3d reconstruction sees tabletops, chair legs and the target object itself. the navigation strategy decides which views the reconstruction gets, so it directly affects the quality of the map, and through it whether the object can be found at all. localisation errors are also known to be mistaken for &quot;the object has moved&quot;, so a good strategy relocalises before it concludes that something is missing. the project is part of my phd work on a search behaviour modelled on the motivational (seeking) system of mammals. at least three navigation strategies implemented as interchangeable behaviour-tree subtrees on top of nav2 — for example a coverage/frontier baseline, go-to-last-seen-location, and area-restricted search spreading outward from the last-seen position. an explicit stopping rule for the exploration phase and an explicit giving-up rule for the search phase, both configurable by parameter. integration with the existing server link: the strategies consume the server&#x27;s map updates and found / not-found announcements, and switch between the exploration and search phases through the existing protocol. a relocalisation check before the robot treats the target as absent from its remembered location. a reproducible evaluation protocol in simulation (fixed rooms, object placements and random seeds) that logs, per run: time to find, path length, area covered, and whether the object was found or wrongly declared missing. a comparison of the strategies over repeated simulated runs, followed by a smaller set of runs on the real robot in the lab. documentation: launch instructions, parameter reference, and a short report of the comparison.">
+  <div class="card-head"><h3 class="card-title">Navigation strategies for Deep3R-based object search</h3></div>
+  <p class="task-skills"><span class="tag">Python</span> <span class="tag">ROS 2</span> <span class="tag">Nav2</span> <span class="tag">behaviour trees</span> <span class="tag">search algorithms</span></p>
+  <section class="task-sec"><h4>Description</h4><div class="task-desc"><p>The robot has to find an object in a room it has seen before. In a first visit it
+explores the room while a GPU server builds a 3D reconstruction of it from the
+robot's camera stream (the Deep3R pipeline). Later, in a second visit, it is given
+a target — named in words — and has to find it, even if the object has been moved
+in the meantime.</p>
+<p>This task is about <strong>how the robot moves</strong> during both visits: which exploration
+strategy produces a map good enough to search in, when to stop exploring, how to
+return to where the object was last seen, and how to search when it is not there
+any more. Several strategies are implemented, run side by side in simulation and on
+the robot, and compared.</p></div></section>
+  <section class="task-sec"><h4>Background — why we do it</h4><div class="task-desc"><p>Object search is a classic problem in active perception, and animals are very good
+at it. A dog that sees a toy hidden and then taken away first goes to where it last
+saw the toy, and then searches <em>around</em> that spot — searching intensively near the
+last evidence and widening out as time passes, a pattern ethology calls
+<em>area-restricted search</em>. Foraging theory adds a principled answer to <em>when to give
+up</em> on an area. Robotic search, by contrast, usually relies on frontier-based
+exploration or on full coverage, which treat every unexplored cell alike.</p>
+<p>On the technological side, the robot's 2D LiDAR sees only one horizontal plane,
+while the server-side 3D reconstruction sees tabletops, chair legs and the target
+object itself. The navigation strategy decides which views the reconstruction gets,
+so it directly affects the quality of the map, and through it whether the object can
+be found at all. Localisation errors are also known to be mistaken for "the object
+has moved", so a good strategy relocalises before it concludes that something is
+missing. The project is part of my PhD work on a search behaviour modelled on the
+motivational (SEEKING) system of mammals.</p></div></section>
+  <section class="task-sec"><h4>Requirements for the finished system</h4><ul class="task-reqs"><li>At least <strong>three navigation strategies</strong> implemented as interchangeable behaviour-tree subtrees on top of Nav2 — for example a coverage/frontier baseline, go-to-last-seen-location, and area-restricted search spreading outward from the last-seen position.</li><li>An <strong>explicit stopping rule</strong> for the exploration phase and an explicit <strong>giving-up rule</strong> for the search phase, both configurable by parameter.</li><li>Integration with the existing server link: the strategies consume the server's map updates and <code>found</code> / not-found announcements, and switch between the exploration and search phases through the existing protocol.</li><li>A <strong>relocalisation check</strong> before the robot treats the target as absent from its remembered location.</li><li>A reproducible <strong>evaluation protocol</strong> in simulation (fixed rooms, object placements and random seeds) that logs, per run: time to find, path length, area covered, and whether the object was found or wrongly declared missing.</li><li>A comparison of the strategies over repeated simulated runs, followed by a smaller set of runs on the real robot in the lab.</li><li>Documentation: launch instructions, parameter reference, and a short report of the comparison.</li></ul></section>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Student project: Navigation strategies for Deep3R-based object search (AI lab)">Ask about this topic →</a>
 </article>
-<article class="card task" data-status="medium"
-   data-search="mecanumbot full behaviour stack in the mujoco digital twin the robot has a physics-simulated twin, but the behaviour tree does not yet start together with the rest of the stack from one launch. integrate it, and improve the simulation where it matters most: wheel–ground contact and more realistic (articulated) simulated people. ros 2 mujoco launch files simulation medium">
-  <div class="card-head"><h3 class="card-title">Full behaviour stack in the MuJoCo digital twin</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
-  <div class="task-desc"><p>The robot has a physics-simulated twin, but the behaviour tree does not yet start
-together with the rest of the stack from one launch. Integrate it, and improve the
-simulation where it matters most: wheel–ground contact and more realistic
-(articulated) simulated people.</p></div>
-  <p class="task-skills"><span class="tag">ROS 2</span> <span class="tag">MuJoCo</span> <span class="tag">launch files</span> <span class="tag">simulation</span></p>
-  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: MecanumBot — Full behaviour stack in the MuJoCo digital twin">Ask about this task →</a>
-</article>
-<article class="card task" data-status="large"
-   data-search="mecanumbot learning the leading behaviour from data a top-down simulator already records sessions in which people are led by the robot. collect scripted baseline sessions, train a behaviour-cloning policy, then an offline reinforcement-learning policy, and compare them against the scripted behaviour. part of the work is refactoring the study code so that it scales. python reinforcement learning behaviour cloning pygame large">
-  <div class="card-head"><h3 class="card-title">Learning the leading behaviour from data</h3><span class="badge badge-large" title="a year or more — an MSc thesis or TDK work">large</span></div>
-  <div class="task-desc"><p>A top-down simulator already records sessions in which people are led by the
-robot. Collect scripted baseline sessions, train a behaviour-cloning policy, then
-an offline reinforcement-learning policy, and compare them against the scripted
-behaviour. Part of the work is refactoring the study code so that it scales.</p></div>
-  <p class="task-skills"><span class="tag">Python</span> <span class="tag">reinforcement learning</span> <span class="tag">behaviour cloning</span> <span class="tag">pygame</span></p>
-  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: MecanumBot — Learning the leading behaviour from data">Ask about this task →</a>
-</article>
-<article class="card task" data-status="medium"
-   data-search="mecanumbot a fear response for the robot dogs freeze, avoid, or seek attention when something startles them. a first version of this behaviour exists on paper and in a training environment. connect the environment to real lidar input, add the discrete response actions, and run it in simulation and then on the robot. reinforcement learning gym-style environments ros 2 medium">
-  <div class="card-head"><h3 class="card-title">A fear response for the robot</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
-  <div class="task-desc"><p>Dogs freeze, avoid, or seek attention when something startles them. A first
-version of this behaviour exists on paper and in a training environment. Connect
-the environment to real LiDAR input, add the discrete response actions, and run it
-in simulation and then on the robot.</p></div>
-  <p class="task-skills"><span class="tag">reinforcement learning</span> <span class="tag">Gym-style environments</span> <span class="tag">ROS 2</span></p>
-  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: MecanumBot — A fear response for the robot">Ask about this task →</a>
-</article>
-<article class="card task" data-status="small"
-   data-search="mecanumbot robust framing for the motor-controller serial link the link to the stepper controller sends raw fixed-size packets with no framing, so a single lost byte corrupts the stream until reconnect. design a small framed protocol (start marker, length, checksum) and implement it on both the firmware and the ros 2 side. embedded c arduino / opencr serial protocols small">
-  <div class="card-head"><h3 class="card-title">Robust framing for the motor-controller serial link</h3><span class="badge badge-small" title="a few weeks — a course assignment or internship">small</span></div>
-  <div class="task-desc"><p>The link to the stepper controller sends raw fixed-size packets with no framing,
-so a single lost byte corrupts the stream until reconnect. Design a small framed
-protocol (start marker, length, checksum) and implement it on both the firmware
-and the ROS 2 side.</p></div>
-  <p class="task-skills"><span class="tag">embedded C</span> <span class="tag">Arduino / OpenCR</span> <span class="tag">serial protocols</span></p>
-  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: MecanumBot — Robust framing for the motor-controller serial link">Ask about this task →</a>
-</article>
-<article class="card task" data-status="medium"
-   data-search="mecanumbot hearing the human — prosody as a social cue people address dogs with a particular tone of voice, and dogs use it to tell whether a gesture is meant for them. the robot already records audio, but nothing uses it. build a detector for this &quot;addressing&quot; speech prosody and feed it into the perception stack. audio signal processing python ros 2 medium">
-  <div class="card-head"><h3 class="card-title">Hearing the human — prosody as a social cue</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
-  <div class="task-desc"><p>People address dogs with a particular tone of voice, and dogs use it to tell
-whether a gesture is meant for them. The robot already records audio, but nothing
-uses it. Build a detector for this "addressing" speech prosody and feed it into
-the perception stack.</p></div>
-  <p class="task-skills"><span class="tag">audio signal processing</span> <span class="tag">Python</span> <span class="tag">ROS 2</span></p>
-  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: MecanumBot — Hearing the human — prosody as a social cue">Ask about this task →</a>
+<article class="card task" data-status="ai-lab"
+   data-search="ai lab a learned fear response for mecanumbot in human–robot interaction python reinforcement learning gym-style environments ros 2 behaviour trees dogs that are startled freeze, back away, or turn to their owner for reassurance — and they stay cautious for a while after the threat is gone. this task builds that behaviour into mecanumbot in an interaction scenario: the robot carries out a simple delivery task while a person moves around it, and a person coming too close or too fast raises an internal fear level that decays slowly afterwards. a reinforcement-learning agent learns when to freeze , avoid (retreat with nav2), catch the person&#x27;s attention , or carry on with the task . a first version of the fear dynamics, a training environment and draft behaviour-tree leaves exist; the work is to connect them to real lidar input, bring the learned policy into the robot&#x27;s behaviour tree, and test it in the mujoco digital twin and on the robot. in animals, fear is not a reflex that stops when the stimulus disappears: defensive states build up with threat and fade slowly, and the choice between freezing, fleeing and seeking social support depends on the situation and on learning. a robot with a comparable internal state behaves differently from one with a plain safety rule — a proximity-based slow-down returns to full speed the moment a person steps back, whereas a fear-modulated robot remains cautious. whether people read this residual caution as an emotion , and whether it makes the robot easier to predict, is an ethorobotics question. reinforcement learning is a natural fit because which defensive response pays off depends on the consequences — a retreat that costs the task, a freeze that prevents a collision — rather than on a hand-written rule. keeping the learned policy inside a behaviour tree keeps the robot&#x27;s behaviour inspectable and safe, which matters when it runs next to people in an experiment. a fear model driven by the robot&#x27;s real /scan data: risk from the minimum range and closing speed of people or obstacles, a spike on near-collision, and a slow, parameterised decay. a gym-style training environment with the discrete actions freeze , avoid , catch attention and task , and the fear level in the observation. a trained policy compared against a fixed hand-written heuristic on task completion, near-collisions and how long caution persists after the person leaves. a ros 2 behaviour-tree package in which the policy selects between the four responses, with avoid implemented as a nav2 retreat and freeze cancelling navigation. runs of the full stack in the mujoco digital twin , then on the real robot in the lab with a person present. every parameter of the fear dynamics and the reward documented, with its biological motivation — these are experimental design choices, reviewed with an ethologist before any study. unit tests for the fear dynamics and the reward, and launch instructions for simulation and robot.">
+  <div class="card-head"><h3 class="card-title">A learned fear response for MecanumBot in human–robot interaction</h3></div>
+  <p class="task-skills"><span class="tag">Python</span> <span class="tag">reinforcement learning</span> <span class="tag">Gym-style environments</span> <span class="tag">ROS 2</span> <span class="tag">behaviour trees</span></p>
+  <section class="task-sec"><h4>Description</h4><div class="task-desc"><p>Dogs that are startled freeze, back away, or turn to their owner for reassurance —
+and they stay cautious for a while after the threat is gone. This task builds that
+behaviour into MecanumBot in an interaction scenario: the robot carries out a simple
+delivery task while a person moves around it, and a person coming too close or too
+fast raises an internal <strong>fear level</strong> that decays slowly afterwards.</p>
+<p>A reinforcement-learning agent learns when to <strong>freeze</strong>, <strong>avoid</strong> (retreat with
+Nav2), <strong>catch the person's attention</strong>, or <strong>carry on with the task</strong>. A first
+version of the fear dynamics, a training environment and draft behaviour-tree
+leaves exist; the work is to connect them to real LiDAR input, bring the learned
+policy into the robot's behaviour tree, and test it in the MuJoCo digital twin and
+on the robot.</p></div></section>
+  <section class="task-sec"><h4>Background — why we do it</h4><div class="task-desc"><p>In animals, fear is not a reflex that stops when the stimulus disappears: defensive
+states build up with threat and fade slowly, and the choice between freezing,
+fleeing and seeking social support depends on the situation and on learning. A
+robot with a comparable internal state behaves differently from one with a plain
+safety rule — a proximity-based slow-down returns to full speed the moment a person
+steps back, whereas a fear-modulated robot remains cautious. Whether people read
+this residual caution as an <em>emotion</em>, and whether it makes the robot easier to
+predict, is an ethorobotics question.</p>
+<p>Reinforcement learning is a natural fit because <em>which</em> defensive response pays
+off depends on the consequences — a retreat that costs the task, a freeze that
+prevents a collision — rather than on a hand-written rule. Keeping the learned
+policy inside a behaviour tree keeps the robot's behaviour inspectable and safe,
+which matters when it runs next to people in an experiment.</p></div></section>
+  <section class="task-sec"><h4>Requirements for the finished system</h4><ul class="task-reqs"><li>A <strong>fear model</strong> driven by the robot's real <code>/scan</code> data: risk from the minimum range and closing speed of people or obstacles, a spike on near-collision, and a slow, parameterised decay.</li><li>A Gym-style <strong>training environment</strong> with the discrete actions <em>freeze</em>, <em>avoid</em>, <em>catch attention</em> and <em>task</em>, and the fear level in the observation.</li><li>A <strong>trained policy</strong> compared against a fixed hand-written heuristic on task completion, near-collisions and how long caution persists after the person leaves.</li><li>A ROS 2 <strong>behaviour-tree package</strong> in which the policy selects between the four responses, with <em>avoid</em> implemented as a Nav2 retreat and <em>freeze</em> cancelling navigation.</li><li>Runs of the full stack in the <strong>MuJoCo digital twin</strong>, then on the <strong>real robot</strong> in the lab with a person present.</li><li>Every parameter of the fear dynamics and the reward documented, with its biological motivation — these are experimental design choices, reviewed with an ethologist before any study.</li><li>Unit tests for the fear dynamics and the reward, and launch instructions for simulation and robot.</li></ul></section>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Student project: A learned fear response for MecanumBot in human–robot interaction (AI lab)">Ask about this topic →</a>
 </article>
   </div>
-</section><section class="catblock project" id="biscee">
+</section><section class="catblock project" id="ci">
   <div class="project-head">
-    <h2>Biscee — emotions expressed with crests</h2>
-    <span class="badge">active</span>
+    <h2>Computational Intelligence (CI)</h2>
   </div>
-  <div class="prose project-sum"><p>Biscee is a social robot with an expressive head and three pairs of movable crests,
-a little like a bird's feathers. Can people read emotions such as happiness, fear or
-anger from crest movements alone? If so, simple non-humanlike body parts are enough
-to carry emotional signals. Movement patterns for several emotions and intensities
-exist; the next step is turning them into a validated video study.</p></div>
-  
-  <div class="cards tasks">
-<article class="card task" data-status="small"
-   data-search="biscee — emotions expressed with crests make the crest emotions distinguishable some emotions currently end in very similar crest postures. redesign the movement patterns so each emotion has its own recognisable shape and timing, drawing on how birds and mammals use crests and ears to signal. python ros motion design small">
-  <div class="card-head"><h3 class="card-title">Make the crest emotions distinguishable</h3><span class="badge badge-small" title="a few weeks — a course assignment or internship">small</span></div>
-  <div class="task-desc"><p>Some emotions currently end in very similar crest postures. Redesign the movement
-patterns so each emotion has its own recognisable shape and timing, drawing on how
-birds and mammals use crests and ears to signal.</p></div>
-  <p class="task-skills"><span class="tag">Python</span> <span class="tag">ROS</span> <span class="tag">motion design</span></p>
-  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: Biscee — emotions expressed with crests — Make the crest emotions distinguishable">Ask about this task →</a>
+  <div class="prose project-sum"><p>Team projects for the Computational Intelligence course: a human experiment with a
+data-driven evaluation, and a computer-vision pipeline for the laboratory.</p></div>
+  <div class="tasks">
+<article class="card task" data-status="ci"
+   data-search="computational intelligence (ci) effects of visual distractors on motor performance (fitts&#x27; task) python pygame or web front end experimental design statistics machine learning an investigation of how distracting visual (led) signals degrade human motor performance. the project involves implementing a test application (pygame-based or web-based) with full interaction logging, designing the distracting effects and at least two test conditions with an appropriately disturbing signal, and running a human experiment. the results are evaluated with statistical analysis and with an ai/ml model trained on the collected data. fitts&#x27; law is one of the most robust quantitative laws of human movement: the time needed to point at a target grows with the logarithm of the ratio of distance to target width — the index of difficulty . because the relationship is so stable, fitts&#x27; task is the standard tool for measuring how interfaces, input devices or conditions change motor performance, summarised as throughput . visual attention research shows that sudden onsets, flicker and salient colours in the periphery capture attention even when they are irrelevant to the task. this matters for robots: a robot in a shared space often communicates with lights — status leds, signals meant to attract a person or show where to go. the same signal that makes a robot understandable may disrupt what a person is doing. measuring the cost of such signals on a well-understood motor task gives a quantitative basis for designing robot light signals that inform without disturbing. a fitts&#x27; task application (pygame or web) with configurable target distances and widths , covering a range of indices of difficulty. full interaction logging : timestamped pointer trajectory, target parameters, hits and misses, movement time, and the distractor state at every moment, saved in an analysis-ready format. a distractor module that drives the led signals (or a faithful on-screen substitute) synchronised with the task log, with parameters such as position, colour, flash frequency and onset timing. at least two distractor conditions plus a no-distractor control , with a written rationale for why each signal should be disturbing. an experimental design: within-subject conditions, counterbalanced order, practice trials, target number of participants, informed consent, and anonymised data. the experiment carried out with human participants. statistical analysis : fitts&#x27; law fits per condition, and a comparison of movement time, error rate and throughput between conditions with an appropriate repeated-measures or mixed-effects model. an ai/ml model on the collected data — for example predicting the condition from trajectory features, or predicting movement time — with a proper participant-wise train/test split. a reproducible repository and a short report of the method and results.">
+  <div class="card-head"><h3 class="card-title">Effects of visual distractors on motor performance (Fitts&#x27; task)</h3><span class="badge">3 students</span></div>
+  <p class="task-skills"><span class="tag">Python</span> <span class="tag">pygame or web front end</span> <span class="tag">experimental design</span> <span class="tag">statistics</span> <span class="tag">machine learning</span></p>
+  <section class="task-sec"><h4>Description</h4><div class="task-desc"><p>An investigation of how distracting visual (LED) signals degrade human motor
+performance. The project involves implementing a test application (pygame-based or
+web-based) with full interaction logging, designing the distracting effects and at
+least two test conditions with an appropriately disturbing signal, and running a
+human experiment. The results are evaluated with statistical analysis and with an
+AI/ML model trained on the collected data.</p></div></section>
+  <section class="task-sec"><h4>Background — why we do it</h4><div class="task-desc"><p><strong>Fitts' law</strong> is one of the most robust quantitative laws of human movement: the
+time needed to point at a target grows with the logarithm of the ratio of distance
+to target width — the <em>index of difficulty</em>. Because the relationship is so stable,
+Fitts' task is the standard tool for measuring how interfaces, input devices or
+conditions change motor performance, summarised as <em>throughput</em>.</p>
+<p>Visual attention research shows that sudden onsets, flicker and salient colours in
+the periphery capture attention even when they are irrelevant to the task. This
+matters for robots: a robot in a shared space often communicates with lights —
+status LEDs, signals meant to attract a person or show where to go. The same signal
+that makes a robot understandable may disrupt what a person is doing. Measuring the
+cost of such signals on a well-understood motor task gives a quantitative basis for
+designing robot light signals that inform without disturbing.</p></div></section>
+  <section class="task-sec"><h4>Requirements for the finished system</h4><ul class="task-reqs"><li>A Fitts' task application (pygame or web) with <strong>configurable target distances and widths</strong>, covering a range of indices of difficulty.</li><li><strong>Full interaction logging</strong>: timestamped pointer trajectory, target parameters, hits and misses, movement time, and the distractor state at every moment, saved in an analysis-ready format.</li><li>A <strong>distractor module</strong> that drives the LED signals (or a faithful on-screen substitute) synchronised with the task log, with parameters such as position, colour, flash frequency and onset timing.</li><li><strong>At least two distractor conditions plus a no-distractor control</strong>, with a written rationale for why each signal should be disturbing.</li><li>An experimental design: within-subject conditions, counterbalanced order, practice trials, target number of participants, informed consent, and anonymised data.</li><li>The <strong>experiment carried out</strong> with human participants.</li><li><strong>Statistical analysis</strong>: Fitts' law fits per condition, and a comparison of movement time, error rate and throughput between conditions with an appropriate repeated-measures or mixed-effects model.</li><li>An <strong>AI/ML model</strong> on the collected data — for example predicting the condition from trajectory features, or predicting movement time — with a proper participant-wise train/test split.</li><li>A reproducible repository and a short report of the method and results.</li></ul></section>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Student project: Effects of visual distractors on motor performance (Fitts&#x27; task) (Computational Intelligence (CI))">Ask about this topic →</a>
 </article>
-<article class="card task" data-status="medium"
-   data-search="biscee — emotions expressed with crests intensity levels and a control condition decide how emotional intensity should show in the movement — larger, faster, or by recruiting more crests — and design a control display (for example, the same movements with the order scrambled) so the study can show that viewers read the emotion, not just the motion. experimental design motion design python medium">
-  <div class="card-head"><h3 class="card-title">Intensity levels and a control condition</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
-  <div class="task-desc"><p>Decide how emotional intensity should show in the movement — larger, faster, or by
-recruiting more crests — and design a control display (for example, the same
-movements with the order scrambled) so the study can show that viewers read the
-emotion, not just the motion.</p></div>
-  <p class="task-skills"><span class="tag">experimental design</span> <span class="tag">motion design</span> <span class="tag">Python</span></p>
-  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: Biscee — emotions expressed with crests — Intensity levels and a control condition">Ask about this task →</a>
-</article>
-<article class="card task" data-status="medium"
-   data-search="biscee — emotions expressed with crests stimulus videos and online questionnaire film the robot performing each movement pattern under consistent conditions, and build the questionnaire versions and presentation orders for an online emotion-recognition study. video production survey design medium">
-  <div class="card-head"><h3 class="card-title">Stimulus videos and online questionnaire</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
-  <div class="task-desc"><p>Film the robot performing each movement pattern under consistent conditions, and
-build the questionnaire versions and presentation orders for an online
-emotion-recognition study.</p></div>
-  <p class="task-skills"><span class="tag">video production</span> <span class="tag">survey design</span></p>
-  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: Biscee — emotions expressed with crests — Stimulus videos and online questionnaire">Ask about this task →</a>
-</article>
-<article class="card task" data-status="medium"
-   data-search="biscee — emotions expressed with crests analysis plan and power analysis write the analysis plan before any data exists: the statistical models, a power analysis for the sample size, and a coding scheme for free-text answers. statistics r study preregistration medium">
-  <div class="card-head"><h3 class="card-title">Analysis plan and power analysis</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
-  <div class="task-desc"><p>Write the analysis plan before any data exists: the statistical models, a power
-analysis for the sample size, and a coding scheme for free-text answers.</p></div>
-  <p class="task-skills"><span class="tag">statistics</span> <span class="tag">R</span> <span class="tag">study preregistration</span></p>
-  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: Biscee — emotions expressed with crests — Analysis plan and power analysis">Ask about this task →</a>
+<article class="card task" data-status="ci"
+   data-search="computational intelligence (ci) 2d ground-plane projection from the laboratory camera system python opencv camera calibration projective geometry creation of a common top-down (2d) view of a laboratory room from the images of the fixed camera system installed there. the project involves calibrating the cameras, computing the image-to-ground-plane homography for each camera, and fusing the individual views into a single, metrically consistent 2d map of the laboratory floor. the resulting projection can be used to localise and track objects and beings — people, dogs, robots — moving in the lab. behavioural experiments with people, dogs and robots are recorded on video and then coded by hand: who was where, how close, moving in which direction. a top-down, metric view of the floor turns those recordings into positions in centimetres, which makes automatic tracking, distance measurements and trajectory analysis possible, and gives a ground truth for the robot&#x27;s own localisation. technologically, every point on a flat floor is related to its image in a camera by a homography , a 3×3 projective transformation. estimating it needs the camera&#x27;s intrinsic parameters and lens distortion (from a checkerboard or charuco calibration) and a set of floor points with known positions. once each camera is mapped to the same floor coordinate system, the views can be stitched into one map. the homography is exact only for points on the floor, which is why tracking uses the foot point of a person or animal and why the achievable accuracy has to be measured rather than assumed. a documented, reproducible calibration procedure : intrinsic and distortion calibration for every camera, and floor markers placed at measured positions in a common lab coordinate system. an image-to-ground-plane homography for each camera, stored in a configuration file together with its calibration data. a fused top-down map of the lab floor at a fixed metric resolution (for example 1 px = 1 cm), handling overlapping fields of view. measured accuracy : projection error in centimetres at check points that were not used for calibration, reported for each camera and in the overlaps. a projection pipeline running on the live camera streams at a usable frame rate, not only on stored images. a function or small api that converts an image point from any camera into floor coordinates, as the interface for later tracking work. minimum expected outcome: a working, reproducible calibration procedure and a projection pipeline running on the live camera streams.">
+  <div class="card-head"><h3 class="card-title">2D ground-plane projection from the laboratory camera system</h3><span class="badge">3 students</span></div>
+  <p class="task-skills"><span class="tag">Python</span> <span class="tag">OpenCV</span> <span class="tag">camera calibration</span> <span class="tag">projective geometry</span></p>
+  <section class="task-sec"><h4>Description</h4><div class="task-desc"><p>Creation of a common top-down (2D) view of a laboratory room from the images of the
+fixed camera system installed there. The project involves calibrating the cameras,
+computing the image-to-ground-plane homography for each camera, and fusing the
+individual views into a single, metrically consistent 2D map of the laboratory
+floor. The resulting projection can be used to localise and track objects and
+beings — people, dogs, robots — moving in the lab.</p></div></section>
+  <section class="task-sec"><h4>Background — why we do it</h4><div class="task-desc"><p>Behavioural experiments with people, dogs and robots are recorded on video and then
+coded by hand: who was where, how close, moving in which direction. A top-down,
+metric view of the floor turns those recordings into positions in centimetres, which
+makes automatic tracking, distance measurements and trajectory analysis possible,
+and gives a ground truth for the robot's own localisation.</p>
+<p>Technologically, every point on a flat floor is related to its image in a camera by
+a <strong>homography</strong>, a 3×3 projective transformation. Estimating it needs the camera's
+intrinsic parameters and lens distortion (from a checkerboard or ChArUco
+calibration) and a set of floor points with known positions. Once each camera is
+mapped to the same floor coordinate system, the views can be stitched into one map.
+The homography is exact only for points <em>on</em> the floor, which is why tracking uses
+the foot point of a person or animal and why the achievable accuracy has to be
+measured rather than assumed.</p></div></section>
+  <section class="task-sec"><h4>Requirements for the finished system</h4><ul class="task-reqs"><li>A <strong>documented, reproducible calibration procedure</strong>: intrinsic and distortion calibration for every camera, and floor markers placed at measured positions in a common lab coordinate system.</li><li>An <strong>image-to-ground-plane homography</strong> for each camera, stored in a configuration file together with its calibration data.</li><li>A <strong>fused top-down map</strong> of the lab floor at a fixed metric resolution (for example 1 px = 1 cm), handling overlapping fields of view.</li><li><strong>Measured accuracy</strong>: projection error in centimetres at check points that were not used for calibration, reported for each camera and in the overlaps.</li><li>A <strong>projection pipeline running on the live camera streams</strong> at a usable frame rate, not only on stored images.</li><li>A function or small API that converts an image point from any camera into floor coordinates, as the interface for later tracking work.</li><li>Minimum expected outcome: a working, reproducible calibration procedure and a projection pipeline running on the live camera streams.</li></ul></section>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Student project: 2D ground-plane projection from the laboratory camera system (Computational Intelligence (CI))">Ask about this topic →</a>
 </article>
   </div>
-</section><section class="catblock project" id="citizen-science">
+</section><section class="catblock project" id="ei">
   <div class="project-head">
-    <h2>Citizen Science Portal</h2>
-    <span class="badge">working prototype</span>
+    <h2>Embodied Intelligence (EI)</h2>
   </div>
-  <div class="prose project-sum"><p>A web portal where researchers publish short questionnaire studies and members of
-the public take part — a way to reach far more participants than lab studies can.
-Researchers can draft, publish and export studies; the interface is available in
-English, Hungarian and German. It currently runs on a single machine.</p></div>
-  
-  <div class="cards tasks">
-<article class="card task" data-status="medium"
-   data-search="citizen science portal make it ready for the public internet harden the deployment: secrets management, https behind a reverse proxy, database authentication, and a proper consent and data-protection notice for participants. node.js mongodb devops https / reverse proxy medium">
-  <div class="card-head"><h3 class="card-title">Make it ready for the public internet</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
-  <div class="task-desc"><p>Harden the deployment: secrets management, HTTPS behind a reverse proxy, database
-authentication, and a proper consent and data-protection notice for participants.</p></div>
-  <p class="task-skills"><span class="tag">Node.js</span> <span class="tag">MongoDB</span> <span class="tag">DevOps</span> <span class="tag">HTTPS / reverse proxy</span></p>
-  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: Citizen Science Portal — Make it ready for the public internet">Ask about this task →</a>
+  <div class="prose project-sum"><p>Team projects for the Embodied Intelligence course, on real robots: navigation for
+MecanumBot, and trust in a robotic arm.</p></div>
+  <div class="tasks">
+<article class="card task" data-status="ei"
+   data-search="embodied intelligence (ei) custom-criteria path planning for mecanumbot (nav2) python ros 2 nav2 c++ web front end route planning and navigation for a mecanum-wheeled robot according to selectable criteria — for example shortest path, smoothest trajectory, distance kept from obstacles, or energy- or time-optimal routes. the project involves understanding the ros 2 nav2 navigation stack, implementing the criteria as a custom nav2 path planner plugin, and testing it first in simulation and then on the real robot. as a final step, a simple web interface is developed on which the planning criteria can be selected and switched, and the resulting routes compared. standard planners optimise one thing — usually path length on a costmap — but &quot;the best route&quot; depends on the situation. near people a robot should keep its distance; with a heavy load it should avoid sharp turns; on battery it should save energy. for the social robots in our experiments, the shape of a route is part of the behaviour people observe and interpret, so being able to choose and compare route criteria is useful beyond efficiency. a mecanum-wheeled robot is holonomic : it can drive sideways and diagonally without turning. this widens the set of possible paths, but the motions are not equally cheap — sideways and diagonal driving typically loses more energy to roller slip than driving forward — so time and energy criteria differ from path length in ways a differential-drive planner never has to consider. nav2 exposes global planning through a plugin interface, so new criteria can be added without changing the rest of the navigation stack. a custom nav2 global planner plugin (nav2&#x27;s planner plugin interface is c++; the cost criteria can be prototyped in python first) that plans on the robot&#x27;s costmap and supports at least four criteria : shortest, smoothest, maximum clearance, and energy- or time-optimal using a motion-cost model of the mecanum base. criteria that can be selected and switched at runtime , through parameters, without restarting the navigation stack. a metric report for every planned route : length, total curvature or number of turns, minimum obstacle clearance, estimated time and energy, and planning time. tests in simulation on fixed maps and goal sets, then runs on the real robot in the lab, with the planned and the driven paths recorded. a web interface that shows the map, lets the user choose a criterion and send a goal, and overlays the routes of different criteria with their metrics for comparison. launch files, a parameter reference and a short evaluation report.">
+  <div class="card-head"><h3 class="card-title">Custom-criteria path planning for MecanumBot (Nav2)</h3><span class="badge">3 students</span></div>
+  <p class="task-skills"><span class="tag">Python</span> <span class="tag">ROS 2</span> <span class="tag">Nav2</span> <span class="tag">C++</span> <span class="tag">web front end</span></p>
+  <section class="task-sec"><h4>Description</h4><div class="task-desc"><p>Route planning and navigation for a mecanum-wheeled robot according to selectable
+criteria — for example shortest path, smoothest trajectory, distance kept from
+obstacles, or energy- or time-optimal routes. The project involves understanding the
+ROS 2 Nav2 navigation stack, implementing the criteria as a custom Nav2 path planner
+plugin, and testing it first in simulation and then on the real robot. As a final
+step, a simple web interface is developed on which the planning criteria can be
+selected and switched, and the resulting routes compared.</p></div></section>
+  <section class="task-sec"><h4>Background — why we do it</h4><div class="task-desc"><p>Standard planners optimise one thing — usually path length on a costmap — but "the
+best route" depends on the situation. Near people a robot should keep its distance;
+with a heavy load it should avoid sharp turns; on battery it should save energy.
+For the social robots in our experiments, the <em>shape</em> of a route is part of the
+behaviour people observe and interpret, so being able to choose and compare route
+criteria is useful beyond efficiency.</p>
+<p>A mecanum-wheeled robot is <strong>holonomic</strong>: it can drive sideways and diagonally
+without turning. This widens the set of possible paths, but the motions are not
+equally cheap — sideways and diagonal driving typically loses more energy to roller
+slip than driving forward — so time and energy criteria differ from path length in
+ways a differential-drive planner never has to consider. Nav2 exposes
+global planning through a plugin interface, so new criteria can be added without
+changing the rest of the navigation stack.</p></div></section>
+  <section class="task-sec"><h4>Requirements for the finished system</h4><ul class="task-reqs"><li>A <strong>custom Nav2 global planner plugin</strong> (Nav2's planner plugin interface is C++; the cost criteria can be prototyped in Python first) that plans on the robot's costmap and supports at least <strong>four criteria</strong>: shortest, smoothest, maximum clearance, and energy- or time-optimal using a motion-cost model of the mecanum base.</li><li>Criteria that can be <strong>selected and switched at runtime</strong>, through parameters, without restarting the navigation stack.</li><li>A <strong>metric report for every planned route</strong>: length, total curvature or number of turns, minimum obstacle clearance, estimated time and energy, and planning time.</li><li>Tests in <strong>simulation</strong> on fixed maps and goal sets, then runs on the <strong>real robot</strong> in the lab, with the planned and the driven paths recorded.</li><li>A <strong>web interface</strong> that shows the map, lets the user choose a criterion and send a goal, and overlays the routes of different criteria with their metrics for comparison.</li><li>Launch files, a parameter reference and a short evaluation report.</li></ul></section>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Student project: Custom-criteria path planning for MecanumBot (Nav2) (Embodied Intelligence (EI))">Ask about this topic →</a>
 </article>
-<article class="card task" data-status="small"
-   data-search="citizen science portal shared rate limiting request limits are currently counted in memory per process. move them to redis so they hold across restarts and multiple server processes. node.js express redis small">
-  <div class="card-head"><h3 class="card-title">Shared rate limiting</h3><span class="badge badge-small" title="a few weeks — a course assignment or internship">small</span></div>
-  <div class="task-desc"><p>Request limits are currently counted in memory per process. Move them to Redis so
-they hold across restarts and multiple server processes.</p></div>
-  <p class="task-skills"><span class="tag">Node.js</span> <span class="tag">Express</span> <span class="tag">Redis</span></p>
-  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: Citizen Science Portal — Shared rate limiting">Ask about this task →</a>
-</article>
-<article class="card task" data-status="medium"
-   data-search="citizen science portal video-rating questions studies can ask single-choice, multiple-choice and free-text questions. add a question type that shows a video and collects ratings, so robot-behaviour studies such as the biscee crest study can run on the portal. javascript front end back end medium">
-  <div class="card-head"><h3 class="card-title">Video-rating questions</h3><span class="badge badge-medium" title="about a semester — a BSc thesis or project course">medium</span></div>
-  <div class="task-desc"><p>Studies can ask single-choice, multiple-choice and free-text questions. Add a
-question type that shows a video and collects ratings, so robot-behaviour studies
-such as the Biscee crest study can run on the portal.</p></div>
-  <p class="task-skills"><span class="tag">JavaScript</span> <span class="tag">front end</span> <span class="tag">back end</span></p>
-  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Open project: Citizen Science Portal — Video-rating questions">Ask about this task →</a>
+<article class="card task" data-status="ei"
+   data-search="embodied intelligence (ei) should i ask or should i go? trust in a robotic arm interest in psychology computer vision robot programming python experimental testing of people&#x27;s trust in a robotic arm in different scenarios: correct behaviour without asking for information, mistakes without asking for information, and asking for information to different extents. the project covers the complete research cycle — reviewing psychological questionnaires, designing the experiment, programming the robot, and running the experiments. the work is supported from the psychological side by two cognitive science students, and the topic is co-supervised. people rely on robots only as much as they trust them, and appropriate trust — not simply more trust — is what makes collaboration safe: over-trust leads people to follow a faulty robot, under-trust leads them to ignore a reliable one. research on trust in automation and in human–robot interaction shows that robot errors reduce trust, and that the robot&#x27;s performance is among the strongest factors shaping it. a robot can also avoid errors by asking — confirming which object is meant, or whether a step is correct. asking may make the robot appear careful and trustworthy, or incompetent and tiresome, and the balance probably depends on how often it asks. dogs face the same dilemma with their owners: they look back at the human when a situation is uncertain. measuring how the amount of inquiry trades off against mistakes tells designers when a robot should ask and when it should just go. a literature review of trust in human–robot interaction and of validated questionnaires for measuring it, ending with the chosen measures. an experimental design with at least the three scenario types — correct behaviour without inquiry, mistakes without inquiry, and inquiry at two or more different frequencies — including the task, the hypotheses, the participant allocation, and informed consent. a robotic arm program for the experimental task that performs the task correctly, commits scripted mistakes at controlled moments, and asks for information in the inquiry conditions, all triggered identically across participants. computer vision for the task — for example detecting and localising the objects the arm handles — robust enough that unplanned errors do not contaminate the conditions. logging of the robot&#x27;s actions, its questions, the participant&#x27;s answers and timing, synchronised with the questionnaire data. the experiment carried out with participants, followed by a statistical comparison of trust between scenarios and a short report written together with the cognitive science students.">
+  <div class="card-head"><h3 class="card-title">Should I ask or should I go? Trust in a robotic arm</h3><span class="badge">3 students</span></div>
+  <p class="task-skills"><span class="tag">interest in psychology</span> <span class="tag">computer vision</span> <span class="tag">robot programming</span> <span class="tag">Python</span></p>
+  <section class="task-sec"><h4>Description</h4><div class="task-desc"><p>Experimental testing of people's trust in a robotic arm in different scenarios:
+correct behaviour without asking for information, mistakes without asking for
+information, and asking for information to different extents. The project covers
+the complete research cycle — reviewing psychological questionnaires, designing the
+experiment, programming the robot, and running the experiments. The work is
+supported from the psychological side by two cognitive science students, and the
+topic is co-supervised.</p></div></section>
+  <section class="task-sec"><h4>Background — why we do it</h4><div class="task-desc"><p>People rely on robots only as much as they trust them, and appropriate trust — not
+simply more trust — is what makes collaboration safe: over-trust leads people to
+follow a faulty robot, under-trust leads them to ignore a reliable one. Research on
+trust in automation and in human–robot interaction shows that robot errors reduce
+trust, and that the robot's performance is among the strongest factors shaping it.</p>
+<p>A robot can also avoid errors by <strong>asking</strong> — confirming which object is meant, or
+whether a step is correct. Asking may make the robot appear careful and
+trustworthy, or incompetent and tiresome, and the balance probably depends on how
+often it asks. Dogs face the same dilemma with their owners: they look back at the
+human when a situation is uncertain. Measuring how the amount of inquiry trades off
+against mistakes tells designers when a robot should ask and when it should just go.</p></div></section>
+  <section class="task-sec"><h4>Requirements for the finished system</h4><ul class="task-reqs"><li>A <strong>literature review</strong> of trust in human–robot interaction and of validated questionnaires for measuring it, ending with the chosen measures.</li><li>An <strong>experimental design</strong> with at least the three scenario types — correct behaviour without inquiry, mistakes without inquiry, and inquiry at two or more different frequencies — including the task, the hypotheses, the participant allocation, and informed consent.</li><li>A <strong>robotic arm program</strong> for the experimental task that performs the task correctly, commits <strong>scripted mistakes</strong> at controlled moments, and asks for information in the inquiry conditions, all triggered identically across participants.</li><li><strong>Computer vision</strong> for the task — for example detecting and localising the objects the arm handles — robust enough that unplanned errors do not contaminate the conditions.</li><li><strong>Logging</strong> of the robot's actions, its questions, the participant's answers and timing, synchronised with the questionnaire data.</li><li>The <strong>experiment carried out</strong> with participants, followed by a statistical comparison of trust between scenarios and a short report written together with the cognitive science students.</li></ul></section>
+  <a class="task-ask" href="mailto:csengehubay@inf.elte.hu?subject=Student project: Should I ask or should I go? Trust in a robotic arm (Embodied Intelligence (EI))">Ask about this topic →</a>
 </article>
   </div>
 </section>
-  <p class="noresults" data-noresults hidden>No task matches that.</p>
+  <p class="noresults" data-noresults hidden>No topic matches that.</p>
 </div>
 
 </main>
 <footer class="foot">
   <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
-  <p class="fine">Tasks are open unless marked otherwise. Get in touch before starting — scope is agreed per student.</p>
+  <p class="fine">Get in touch before applying — the scope of each topic is agreed with the team.</p>
 </footer>
 <script src="assets/site.js" defer></script>
 </body>

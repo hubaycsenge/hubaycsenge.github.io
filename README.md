@@ -14,9 +14,10 @@ page with a *Sign in with GitHub* button (to `wiki_url`, where the sign-in turns
 away anyone not on the reader list) and a
 request-access email. Until `wiki_url` is set, the button shows as disabled.
 
-A public **Open projects** page (`projects.html`) lists work open to students and
-collaborators. It is generated from `content/projects.yml` — edit that file, not
-the HTML. Like the homepage it contains nothing from the vault, so keep
+A public **Student projects** page (`projects.html`) lists the topics offered to
+students, grouped by course (AI lab, CI, EI). Each topic is a task specification:
+description, background (why), and requirements for the finished system. It is
+generated from `content/projects.yml` — edit that file, not the HTML. Like the homepage it contains nothing from the vault, so keep
 unpublished results, participant data, collaborator names and host names out of it.
 
 ## Raw materials are not in this repository
@@ -150,7 +151,7 @@ survives verbatim.
 
 ```
 index.html            generated public homepage (do not edit by hand)
-projects.html         generated public Open projects page
+projects.html         generated public Student projects page
 wikillm.html          generated public WikiLLM sign-in / restricted page
 _private/             generated restricted site — gitignored, deployed to Cloudflare
   index.html            homepage with the WikiLLM panel
@@ -158,7 +159,7 @@ _private/             generated restricted site — gitignored, deployed to Clou
   wiki/search.json      full-text index
   wiki/pages.json       page manifest
 content/home.md       ← EDIT THIS: bio, tagline, contact links, wiki_url, research themes
-content/projects.yml  ← EDIT THIS: open projects and task descriptions
+content/projects.yml  ← EDIT THIS: student project topics, grouped by course
 assets/style.css      hand-written
 assets/site.js        hand-written
 build.py, build.sh    the generator

@@ -401,7 +401,7 @@ def shell(
     on = ' class="on"' if active == "wiki" else ""
     extra_nav = f'\n    <a href="{html.escape(wiki_href)}"{on}>WikiLLM</a>' if wiki_href else ""
     on = ' class="on"' if active == "projects" else ""
-    extra_nav += f'\n    <a href="{up}projects.html"{on}>Open projects</a>'
+    extra_nav += f'\n    <a href="{up}projects.html"{on}>Student projects</a>'
     if footnote is None:
         footnote = """Wiki prose is generated from a private research vault. The underlying
   sources — paper PDFs and unpublished notes — are not published here."""
@@ -598,7 +598,7 @@ def render_wiki_gate(cfg: dict) -> str:
   </div>
   {request}
   <p class="gate-back"><a href="index.html">← Back to the homepage</a> ·
-  <a href="projects.html">Open projects</a></p>
+  <a href="projects.html">Student projects</a></p>
 </section>
 """
     return shell(
@@ -612,15 +612,8 @@ def render_wiki_gate(cfg: dict) -> str:
     )
 
 
-TASK_SIZES = {
-    "small": "a few weeks — a course assignment or internship",
-    "medium": "about a semester — a BSc thesis or project course",
-    "large": "a year or more — an MSc thesis or TDK work",
-}
-
-
 def render_projects(cfg: dict, data: dict, *, wiki_href: str | None = None, extra_head: str = "") -> str:
-    """Open projects page, from content/projects.yml. Public: nothing here may
+    """Student projects page, from content/projects.yml. Public: nothing here may
     come from the vault."""
     md = markdown.Markdown(extensions=["tables", "sane_lists", "attr_list"])
 
@@ -628,97 +621,108 @@ def render_projects(cfg: dict, data: dict, *, wiki_href: str | None = None, extr
         md.reset()
         return md.convert(str(text or ""))
 
+    def mdi(text: str) -> str:
+        """Inline markdown, for list items: no wrapping <p>."""
+        out = mdc(text).strip()
+        return out[3:-4] if out.startswith("<p>") and out.endswith("</p>") and out.count("<p>") == 1 else out
+
     email = (data.get("contact") or cfg.get("email") or "").strip()
-    projects = data.get("projects") or []
-    n_tasks = sum(len(p.get("tasks") or []) for p in projects)
+    courses = data.get("courses") or []
+    n_tasks = sum(len(c.get("tasks") or []) for c in courses)
 
     toc = "\n".join(
-        f'<li><a href="#{html.escape(p["id"])}">{html.escape(p["name"])}</a> '
-        f'<span class="cat-n">{len(p.get("tasks") or [])}</span></li>'
-        for p in projects
+        f'<li><a href="#{html.escape(c["id"])}">{html.escape(c["name"])}</a> '
+        f'<span class="cat-n">{len(c.get("tasks") or [])}</span></li>'
+        for c in courses
     )
 
     blocks = []
-    for p in projects:
+    for c in courses:
         cards = []
-        for t in p.get("tasks") or []:
-            size = str(t.get("size", "")).lower()
+        for t in c.get("tasks") or []:
             skills = [str(s) for s in t.get("skills") or []]
-            haystack = " ".join([p["name"], t["title"], plain_text(str(t.get("description", ""))), " ".join(skills), size])
-            subject = f"Open project: {p['name']} — {t['title']}"
+            reqs = [str(r) for r in t.get("requirements") or []]
+            students = t.get("students")
+            haystack = " ".join(
+                [c["name"], t["title"], " ".join(skills)]
+                + [plain_text(str(t.get(k, ""))) for k in ("description", "background")]
+                + [plain_text(r) for r in reqs]
+            )
+            subject = f"Student project: {t['title']} ({c['name']})"
             ask = (
-                f'<a class="task-ask" href="mailto:{html.escape(email)}?subject={html.escape(subject, quote=True)}">Ask about this task →</a>'
+                f'<a class="task-ask" href="mailto:{html.escape(email)}?subject={html.escape(subject, quote=True)}">Ask about this topic →</a>'
                 if email
                 else ""
             )
+            facts = []
+            if students:
+                n = int(students)
+                facts.append(f'<span class="badge">{n} student{"s" if n != 1 else ""}</span>')
             tags = " ".join(f'<span class="tag">{html.escape(s)}</span>' for s in skills)
-            cards.append(f"""<article class="card task" data-status="{html.escape(size)}"
+            background = (
+                f'<section class="task-sec"><h4>Background — why we do it</h4><div class="task-desc">{mdc(t.get("background"))}</div></section>'
+                if t.get("background")
+                else ""
+            )
+            requirements = (
+                '<section class="task-sec"><h4>Requirements for the finished system</h4>'
+                f'<ul class="task-reqs">{"".join(f"<li>{mdi(r)}</li>" for r in reqs)}</ul></section>'
+                if reqs
+                else ""
+            )
+            cards.append(f"""<article class="card task" data-status="{html.escape(c["id"])}"
    data-search="{html.escape(haystack.lower(), quote=True)}">
-  <div class="card-head"><h3 class="card-title">{html.escape(t["title"])}</h3>{badge_for_size(size)}</div>
-  <div class="task-desc">{mdc(t.get("description"))}</div>
-  <p class="task-skills">{tags}</p>
+  <div class="card-head"><h3 class="card-title">{html.escape(t["title"])}</h3>{"".join(facts)}</div>
+  {f'<p class="task-skills">{tags}</p>' if tags else ""}
+  <section class="task-sec"><h4>Description</h4><div class="task-desc">{mdc(t.get("description"))}</div></section>
+  {background}
+  {requirements}
   {ask}
 </article>""")
 
-        links = " · ".join(
-            f'<a href="{html.escape(l["url"])}">{html.escape(l["label"])}</a>' for l in p.get("links") or []
-        )
-        status = str(p.get("status", "") or "")
-        blocks.append(f"""<section class="catblock project" id="{html.escape(p["id"])}">
+        blocks.append(f"""<section class="catblock project" id="{html.escape(c["id"])}">
   <div class="project-head">
-    <h2>{html.escape(p["name"])}</h2>
-    {f'<span class="badge">{html.escape(status)}</span>' if status else ""}
+    <h2>{html.escape(c["name"])}</h2>
   </div>
-  <div class="prose project-sum">{mdc(p.get("summary"))}</div>
-  {f'<p class="project-links">{links}</p>' if links else ""}
-  <div class="cards tasks">
+  <div class="prose project-sum">{mdc(c.get("summary"))}</div>
+  <div class="tasks">
 {chr(10).join(cards)}
   </div>
 </section>""")
 
-    sizes = "\n".join(
-        f'<li>{badge_for_size(s)} {html.escape(blurb)}</li>' for s, blurb in TASK_SIZES.items()
-    )
     body = f"""<section class="prose pagehead">
-  <p class="crumb"><a href="index.html">Home</a> / Open projects</p>
-  <h1>{html.escape(data.get("title") or "Open projects")}</h1>
+  <p class="crumb"><a href="index.html">Home</a> / {html.escape(data.get("title") or "Student projects")}</p>
+  <h1>{html.escape(data.get("title") or "Student projects")}</h1>
   <div class="lede">{mdc(data.get("intro"))}</div>
-  <ul class="sizes">{sizes}</ul>
   <ul class="toc">{toc}</ul>
 </section>
 
-<div class="browser" data-browser>
+<div class="browser" data-browser data-noun="topic">
   <div class="searchrow">
     <input type="search" class="search" data-search-input
-           placeholder="Search {n_tasks} tasks — topics, skills…"
-           autocomplete="off" aria-label="Search open tasks">
-    <div class="filters" role="group" aria-label="Filter by size">
+           placeholder="Search {n_tasks} topics — methods, skills…"
+           autocomplete="off" aria-label="Search student project topics">
+    <div class="filters" role="group" aria-label="Filter by course">
       <button type="button" class="chip on" data-filter="all">All</button>
-      {"".join(f'<button type="button" class="chip" data-filter="{s}">{s}</button>' for s in TASK_SIZES)}
+      {"".join(f'<button type="button" class="chip" data-filter="{html.escape(c["id"])}">{html.escape(c.get("short") or c["name"])}</button>' for c in courses)}
     </div>
   </div>
   <p class="hits" data-hits aria-live="polite"></p>
 {"".join(blocks)}
-  <p class="noresults" data-noresults hidden>No task matches that.</p>
+  <p class="noresults" data-noresults hidden>No topic matches that.</p>
 </div>
 """
     name = cfg.get("name", "Csenge Hubay")
     return shell(
-        title=f"Open projects — {name}",
-        description=f"Open research projects and student tasks with {name}: social robotics, ethorobotics, perception and 3D reconstruction.",
+        title=f"{data.get('title') or 'Student projects'} — {name}",
+        description=f"Student project topics supervised by {name}: task descriptions, background and requirements in social robotics, ethorobotics, perception and human experiments.",
         body=body,
         depth=0,
         active="projects",
         extra_head=extra_head,
         wiki_href=wiki_href,
-        footnote="Tasks are open unless marked otherwise. Get in touch before starting — scope is agreed per student.",
+        footnote="Get in touch before applying — the scope of each topic is agreed with the team.",
     )
-
-
-def badge_for_size(size: str) -> str:
-    if not size:
-        return ""
-    return f'<span class="badge badge-{html.escape(size)}" title="{html.escape(TASK_SIZES.get(size, ""))}">{html.escape(size)}</span>'
 
 
 def render_home(cfg: dict, about_html: str, pages: list[Page]) -> str:

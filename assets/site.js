@@ -10,6 +10,7 @@
     var chips = Array.prototype.slice.call(root.querySelectorAll(".chip"));
     var cards = Array.prototype.slice.call(root.querySelectorAll(".card"));
     var blocks = Array.prototype.slice.call(root.querySelectorAll(".catblock"));
+    var noun = root.getAttribute("data-noun") || "page";
     var status = "all";
     var fulltext = null; // slug -> page text, loaded on first keystroke
     var loading = false;
@@ -62,7 +63,7 @@
       if (hits) {
         var filtering = terms.length || status !== "all";
         hits.textContent = filtering
-          ? shown + (shown === 1 ? " page matches" : " pages match")
+          ? shown + " " + noun + (shown === 1 ? " matches" : "s match")
           : "";
       }
     }
