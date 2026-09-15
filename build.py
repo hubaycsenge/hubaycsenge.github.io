@@ -26,6 +26,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html
 import json
 import re
@@ -388,6 +389,15 @@ WIKI_GATE = "wikillm.html"
 PUBLIC_SITE = "https://hubaycsenge.github.io/"
 
 
+def asset_version() -> str:
+    """Short content hash for cache-busting: GitHub Pages lets browsers cache
+    assets for 10 minutes, so new HTML could otherwise meet an old stylesheet."""
+    h = hashlib.sha256()
+    for name in ("style.css", "site.js"):
+        h.update((SITE / "assets" / name).read_bytes())
+    return h.hexdigest()[:10]
+
+
 def shell(
     *,
     title: str,
@@ -423,7 +433,7 @@ def shell(
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(description)}">
-<link rel="stylesheet" href="{up}assets/style.css">
+<link rel="stylesheet" href="{up}assets/style.css?v={asset_version()}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
 {extra_head}
 </head>
@@ -442,7 +452,7 @@ def shell(
   <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
   <p class="fine">{footnote}</p>
 </footer>
-<script src="{up}assets/site.js" defer></script>
+<script src="{up}assets/site.js?v={asset_version()}" defer></script>
 </body>
 </html>
 """
