@@ -705,22 +705,14 @@ def render_projects(cfg: dict, data: dict) -> str:
                 + [plain_text(str(t.get(k, ""))) for k in ("description", "background")]
                 + [plain_text(str(r)) for r in t.get("requirements") or []]
             )
-            students = t.get("students")
-            facts = f'<span class="badge">{int(students)} student{"s" if int(students) != 1 else ""}</span>' if students else ""
-            tags = " ".join(f'<span class="tag">{html.escape(s)}</span>' for s in skills)
             cards.append(f"""<a class="card topic-card" href="projects/{html.escape(t["id"])}.html"
    data-status="{html.escape(c["id"])}" data-search="{html.escape(haystack.lower(), quote=True)}">
-  <span class="card-head">{course_badge(c)}{facts}</span>
   <span class="card-title">{html.escape(t["title"])}</span>
-  <span class="topic-sum">{html.escape(t.get("summary") or first_sentence(t.get("description")))}</span>
-  <span class="task-skills">{tags}</span>
-  <span class="topic-more">Read the task specification →</span>
 </a>""")
 
         blocks.append(f"""<section class="catblock project tint-{html.escape(c.get("color") or "grey")}" id="{html.escape(c["id"])}">
   <div class="project-head"><h2>{html.escape(c["name"])}</h2></div>
-  <div class="prose project-sum">{mdc(c.get("summary"))}</div>
-  <div class="cards topics">
+  <div class="topics">
 {chr(10).join(cards)}
   </div>
 </section>""")

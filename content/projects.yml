@@ -7,7 +7,7 @@
 # projects/<task id>.html. Topics are grouped by the course they are offered in.
 # Course fields: id, name, short (filter button label, defaults to name),
 # color (teal | amber | violet | rose | grey — the course's background tint),
-# summary (markdown), tasks. Task fields:
+# summary (markdown, kept for reference — not shown on the page), tasks. Task fields:
 #   id            the topic page's filename — keep it stable once shared
 #   title
 #   students      how many students can take the topic (omit if not fixed)
@@ -16,7 +16,7 @@
 #   background    scientific and technological background — why we do it (markdown)
 #   requirements  list of concrete requirements for the finished system (markdown)
 #   links         optional list of {label, url}, e.g. the robot's documentation
-#   summary       optional one-line card text; defaults to the description's first sentence
+#   summary       optional one-line link-preview text; defaults to the description's first sentence
 # Delete a task or course to unpublish it.
 
 title: Student projects
