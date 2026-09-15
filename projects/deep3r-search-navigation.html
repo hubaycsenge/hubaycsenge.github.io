@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Navigation strategies for Deep3R-based object search — Student projects — Csenge Hubay</title>
+<meta name="description" content="The robot has to find an object in a room it has seen before.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+<link rel="canonical" href="https://hubaycsenge.github.io/projects/deep3r-search-navigation.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Navigation strategies for Deep3R-based object search">
+<meta property="og:description" content="The robot has to find an object in a room it has seen before.">
+<meta property="og:url" content="https://hubaycsenge.github.io/projects/deep3r-search-navigation.html">
+<meta property="og:site_name" content="Csenge Hubay — Student projects">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wikillm.html">WikiLLM</a>
+    <a href="../projects.html" class="on">Student projects</a>
+  </nav>
+</header>
+<main id="main">
+<article class="topic tint-teal">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Home</a> / <a href="../projects.html">Student projects</a> /
+    <a href="../projects.html#ai-lab">AI lab</a></p>
+    <p class="topic-facts"><span class="badge badge-course">AI lab</span></p>
+    <h1>Navigation strategies for Deep3R-based object search</h1>
+    <p class="task-skills"><span class="tag">Python</span> <span class="tag">ROS 2</span> <span class="tag">Nav2</span> <span class="tag">behaviour trees</span> <span class="tag">search algorithms</span></p>
+    <p class="topic-links"><a class="topic-link" href="https://fortuz.github.io/docs/mecanumbot_main/" target="_blank" rel="noopener">MecanumBot documentation ↗</a></p>
+    <p class="topic-actions"><a class="btn task-ask" href="https://teams.microsoft.com/l/chat/0/0?users=csengehubay@inf.elte.hu&amp;message=Hi%21%20I%20am%20interested%20in%20the%20student%20project%20topic%20%22Navigation%20strategies%20for%20Deep3R-based%20object%20search%22%20%28AI%20lab%29." target="_blank" rel="noopener">Ask about this topic on Teams →</a>
+      <button type="button" class="chip" data-copy-link="https://hubaycsenge.github.io/projects/deep3r-search-navigation.html" hidden>Copy link to this topic</button></p>
+  </header>
+  <div class="topic-body">
+<section class="task-sec"><h2>Description</h2><div class="task-desc"><p>The robot has to find an object in a room it has seen before. In a first visit it
+explores the room while a GPU server builds a 3D reconstruction of it from the
+robot's camera stream (the Deep3R pipeline). Later, in a second visit, it is given
+a target — named in words — and has to find it, even if the object has been moved
+in the meantime.</p>
+<p>This task is about <strong>how the robot moves</strong> during both visits: which exploration
+strategy produces a map good enough to search in, when to stop exploring, how to
+return to where the object was last seen, and how to search when it is not there
+any more. Several strategies are implemented, run side by side in simulation and on
+the robot, and compared.</p></div></section>
+<section class="task-sec"><h2>Background — why we do it</h2><div class="task-desc"><p>Object search is a classic problem in active perception, and animals are very good
+at it. A dog that sees a toy hidden and then taken away first goes to where it last
+saw the toy, and then searches <em>around</em> that spot — searching intensively near the
+last evidence and widening out as time passes, a pattern ethology calls
+<em>area-restricted search</em>. Foraging theory adds a principled answer to <em>when to give
+up</em> on an area. Robotic search, by contrast, usually relies on frontier-based
+exploration or on full coverage, which treat every unexplored cell alike.</p>
+<p>On the technological side, the robot's 2D LiDAR sees only one horizontal plane,
+while the server-side 3D reconstruction sees tabletops, chair legs and the target
+object itself. The navigation strategy decides which views the reconstruction gets,
+so it directly affects the quality of the map, and through it whether the object can
+be found at all. Localisation errors are also known to be mistaken for "the object
+has moved", so a good strategy relocalises before it concludes that something is
+missing. The project is part of my PhD work on a search behaviour modelled on the
+motivational (SEEKING) system of mammals.</p></div></section>
+<section class="task-sec"><h2>Requirements for the finished system</h2><ul class="task-reqs"><li>At least <strong>three navigation strategies</strong> implemented as interchangeable behaviour-tree subtrees on top of Nav2 — for example a coverage/frontier baseline, go-to-last-seen-location, and area-restricted search spreading outward from the last-seen position.</li><li>An <strong>explicit stopping rule</strong> for the exploration phase and an explicit <strong>giving-up rule</strong> for the search phase, both configurable by parameter.</li><li>Integration with the existing server link: the strategies consume the server's map updates and <code>found</code> / not-found announcements, and switch between the exploration and search phases through the existing protocol.</li><li>A <strong>relocalisation check</strong> before the robot treats the target as absent from its remembered location.</li><li>A reproducible <strong>evaluation protocol</strong> in simulation (fixed rooms, object placements and random seeds) that logs, per run: time to find, path length, area covered, and whether the object was found or wrongly declared missing.</li><li>A comparison of the strategies over repeated simulated runs, followed by a smaller set of runs on the real robot in the lab.</li><li>Documentation: launch instructions, parameter reference, and a short report of the comparison.</li></ul></section>
+  </div>
+  <p class="topic-back"><a href="../projects.html">← All student projects</a></p>
+</article>
+
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Get in touch before applying — the scope of each topic is agreed with the team.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

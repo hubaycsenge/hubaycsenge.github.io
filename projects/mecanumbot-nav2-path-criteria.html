@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Custom-criteria path planning for MecanumBot (Nav2) — Student projects — Csenge Hubay</title>
+<meta name="description" content="Route planning and navigation for a mecanum-wheeled robot according to selectable criteria — for example shortest path, smoothest trajectory, distance…">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+<link rel="canonical" href="https://hubaycsenge.github.io/projects/mecanumbot-nav2-path-criteria.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Custom-criteria path planning for MecanumBot (Nav2)">
+<meta property="og:description" content="Route planning and navigation for a mecanum-wheeled robot according to selectable criteria — for example shortest path, smoothest trajectory, distance kept from obstacles, or energy- or time-optimal routes.">
+<meta property="og:url" content="https://hubaycsenge.github.io/projects/mecanumbot-nav2-path-criteria.html">
+<meta property="og:site_name" content="Csenge Hubay — Student projects">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wikillm.html">WikiLLM</a>
+    <a href="../projects.html" class="on">Student projects</a>
+  </nav>
+</header>
+<main id="main">
+<article class="topic tint-violet">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Home</a> / <a href="../projects.html">Student projects</a> /
+    <a href="../projects.html#ei">Embodied Intelligence (EI)</a></p>
+    <p class="topic-facts"><span class="badge badge-course">EI</span><span class="badge">3 students</span></p>
+    <h1>Custom-criteria path planning for MecanumBot (Nav2)</h1>
+    <p class="task-skills"><span class="tag">Python</span> <span class="tag">ROS 2</span> <span class="tag">Nav2</span> <span class="tag">C++</span> <span class="tag">web front end</span></p>
+    <p class="topic-links"><a class="topic-link" href="https://fortuz.github.io/docs/mecanumbot_main/" target="_blank" rel="noopener">MecanumBot documentation ↗</a></p>
+    <p class="topic-actions"><a class="btn task-ask" href="https://teams.microsoft.com/l/chat/0/0?users=csengehubay@inf.elte.hu&amp;message=Hi%21%20I%20am%20interested%20in%20the%20student%20project%20topic%20%22Custom-criteria%20path%20planning%20for%20MecanumBot%20%28Nav2%29%22%20%28Embodied%20Intelligence%20%28EI%29%29." target="_blank" rel="noopener">Ask about this topic on Teams →</a>
+      <button type="button" class="chip" data-copy-link="https://hubaycsenge.github.io/projects/mecanumbot-nav2-path-criteria.html" hidden>Copy link to this topic</button></p>
+  </header>
+  <div class="topic-body">
+<section class="task-sec"><h2>Description</h2><div class="task-desc"><p>Route planning and navigation for a mecanum-wheeled robot according to selectable
+criteria — for example shortest path, smoothest trajectory, distance kept from
+obstacles, or energy- or time-optimal routes. The project involves understanding the
+ROS 2 Nav2 navigation stack, implementing the criteria as a custom Nav2 path planner
+plugin, and testing it first in simulation and then on the real robot. As a final
+step, a simple web interface is developed on which the planning criteria can be
+selected and switched, and the resulting routes compared.</p></div></section>
+<section class="task-sec"><h2>Background — why we do it</h2><div class="task-desc"><p>Standard planners optimise one thing — usually path length on a costmap — but "the
+best route" depends on the situation. Near people a robot should keep its distance;
+with a heavy load it should avoid sharp turns; on battery it should save energy.
+For the social robots in our experiments, the <em>shape</em> of a route is part of the
+behaviour people observe and interpret, so being able to choose and compare route
+criteria is useful beyond efficiency.</p>
+<p>A mecanum-wheeled robot is <strong>holonomic</strong>: it can drive sideways and diagonally
+without turning. This widens the set of possible paths, but the motions are not
+equally cheap — sideways and diagonal driving typically loses more energy to roller
+slip than driving forward — so time and energy criteria differ from path length in
+ways a differential-drive planner never has to consider. Nav2 exposes
+global planning through a plugin interface, so new criteria can be added without
+changing the rest of the navigation stack.</p></div></section>
+<section class="task-sec"><h2>Requirements for the finished system</h2><ul class="task-reqs"><li>A <strong>custom Nav2 global planner plugin</strong> (Nav2's planner plugin interface is C++; the cost criteria can be prototyped in Python first) that plans on the robot's costmap and supports at least <strong>four criteria</strong>: shortest, smoothest, maximum clearance, and energy- or time-optimal using a motion-cost model of the mecanum base.</li><li>Criteria that can be <strong>selected and switched at runtime</strong>, through parameters, without restarting the navigation stack.</li><li>A <strong>metric report for every planned route</strong>: length, total curvature or number of turns, minimum obstacle clearance, estimated time and energy, and planning time.</li><li>Tests in <strong>simulation</strong> on fixed maps and goal sets, then runs on the <strong>real robot</strong> in the lab, with the planned and the driven paths recorded.</li><li>A <strong>web interface</strong> that shows the map, lets the user choose a criterion and send a goal, and overlays the routes of different criteria with their metrics for comparison.</li><li>Launch files, a parameter reference and a short evaluation report.</li></ul></section>
+  </div>
+  <p class="topic-back"><a href="../projects.html">← All student projects</a></p>
+</article>
+
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Get in touch before applying — the scope of each topic is agreed with the team.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

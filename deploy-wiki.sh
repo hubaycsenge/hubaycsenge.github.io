@@ -16,7 +16,10 @@ PROJECT="${WIKI_PROJECT:-csenge-wiki}"
 WRANGLER=(npx --yes wrangler@4)
 SECRETS=(GITHUB_CLIENT_ID GITHUB_CLIENT_SECRET SESSION_SECRET ALLOWED_GITHUB_USERS)
 
-[ -f _private/index.html ] || { echo "No _private/ build — run ./build.sh first." >&2; exit 1; }
+[ -f _private/wiki/index.html ] || { echo "No _private/ build — run ./build.sh first." >&2; exit 1; }
+# The deployment is the wiki only; anything else at the top level is a stale build.
+stray=$(find _private -mindepth 1 -maxdepth 1 ! -name wiki ! -name assets ! -name robots.txt)
+[ -z "$stray" ] || { echo "Refusing to deploy non-wiki files: $stray — rerun ./build.sh." >&2; exit 1; }
 [ -f cloudflare/functions/_middleware.js ] || { echo "Missing cloudflare/functions/_middleware.js." >&2; exit 1; }
 
 # If the Pages project does not exist, recent wrangler versions hand `pages`

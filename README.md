@@ -17,7 +17,10 @@ request-access email. Until `wiki_url` is set, the button shows as disabled.
 A public **Student projects** page (`projects.html`) lists the topics offered to
 students, grouped by course (AI lab, CI, EI). Each topic is a task specification:
 description, background (why), and requirements for the finished system. It is
-generated from `content/projects.yml` — edit that file, not the HTML. Like the homepage it contains nothing from the vault, so keep
+generated from `content/projects.yml` — edit that file, not the HTML. Each topic
+also gets its own shareable page, `projects/<id>.html`, with a button that opens a
+Teams chat about it (`teams_user`) and link-preview metadata; courses are told
+apart by background tint (`color`). Like the homepage it contains nothing from the vault, so keep
 unpublished results, participant data, collaborator names and host names out of it.
 
 ## Raw materials are not in this repository
@@ -62,7 +65,7 @@ One run writes both sites:
 | Output | Contents | Goes to |
 |---|---|---|
 | `index.html` | public homepage, no vault content | GitHub (commit it) |
-| `_private/` | homepage with the WikiLLM panel, `wiki/*.html`, `search.json`, `assets/` | Cloudflare (`./deploy-wiki.sh`) |
+| `_private/` | the wiki only: `wiki/*.html`, `search.json`, `assets/` | Cloudflare (`./deploy-wiki.sh`) |
 
 First run creates a gitignored `.venv` with `markdown` and `pyyaml`. There is no
 GitHub Action, and GitHub never sees the vault or the rendered wiki. When the wiki
@@ -72,7 +75,7 @@ or the generator changed.
 Preview locally:
 
 ```sh
-python3 -m http.server 8765 -d _private    # the full site, wiki included
+python3 -m http.server 8765 -d _private    # the wiki, at /wiki/
 python3 -m http.server 8765                # the public homepage only
 ```
 
@@ -86,6 +89,11 @@ only usernames in the `ALLOWED_GITHUB_USERS` secret get in. Others see a sign-in
 page (401) or a not-authorised page (403). If any secret is missing it answers
 503 for everything; it never falls back to serving the wiki. Sessions last 7
 days, and the reader list is re-checked on every request.
+
+The deployment holds the wiki and nothing else: the homepage and the Student
+projects page exist only on github.io, and the wiki's Home and Student projects
+links go there. After sign-in, `/` redirects to `/wiki/`. `deploy-wiki.sh` refuses
+to upload a `_private/` with anything besides `wiki/`, `assets/` and `robots.txt`.
 
 The public `wikillm.html` page on github.io links to the sign-in.
 
@@ -152,9 +160,9 @@ survives verbatim.
 ```
 index.html            generated public homepage (do not edit by hand)
 projects.html         generated public Student projects page
+projects/*.html       generated public page per student project topic
 wikillm.html          generated public WikiLLM sign-in / restricted page
 _private/             generated restricted site — gitignored, deployed to Cloudflare
-  index.html            homepage with the WikiLLM panel
   wiki/*.html           wiki pages
   wiki/search.json      full-text index
   wiki/pages.json       page manifest

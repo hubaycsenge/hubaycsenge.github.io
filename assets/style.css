@@ -18,6 +18,10 @@
   --green: #2f6b34;
   --green-soft: #e2efe0;
   --grey-soft: #ebe8e2;
+  --violet: #5d4b9c;
+  --violet-soft: #ebe6f5;
+  --rose: #9c3f55;
+  --rose-soft: #f6e4e8;
   --shadow: 0 1px 2px rgba(30, 28, 25, .05), 0 8px 24px -12px rgba(30, 28, 25, .16);
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
   --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -42,6 +46,10 @@
     --green: #8ac48f;
     --green-soft: #1d2a1e;
     --grey-soft: #262a30;
+    --violet: #b9a8ee;
+    --violet-soft: #262139;
+    --rose: #eb9fb0;
+    --rose-soft: #33202a;
     --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 30px -14px rgba(0, 0, 0, .7);
   }
 }
@@ -268,35 +276,74 @@ main { max-width: 62rem; margin: 0 auto; padding: 0 1.5rem 5rem; }
 
 /* --- student projects ----------------------------------------------------- */
 
+/* Course colours: a tint-* class sets --tint (background) and --tint-ink (text, rules). */
+.tint-teal { --tint: var(--accent-soft); --tint-ink: var(--accent); }
+.tint-amber { --tint: var(--amber-soft); --tint-ink: var(--amber); }
+.tint-violet { --tint: var(--violet-soft); --tint-ink: var(--violet); }
+.tint-rose { --tint: var(--rose-soft); --tint-ink: var(--rose); }
+.tint-grey { --tint: var(--grey-soft); --tint-ink: var(--ink-soft); }
+.badge-course { background: var(--tint-ink, var(--ink-soft)); color: var(--paper); }
+
 .prose .toc { list-style: none; padding: 0; margin: 1.2rem 0; font: 400 .9rem/1.5 var(--sans); display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; }
 .prose .toc li { margin: 0; }
-.project { margin: 3rem 0; scroll-margin-top: 1.5rem; }
-.project-head { display: flex; flex-wrap: wrap; gap: .7rem; align-items: baseline; }
-.project-head h2 { margin: 0; font-size: 1.5rem; }
-.project-sum { margin: .6rem 0 1rem; color: var(--ink-soft); }
-.tasks { display: grid; gap: 1.1rem; }
-.card.task { gap: .2rem; background: var(--panel); padding: 1.3rem 1.4rem 1.2rem; }
-.card.task:hover { border-color: var(--rule-firm); }
-.card.task:hover .card-title { color: var(--ink); }
-.task .card-head { flex-wrap: wrap; justify-content: space-between; }
-.task h3.card-title { margin: 0; font-size: 1.2rem; line-height: 1.35; }
-.task-skills { margin: .2rem 0 .3rem; }
-.task-sec { max-width: var(--measure); }
-.task-sec h4 {
-  margin: .9rem 0 .35rem;
-  font: 600 .74rem/1.3 var(--sans); letter-spacing: .08em; text-transform: uppercase;
-  color: var(--accent);
+.prose .toc li::before {
+  content: ""; display: inline-block; width: .6rem; height: .6rem; margin-right: .45rem;
+  border-radius: 2px; background: var(--tint-ink);
 }
-.task-desc, .task-reqs { font: 400 .92rem/1.6 var(--sans); color: var(--ink-soft); }
-.task-desc p { margin: 0 0 .6rem; }
-.task-desc ul { margin: 0 0 .6rem; padding-left: 1.2rem; }
-.task-reqs { margin: 0; padding-left: 1.2rem; }
-.task-reqs li { margin: 0 0 .35rem; padding-left: .2rem; }
-.task-reqs li::marker { color: var(--accent); }
+.chip .dot { display: inline-block; width: .5rem; height: .5rem; margin-right: .4rem; border-radius: 50%; background: var(--tint-ink); }
+.chip.on .dot { box-shadow: 0 0 0 1.5px var(--paper); }
+
+.project { margin: 2.6rem 0; scroll-margin-top: 1.5rem; }
+.project-head h2 { margin: 0; font-size: 1.5rem; }
+.project-head h2::after {
+  content: ""; display: block; width: 2.5rem; height: 3px; margin-top: .35rem;
+  border-radius: 2px; background: var(--tint-ink);
+}
+.project-sum { margin: .6rem 0 1rem; color: var(--ink-soft); }
+.topics { grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); gap: .8rem; }
+.card.topic-card {
+  gap: .45rem; padding: 1rem 1.1rem;
+  background: var(--tint); border-color: transparent; border-left: 4px solid var(--tint-ink);
+}
+.card.topic-card:hover { background: var(--tint); border-color: var(--tint-ink); box-shadow: var(--shadow); }
+.card.topic-card:hover .card-title { color: var(--tint-ink); }
+.topic-card .card-head { justify-content: flex-start; flex-wrap: wrap; }
+.topic-card .card-title { font-size: 1.05rem; line-height: 1.35; }
+.topic-sum { font: 400 .88rem/1.5 var(--sans); color: var(--ink-soft); }
+.topic-card .tag { background: var(--panel); }
+.task-skills { margin: .1rem 0 0; }
+.topic-more { margin-top: auto; padding-top: .3rem; font: 600 .82rem/1.4 var(--sans); color: var(--tint-ink); }
+
+/* a topic's own page */
+.topic { padding-top: 2rem; }
+.topic-head {
+  padding: 1.4rem 1.5rem 1.3rem; border-radius: 12px;
+  background: var(--tint); border-left: 5px solid var(--tint-ink);
+}
+.topic-head .crumb { margin-bottom: .9rem; }
+.topic-facts { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 .6rem; }
+.topic-head h1 { margin: 0 0 .7rem; font-size: clamp(1.6rem, 4.2vw, 2.2rem); line-height: 1.2; }
+.topic-head .tag { background: var(--panel); }
+.topic-links { margin: .7rem 0 0; font: 600 .88rem/1.5 var(--sans); }
+.topic-link { color: var(--tint-ink); }
+.topic-actions { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin: 1.1rem 0 0; }
+.topic-actions .btn { background: var(--tint-ink); }
+.topic-actions .chip { background: var(--panel); padding: .7rem .9rem; }
+.topic-body { max-width: var(--measure); margin: .4rem auto 0; padding: 0 .2rem; }
+.task-sec h2 {
+  margin: 2rem 0 .55rem;
+  font: 600 .8rem/1.3 var(--sans); letter-spacing: .08em; text-transform: uppercase;
+  color: var(--tint-ink);
+}
+.task-desc, .task-reqs { font: 400 .98rem/1.65 var(--sans); color: var(--ink-soft); }
+.task-desc p { margin: 0 0 .8rem; }
+.task-reqs { margin: 0; padding-left: 1.25rem; }
+.task-reqs li { margin: 0 0 .5rem; padding-left: .2rem; }
+.task-reqs li::marker { color: var(--tint-ink); }
 .task-desc strong, .task-reqs strong { color: var(--ink); font-weight: 600; }
-.task-ask { margin-top: .8rem; font: 600 .86rem/1.4 var(--sans); }
+.topic-back { max-width: var(--measure); margin: 2.4rem auto 0; font: 500 .9rem/1.5 var(--sans); }
 @media (max-width: 480px) {
-  .card.task { padding: 1rem; }
+  .topic-head { padding: 1.1rem 1rem; }
 }
 
 /* --- wiki pages ----------------------------------------------------------- */

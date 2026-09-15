@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2D ground-plane projection from the laboratory camera system — Student projects — Csenge Hubay</title>
+<meta name="description" content="Creation of a common top-down (2D) view of a laboratory room from the images of the fixed camera system installed there.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+<link rel="canonical" href="https://hubaycsenge.github.io/projects/lab-camera-ground-plane.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2D ground-plane projection from the laboratory camera system">
+<meta property="og:description" content="Creation of a common top-down (2D) view of a laboratory room from the images of the fixed camera system installed there.">
+<meta property="og:url" content="https://hubaycsenge.github.io/projects/lab-camera-ground-plane.html">
+<meta property="og:site_name" content="Csenge Hubay — Student projects">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wikillm.html">WikiLLM</a>
+    <a href="../projects.html" class="on">Student projects</a>
+  </nav>
+</header>
+<main id="main">
+<article class="topic tint-amber">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Home</a> / <a href="../projects.html">Student projects</a> /
+    <a href="../projects.html#ci">Computational Intelligence (CI)</a></p>
+    <p class="topic-facts"><span class="badge badge-course">CI</span><span class="badge">3 students</span></p>
+    <h1>2D ground-plane projection from the laboratory camera system</h1>
+    <p class="task-skills"><span class="tag">Python</span> <span class="tag">OpenCV</span> <span class="tag">camera calibration</span> <span class="tag">projective geometry</span></p>
+    
+    <p class="topic-actions"><a class="btn task-ask" href="https://teams.microsoft.com/l/chat/0/0?users=csengehubay@inf.elte.hu&amp;message=Hi%21%20I%20am%20interested%20in%20the%20student%20project%20topic%20%222D%20ground-plane%20projection%20from%20the%20laboratory%20camera%20system%22%20%28Computational%20Intelligence%20%28CI%29%29." target="_blank" rel="noopener">Ask about this topic on Teams →</a>
+      <button type="button" class="chip" data-copy-link="https://hubaycsenge.github.io/projects/lab-camera-ground-plane.html" hidden>Copy link to this topic</button></p>
+  </header>
+  <div class="topic-body">
+<section class="task-sec"><h2>Description</h2><div class="task-desc"><p>Creation of a common top-down (2D) view of a laboratory room from the images of the
+fixed camera system installed there. The project involves calibrating the cameras,
+computing the image-to-ground-plane homography for each camera, and fusing the
+individual views into a single, metrically consistent 2D map of the laboratory
+floor. The resulting projection can be used to localise and track objects and
+beings — people, dogs, robots — moving in the lab.</p></div></section>
+<section class="task-sec"><h2>Background — why we do it</h2><div class="task-desc"><p>Behavioural experiments with people, dogs and robots are recorded on video and then
+coded by hand: who was where, how close, moving in which direction. A top-down,
+metric view of the floor turns those recordings into positions in centimetres, which
+makes automatic tracking, distance measurements and trajectory analysis possible,
+and gives a ground truth for the robot's own localisation.</p>
+<p>Technologically, every point on a flat floor is related to its image in a camera by
+a <strong>homography</strong>, a 3×3 projective transformation. Estimating it needs the camera's
+intrinsic parameters and lens distortion (from a checkerboard or ChArUco
+calibration) and a set of floor points with known positions. Once each camera is
+mapped to the same floor coordinate system, the views can be stitched into one map.
+The homography is exact only for points <em>on</em> the floor, which is why tracking uses
+the foot point of a person or animal and why the achievable accuracy has to be
+measured rather than assumed.</p></div></section>
+<section class="task-sec"><h2>Requirements for the finished system</h2><ul class="task-reqs"><li>A <strong>documented, reproducible calibration procedure</strong>: intrinsic and distortion calibration for every camera, and floor markers placed at measured positions in a common lab coordinate system.</li><li>An <strong>image-to-ground-plane homography</strong> for each camera, stored in a configuration file together with its calibration data.</li><li>A <strong>fused top-down map</strong> of the lab floor at a fixed metric resolution (for example 1 px = 1 cm), handling overlapping fields of view.</li><li><strong>Measured accuracy</strong>: projection error in centimetres at check points that were not used for calibration, reported for each camera and in the overlaps.</li><li>A <strong>projection pipeline running on the live camera streams</strong> at a usable frame rate, not only on stored images.</li><li>A function or small API that converts an image point from any camera into floor coordinates, as the interface for later tracking work.</li><li>Minimum expected outcome: a working, reproducible calibration procedure and a projection pipeline running on the live camera streams.</li></ul></section>
+  </div>
+  <p class="topic-back"><a href="../projects.html">← All student projects</a></p>
+</article>
+
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Get in touch before applying — the scope of each topic is agreed with the team.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

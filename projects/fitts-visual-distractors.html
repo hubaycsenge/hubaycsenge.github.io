@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Effects of visual distractors on motor performance (Fitts&#x27; task) — Student projects — Csenge Hubay</title>
+<meta name="description" content="An investigation of how distracting visual (LED) signals degrade human motor performance.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+<link rel="canonical" href="https://hubaycsenge.github.io/projects/fitts-visual-distractors.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Effects of visual distractors on motor performance (Fitts&#x27; task)">
+<meta property="og:description" content="An investigation of how distracting visual (LED) signals degrade human motor performance.">
+<meta property="og:url" content="https://hubaycsenge.github.io/projects/fitts-visual-distractors.html">
+<meta property="og:site_name" content="Csenge Hubay — Student projects">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wikillm.html">WikiLLM</a>
+    <a href="../projects.html" class="on">Student projects</a>
+  </nav>
+</header>
+<main id="main">
+<article class="topic tint-amber">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Home</a> / <a href="../projects.html">Student projects</a> /
+    <a href="../projects.html#ci">Computational Intelligence (CI)</a></p>
+    <p class="topic-facts"><span class="badge badge-course">CI</span><span class="badge">3 students</span></p>
+    <h1>Effects of visual distractors on motor performance (Fitts&#x27; task)</h1>
+    <p class="task-skills"><span class="tag">Python</span> <span class="tag">pygame or web front end</span> <span class="tag">experimental design</span> <span class="tag">statistics</span> <span class="tag">machine learning</span></p>
+    
+    <p class="topic-actions"><a class="btn task-ask" href="https://teams.microsoft.com/l/chat/0/0?users=csengehubay@inf.elte.hu&amp;message=Hi%21%20I%20am%20interested%20in%20the%20student%20project%20topic%20%22Effects%20of%20visual%20distractors%20on%20motor%20performance%20%28Fitts%27%20task%29%22%20%28Computational%20Intelligence%20%28CI%29%29." target="_blank" rel="noopener">Ask about this topic on Teams →</a>
+      <button type="button" class="chip" data-copy-link="https://hubaycsenge.github.io/projects/fitts-visual-distractors.html" hidden>Copy link to this topic</button></p>
+  </header>
+  <div class="topic-body">
+<section class="task-sec"><h2>Description</h2><div class="task-desc"><p>An investigation of how distracting visual (LED) signals degrade human motor
+performance. The project involves implementing a test application (pygame-based or
+web-based) with full interaction logging, designing the distracting effects and at
+least two test conditions with an appropriately disturbing signal, and running a
+human experiment. The results are evaluated with statistical analysis and with an
+AI/ML model trained on the collected data.</p></div></section>
+<section class="task-sec"><h2>Background — why we do it</h2><div class="task-desc"><p><strong>Fitts' law</strong> is one of the most robust quantitative laws of human movement: the
+time needed to point at a target grows with the logarithm of the ratio of distance
+to target width — the <em>index of difficulty</em>. Because the relationship is so stable,
+Fitts' task is the standard tool for measuring how interfaces, input devices or
+conditions change motor performance, summarised as <em>throughput</em>.</p>
+<p>Visual attention research shows that sudden onsets, flicker and salient colours in
+the periphery capture attention even when they are irrelevant to the task. This
+matters for robots: a robot in a shared space often communicates with lights —
+status LEDs, signals meant to attract a person or show where to go. The same signal
+that makes a robot understandable may disrupt what a person is doing. Measuring the
+cost of such signals on a well-understood motor task gives a quantitative basis for
+designing robot light signals that inform without disturbing.</p></div></section>
+<section class="task-sec"><h2>Requirements for the finished system</h2><ul class="task-reqs"><li>A Fitts' task application (pygame or web) with <strong>configurable target distances and widths</strong>, covering a range of indices of difficulty.</li><li><strong>Full interaction logging</strong>: timestamped pointer trajectory, target parameters, hits and misses, movement time, and the distractor state at every moment, saved in an analysis-ready format.</li><li>A <strong>distractor module</strong> that drives the LED signals (or a faithful on-screen substitute) synchronised with the task log, with parameters such as position, colour, flash frequency and onset timing.</li><li><strong>At least two distractor conditions plus a no-distractor control</strong>, with a written rationale for why each signal should be disturbing.</li><li>An experimental design: within-subject conditions, counterbalanced order, practice trials, target number of participants, informed consent, and anonymised data.</li><li>The <strong>experiment carried out</strong> with human participants.</li><li><strong>Statistical analysis</strong>: Fitts' law fits per condition, and a comparison of movement time, error rate and throughput between conditions with an appropriate repeated-measures or mixed-effects model.</li><li>An <strong>AI/ML model</strong> on the collected data — for example predicting the condition from trajectory features, or predicting movement time — with a proper participant-wise train/test split.</li><li>A reproducible repository and a short report of the method and results.</li></ul></section>
+  </div>
+  <p class="topic-back"><a href="../projects.html">← All student projects</a></p>
+</article>
+
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Get in touch before applying — the scope of each topic is agreed with the team.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

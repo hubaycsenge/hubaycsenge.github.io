@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A learned fear response for MecanumBot in human–robot interaction — Student projects — Csenge Hubay</title>
+<meta name="description" content="Dogs that are startled freeze, back away, or turn to their owner for reassurance — and they stay cautious for a while after the threat is gone.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+<link rel="canonical" href="https://hubaycsenge.github.io/projects/mecanumbot-fear-rl.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A learned fear response for MecanumBot in human–robot interaction">
+<meta property="og:description" content="Dogs that are startled freeze, back away, or turn to their owner for reassurance — and they stay cautious for a while after the threat is gone.">
+<meta property="og:url" content="https://hubaycsenge.github.io/projects/mecanumbot-fear-rl.html">
+<meta property="og:site_name" content="Csenge Hubay — Student projects">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html">Csenge Hubay</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../wikillm.html">WikiLLM</a>
+    <a href="../projects.html" class="on">Student projects</a>
+  </nav>
+</header>
+<main id="main">
+<article class="topic tint-teal">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Home</a> / <a href="../projects.html">Student projects</a> /
+    <a href="../projects.html#ai-lab">AI lab</a></p>
+    <p class="topic-facts"><span class="badge badge-course">AI lab</span></p>
+    <h1>A learned fear response for MecanumBot in human–robot interaction</h1>
+    <p class="task-skills"><span class="tag">Python</span> <span class="tag">reinforcement learning</span> <span class="tag">Gym-style environments</span> <span class="tag">ROS 2</span> <span class="tag">behaviour trees</span></p>
+    <p class="topic-links"><a class="topic-link" href="https://fortuz.github.io/docs/mecanumbot_main/" target="_blank" rel="noopener">MecanumBot documentation ↗</a></p>
+    <p class="topic-actions"><a class="btn task-ask" href="https://teams.microsoft.com/l/chat/0/0?users=csengehubay@inf.elte.hu&amp;message=Hi%21%20I%20am%20interested%20in%20the%20student%20project%20topic%20%22A%20learned%20fear%20response%20for%20MecanumBot%20in%20human%E2%80%93robot%20interaction%22%20%28AI%20lab%29." target="_blank" rel="noopener">Ask about this topic on Teams →</a>
+      <button type="button" class="chip" data-copy-link="https://hubaycsenge.github.io/projects/mecanumbot-fear-rl.html" hidden>Copy link to this topic</button></p>
+  </header>
+  <div class="topic-body">
+<section class="task-sec"><h2>Description</h2><div class="task-desc"><p>Dogs that are startled freeze, back away, or turn to their owner for reassurance —
+and they stay cautious for a while after the threat is gone. This task builds that
+behaviour into MecanumBot in an interaction scenario: the robot carries out a simple
+delivery task while a person moves around it, and a person coming too close or too
+fast raises an internal <strong>fear level</strong> that decays slowly afterwards.</p>
+<p>A reinforcement-learning agent learns when to <strong>freeze</strong>, <strong>avoid</strong> (retreat with
+Nav2), <strong>catch the person's attention</strong>, or <strong>carry on with the task</strong>. A first
+version of the fear dynamics, a training environment and draft behaviour-tree
+leaves exist; the work is to connect them to real LiDAR input, bring the learned
+policy into the robot's behaviour tree, and test it in the MuJoCo digital twin and
+on the robot.</p></div></section>
+<section class="task-sec"><h2>Background — why we do it</h2><div class="task-desc"><p>In animals, fear is not a reflex that stops when the stimulus disappears: defensive
+states build up with threat and fade slowly, and the choice between freezing,
+fleeing and seeking social support depends on the situation and on learning. A
+robot with a comparable internal state behaves differently from one with a plain
+safety rule — a proximity-based slow-down returns to full speed the moment a person
+steps back, whereas a fear-modulated robot remains cautious. Whether people read
+this residual caution as an <em>emotion</em>, and whether it makes the robot easier to
+predict, is an ethorobotics question.</p>
+<p>Reinforcement learning is a natural fit because <em>which</em> defensive response pays
+off depends on the consequences — a retreat that costs the task, a freeze that
+prevents a collision — rather than on a hand-written rule. Keeping the learned
+policy inside a behaviour tree keeps the robot's behaviour inspectable and safe,
+which matters when it runs next to people in an experiment.</p></div></section>
+<section class="task-sec"><h2>Requirements for the finished system</h2><ul class="task-reqs"><li>A <strong>fear model</strong> driven by the robot's real <code>/scan</code> data: risk from the minimum range and closing speed of people or obstacles, a spike on near-collision, and a slow, parameterised decay.</li><li>A Gym-style <strong>training environment</strong> with the discrete actions <em>freeze</em>, <em>avoid</em>, <em>catch attention</em> and <em>task</em>, and the fear level in the observation.</li><li>A <strong>trained policy</strong> compared against a fixed hand-written heuristic on task completion, near-collisions and how long caution persists after the person leaves.</li><li>A ROS 2 <strong>behaviour-tree package</strong> in which the policy selects between the four responses, with <em>avoid</em> implemented as a Nav2 retreat and <em>freeze</em> cancelling navigation.</li><li>Runs of the full stack in the <strong>MuJoCo digital twin</strong>, then on the <strong>real robot</strong> in the lab with a person present.</li><li>Every parameter of the fear dynamics and the reward documented, with its biological motivation — these are experimental design choices, reviewed with an ethologist before any study.</li><li>Unit tests for the fear dynamics and the reward, and launch instructions for simulation and robot.</li></ul></section>
+  </div>
+  <p class="topic-back"><a href="../projects.html">← All student projects</a></p>
+</article>
+
+</main>
+<footer class="foot">
+  <p>Csenge Hubay · <a href="mailto:csengehubay@gmail.com">csengehubay@gmail.com</a></p>
+  <p class="fine">Get in touch before applying — the scope of each topic is agreed with the team.</p>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

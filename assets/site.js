@@ -97,6 +97,19 @@
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-browser]"), setupBrowser);
 
+  /* Student project pages: copy the topic's canonical link. */
+  Array.prototype.forEach.call(document.querySelectorAll("[data-copy-link]"), function (btn) {
+    if (!navigator.clipboard) return;
+    var label = btn.textContent;
+    btn.hidden = false;
+    btn.addEventListener("click", function () {
+      navigator.clipboard.writeText(btn.getAttribute("data-copy-link")).then(function () {
+        btn.textContent = "Link copied";
+        setTimeout(function () { btn.textContent = label; }, 2000);
+      });
+    });
+  });
+
   /* Deep link: /#wikillm opens the panel and scrolls to it. */
   var field = document.getElementById("wikillm");
   if (field) {

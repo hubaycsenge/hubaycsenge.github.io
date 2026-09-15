@@ -3,18 +3,27 @@
 # Everything here is world-readable. Keep out: unpublished results and numbers,
 # participant data, collaborator names, host names, credentials.
 #
-# Topics are grouped by the course they are offered in. Course fields: id, name,
-# short (filter button label, defaults to name), summary (markdown), tasks. Task fields:
+# The index is projects.html; every topic also gets its own shareable page,
+# projects/<task id>.html. Topics are grouped by the course they are offered in.
+# Course fields: id, name, short (filter button label, defaults to name),
+# color (teal | amber | violet | rose | grey — the course's background tint),
+# summary (markdown), tasks. Task fields:
+#   id            the topic page's filename — keep it stable once shared
 #   title
 #   students      how many students can take the topic (omit if not fixed)
 #   skills        list of expected or useful skills
 #   description   general description of the task (markdown)
 #   background    scientific and technological background — why we do it (markdown)
 #   requirements  list of concrete requirements for the finished system (markdown)
+#   links         optional list of {label, url}, e.g. the robot's documentation
+#   summary       optional one-line card text; defaults to the description's first sentence
 # Delete a task or course to unpublish it.
 
 title: Student projects
-contact: csengehubay@inf.elte.hu   # "Ask about this topic" links mail here
+# "Ask about this topic" opens a Teams chat with this account, the topic prefilled.
+# It must be the address you sign in to Teams with. Without it, the button mails `contact`.
+teams_user: csengehubay@inf.elte.hu
+contact: csengehubay@inf.elte.hu
 intro: |
   Topics I supervise for student project courses, all connected to my PhD in
   **ethorobotics** — building robots whose behaviour draws on what we know about animals,
@@ -25,13 +34,18 @@ intro: |
 courses:
   - id: ai-lab
     name: AI lab
+    color: teal
     summary: |
       Research-oriented topics on MecanumBot, a small omnidirectional robot (mecanum
       wheels, Jetson Orin Nano, 2D LiDAR and camera) used to study dog-inspired
       human–robot interaction. Its software is ROS 2, with a top-down 2D simulator and a
       MuJoCo digital twin for work away from the robot.
     tasks:
-      - title: Navigation strategies for Deep3R-based object search
+      - id: deep3r-search-navigation
+        title: Navigation strategies for Deep3R-based object search
+        links:
+          - label: MecanumBot documentation
+            url: https://fortuz.github.io/docs/mecanumbot_main/
         skills: [Python, ROS 2, Nav2, behaviour trees, search algorithms]
         description: |
           The robot has to find an object in a room it has seen before. In a first visit it
@@ -89,7 +103,11 @@ courses:
             Documentation: launch instructions, parameter reference, and a short report of
             the comparison.
 
-      - title: A learned fear response for MecanumBot in human–robot interaction
+      - id: mecanumbot-fear-rl
+        title: A learned fear response for MecanumBot in human–robot interaction
+        links:
+          - label: MecanumBot documentation
+            url: https://fortuz.github.io/docs/mecanumbot_main/
         skills: [Python, reinforcement learning, Gym-style environments, ROS 2, behaviour trees]
         description: |
           Dogs that are startled freeze, back away, or turn to their owner for reassurance —
@@ -148,11 +166,13 @@ courses:
   - id: ci
     name: Computational Intelligence (CI)
     short: CI
+    color: amber
     summary: |
       Team projects for the Computational Intelligence course: a human experiment with a
       data-driven evaluation, and a computer-vision pipeline for the laboratory.
     tasks:
-      - title: Effects of visual distractors on motor performance (Fitts' task)
+      - id: fitts-visual-distractors
+        title: Effects of visual distractors on motor performance (Fitts' task)
         students: 3
         skills: [Python, pygame or web front end, experimental design, statistics, machine learning]
         description: |
@@ -208,7 +228,8 @@ courses:
           - >-
             A reproducible repository and a short report of the method and results.
 
-      - title: 2D ground-plane projection from the laboratory camera system
+      - id: lab-camera-ground-plane
+        title: 2D ground-plane projection from the laboratory camera system
         students: 3
         skills: [Python, OpenCV, camera calibration, projective geometry]
         description: |
@@ -260,11 +281,16 @@ courses:
   - id: ei
     name: Embodied Intelligence (EI)
     short: EI
+    color: violet
     summary: |
       Team projects for the Embodied Intelligence course, on real robots: navigation for
       MecanumBot, and trust in a robotic arm.
     tasks:
-      - title: Custom-criteria path planning for MecanumBot (Nav2)
+      - id: mecanumbot-nav2-path-criteria
+        title: Custom-criteria path planning for MecanumBot (Nav2)
+        links:
+          - label: MecanumBot documentation
+            url: https://fortuz.github.io/docs/mecanumbot_main/
         students: 3
         skills: [Python, ROS 2, Nav2, C++, web front end]
         description: |
@@ -313,7 +339,8 @@ courses:
           - >-
             Launch files, a parameter reference and a short evaluation report.
 
-      - title: Should I ask or should I go? Trust in a robotic arm
+      - id: robot-arm-trust
+        title: Should I ask or should I go? Trust in a robotic arm
         students: 3
         skills: [interest in psychology, computer vision, robot programming, Python]
         description: |

@@ -64,6 +64,11 @@ export async function onRequest({ request, env, next }) {
   }
   if (!allowed.has(user)) return notAuthorised(user);
 
+  // The deployment holds only the wiki; there is no page at the root.
+  if (url.pathname === "/" || url.pathname === "/index.html") {
+    return new Response(null, { status: 302, headers: { Location: `/wiki/${url.search}`, "Cache-Control": "no-store" } });
+  }
+
   const response = await next();
   const out = new Response(response.body, response);
   out.headers.set("Cache-Control", "private, no-store");

@@ -13,9 +13,10 @@ Two sites come out of one run:
 * the **public** homepage, `index.html` in this repository, served by GitHub
   Pages. It contains nothing derived from the vault — only `content/home.md`
   and a link to the restricted wiki.
-* the **private** site in `_private/` (gitignored): the homepage with the
-  WikiLLM panel, every wiki page and the search index. It is deployed to
-  Cloudflare Pages behind a GitHub sign-in by `deploy-wiki.sh`, never to GitHub.
+* the **private** site in `_private/` (gitignored): the wiki only — every
+  wiki page, the search index and the stylesheet. Its links to the homepage and
+  the projects page go to the public site. It is deployed to Cloudflare Pages
+  behind a GitHub sign-in by `deploy-wiki.sh`, never to GitHub.
 
 Usage:
     ./build.sh                       # bootstraps a venv, then runs this
@@ -32,6 +33,7 @@ import shutil
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
+from urllib.parse import quote
 
 try:
     import markdown
@@ -381,6 +383,9 @@ PRIVATE_HEAD = '<meta name="robots" content="noindex, nofollow">'
 # The public site links here instead of to the wiki: a page explaining that the
 # wiki is restricted, with GitHub sign-in and request-access links.
 WIKI_GATE = "wikillm.html"
+# The private site carries only the wiki; its Home and Student projects links
+# point here.
+PUBLIC_SITE = "https://hubaycsenge.github.io/"
 
 
 def shell(
@@ -393,15 +398,21 @@ def shell(
     extra_head: str = "",
     wiki_href: str | None = None,
     footnote: str | None = None,
+    home: str | None = None,
 ) -> str:
-    """`wiki_href` defaults to the local wiki; the public site passes WIKI_GATE."""
+    """`wiki_href` defaults to the local wiki; the public site passes WIKI_GATE.
+    `home` is the base of the Home and Student projects links, default the
+    site's own root; wiki pages pass PUBLIC_SITE."""
     up = "../" if depth else ""
+    if home is None:
+        home = up
+    home_href = home if home.startswith("http") else f"{home}index.html"
     if wiki_href is None:
         wiki_href = f"{up}wiki/index.html"
     on = ' class="on"' if active == "wiki" else ""
     extra_nav = f'\n    <a href="{html.escape(wiki_href)}"{on}>WikiLLM</a>' if wiki_href else ""
     on = ' class="on"' if active == "projects" else ""
-    extra_nav += f'\n    <a href="{up}projects.html"{on}>Student projects</a>'
+    extra_nav += f'\n    <a href="{home}projects.html"{on}>Student projects</a>'
     if footnote is None:
         footnote = """Wiki prose is generated from a private research vault. The underlying
   sources — paper PDFs and unpublished notes — are not published here."""
@@ -419,9 +430,9 @@ def shell(
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="topbar">
-  <a class="brand" href="{up}index.html">Csenge Hubay</a>
+  <a class="brand" href="{home_href}">Csenge Hubay</a>
   <nav>
-    <a href="{up}index.html"{' class="on"' if active == "home" else ""}>Home</a>{extra_nav}
+    <a href="{home_href}"{' class="on"' if active == "home" else ""}>Home</a>{extra_nav}
   </nav>
 </header>
 <main id="main">
@@ -612,9 +623,148 @@ def render_wiki_gate(cfg: dict) -> str:
     )
 
 
-def render_projects(cfg: dict, data: dict, *, wiki_href: str | None = None, extra_head: str = "") -> str:
-    """Student projects page, from content/projects.yml. Public: nothing here may
-    come from the vault."""
+TEAMS_CHAT = "https://teams.microsoft.com/l/chat/0/0"
+
+
+def first_sentence(text: str) -> str:
+    para = plain_text(str(text or "").strip().split("\n\n")[0])
+    m = re.match(r"(.+?[.!?])(\s|$)", para)
+    return m.group(1) if m else para
+
+
+def project_topics(data: dict) -> list[tuple[dict, dict]]:
+    """(course, task) pairs, in page order. Task ids name the topic pages."""
+    out, seen = [], set()
+    for c in data.get("courses") or []:
+        for t in c.get("tasks") or []:
+            tid = str(t.get("id") or "").strip()
+            if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", tid):
+                raise SystemExit(f"projects.yml: task {t.get('title')!r} needs an id like 'fitts-distractors'")
+            if tid in seen:
+                raise SystemExit(f"projects.yml: duplicate task id {tid!r}")
+            seen.add(tid)
+            out.append((c, t))
+    return out
+
+
+def course_badge(c: dict) -> str:
+    return f'<span class="badge badge-course">{html.escape(c.get("short") or c["name"])}</span>'
+
+
+def ask_link(data: dict, cfg: dict, c: dict, t: dict) -> str:
+    """Teams chat with the supervisor, the message prefilled; e-mail if no Teams user."""
+    teams = str(data.get("teams_user") or "").strip()
+    note = f"Hi! I am interested in the student project topic \"{t['title']}\" ({c['name']})."
+    if teams:
+        href = f"{TEAMS_CHAT}?users={quote(teams, safe='@')}&message={quote(note)}"
+        label = "Ask about this topic on Teams"
+    else:
+        email = (data.get("contact") or cfg.get("email") or "").strip()
+        if not email:
+            return ""
+        href = f"mailto:{email}?subject={quote('Student project: ' + t['title'])}"
+        label = "Ask about this topic"
+    return f'<a class="btn task-ask" href="{html.escape(href)}" target="_blank" rel="noopener">{label} →</a>'
+
+
+def topic_links(t: dict) -> str:
+    links = [l for l in t.get("links") or [] if l.get("url")]
+    return " ".join(
+        f'<a class="topic-link" href="{html.escape(l["url"])}" target="_blank" rel="noopener">'
+        f'{html.escape(l.get("label") or l["url"])} ↗</a>'
+        for l in links
+    )
+
+
+def render_projects(cfg: dict, data: dict) -> str:
+    """Student projects index, from content/projects.yml. Public: nothing here
+    may come from the vault. Each topic links to its own page (render_topic)."""
+    md = markdown.Markdown(extensions=["tables", "sane_lists", "attr_list"])
+
+    def mdc(text: str) -> str:
+        md.reset()
+        return md.convert(str(text or ""))
+
+    title = data.get("title") or "Student projects"
+    courses = data.get("courses") or []
+    topics = project_topics(data)
+
+    toc = "\n".join(
+        f'<li class="tint-{html.escape(c.get("color") or "grey")}"><a href="#{html.escape(c["id"])}">{html.escape(c["name"])}</a> '
+        f'<span class="cat-n">{len(c.get("tasks") or [])}</span></li>'
+        for c in courses
+    )
+
+    blocks = []
+    for c in courses:
+        cards = []
+        for t in c.get("tasks") or []:
+            skills = [str(s) for s in t.get("skills") or []]
+            haystack = " ".join(
+                [c["name"], c.get("short") or "", t["title"], " ".join(skills)]
+                + [plain_text(str(t.get(k, ""))) for k in ("description", "background")]
+                + [plain_text(str(r)) for r in t.get("requirements") or []]
+            )
+            students = t.get("students")
+            facts = f'<span class="badge">{int(students)} student{"s" if int(students) != 1 else ""}</span>' if students else ""
+            tags = " ".join(f'<span class="tag">{html.escape(s)}</span>' for s in skills)
+            cards.append(f"""<a class="card topic-card" href="projects/{html.escape(t["id"])}.html"
+   data-status="{html.escape(c["id"])}" data-search="{html.escape(haystack.lower(), quote=True)}">
+  <span class="card-head">{course_badge(c)}{facts}</span>
+  <span class="card-title">{html.escape(t["title"])}</span>
+  <span class="topic-sum">{html.escape(t.get("summary") or first_sentence(t.get("description")))}</span>
+  <span class="task-skills">{tags}</span>
+  <span class="topic-more">Read the task specification →</span>
+</a>""")
+
+        blocks.append(f"""<section class="catblock project tint-{html.escape(c.get("color") or "grey")}" id="{html.escape(c["id"])}">
+  <div class="project-head"><h2>{html.escape(c["name"])}</h2></div>
+  <div class="prose project-sum">{mdc(c.get("summary"))}</div>
+  <div class="cards topics">
+{chr(10).join(cards)}
+  </div>
+</section>""")
+
+    chips = "".join(
+        f'<button type="button" class="chip tint-{html.escape(c.get("color") or "grey")}" data-filter="{html.escape(c["id"])}">'
+        f'<span class="dot" aria-hidden="true"></span>{html.escape(c.get("short") or c["name"])}</button>'
+        for c in courses
+    )
+    body = f"""<section class="prose pagehead">
+  <p class="crumb"><a href="index.html">Home</a> / {html.escape(title)}</p>
+  <h1>{html.escape(title)}</h1>
+  <div class="lede">{mdc(data.get("intro"))}</div>
+  <ul class="toc">{toc}</ul>
+</section>
+
+<div class="browser" data-browser data-noun="topic">
+  <div class="searchrow">
+    <input type="search" class="search" data-search-input
+           placeholder="Search {len(topics)} topics — methods, skills…"
+           autocomplete="off" aria-label="Search student project topics">
+    <div class="filters" role="group" aria-label="Filter by course">
+      <button type="button" class="chip on" data-filter="all">All</button>{chips}
+    </div>
+  </div>
+  <p class="hits" data-hits aria-live="polite"></p>
+{"".join(blocks)}
+  <p class="noresults" data-noresults hidden>No topic matches that.</p>
+</div>
+"""
+    name = cfg.get("name", "Csenge Hubay")
+    return shell(
+        title=f"{title} — {name}",
+        description=f"Student project topics supervised by {name}: task descriptions, background and requirements in social robotics, ethorobotics, perception and human experiments.",
+        body=body,
+        depth=0,
+        active="projects",
+        wiki_href=WIKI_GATE,
+        footnote="Get in touch before applying — the scope of each topic is agreed with the team.",
+    )
+
+
+def render_topic(cfg: dict, data: dict, c: dict, t: dict) -> str:
+    """One topic's task specification, at projects/<id>.html, so it can be shared on its own."""
     md = markdown.Markdown(extensions=["tables", "sane_lists", "attr_list"])
 
     def mdc(text: str) -> str:
@@ -626,150 +776,71 @@ def render_projects(cfg: dict, data: dict, *, wiki_href: str | None = None, extr
         out = mdc(text).strip()
         return out[3:-4] if out.startswith("<p>") and out.endswith("</p>") and out.count("<p>") == 1 else out
 
-    email = (data.get("contact") or cfg.get("email") or "").strip()
-    courses = data.get("courses") or []
-    n_tasks = sum(len(c.get("tasks") or []) for c in courses)
+    title = data.get("title") or "Student projects"
+    skills = [str(s) for s in t.get("skills") or []]
+    reqs = [str(r) for r in t.get("requirements") or []]
+    students = t.get("students")
+    summary = t.get("summary") or first_sentence(t.get("description"))
+    url = f"{PUBLIC_SITE}projects/{t['id']}.html"
 
-    toc = "\n".join(
-        f'<li><a href="#{html.escape(c["id"])}">{html.escape(c["name"])}</a> '
-        f'<span class="cat-n">{len(c.get("tasks") or [])}</span></li>'
-        for c in courses
-    )
+    facts = [course_badge(c)]
+    if students:
+        facts.append(f'<span class="badge">{int(students)} student{"s" if int(students) != 1 else ""}</span>')
+    tags = " ".join(f'<span class="tag">{html.escape(s)}</span>' for s in skills)
+    links = topic_links(t)
 
-    blocks = []
-    for c in courses:
-        cards = []
-        for t in c.get("tasks") or []:
-            skills = [str(s) for s in t.get("skills") or []]
-            reqs = [str(r) for r in t.get("requirements") or []]
-            students = t.get("students")
-            haystack = " ".join(
-                [c["name"], t["title"], " ".join(skills)]
-                + [plain_text(str(t.get(k, ""))) for k in ("description", "background")]
-                + [plain_text(r) for r in reqs]
-            )
-            subject = f"Student project: {t['title']} ({c['name']})"
-            ask = (
-                f'<a class="task-ask" href="mailto:{html.escape(email)}?subject={html.escape(subject, quote=True)}">Ask about this topic →</a>'
-                if email
-                else ""
-            )
-            facts = []
-            if students:
-                n = int(students)
-                facts.append(f'<span class="badge">{n} student{"s" if n != 1 else ""}</span>')
-            tags = " ".join(f'<span class="tag">{html.escape(s)}</span>' for s in skills)
-            background = (
-                f'<section class="task-sec"><h4>Background — why we do it</h4><div class="task-desc">{mdc(t.get("background"))}</div></section>'
-                if t.get("background")
-                else ""
-            )
-            requirements = (
-                '<section class="task-sec"><h4>Requirements for the finished system</h4>'
-                f'<ul class="task-reqs">{"".join(f"<li>{mdi(r)}</li>" for r in reqs)}</ul></section>'
-                if reqs
-                else ""
-            )
-            cards.append(f"""<article class="card task" data-status="{html.escape(c["id"])}"
-   data-search="{html.escape(haystack.lower(), quote=True)}">
-  <div class="card-head"><h3 class="card-title">{html.escape(t["title"])}</h3>{"".join(facts)}</div>
-  {f'<p class="task-skills">{tags}</p>' if tags else ""}
-  <section class="task-sec"><h4>Description</h4><div class="task-desc">{mdc(t.get("description"))}</div></section>
-  {background}
-  {requirements}
-  {ask}
-</article>""")
+    sections = [("Description", f'<div class="task-desc">{mdc(t.get("description"))}</div>')]
+    if t.get("background"):
+        sections.append(("Background — why we do it", f'<div class="task-desc">{mdc(t.get("background"))}</div>'))
+    if reqs:
+        sections.append(
+            ("Requirements for the finished system", f'<ul class="task-reqs">{"".join(f"<li>{mdi(r)}</li>" for r in reqs)}</ul>')
+        )
+    secs = "\n".join(f'<section class="task-sec"><h2>{h}</h2>{inner}</section>' for h, inner in sections)
 
-        blocks.append(f"""<section class="catblock project" id="{html.escape(c["id"])}">
-  <div class="project-head">
-    <h2>{html.escape(c["name"])}</h2>
+    body = f"""<article class="topic tint-{html.escape(c.get("color") or "grey")}">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Home</a> / <a href="../projects.html">{html.escape(title)}</a> /
+    <a href="../projects.html#{html.escape(c["id"])}">{html.escape(c["name"])}</a></p>
+    <p class="topic-facts">{"".join(facts)}</p>
+    <h1>{html.escape(t["title"])}</h1>
+    {f'<p class="task-skills">{tags}</p>' if tags else ""}
+    {f'<p class="topic-links">{links}</p>' if links else ""}
+    <p class="topic-actions">{ask_link(data, cfg, c, t)}
+      <button type="button" class="chip" data-copy-link="{html.escape(url)}" hidden>Copy link to this topic</button></p>
+  </header>
+  <div class="topic-body">
+{secs}
   </div>
-  <div class="prose project-sum">{mdc(c.get("summary"))}</div>
-  <div class="tasks">
-{chr(10).join(cards)}
-  </div>
-</section>""")
-
-    body = f"""<section class="prose pagehead">
-  <p class="crumb"><a href="index.html">Home</a> / {html.escape(data.get("title") or "Student projects")}</p>
-  <h1>{html.escape(data.get("title") or "Student projects")}</h1>
-  <div class="lede">{mdc(data.get("intro"))}</div>
-  <ul class="toc">{toc}</ul>
-</section>
-
-<div class="browser" data-browser data-noun="topic">
-  <div class="searchrow">
-    <input type="search" class="search" data-search-input
-           placeholder="Search {n_tasks} topics — methods, skills…"
-           autocomplete="off" aria-label="Search student project topics">
-    <div class="filters" role="group" aria-label="Filter by course">
-      <button type="button" class="chip on" data-filter="all">All</button>
-      {"".join(f'<button type="button" class="chip" data-filter="{html.escape(c["id"])}">{html.escape(c.get("short") or c["name"])}</button>' for c in courses)}
-    </div>
-  </div>
-  <p class="hits" data-hits aria-live="polite"></p>
-{"".join(blocks)}
-  <p class="noresults" data-noresults hidden>No topic matches that.</p>
-</div>
+  <p class="topic-back"><a href="../projects.html">← All student projects</a></p>
+</article>
 """
     name = cfg.get("name", "Csenge Hubay")
+    og = "\n".join(
+        f'<meta property="{k}" content="{html.escape(v, quote=True)}">'
+        for k, v in [
+            ("og:type", "article"),
+            ("og:title", t["title"]),
+            ("og:description", summary),
+            ("og:url", url),
+            ("og:site_name", f"{name} — {title}"),
+        ]
+    )
     return shell(
-        title=f"{data.get('title') or 'Student projects'} — {name}",
-        description=f"Student project topics supervised by {name}: task descriptions, background and requirements in social robotics, ethorobotics, perception and human experiments.",
+        title=f"{t['title']} — {title} — {name}",
+        description=truncate(summary, 155),
         body=body,
-        depth=0,
+        depth=1,
         active="projects",
-        extra_head=extra_head,
-        wiki_href=wiki_href,
+        extra_head=f'<link rel="canonical" href="{html.escape(url)}">\n{og}',
+        wiki_href=f"../{WIKI_GATE}",
         footnote="Get in touch before applying — the scope of each topic is agreed with the team.",
-    )
-
-
-def render_home(cfg: dict, about_html: str, pages: list[Page]) -> str:
-    """The homepage of the private site, with the WikiLLM panel."""
-    name = cfg.get("name", "Csenge Hubay")
-    tagline = cfg.get("tagline", "")
-    n_sources = len([p for p in pages if p.category == "sources"])
-    solid = len([p for p in pages if p.status == "solid"])
-
-    body = f"""{home_intro(cfg, about_html)}
-<details class="wikifield" id="wikillm">
-  <summary>
-    <span class="wf-text">
-      <span class="wf-eyebrow">Doctoral research · open to browse</span>
-      <span class="wf-title">WikiLLM — the PhD research wiki</span>
-      <span class="wf-desc">A living, LLM-maintained wiki on emotion modelling for social
-      robots. Every factual claim is traceable to an ingested source; disagreements between
-      sources are recorded rather than resolved. {len(pages)} pages, {n_sources} sources
-      ingested, {solid} rated solid.</span>
-    </span>
-    <span class="wf-cue" aria-hidden="true"><span class="wf-open">Open</span><span class="wf-close">Close</span></span>
-  </summary>
-  <div class="wf-body">
-    <div class="wf-stats">
-      <div class="stat"><b>{len(pages)}</b><span>pages</span></div>
-      <div class="stat"><b>{n_sources}</b><span>sources ingested</span></div>
-      <div class="stat"><b>{solid}</b><span>solid</span></div>
-      <div class="stat"><b>{len([p for p in pages if p.status == "draft"])}</b><span>draft</span></div>
-    </div>
-    <p class="wf-note">The wiki is a working document, not a publication. Status labels are
-    honest: <em>stub</em> means barely populated, <em>draft</em> means real content with gaps,
-    <em>solid</em> means it would survive a supervisor reading it. Source PDFs and unpublished
-    notes stay in a private vault — only the wiki's own prose is published.</p>
-{browser_markup(pages, "wiki/", "home")}
-    <p class="wf-more"><a class="btn" href="wiki/index.html">Open the full wiki →</a></p>
-  </div>
-</details>
-"""
-    desc = f"{name} — {tagline}. Ethorobotics, emotion modelling for social robots, and a research wiki."
-    return shell(
-        title=f"{name} — {tagline}", description=desc, body=body, depth=0, active="home", extra_head=PRIVATE_HEAD
     )
 
 
 def render_wiki_index(pages: list[Page]) -> str:
     body = f"""<section class="prose pagehead">
-  <p class="crumb"><a href="../index.html">Home</a> / Research wiki</p>
+  <p class="crumb"><a href="{PUBLIC_SITE}">Home</a> / Research wiki</p>
   <h1>Research wiki</h1>
   <p class="lede">Emotion modelling for social robots, in the ethorobotics tradition.
   {len(pages)} pages maintained as sources are ingested. Every claim is cited to a source
@@ -786,6 +857,7 @@ def render_wiki_index(pages: list[Page]) -> str:
         depth=1,
         active="wiki",
         extra_head=PRIVATE_HEAD,
+        home=PUBLIC_SITE,
     )
 
 
@@ -823,7 +895,7 @@ def render_page(page: Page, by_slug: dict[str, Page]) -> str:
 </section>"""
 
     body = f"""<article class="prose page">
-  <p class="crumb"><a href="../index.html">Home</a> / <a href="index.html">Research wiki</a> / {html.escape(label)}</p>
+  <p class="crumb"><a href="{PUBLIC_SITE}">Home</a> / <a href="index.html">Research wiki</a> / {html.escape(label)}</p>
   <h1>{html.escape(page.title)}</h1>
 {meta_rows(page)}
 {page.html}
@@ -836,6 +908,7 @@ def render_page(page: Page, by_slug: dict[str, Page]) -> str:
         depth=1,
         active="wiki",
         extra_head=PRIVATE_HEAD,
+        home=PUBLIC_SITE,
     )
 
 
@@ -872,7 +945,18 @@ def main() -> int:
     (SITE / "index.html").write_text(render_public_home(cfg, about_html), encoding="utf-8")
     (SITE / WIKI_GATE).write_text(render_wiki_gate(cfg), encoding="utf-8")
     if projects:
-        (SITE / "projects.html").write_text(render_projects(cfg, projects, wiki_href=WIKI_GATE), encoding="utf-8")
+        (SITE / "projects.html").write_text(render_projects(cfg, projects), encoding="utf-8")
+        # One page per topic, so each can be shared. Pages of deleted topics are removed.
+        topic_dir = SITE / "projects"
+        topic_dir.mkdir(exist_ok=True)
+        written = set()
+        for course, task in project_topics(projects):
+            out = topic_dir / f"{task['id']}.html"
+            out.write_text(render_topic(cfg, projects, course, task), encoding="utf-8")
+            written.add(out.name)
+        for stale in topic_dir.glob("*.html"):
+            if stale.name not in written:
+                stale.unlink()
     if (SITE / "wiki").exists():
         print("  ! a wiki/ directory exists in the public repo — delete it, it must not be committed", file=sys.stderr)
 
@@ -891,11 +975,6 @@ def main() -> int:
     for page in pages:
         (out_wiki / f"{page.slug}.html").write_text(render_page(page, by_slug), encoding="utf-8")
     (out_wiki / "index.html").write_text(render_wiki_index(pages), encoding="utf-8")
-    (PRIVATE_OUT / "index.html").write_text(render_home(cfg, about_html, pages), encoding="utf-8")
-    if projects:
-        (PRIVATE_OUT / "projects.html").write_text(
-            render_projects(cfg, projects, extra_head=PRIVATE_HEAD), encoding="utf-8"
-        )
     # Belt and braces: if the sign-in is ever switched off, keep crawlers out.
     (PRIVATE_OUT / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
 
